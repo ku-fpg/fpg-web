@@ -70,124 +70,124 @@ Architecture
 This figure gives a high level overview of the architecture of the major
 components of Kansas Lava.
 
-![](sites/default/files/KansasLava.png)
+![](/sites/default/files/KansasLava.png)
 
 The user manual give more details of how these components fit together.
 
 Documentation and Further Reading
 ---------------------------------
 
-[Introducing Kansas Lava](node/12 "Introducing Kansas Lava")
+[Introducing Kansas Lava](/node/12 "Introducing Kansas Lava")
 ----------------------------------------------------------------------
 
-[Gill, A.](biblio/author/42), [T.
-Bull](biblio/author/17), [G.
-Kimmell](biblio/author/10), [E.
-Perrins](biblio/author/11), [E.
-Komp](biblio/author/12), and [B.
-Werling](biblio/author/14), "[Introducing Kansas
-Lava](biblio/view/12)", *21st International Symposium on
+[Gill, A.](/biblio/author/42), [T.
+Bull](/biblio/author/17), [G.
+Kimmell](/biblio/author/10), [E.
+Perrins](/biblio/author/11), [E.
+Komp](/biblio/author/12), and [B.
+Werling](/biblio/author/14), "[Introducing Kansas
+Lava](/biblio/view/12)", *21st International Symposium on
 Implementation and Application of Functional Languages*: LNCS 6041,
 11/2009.
 
--   [Tagged](biblio/export/tagged/12 "Click to download the EndNote Tagged formatted file")
--   [XML](biblio/export/xml/12 "Click to download the XML formatted file")
--   [BibTex](biblio/export/bibtex/12 "Click to download the BibTEX formatted file")
+-   [Tagged](/biblio/export/tagged/12 "Click to download the EndNote Tagged formatted file")
+-   [XML](/biblio/export/xml/12 "Click to download the XML formatted file")
+-   [BibTex](/biblio/export/bibtex/12 "Click to download the BibTEX formatted file")
 -   [Google
     Scholar](http://scholar.google.com/scholar?btnG=Search%2BScholar&as_q=%22Introducing%2BKansas%2BLava%22&as_sauthors=Gill&as_occt=any&as_epq=&as_oq=&as_eq=&as_publication=&as_ylo=&as_yhi=&as_sdtAAP=1&as_sdtp=1 "Click to search Google Scholar for this entry")
 
-[What's the matter with Kansas Lava?](node/48 "What's the matter with Kansas Lava?")
+[What's the matter with Kansas Lava?](/node/48 "What's the matter with Kansas Lava?")
 ----------------------------------------------------------------------------------------------
 
-[Farmer, A.](biblio/author/45), [G.
-Kimmell](biblio/author/10), and [A.
-Gill](biblio/author/42), "[What's the matter with Kansas
-Lava?](biblio/view/48)", *Trends in Functional Programming*,
+[Farmer, A.](/biblio/author/45), [G.
+Kimmell](/biblio/author/10), and [A.
+Gill](/biblio/author/42), "[What's the matter with Kansas
+Lava?](/biblio/view/48)", *Trends in Functional Programming*,
 2010.
 
--   [Tagged](biblio/export/tagged/48 "Click to download the EndNote Tagged formatted file")
--   [XML](biblio/export/xml/48 "Click to download the XML formatted file")
--   [BibTex](biblio/export/bibtex/48 "Click to download the BibTEX formatted file")
+-   [Tagged](/biblio/export/tagged/48 "Click to download the EndNote Tagged formatted file")
+-   [XML](/biblio/export/xml/48 "Click to download the XML formatted file")
+-   [BibTex](/biblio/export/bibtex/48 "Click to download the BibTEX formatted file")
 -   [Google
     Scholar](http://scholar.google.com/scholar?btnG=Search%2BScholar&as_q=%22What%27s%2Bthe%2Bmatter%2Bwith%2BKansas%2BLava%3F%22&as_sauthors=Farmer&as_occt=any&as_epq=&as_oq=&as_eq=&as_publication=&as_ylo=&as_yhi=&as_sdtAAP=1&as_sdtp=1 "Click to search Google Scholar for this entry")
 
-[Types and Type Families for Hardware Simulation and Synthesis: The Internals and Externals of Kansas Lava](node/47 "Types and Type Families for Hardware Simulation and Synthesis: The Internals and Externals of Kansas Lava")
+[Types and Type Families for Hardware Simulation and Synthesis: The Internals and Externals of Kansas Lava](/node/47 "Types and Type Families for Hardware Simulation and Synthesis: The Internals and Externals of Kansas Lava")
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-[Gill, A.](biblio/author/42), [T.
-Bull](biblio/author/44), [A.
-Farmer](biblio/author/45), [G.
-Kimmell](biblio/author/10), and [E.
-Komp](biblio/author/12), "[Types and Type Families for
+[Gill, A.](/biblio/author/42), [T.
+Bull](/biblio/author/44), [A.
+Farmer](/biblio/author/45), [G.
+Kimmell](/biblio/author/10), and [E.
+Komp](/biblio/author/12), "[Types and Type Families for
 Hardware Simulation and Synthesis: The Internals and Externals of Kansas
-Lava](biblio/view/47)", *Trends in Functional Programming*,
+Lava](/biblio/view/47)", *Trends in Functional Programming*,
 2010.
 
--   [Tagged](biblio/export/tagged/47 "Click to download the EndNote Tagged formatted file")
--   [XML](biblio/export/xml/47 "Click to download the XML formatted file")
--   [BibTex](biblio/export/bibtex/47 "Click to download the BibTEX formatted file")
+-   [Tagged](/biblio/export/tagged/47 "Click to download the EndNote Tagged formatted file")
+-   [XML](/biblio/export/xml/47 "Click to download the XML formatted file")
+-   [BibTex](/biblio/export/bibtex/47 "Click to download the BibTEX formatted file")
 -   [Google
     Scholar](http://scholar.google.com/scholar?btnG=Search%2BScholar&as_q=%22Types%2Band%2BType%2BFamilies%2Bfor%2BHardware%2BSimulation%2Band%2BSynthesis%3A%2BThe%2BInternals%2Band%2BExternals%2Bof%2BKansas%2BLava%22&as_sauthors=Gill&as_occt=any&as_epq=&as_oq=&as_eq=&as_publication=&as_ylo=&as_yhi=&as_sdtAAP=1&as_sdtp=1 "Click to search Google Scholar for this entry")
 
-[Using Functional Programming to Generate an LDPC Forward Error Corrector](node/106 "Using Functional Programming to Generate an LDPC Forward Error Corrector")
+[Using Functional Programming to Generate an LDPC Forward Error Corrector](/node/106 "Using Functional Programming to Generate an LDPC Forward Error Corrector")
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-[Gill, A.](biblio/author/42), [T.
-Bull](biblio/author/44), [D.
-DePardo](biblio/author/47), [A.
-Farmer](biblio/author/45), [E.
-Komp](biblio/author/12), and [E.
-Perrins](biblio/author/11), "[Using Functional Programming to
-Generate an LDPC Forward Error Corrector](biblio/view/106)",
+[Gill, A.](/biblio/author/42), [T.
+Bull](/biblio/author/44), [D.
+DePardo](/biblio/author/47), [A.
+Farmer](/biblio/author/45), [E.
+Komp](/biblio/author/12), and [E.
+Perrins](/biblio/author/11), "[Using Functional Programming to
+Generate an LDPC Forward Error Corrector](/biblio/view/106)",
 *The 19th Annual IEEE International Symposium on Field-Programmable
 Custom Computing Machines*, Salt Lake City, 05/2011.
 
--   [Tagged](biblio/export/tagged/106 "Click to download the EndNote Tagged formatted file")
--   [XML](biblio/export/xml/106 "Click to download the XML formatted file")
--   [BibTex](biblio/export/bibtex/106 "Click to download the BibTEX formatted file")
+-   [Tagged](/biblio/export/tagged/106 "Click to download the EndNote Tagged formatted file")
+-   [XML](/biblio/export/xml/106 "Click to download the XML formatted file")
+-   [BibTex](/biblio/export/bibtex/106 "Click to download the BibTEX formatted file")
 -   [Google
     Scholar](http://scholar.google.com/scholar?btnG=Search%2BScholar&as_q=%22Using%2BFunctional%2BProgramming%2Bto%2BGenerate%2Ban%2BLDPC%2BForward%2BError%2BCorrector%22&as_sauthors=Gill&as_occt=any&as_epq=&as_oq=&as_eq=&as_publication=&as_ylo=&as_yhi=&as_sdtAAP=1&as_sdtp=1 "Click to search Google Scholar for this entry")
 
-[Declarative FPGA Circuit Synthesis using Kansas Lava](node/111 "Declarative FPGA Circuit Synthesis using Kansas Lava")
+[Declarative FPGA Circuit Synthesis using Kansas Lava](/node/111 "Declarative FPGA Circuit Synthesis using Kansas Lava")
 ---------------------------------------------------------------------------------------------------------------------------------
 
-[Gill, A.](biblio/author/42), "[Declarative FPGA Circuit
-Synthesis using Kansas Lava](biblio/view/111)", *The
+[Gill, A.](/biblio/author/42), "[Declarative FPGA Circuit
+Synthesis using Kansas Lava](/biblio/view/111)", *The
 International Conference on Engineering of Reconfigurable Systems and
 Algorithms (ERSA'11)*, Las Vegas, Nevada, USA, 07/2011.
 
--   [Tagged](biblio/export/tagged/111 "Click to download the EndNote Tagged formatted file")
--   [XML](biblio/export/xml/111 "Click to download the XML formatted file")
--   [BibTex](biblio/export/bibtex/111 "Click to download the BibTEX formatted file")
+-   [Tagged](/biblio/export/tagged/111 "Click to download the EndNote Tagged formatted file")
+-   [XML](/biblio/export/xml/111 "Click to download the XML formatted file")
+-   [BibTex](/biblio/export/bibtex/111 "Click to download the BibTEX formatted file")
 -   [Google
     Scholar](http://scholar.google.com/scholar?btnG=Search%2BScholar&as_q=%22Declarative%2BFPGA%2BCircuit%2BSynthesis%2Busing%2BKansas%2BLava%22&as_sauthors=Gill&as_occt=any&as_epq=&as_oq=&as_eq=&as_publication=&as_ylo=&as_yhi=&as_sdtAAP=1&as_sdtp=1 "Click to search Google Scholar for this entry")
 
-[Deriving an Efficient FPGA Implementation of a Low Density Parity Check Forward Error Corrector](node/107 "Deriving an Efficient FPGA Implementation of a Low Density Parity Check Forward Error Corrector")
+[Deriving an Efficient FPGA Implementation of a Low Density Parity Check Forward Error Corrector](/node/107 "Deriving an Efficient FPGA Implementation of a Low Density Parity Check Forward Error Corrector")
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-[Gill, A.](biblio/author/42), and [A.
-Farmer](biblio/author/45), "[Deriving an Efficient FPGA
+[Gill, A.](/biblio/author/42), and [A.
+Farmer](/biblio/author/45), "[Deriving an Efficient FPGA
 Implementation of a Low Density Parity Check Forward Error
-Corrector](biblio/view/107)", *The 16th ACM SIGPLAN
+Corrector](/biblio/view/107)", *The 16th ACM SIGPLAN
 International Conference on Functional Programming*, 09/2011.
 
--   [Tagged](biblio/export/tagged/107 "Click to download the EndNote Tagged formatted file")
--   [XML](biblio/export/xml/107 "Click to download the XML formatted file")
--   [BibTex](biblio/export/bibtex/107 "Click to download the BibTEX formatted file")
+-   [Tagged](/biblio/export/tagged/107 "Click to download the EndNote Tagged formatted file")
+-   [XML](/biblio/export/xml/107 "Click to download the XML formatted file")
+-   [BibTex](/biblio/export/bibtex/107 "Click to download the BibTEX formatted file")
 -   [Google
     Scholar](http://scholar.google.com/scholar?btnG=Search%2BScholar&as_q=%22Deriving%2Ban%2BEfficient%2BFPGA%2BImplementation%2Bof%2Ba%2BLow%2BDensity%2BParity%2BCheck%2BForward%2BError%2BCorrector%22&as_sauthors=Gill&as_occt=any&as_epq=&as_oq=&as_eq=&as_publication=&as_ylo=&as_yhi=&as_sdtAAP=1&as_sdtp=1 "Click to search Google Scholar for this entry")
 
-[Handshaking in Kansas Lava using Patch Logic](node/119 "Handshaking in Kansas Lava using Patch Logic")
+[Handshaking in Kansas Lava using Patch Logic](/node/119 "Handshaking in Kansas Lava using Patch Logic")
 -----------------------------------------------------------------------------------------------------------------
 
-[Gill, A.](biblio/author/42), and [B.
-Neuenschwander](biblio/author/48), "[Handshaking in Kansas
-Lava using Patch Logic](biblio/view/119)", *Practical Aspects
+[Gill, A.](/biblio/author/42), and [B.
+Neuenschwander](/biblio/author/48), "[Handshaking in Kansas
+Lava using Patch Logic](/biblio/view/119)", *Practical Aspects
 of Declarative Languages*, 01/2012.
 
--   [Tagged](biblio/export/tagged/119 "Click to download the EndNote Tagged formatted file")
--   [XML](biblio/export/xml/119 "Click to download the XML formatted file")
--   [BibTex](biblio/export/bibtex/119 "Click to download the BibTEX formatted file")
+-   [Tagged](/biblio/export/tagged/119 "Click to download the EndNote Tagged formatted file")
+-   [XML](/biblio/export/xml/119 "Click to download the XML formatted file")
+-   [BibTex](/biblio/export/bibtex/119 "Click to download the BibTEX formatted file")
 -   [Google
     Scholar](http://scholar.google.com/scholar?btnG=Search%2BScholar&as_q=%22Handshaking%2Bin%2BKansas%2BLava%2Busing%2BPatch%2BLogic%22&as_sauthors=Gill&as_occt=any&as_epq=&as_oq=&as_eq=&as_publication=&as_ylo=&as_yhi=&as_sdtAAP=1&as_sdtp=1 "Click to search Google Scholar for this entry")
 

@@ -128,7 +128,7 @@ Other Sponsors
 Research Before KU
 ==================
 
-[History](Users/AndyGill/History "History")
+[History](/Users/AndyGill/History "History")
 -----------------------------------------------------
 
 Andy Gill has been an active researcher in functional programming for 20
@@ -137,5 +137,5 @@ functional languages at Edinburgh then Glasgow, running Haskell on
 virtual machines at OGI, and high assurance software at Galois.
 
 -   [Read
-    more](Users/AndyGill/History "Read the rest of History.")
+    more](/Users/AndyGill/History "Read the rest of History.")
 

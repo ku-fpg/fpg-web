@@ -11,7 +11,7 @@ FPG at KU, October 3-5, 2011.
 
 ### Oct 1st
 
-[Andrew Farmer](users/andrewfarmer) gave a talk about type functions and
+[Andrew Farmer](/users/andrewfarmer) gave a talk about type functions and
 Kansas Lava at the [Haskell Implementors
 Workshop](http://haskell.org/haskellwiki/HaskellImplementorsWorkshop/2010).
 [Slides](http://www.scribd.com/doc/38559736/kansaslava-hiw10),
@@ -28,7 +28,7 @@ Andy Gill gave a talk at ASEE, about post-processing video talks.
 
 ### Aug 28th
 
-[Paper](node/63) about using [ChalkBoard](Tools/ChalkBoard)
+[Paper](/node/63) about using [ChalkBoard](Tools/ChalkBoard)
 for video processing accepted and sent for publication at ASEE.
 
 ### July 19th-23rd
@@ -38,5 +38,5 @@ Portland, Oregon.
 
 ### July 19th
 
-Paper about using [ChalkBoard](Tools/ChalkBoard) for video processing
+Paper about using [ChalkBoard](/Tools/ChalkBoard) for video processing
 submitted.

@@ -44,15 +44,15 @@ ChalkBoard Paper
 
 2009
 
-[Matlage, K.](biblio/author/8), and [A.
-Gill](biblio/author/42), "[ChalkBoard: Mapping Functions to
-Polygons](biblio/view/11)", *21st International Symposium on
+[Matlage, K.](/biblio/author/8), and [A.
+Gill](/biblio/author/42), "[ChalkBoard: Mapping Functions to
+Polygons](/biblio/view/11)", *21st International Symposium on
 Implementation and Application of Functional Languages*: LNCS 6041,
-11/2009. [Abstract](node/11)
+11/2009. [Abstract](/node/11)
 
--   [Tagged](biblio/export/tagged/11 "Click to download the EndNote Tagged formatted file")
--   [XML](biblio/export/xml/11 "Click to download the XML formatted file")
--   [BibTex](biblio/export/bibtex/11 "Click to download the BibTEX formatted file")
+-   [Tagged](/biblio/export/tagged/11 "Click to download the EndNote Tagged formatted file")
+-   [XML](/biblio/export/xml/11 "Click to download the XML formatted file")
+-   [BibTex](/biblio/export/bibtex/11 "Click to download the BibTEX formatted file")
 -   [Google
     Scholar](http://scholar.google.com/scholar?btnG=Search%2BScholar&as_q=%22ChalkBoard%3A%2BMapping%2BFunctions%2Bto%2BPolygons%22&as_sauthors=Matlage&as_occt=any&as_epq=&as_oq=&as_eq=&as_publication=&as_ylo=&as_yhi=&as_sdtAAP=1&as_sdtp=1 "Click to search Google Scholar for this entry")
 

@@ -18,11 +18,11 @@ Jan Bracker
 
 MS exchange student
 
-[Andrew Farmer](users/andrewfarmer)
+[Andrew Farmer](/users/andrewfarmer)
 
 PhD, expected 2014
 
-[Andy Gill](Users/AndyGill)
+[Andy Gill](/Users/AndyGill)
 
 Faculty
 
@@ -30,11 +30,11 @@ Faculty
 
 Staff
 
-[Bowe Neuenschwander](users/boweneuenschwander)
+[Bowe Neuenschwander](/users/boweneuenschwander)
 
 MS, expected 2012
 
-[Neil Sculthorpe](users/neilsculthorpe)
+[Neil Sculthorpe](/users/neilsculthorpe)
 
 PostDoc
 

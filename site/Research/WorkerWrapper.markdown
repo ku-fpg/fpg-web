@@ -100,29 +100,29 @@ Papers
 
 2009
 
-[Gill, A.](biblio/author/42), and [G.
-Hutton](biblio/author/2), "[The worker/wrapper
-transformation](biblio/view/19)", *Journal of Functional
+[Gill, A.](/biblio/author/42), and [G.
+Hutton](/biblio/author/2), "[The worker/wrapper
+transformation](/biblio/view/19)", *Journal of Functional
 Programming*, vol. 19, no. 2: Cambridge University Press, pp. 227–251,
-03/2009. [Abstract](node/19)
+03/2009. [Abstract](/node/19)
 
--   [Tagged](biblio/export/tagged/19 "Click to download the EndNote Tagged formatted file")
--   [XML](biblio/export/xml/19 "Click to download the XML formatted file")
--   [BibTex](biblio/export/bibtex/19 "Click to download the BibTEX formatted file")
+-   [Tagged](/biblio/export/tagged/19 "Click to download the EndNote Tagged formatted file")
+-   [XML](/biblio/export/xml/19 "Click to download the XML formatted file")
+-   [BibTex](/biblio/export/bibtex/19 "Click to download the BibTEX formatted file")
 -   [Google
     Scholar](http://scholar.google.com/scholar?btnG=Search%2BScholar&as_q=%22The%2Bworker%2Fwrapper%2Btransformation%22&as_sauthors=Gill&as_occt=any&as_epq=&as_oq=&as_eq=&as_publication=&as_ylo=&as_yhi=&as_sdtAAP=1&as_sdtp=1 "Click to search Google Scholar for this entry")
 
 2010
 
-[Hutton, G.](biblio/author/2), [M.
-Jaskelioff](biblio/author/6), and [A.
-Gill](biblio/author/42), "[Factorising Folds for Faster
-Functions](biblio/view/10)", *Journal of Functional
-Programming*, vol. 20, issue 3-4, 2010. [Abstract](node/10)
+[Hutton, G.](/biblio/author/2), [M.
+Jaskelioff](/biblio/author/6), and [A.
+Gill](/biblio/author/42), "[Factorising Folds for Faster
+Functions](/biblio/view/10)", *Journal of Functional
+Programming*, vol. 20, issue 3-4, 2010. [Abstract](/node/10)
 
--   [Tagged](biblio/export/tagged/10 "Click to download the EndNote Tagged formatted file")
--   [XML](biblio/export/xml/10 "Click to download the XML formatted file")
--   [BibTex](biblio/export/bibtex/10 "Click to download the BibTEX formatted file")
+-   [Tagged](/biblio/export/tagged/10 "Click to download the EndNote Tagged formatted file")
+-   [XML](/biblio/export/xml/10 "Click to download the XML formatted file")
+-   [BibTex](/biblio/export/bibtex/10 "Click to download the BibTEX formatted file")
 -   [Google
     Scholar](http://scholar.google.com/scholar?btnG=Search%2BScholar&as_q=%22Factorising%2BFolds%2Bfor%2BFaster%2BFunctions%22&as_sauthors=Hutton&as_occt=any&as_epq=&as_oq=&as_eq=&as_publication=&as_ylo=&as_yhi=&as_sdtAAP=1&as_sdtp=1 "Click to search Google Scholar for this entry")
 

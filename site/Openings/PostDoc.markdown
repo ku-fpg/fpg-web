@@ -1,5 +1,5 @@
 The Functional Programming Group at KU is looking to hire a post
-doctoral researcher, to work on the [HERMIT](Tools/HERMIT)
+doctoral researcher, to work on the [HERMIT](/Tools/HERMIT)
 project.
 
 * * * * *
@@ -33,7 +33,7 @@ Complete applications will include the following:
     least three references
 
 For further information about this position, please contact Andy Gill at
-[andygill@ku.edu](mailto:andygill@ku.edu).
+[andygill@ku.edu](/mailto:andygill@ku.edu).
 
 EO/AA employer
 
@@ -46,7 +46,7 @@ The Haskell Equational Reasoning Model-to-Implementation Tunnel (HERMIT)
 is a two year NSF-funded project to improving the Applicability of
 Haskell-Hosted Semi-Formal Models to High Assurance Development.
 Specifically, HERMIT will use the [?\>worker/wrapper
-transformation](Research/WorkerWrapper), a Haskell-hosted DSL,
+transformation](/Research/WorkerWrapper), a Haskell-hosted DSL,
 and a new refinement UI to perform rewrites directly on Haskell Core,
 the [GHC](http://www.haskell.org/ghc) internal representation.
 
@@ -66,43 +66,43 @@ Background Reading:
 
 2009
 
-[Gill, A.](biblio/author/42), and [G.
-Hutton](biblio/author/2), "[The worker/wrapper
-transformation](biblio/view/19)", *Journal of Functional
+[Gill, A.](/biblio/author/42), and [G.
+Hutton](/biblio/author/2), "[The worker/wrapper
+transformation](/biblio/view/19)", *Journal of Functional
 Programming*, vol. 19, no. 2: Cambridge University Press, pp. 227–251,
-03/2009. [Abstract](node/19)
+03/2009. [Abstract](/node/19)
 
--   [Tagged](biblio/export/tagged/19 "Click to download the EndNote Tagged formatted file")
--   [XML](biblio/export/xml/19 "Click to download the XML formatted file")
--   [BibTex](biblio/export/bibtex/19 "Click to download the BibTEX formatted file")
+-   [Tagged](/biblio/export/tagged/19 "Click to download the EndNote Tagged formatted file")
+-   [XML](/biblio/export/xml/19 "Click to download the XML formatted file")
+-   [BibTex](/biblio/export/bibtex/19 "Click to download the BibTEX formatted file")
 -   [Google
     Scholar](http://scholar.google.com/scholar?btnG=Search%2BScholar&as_q=%22The%2Bworker%2Fwrapper%2Btransformation%22&as_sauthors=Gill&as_occt=any&as_epq=&as_oq=&as_eq=&as_publication=&as_ylo=&as_yhi=&as_sdtAAP=1&as_sdtp=1 "Click to search Google Scholar for this entry")
 
 2009
 
-[Gill, A.](biblio/author/42), "[A Haskell Hosted DSL for
-Writing Transformation Systems](biblio/view/16)", *IFIP
+[Gill, A.](/biblio/author/42), "[A Haskell Hosted DSL for
+Writing Transformation Systems](/biblio/view/16)", *IFIP
 Working Conference on Domain Specific Languages*, 07/2009.
-[Abstract](node/16)
+[Abstract](/node/16)
 
--   [Tagged](biblio/export/tagged/16 "Click to download the EndNote Tagged formatted file")
--   [XML](biblio/export/xml/16 "Click to download the XML formatted file")
--   [BibTex](biblio/export/bibtex/16 "Click to download the BibTEX formatted file")
+-   [Tagged](/biblio/export/tagged/16 "Click to download the EndNote Tagged formatted file")
+-   [XML](/biblio/export/xml/16 "Click to download the XML formatted file")
+-   [BibTex](/biblio/export/bibtex/16 "Click to download the BibTEX formatted file")
 -   [Google
     Scholar](http://scholar.google.com/scholar?btnG=Search%2BScholar&as_q=%22A%2BHaskell%2BHosted%2BDSL%2Bfor%2BWriting%2BTransformation%2BSystems%22&as_sauthors=Gill&as_occt=any&as_epq=&as_oq=&as_eq=&as_publication=&as_ylo=&as_yhi=&as_sdtAAP=1&as_sdtp=1 "Click to search Google Scholar for this entry")
 
 2011
 
-[Gill, A.](biblio/author/42), and [A.
-Farmer](biblio/author/45), "[Deriving an Efficient FPGA
+[Gill, A.](/biblio/author/42), and [A.
+Farmer](/biblio/author/45), "[Deriving an Efficient FPGA
 Implementation of a Low Density Parity Check Forward Error
-Corrector](biblio/view/107)", *The 16th ACM SIGPLAN
+Corrector](/biblio/view/107)", *The 16th ACM SIGPLAN
 International Conference on Functional Programming*, 09/2011.
-[Abstract](node/107)
+[Abstract](/node/107)
 
--   [Tagged](biblio/export/tagged/107 "Click to download the EndNote Tagged formatted file")
--   [XML](biblio/export/xml/107 "Click to download the XML formatted file")
--   [BibTex](biblio/export/bibtex/107 "Click to download the BibTEX formatted file")
+-   [Tagged](/biblio/export/tagged/107 "Click to download the EndNote Tagged formatted file")
+-   [XML](/biblio/export/xml/107 "Click to download the XML formatted file")
+-   [BibTex](/biblio/export/bibtex/107 "Click to download the BibTEX formatted file")
 -   [Google
     Scholar](http://scholar.google.com/scholar?btnG=Search%2BScholar&as_q=%22Deriving%2Ban%2BEfficient%2BFPGA%2BImplementation%2Bof%2Ba%2BLow%2BDensity%2BParity%2BCheck%2BForward%2BError%2BCorrector%22&as_sauthors=Gill&as_occt=any&as_epq=&as_oq=&as_eq=&as_publication=&as_ylo=&as_yhi=&as_sdtAAP=1&as_sdtp=1 "Click to search Google Scholar for this entry")
 
