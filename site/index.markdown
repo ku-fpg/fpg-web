@@ -1,8 +1,3 @@
----
-title:  Home
-foo:    bar *Hello* World
----
-
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tempor, urna et
 auctor tincidunt, eros mauris facilisis purus, eget sollicitudin leo massa sit
 amet ipsum. Vivamus eu massa in urna vehicula rutrum eget sit amet purus.
