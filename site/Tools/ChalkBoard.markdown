@@ -12,9 +12,9 @@ principal image type, a `Board`, is abstract.
 
 -   [Download ChalkBoard](http://hackage.haskell.org/package/chalkboard)
 -   [ChalkBoard
-    Tutorial](http://www.ittc.ku.edu/csdl/fpg/Tools/ChalkBoard/Tutorial)
+    Tutorial](http://www.ittc.ku.eduTools/ChalkBoard/Tutorial)
 -   [ChalkBoard
-    Documentation](http://www.ittc.ku.edu/csdl/fpg/sites/default/files/chalkboardhaddock/index.html)
+    Documentation](http://www.ittc.ku.edusites/default/files/chalkboardhaddock/index.html)
 
 Download
 --------
@@ -44,15 +44,15 @@ ChalkBoard Paper
 
 2009
 
-[Matlage, K.](/csdl/fpg/biblio/author/8), and [A.
-Gill](/csdl/fpg/biblio/author/42), "[ChalkBoard: Mapping Functions to
-Polygons](/csdl/fpg/biblio/view/11)", *21st International Symposium on
+[Matlage, K.](biblio/author/8), and [A.
+Gill](biblio/author/42), "[ChalkBoard: Mapping Functions to
+Polygons](biblio/view/11)", *21st International Symposium on
 Implementation and Application of Functional Languages*: LNCS 6041,
-11/2009. [Abstract](/csdl/fpg/node/11)
+11/2009. [Abstract](node/11)
 
--   [Tagged](/csdl/fpg/biblio/export/tagged/11 "Click to download the EndNote Tagged formatted file")
--   [XML](/csdl/fpg/biblio/export/xml/11 "Click to download the XML formatted file")
--   [BibTex](/csdl/fpg/biblio/export/bibtex/11 "Click to download the BibTEX formatted file")
+-   [Tagged](biblio/export/tagged/11 "Click to download the EndNote Tagged formatted file")
+-   [XML](biblio/export/xml/11 "Click to download the XML formatted file")
+-   [BibTex](biblio/export/bibtex/11 "Click to download the BibTEX formatted file")
 -   [Google
     Scholar](http://scholar.google.com/scholar?btnG=Search%2BScholar&as_q=%22ChalkBoard%3A%2BMapping%2BFunctions%2Bto%2BPolygons%22&as_sauthors=Matlage&as_occt=any&as_epq=&as_oq=&as_eq=&as_publication=&as_ylo=&as_yhi=&as_sdtAAP=1&as_sdtp=1 "Click to search Google Scholar for this entry")
 

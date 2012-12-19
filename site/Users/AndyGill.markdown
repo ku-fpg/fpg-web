@@ -1,4 +1,4 @@
-![](http://www.ittc.ku.edu/csdl/fpg/sites/default/files/me.jpg)
+![](http://www.ittc.ku.edusites/default/files/me.jpg)
 
 Assistant Professor
 -------------------
@@ -28,7 +28,7 @@ Science](http://www.eecs.ku.edu/), \
                    (or by appointment)
   --------------- -----------------------------
 
-[Research](/csdl/fpg/Research "Research")
+[Research](Research "Research")
 -----------------------------------------
 
 We use functional programming to solve problems in ways that are
@@ -47,17 +47,17 @@ to a problem. However, the scope and influence of our ideas is intended
 to be broader than simply their use inside our functional language
 community.
 
--   [Read more](/csdl/fpg/Research "Read the rest of Research.")
+-   [Read more](Research "Read the rest of Research.")
 
-[Teaching](/csdl/fpg/Users/AndyGill/Teaching "Teaching")
+[Teaching](Users/AndyGill/Teaching "Teaching")
 --------------------------------------------------------
 
 I am teaching Programming Language Paradigms (EECS 368) in Fall 2011.
 
 -   [Read
-    more](/csdl/fpg/Users/AndyGill/Teaching "Read the rest of Teaching.")
+    more](Users/AndyGill/Teaching "Read the rest of Teaching.")
 
-[Presentations](/csdl/fpg/Users/AndyGill/Presentations "Presentations")
+[Presentations](Users/AndyGill/Presentations "Presentations")
 -----------------------------------------------------------------------
 
 Here is a list of recent invited talks, conference presentations and
@@ -82,9 +82,9 @@ briefings.
 -   **May 11^th^**, ***Generating Implementations of Error Correcting
     Codes using Kansas Lava,***10th Annual High Confidence Software and
     Systems Conference, Linthicum Heights, MD,
-    [Slides](http://www.ittc.ku.edu/csdl/fpg/sites/default/files/20105011-hcss.pdf),
+    [Slides](http://www.ittc.ku.edusites/default/files/20105011-hcss.pdf),
     [Quicktime
-    Slides](http://www.ittc.ku.edu/csdl/fpg/sites/default/files/20105011-hcss.mov).
+    Slides](http://www.ittc.ku.edusites/default/files/20105011-hcss.mov).
 -   **March 11^th^**, ***Information Assurance, Functional Programming
     and Kansas Lava,***Information Assurance Visit, ITTC.
 -   **February 26^th^**, ***Forward Error Correction Codes and Kansas
@@ -95,151 +95,151 @@ briefings.
     Program Manipulation, Madrid, Spain.
 
 -   [Read
-    more](/csdl/fpg/Users/AndyGill/Presentations "Read the rest of Presentations.")
+    more](Users/AndyGill/Presentations "Read the rest of Presentations.")
 
 Recent Publications and Submissions
 -----------------------------------
 
 Submitted
 
-[Sculthorpe, N.](/csdl/fpg/biblio/author/51), [A.
-Farmer](/csdl/fpg/biblio/author/45), and [A.
-Gill](/csdl/fpg/biblio/author/42), "[The HERMIT in the Tree: Mechanizing
+[Sculthorpe, N.](biblio/author/51), [A.
+Farmer](biblio/author/45), and [A.
+Gill](biblio/author/42), "[The HERMIT in the Tree: Mechanizing
 Program Transformations in the GHC Core
-Language](/csdl/fpg/biblio/view/129)", *24th Symposium on Implementation
+Language](biblio/view/129)", *24th Symposium on Implementation
 and Application of Functional Languages (IFL '12)*, Oxford, England,
-09/2012, Submitted. [Abstract](/csdl/fpg/node/129)
+09/2012, Submitted. [Abstract](node/129)
 
--   [Tagged](/csdl/fpg/biblio/export/tagged/129 "Click to download the EndNote Tagged formatted file")
--   [XML](/csdl/fpg/biblio/export/xml/129 "Click to download the XML formatted file")
--   [BibTex](/csdl/fpg/biblio/export/bibtex/129 "Click to download the BibTEX formatted file")
+-   [Tagged](biblio/export/tagged/129 "Click to download the EndNote Tagged formatted file")
+-   [XML](biblio/export/xml/129 "Click to download the XML formatted file")
+-   [BibTex](biblio/export/bibtex/129 "Click to download the BibTEX formatted file")
 -   [Google
     Scholar](http://scholar.google.com/scholar?btnG=Search%2BScholar&as_q=%22The%2BHERMIT%2Bin%2Bthe%2BTree%3A%2BMechanizing%2BProgram%2BTransformations%2Bin%2Bthe%2BGHC%2BCore%2BLanguage%22&as_sauthors=Sculthorpe&as_occt=any&as_epq=&as_oq=&as_eq=&as_publication=&as_ylo=&as_yhi=&as_sdtAAP=1&as_sdtp=1 "Click to search Google Scholar for this entry")
 
 2012
 
-[Farmer, A.](/csdl/fpg/biblio/author/45), and [A.
-Gill](/csdl/fpg/biblio/author/42), "[Haskell DSLs for Interactive Web
-Services](/csdl/fpg/biblio/view/125)", *The First International Workshop
+[Farmer, A.](biblio/author/45), and [A.
+Gill](biblio/author/42), "[Haskell DSLs for Interactive Web
+Services](biblio/view/125)", *The First International Workshop
 on Cross-model Language Design and Implementation*, 09/2012.
-[Abstract](/csdl/fpg/node/125)
+[Abstract](node/125)
 
--   [Tagged](/csdl/fpg/biblio/export/tagged/125 "Click to download the EndNote Tagged formatted file")
--   [XML](/csdl/fpg/biblio/export/xml/125 "Click to download the XML formatted file")
--   [BibTex](/csdl/fpg/biblio/export/bibtex/125 "Click to download the BibTEX formatted file")
+-   [Tagged](biblio/export/tagged/125 "Click to download the EndNote Tagged formatted file")
+-   [XML](biblio/export/xml/125 "Click to download the XML formatted file")
+-   [BibTex](biblio/export/bibtex/125 "Click to download the BibTEX formatted file")
 -   [Google
     Scholar](http://scholar.google.com/scholar?btnG=Search%2BScholar&as_q=%22Haskell%2BDSLs%2Bfor%2BInteractive%2BWeb%2BServices%22&as_sauthors=Farmer&as_occt=any&as_epq=&as_oq=&as_eq=&as_publication=&as_ylo=&as_yhi=&as_sdtAAP=1&as_sdtp=1 "Click to search Google Scholar for this entry")
 
-[Farmer, A.](/csdl/fpg/biblio/author/45), [A.
-Gill](/csdl/fpg/biblio/author/42), [E.
-Komp](/csdl/fpg/biblio/author/12), and [N.
-Sculthorpe](/csdl/fpg/biblio/author/51), "[The HERMIT in the Machine: A
+[Farmer, A.](biblio/author/45), [A.
+Gill](biblio/author/42), [E.
+Komp](biblio/author/12), and [N.
+Sculthorpe](biblio/author/51), "[The HERMIT in the Machine: A
 Plugin for the Interactive Transformation of GHC Core Language
-Programs](/csdl/fpg/biblio/view/126)", *ACM SIGPLAN Haskell Symposium*,
-09/2012. [Abstract](/csdl/fpg/node/126)
+Programs](biblio/view/126)", *ACM SIGPLAN Haskell Symposium*,
+09/2012. [Abstract](node/126)
 
--   [Tagged](/csdl/fpg/biblio/export/tagged/126 "Click to download the EndNote Tagged formatted file")
--   [XML](/csdl/fpg/biblio/export/xml/126 "Click to download the XML formatted file")
--   [BibTex](/csdl/fpg/biblio/export/bibtex/126 "Click to download the BibTEX formatted file")
+-   [Tagged](biblio/export/tagged/126 "Click to download the EndNote Tagged formatted file")
+-   [XML](biblio/export/xml/126 "Click to download the XML formatted file")
+-   [BibTex](biblio/export/bibtex/126 "Click to download the BibTEX formatted file")
 -   [Google
     Scholar](http://scholar.google.com/scholar?btnG=Search%2BScholar&as_q=%22The%2BHERMIT%2Bin%2Bthe%2BMachine%3A%2BA%2BPlugin%2Bfor%2Bthe%2BInteractive%2BTransformation%2Bof%2BGHC%2BCore%2BLanguage%2BPrograms%22&as_sauthors=Farmer&as_occt=any&as_epq=&as_oq=&as_eq=&as_publication=&as_ylo=&as_yhi=&as_sdtAAP=1&as_sdtp=1 "Click to search Google Scholar for this entry")
 
-[Frisby, N.](/csdl/fpg/biblio/author/18), [A.
-Gill](/csdl/fpg/biblio/author/42), and [P.
-Alexander](/csdl/fpg/biblio/author/50), "[A Pattern for Almost
-Homomorphic Functions](/csdl/fpg/biblio/view/122)", *ACM SIGPLAN
+[Frisby, N.](biblio/author/18), [A.
+Gill](biblio/author/42), and [P.
+Alexander](biblio/author/50), "[A Pattern for Almost
+Homomorphic Functions](biblio/view/122)", *ACM SIGPLAN
 Workshop on Generic Programming*, 09/2012.
-[Abstract](/csdl/fpg/node/122)
+[Abstract](node/122)
 
--   [Tagged](/csdl/fpg/biblio/export/tagged/122 "Click to download the EndNote Tagged formatted file")
--   [XML](/csdl/fpg/biblio/export/xml/122 "Click to download the XML formatted file")
--   [BibTex](/csdl/fpg/biblio/export/bibtex/122 "Click to download the BibTEX formatted file")
+-   [Tagged](biblio/export/tagged/122 "Click to download the EndNote Tagged formatted file")
+-   [XML](biblio/export/xml/122 "Click to download the XML formatted file")
+-   [BibTex](biblio/export/bibtex/122 "Click to download the BibTEX formatted file")
 -   [Google
     Scholar](http://scholar.google.com/scholar?btnG=Search%2BScholar&as_q=%22A%2BPattern%2Bfor%2BAlmost%2BHomomorphic%2BFunctions%22&as_sauthors=Frisby&as_occt=any&as_epq=&as_oq=&as_eq=&as_publication=&as_ylo=&as_yhi=&as_sdtAAP=1&as_sdtp=1 "Click to search Google Scholar for this entry")
 
-[Gill, A.](/csdl/fpg/biblio/author/42), and [B.
-Neuenschwander](/csdl/fpg/biblio/author/48), "[Handshaking in Kansas
-Lava using Patch Logic](/csdl/fpg/biblio/view/119)", *Practical Aspects
-of Declarative Languages*, 01/2012. [Abstract](/csdl/fpg/node/119)
+[Gill, A.](biblio/author/42), and [B.
+Neuenschwander](biblio/author/48), "[Handshaking in Kansas
+Lava using Patch Logic](biblio/view/119)", *Practical Aspects
+of Declarative Languages*, 01/2012. [Abstract](node/119)
 
--   [Tagged](/csdl/fpg/biblio/export/tagged/119 "Click to download the EndNote Tagged formatted file")
--   [XML](/csdl/fpg/biblio/export/xml/119 "Click to download the XML formatted file")
--   [BibTex](/csdl/fpg/biblio/export/bibtex/119 "Click to download the BibTEX formatted file")
+-   [Tagged](biblio/export/tagged/119 "Click to download the EndNote Tagged formatted file")
+-   [XML](biblio/export/xml/119 "Click to download the XML formatted file")
+-   [BibTex](biblio/export/bibtex/119 "Click to download the BibTEX formatted file")
 -   [Google
     Scholar](http://scholar.google.com/scholar?btnG=Search%2BScholar&as_q=%22Handshaking%2Bin%2BKansas%2BLava%2Busing%2BPatch%2BLogic%22&as_sauthors=Gill&as_occt=any&as_epq=&as_oq=&as_eq=&as_publication=&as_ylo=&as_yhi=&as_sdtAAP=1&as_sdtp=1 "Click to search Google Scholar for this entry")
 
 2011
 
-[Gill, A.](/csdl/fpg/biblio/author/42), and [A.
-Farmer](/csdl/fpg/biblio/author/45), "[Deriving an Efficient FPGA
+[Gill, A.](biblio/author/42), and [A.
+Farmer](biblio/author/45), "[Deriving an Efficient FPGA
 Implementation of a Low Density Parity Check Forward Error
-Corrector](/csdl/fpg/biblio/view/107)", *The 16th ACM SIGPLAN
+Corrector](biblio/view/107)", *The 16th ACM SIGPLAN
 International Conference on Functional Programming*, 09/2011.
-[Abstract](/csdl/fpg/node/107)
+[Abstract](node/107)
 
--   [Tagged](/csdl/fpg/biblio/export/tagged/107 "Click to download the EndNote Tagged formatted file")
--   [XML](/csdl/fpg/biblio/export/xml/107 "Click to download the XML formatted file")
--   [BibTex](/csdl/fpg/biblio/export/bibtex/107 "Click to download the BibTEX formatted file")
+-   [Tagged](biblio/export/tagged/107 "Click to download the EndNote Tagged formatted file")
+-   [XML](biblio/export/xml/107 "Click to download the XML formatted file")
+-   [BibTex](biblio/export/bibtex/107 "Click to download the BibTEX formatted file")
 -   [Google
     Scholar](http://scholar.google.com/scholar?btnG=Search%2BScholar&as_q=%22Deriving%2Ban%2BEfficient%2BFPGA%2BImplementation%2Bof%2Ba%2BLow%2BDensity%2BParity%2BCheck%2BForward%2BError%2BCorrector%22&as_sauthors=Gill&as_occt=any&as_epq=&as_oq=&as_eq=&as_publication=&as_ylo=&as_yhi=&as_sdtAAP=1&as_sdtp=1 "Click to search Google Scholar for this entry")
 
-[Gill, A.](/csdl/fpg/biblio/author/42), "[Declarative FPGA Circuit
-Synthesis using Kansas Lava](/csdl/fpg/biblio/view/111)", *The
+[Gill, A.](biblio/author/42), "[Declarative FPGA Circuit
+Synthesis using Kansas Lava](biblio/view/111)", *The
 International Conference on Engineering of Reconfigurable Systems and
 Algorithms (ERSA'11)*, Las Vegas, Nevada, USA, 07/2011.
 
--   [Tagged](/csdl/fpg/biblio/export/tagged/111 "Click to download the EndNote Tagged formatted file")
--   [XML](/csdl/fpg/biblio/export/xml/111 "Click to download the XML formatted file")
--   [BibTex](/csdl/fpg/biblio/export/bibtex/111 "Click to download the BibTEX formatted file")
+-   [Tagged](biblio/export/tagged/111 "Click to download the EndNote Tagged formatted file")
+-   [XML](biblio/export/xml/111 "Click to download the XML formatted file")
+-   [BibTex](biblio/export/bibtex/111 "Click to download the BibTEX formatted file")
 -   [Google
     Scholar](http://scholar.google.com/scholar?btnG=Search%2BScholar&as_q=%22Declarative%2BFPGA%2BCircuit%2BSynthesis%2Busing%2BKansas%2BLava%22&as_sauthors=Gill&as_occt=any&as_epq=&as_oq=&as_eq=&as_publication=&as_ylo=&as_yhi=&as_sdtAAP=1&as_sdtp=1 "Click to search Google Scholar for this entry")
 
-[Gill, A.](/csdl/fpg/biblio/author/42), [T.
-Bull](/csdl/fpg/biblio/author/44), [D.
-DePardo](/csdl/fpg/biblio/author/47), [A.
-Farmer](/csdl/fpg/biblio/author/45), [E.
-Komp](/csdl/fpg/biblio/author/12), and [E.
-Perrins](/csdl/fpg/biblio/author/11), "[Using Functional Programming to
-Generate an LDPC Forward Error Corrector](/csdl/fpg/biblio/view/106)",
+[Gill, A.](biblio/author/42), [T.
+Bull](biblio/author/44), [D.
+DePardo](biblio/author/47), [A.
+Farmer](biblio/author/45), [E.
+Komp](biblio/author/12), and [E.
+Perrins](biblio/author/11), "[Using Functional Programming to
+Generate an LDPC Forward Error Corrector](biblio/view/106)",
 *The 19th Annual IEEE International Symposium on Field-Programmable
 Custom Computing Machines*, Salt Lake City, 05/2011.
-[Abstract](/csdl/fpg/node/106)
+[Abstract](node/106)
 
--   [Tagged](/csdl/fpg/biblio/export/tagged/106 "Click to download the EndNote Tagged formatted file")
--   [XML](/csdl/fpg/biblio/export/xml/106 "Click to download the XML formatted file")
--   [BibTex](/csdl/fpg/biblio/export/bibtex/106 "Click to download the BibTEX formatted file")
+-   [Tagged](biblio/export/tagged/106 "Click to download the EndNote Tagged formatted file")
+-   [XML](biblio/export/xml/106 "Click to download the XML formatted file")
+-   [BibTex](biblio/export/bibtex/106 "Click to download the BibTEX formatted file")
 -   [Google
     Scholar](http://scholar.google.com/scholar?btnG=Search%2BScholar&as_q=%22Using%2BFunctional%2BProgramming%2Bto%2BGenerate%2Ban%2BLDPC%2BForward%2BError%2BCorrector%22&as_sauthors=Gill&as_occt=any&as_epq=&as_oq=&as_eq=&as_publication=&as_ylo=&as_yhi=&as_sdtAAP=1&as_sdtp=1 "Click to search Google Scholar for this entry")
 
-[Matlage, K.](/csdl/fpg/biblio/author/8), "[ChalkBoard: A Functional
+[Matlage, K.](biblio/author/8), "[ChalkBoard: A Functional
 Image Description Language and its Practical
-Applications](/csdl/fpg/biblio/view/109)", *EECS*, vol. MS: University
-of Kansas, 04/2011. [Abstract](/csdl/fpg/node/109)
+Applications](biblio/view/109)", *EECS*, vol. MS: University
+of Kansas, 04/2011. [Abstract](node/109)
 
--   [Tagged](/csdl/fpg/biblio/export/tagged/109 "Click to download the EndNote Tagged formatted file")
--   [XML](/csdl/fpg/biblio/export/xml/109 "Click to download the XML formatted file")
--   [BibTex](/csdl/fpg/biblio/export/bibtex/109 "Click to download the BibTEX formatted file")
+-   [Tagged](biblio/export/tagged/109 "Click to download the EndNote Tagged formatted file")
+-   [XML](biblio/export/xml/109 "Click to download the XML formatted file")
+-   [BibTex](biblio/export/bibtex/109 "Click to download the BibTEX formatted file")
 -   [Google
     Scholar](http://scholar.google.com/scholar?btnG=Search%2BScholar&as_q=%22ChalkBoard%3A%2BA%2BFunctional%2BImage%2BDescription%2BLanguage%2Band%2Bits%2BPractical%2BApplications%22&as_sauthors=Matlage&as_occt=any&as_epq=&as_oq=&as_eq=&as_publication=&as_ylo=&as_yhi=&as_sdtAAP=1&as_sdtp=1 "Click to search Google Scholar for this entry")
 
-[Bull, T.](/csdl/fpg/biblio/author/44), "[Forward Error Correction and
-Functional Programming](/csdl/fpg/biblio/view/110)", *EECS*, vol. MS:
+[Bull, T.](biblio/author/44), "[Forward Error Correction and
+Functional Programming](biblio/view/110)", *EECS*, vol. MS:
 University of Kansas, 04/2011.
 
--   [Tagged](/csdl/fpg/biblio/export/tagged/110 "Click to download the EndNote Tagged formatted file")
--   [XML](/csdl/fpg/biblio/export/xml/110 "Click to download the XML formatted file")
--   [BibTex](/csdl/fpg/biblio/export/bibtex/110 "Click to download the BibTEX formatted file")
+-   [Tagged](biblio/export/tagged/110 "Click to download the EndNote Tagged formatted file")
+-   [XML](biblio/export/xml/110 "Click to download the XML formatted file")
+-   [BibTex](biblio/export/bibtex/110 "Click to download the BibTEX formatted file")
 -   [Google
     Scholar](http://scholar.google.com/scholar?btnG=Search%2BScholar&as_q=%22Forward%2BError%2BCorrection%2Band%2BFunctional%2BProgramming%22&as_sauthors=Bull&as_occt=any&as_epq=&as_oq=&as_eq=&as_publication=&as_ylo=&as_yhi=&as_sdtAAP=1&as_sdtp=1 "Click to search Google Scholar for this entry")
 
-[Gill, A.](/csdl/fpg/biblio/author/42), and [G.
-Kimmell](/csdl/fpg/biblio/author/10), *[Capturing Functions and Catching
-Satellites](/csdl/fpg/biblio/view/45),* , no. ITTC-FY2011-TR-29952011-1,
-01/2011. [Abstract](/csdl/fpg/node/45)
+[Gill, A.](biblio/author/42), and [G.
+Kimmell](biblio/author/10), *[Capturing Functions and Catching
+Satellites](biblio/view/45),* , no. ITTC-FY2011-TR-29952011-1,
+01/2011. [Abstract](node/45)
 
--   [Tagged](/csdl/fpg/biblio/export/tagged/45 "Click to download the EndNote Tagged formatted file")
--   [XML](/csdl/fpg/biblio/export/xml/45 "Click to download the XML formatted file")
--   [BibTex](/csdl/fpg/biblio/export/bibtex/45 "Click to download the BibTEX formatted file")
+-   [Tagged](biblio/export/tagged/45 "Click to download the EndNote Tagged formatted file")
+-   [XML](biblio/export/xml/45 "Click to download the XML formatted file")
+-   [BibTex](biblio/export/bibtex/45 "Click to download the BibTEX formatted file")
 -   [Google
     Scholar](http://scholar.google.com/scholar?btnG=Search%2BScholar&as_q=%22Capturing%2BFunctions%2Band%2BCatching%2BSatellites%22&as_sauthors=Gill&as_occt=any&as_epq=&as_oq=&as_eq=&as_publication=&as_ylo=&as_yhi=&as_sdtAAP=1&as_sdtp=1 "Click to search Google Scholar for this entry")
 
@@ -277,7 +277,7 @@ Professional Activities
     Workshop](http://www.haskell.org/haskell-workshop/2007/)
     (HASKELL'07)\
 
-[History](/csdl/fpg/Users/AndyGill/History "History")
+[History](Users/AndyGill/History "History")
 -----------------------------------------------------
 
 Andy Gill has been an active researcher in functional programming for 20
@@ -286,9 +286,9 @@ functional languages at Edinburgh then Glasgow, running Haskell on
 virtual machines at OGI, and high assurance software at Galois.
 
 -   [Read
-    more](/csdl/fpg/Users/AndyGill/History "Read the rest of History.")
+    more](Users/AndyGill/History "Read the rest of History.")
 
-[Bio](/csdl/fpg/Users/AndyGill/Bio "Bio")
+[Bio](Users/AndyGill/Bio "Bio")
 -----------------------------------------
 
 Andrew (Andy) Gill was born and educated in Scotland, and has spent his
@@ -301,5 +301,5 @@ systems. In 2008 he returned to academia and research, joining the
 University of Kansas and the Information and Telecommunication
 Technology Center.
 
--   [Read more](/csdl/fpg/Users/AndyGill/Bio "Read the rest of Bio.")
+-   [Read more](Users/AndyGill/Bio "Read the rest of Bio.")
 

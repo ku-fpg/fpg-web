@@ -11,7 +11,7 @@ tool.
 Haskell Domain Specific Languages (DSLs)
 ========================================
 
-[Kansas Lava](/csdl/fpg/Tools/KansasLava "Kansas Lava")
+[Kansas Lava](Tools/KansasLava "Kansas Lava")
 -------------------------------------------------------
 
 Kansas Lava is a Domain Specific Language (DSL) for expressing
@@ -25,9 +25,9 @@ applied to good effect to provide descriptions of highly efficient
 circuits.
 
 -   [Read
-    more](/csdl/fpg/Tools/KansasLava "Read the rest of Kansas Lava.")
+    more](Tools/KansasLava "Read the rest of Kansas Lava.")
 
-[KURE](/csdl/fpg/Tools/KURE "KURE")
+[KURE](Tools/KURE "KURE")
 -----------------------------------
 
 The **Kansas University Rewrite Engine** (KURE) is a Haskell-hosted
@@ -43,9 +43,9 @@ use of type families to provide a delimited generic mechanism for tree
 rewriting, and provides support for efficient identity rewrite
 detection.
 
--   [Read more](/csdl/fpg/Tools/KURE "Read the rest of KURE.")
+-   [Read more](Tools/KURE "Read the rest of KURE.")
 
-[ChalkBoard](/csdl/fpg/Tools/ChalkBoard "ChalkBoard")
+[ChalkBoard](Tools/ChalkBoard "ChalkBoard")
 -----------------------------------------------------
 
 ChalkBoard is a Haskell-hosted Domain Specific Language (DSL) for image
@@ -59,12 +59,12 @@ directly on boards. The system is based loosely on Pan, but the
 principal image type, a `Board`, is abstract.
 
 -   [Read
-    more](/csdl/fpg/Tools/ChalkBoard "Read the rest of ChalkBoard.")
+    more](Tools/ChalkBoard "Read the rest of ChalkBoard.")
 
 Tools
 =====
 
-[Haskell Program Coverage](/csdl/fpg/Tools/Hpc "Haskell Program Coverage")
+[Haskell Program Coverage](Tools/Hpc "Haskell Program Coverage")
 --------------------------------------------------------------------------
 
 Haskell Program Coverage (Hpc) is a high-fidelity code coverage tool for
@@ -74,12 +74,12 @@ coverage, run instrumented programs, and display the coverage
 information obtained. It is included with the standard GHC distribution.
 
 -   [Read
-    more](/csdl/fpg/Tools/Hpc "Read the rest of Haskell Program Coverage.")
+    more](Tools/Hpc "Read the rest of Haskell Program Coverage.")
 
 Group Efforts
 =============
 
-[Lambda Bridge](/csdl/fpg/Tools/LambdaBridge "Lambda Bridge")
+[Lambda Bridge](Tools/LambdaBridge "Lambda Bridge")
 -------------------------------------------------------------
 
 The Lambda Bridge effort provides enabling technology for using
@@ -88,12 +88,12 @@ artifacts are shared documentation of ways to use FPGA board, and
 libraries (software and hardware) that facilitate the use of FPGAs.
 
 -   [Read
-    more](/csdl/fpg/Tools/LambdaBridge "Read the rest of Lambda Bridge.")
+    more](Tools/LambdaBridge "Read the rest of Lambda Bridge.")
 
 Libraries
 =========
 
-[Haskell Object Observation Debugger (Hood)](/csdl/fpg/Tools/Hood "Haskell Object Observation Debugger (Hood)")
+[Haskell Object Observation Debugger (Hood)](Tools/Hood "Haskell Object Observation Debugger (Hood)")
 ---------------------------------------------------------------------------------------------------------------
 
 HOOD is a small post-mortem debugger for the lazy functional language
@@ -103,9 +103,9 @@ traditional stepping and variable examination paradigm used by
 imperative language debuggers.
 
 -   [Read
-    more](/csdl/fpg/Tools/Hood "Read the rest of Haskell Object Observation Debugger (Hood).")
+    more](Tools/Hood "Read the rest of Haskell Object Observation Debugger (Hood).")
 
-[IO Reification](/csdl/fpg/Tools/IOReification "IO Reification")
+[IO Reification](Tools/IOReification "IO Reification")
 ----------------------------------------------------------------
 
 [data-reify](http://hackage.haskell.org/cgi-bin/hackage-scripts/package/data-reify)
@@ -114,9 +114,9 @@ Many (implicitly or explicitly) recursive data structure can be given
 this ability, via a type class instance.
 
 -   [Read
-    more](/csdl/fpg/Tools/IOReification "Read the rest of IO Reification.")
+    more](Tools/IOReification "Read the rest of IO Reification.")
 
-[Scotty](/csdl/fpg/Tools/Scotty "Scotty")
+[Scotty](Tools/Scotty "Scotty")
 -----------------------------------------
 
 A Haskell web framework inspired by Ruby's Sinatra, using WAI and Warp.
@@ -138,7 +138,7 @@ Hackage:
 Github:
 [https://github.com/xich/scotty](https://github.com/xich/scotty "https://github.com/xich/scotty")
 
--   [Read more](/csdl/fpg/Tools/Scotty "Read the rest of Scotty.")
+-   [Read more](Tools/Scotty "Read the rest of Scotty.")
 
 Other Libraries
 ---------------

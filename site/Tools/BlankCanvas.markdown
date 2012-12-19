@@ -21,7 +21,7 @@ main = blankCanvas 3000 $ \ context -> do
                 stroke()
 ~~~~
 
-![](http://ittc.ku.edu/csdl/fpg/sites/default/files/red-line.png)
+![](http://ittc.ku.edusites/default/files/red-line.png)
 
 Downloading
 -----------
@@ -35,7 +35,7 @@ Haddock:
 [http://hackage.haskell.org/package/blank-canvas](http://hackage.haskell.org/package/blank-canvas)
 \
  There is also a [slide
-set](http://ittc.ku.edu/csdl/fpg/sites/default/files/class17.pdf) about
+set](http://ittc.ku.edusites/default/files/class17.pdf) about
 blank-canvas.
 
 Examples
@@ -43,8 +43,8 @@ Examples
 
 ### Squares
 
-![](http://ittc.ku.edu/csdl/fpg/sites/default/files/squares.png)
+![](http://ittc.ku.edusites/default/files/squares.png)
 
 ### Tic Tac Toe
 
-![](http://ittc.ku.edu/csdl/fpg/sites/default/files/xox.png)
+![](http://ittc.ku.edusites/default/files/xox.png)

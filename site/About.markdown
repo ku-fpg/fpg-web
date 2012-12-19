@@ -100,4 +100,4 @@ CSDL organized the [ICFP programming
 contest](http://www.icfpcontest.org/) in 2009. Here is a picture taking
 during the hectic preparation before the content started.
 
-![](http://www.ittc.ku.edu/csdl/fpg/sites/default/files/us.jpg)
+![](http://www.ittc.ku.edusites/default/files/us.jpg)

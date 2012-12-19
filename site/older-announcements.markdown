@@ -28,7 +28,7 @@ Andy Gill gave a talk at ASEE, about post-processing video talks.
 
 ### Aug 28th
 
-[Paper](/csdl/fpg/node/63) about using [ChalkBoard](Tools/ChalkBoard)
+[Paper](node/63) about using [ChalkBoard](Tools/ChalkBoard)
 for video processing accepted and sent for publication at ASEE.
 
 ### July 19th-23rd

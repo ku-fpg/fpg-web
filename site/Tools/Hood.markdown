@@ -108,4 +108,4 @@ Tutorial
 --------
 
 [Hood 0.2
-Tutorial](http://www.ittc.ku.edu/csdl/fpg/sites/default/files/hood-tutorial-0.2.1.pdf)
+Tutorial](http://www.ittc.ku.edusites/default/files/hood-tutorial-0.2.1.pdf)

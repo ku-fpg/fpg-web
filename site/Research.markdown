@@ -44,10 +44,10 @@ Kansas, we are addressing this gap using two separate techniques.
     fundamentally revisit the optimizing possibilities of a Haskell
     program. At the heart of these principled optimizations is the
     [Worker Wrapper
-    transformation](http://www.ittc.ku.edu/csdl/fpg/Research/WorkerWrapper).
+    transformation](http://www.ittc.ku.eduResearch/WorkerWrapper).
 -   Second, we are looking at ways of expressing and implementing
     [Domain Specific
-    Languages](http://www.ittc.ku.edu/csdl/fpg/Research/DSLs) (DSLs)
+    Languages](http://www.ittc.ku.eduResearch/DSLs) (DSLs)
     which are stylized libraries that give an engineered compromise
     between clarity, elegance and efficiency.
 
@@ -113,22 +113,22 @@ Other Sponsors
 
 #### 
 
-[![](http://www.ittc.ku.edu/csdl/fpg/sites/default/files/sicsa_logo.gif)](http://www.sicsa.ac.uk/)
+[![](http://www.ittc.ku.edusites/default/files/sicsa_logo.gif)](http://www.sicsa.ac.uk/)
 
 #### International Foundation for Telemetering (IFT)
 
-[![](http://www.ittc.ku.edu/csdl/fpg/sites/default/files/IFT_logo.gif)](http://www.telemetry.org/pages/ift/whoisift.php)
+[![](http://www.ittc.ku.edusites/default/files/IFT_logo.gif)](http://www.telemetry.org/pages/ift/whoisift.php)
 
 #### Xilinx
 
 #### 
 
-[![](http://www.ittc.ku.edu/csdl/fpg/sites/default/files/xilinx_logo.gif)](http://www.xilinx.com/)
+[![](http://www.ittc.ku.edusites/default/files/xilinx_logo.gif)](http://www.xilinx.com/)
 
 Research Before KU
 ==================
 
-[History](/csdl/fpg/Users/AndyGill/History "History")
+[History](Users/AndyGill/History "History")
 -----------------------------------------------------
 
 Andy Gill has been an active researcher in functional programming for 20
@@ -137,5 +137,5 @@ functional languages at Edinburgh then Glasgow, running Haskell on
 virtual machines at OGI, and high assurance software at Galois.
 
 -   [Read
-    more](/csdl/fpg/Users/AndyGill/History "Read the rest of History.")
+    more](Users/AndyGill/History "Read the rest of History.")
 

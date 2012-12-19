@@ -47,7 +47,7 @@ five of these contracts, including Galois' flagship product, the Trusted
 Services Engine. As a technologist he practiced applied functional
 programming by creating and deploying tools and methodologies that
 allowed Galois' employees to develop high assurance software. [Haskell
-Program Coverage](http://www.ittc.ku.edu/csdl/fpg/Tools/Hpc), now open
+Program Coverage](http://www.ittc.ku.eduTools/Hpc), now open
 sourced, is one such project.
 
 ### The University of Kansas (2008-)

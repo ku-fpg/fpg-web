@@ -1,4 +1,4 @@
-[About Functional Programming at KU](/csdl/fpg/About "About Functional Programming at KU")
+[About Functional Programming at KU](About "About Functional Programming at KU")
 ------------------------------------------------------------------------------------------
 
 The Functional Programming Group, led by Andy Gill, apply and extend
@@ -13,9 +13,9 @@ collaborators' open issues, as well as their assurance and performance
 needs.
 
 -   [Read
-    more](/csdl/fpg/About "Read the rest of About Functional Programming at KU.")
+    more](About "Read the rest of About Functional Programming at KU.")
 
-[Research](/csdl/fpg/Research "Research")
+[Research](Research "Research")
 -----------------------------------------
 
 We use functional programming to solve problems in ways that are
@@ -34,9 +34,9 @@ to a problem. However, the scope and influence of our ideas is intended
 to be broader than simply their use inside our functional language
 community.
 
--   [Read more](/csdl/fpg/Research "Read the rest of Research.")
+-   [Read more](Research "Read the rest of Research.")
 
-[Tools and Libraries](/csdl/fpg/Tools "Tools and Libraries")
+[Tools and Libraries](Tools "Tools and Libraries")
 ------------------------------------------------------------
 
 We use tools, typically written in Haskell, to explore and validate our
@@ -45,7 +45,7 @@ high assurance narrative for functional languages. We release our tools
 open source, under a BSD license, use git for version control, and
 github for external contributions.
 
--   [Read more](/csdl/fpg/Tools "Read the rest of Tools and Libraries.")
+-   [Read more](Tools "Read the rest of Tools and Libraries.")
 
 Recently at KU
 --------------
@@ -60,12 +60,12 @@ Neil!
 We (finally!) release Kansas Lava, and Kansas Lava Cores. There are
 available on [hackage](http://hackage.haskell.org). Our webpage for
 Kansas Lava is
-[http://ittc.ku.edu/csdl/fpg/Tools/KansasLava](http://ittc.ku.edu/csdl/fpg/Tools/KansasLava).
+[http://ittc.ku.eduTools/KansasLava](http://ittc.ku.edu/csdl/fpg/Tools/KansasLava).
 
 ### September 8th
 
-We are looking to [hire a PostDoc](/csdl/fpg/Openings/PostDoc), to work
-on the [HERMIT](/csdl/fpg/Tools/HERMIT) project. Please apply!
+We are looking to [hire a PostDoc](Openings/PostDoc), to work
+on the [HERMIT](Tools/HERMIT) project. Please apply!
 
 ### July 28th
 
@@ -124,5 +124,5 @@ school teachers to improve Fellows' teaching and communication skills,
 advance STEM education in middle schools, and provide role models for
 younger students.
 
-[Older Announcements](/csdl/fpg/older-announcements "Older Announcements")
+[Older Announcements](older-announcements "Older Announcements")
 --------------------------------------------------------------------------
