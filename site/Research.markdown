@@ -44,10 +44,10 @@ Kansas, we are addressing this gap using two separate techniques.
     fundamentally revisit the optimizing possibilities of a Haskell
     program. At the heart of these principled optimizations is the
     [Worker Wrapper
-    transformation](http://www.ittc.ku.eduResearch/WorkerWrapper).
+    transformation](/Research/WorkerWrapper).
 -   Second, we are looking at ways of expressing and implementing
     [Domain Specific
-    Languages](http://www.ittc.ku.eduResearch/DSLs) (DSLs)
+    Languages](/Research/DSLs) (DSLs)
     which are stylized libraries that give an engineered compromise
     between clarity, elegance and efficiency.
 
