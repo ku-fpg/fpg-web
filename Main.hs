@@ -1,4 +1,4 @@
-{-# LANGUAGE FlexibleInstances, MultiParamTypeClasses, ScopedTypeVariables, LambdaCase, InstanceSigs #-}
+{-# LANGUAGE FlexibleInstances, MultiParamTypeClasses, ScopedTypeVariables, LambdaCase, InstanceSigs, FlexibleContexts #-}
 -- @
 --
 --      site/ ... name.page
@@ -45,33 +45,92 @@ main = do
 
 
 
-main2 ["build"] = shake shakeOptions { shakeVerbosity = Diagnostic } $ do
+main2 ["build"] = shake shakeOptions { shakeVerbosity = Loud } $ do
 
 --        want ["_make/html/index.html"]
 
         -- Require the final html files in place
         action $ do
                 liftIO $ createDirectoryIfMissing True $ build_dir
-                files <- getDirectoryFiles site_dir "//*.markdown"
-                let target_files = map (flip replaceExtension ".html") files
+                files <- liftIO $ getRecursiveContents "site"
+--                files <- getDirectoryFiles "." "site//*.markdown"
+                let target_files = id
+                                 $ map ( build_dir </> "html" </>)
+                                 $ map dropDirectory1
+                                 $ map (flip replaceExtension ".html")
+                                 $ filter ("site//*.markdown" ?==)
+                                 $ files
                 liftIO $ print target_files
-                need (map (build_dir </> "html" </>) target_files)
+                need target_files
 
 --              -- To consider, save these for use in other contexts (like scp?)
 --                writeFileLines all_src_files target_files
 
         -- make the indiviual html files for uploading, in the html directory.
         "_make/html//*.html" *> \ out -> do
+--                liftIO $ prepareDirectory out
                 let srcName = build_dir </> "contents" </> dropDirectory1 (dropDirectory1 out)
                 let tplName = "template" </> "page.html"
+
+                --- now get the relative name for this file.
+
+                let count = length [ () | '/' <- out ]
+                let local_prefix = concat (take (count - 2) (repeat "../"))
+
+                liftIO $ print(out,count,local_prefix)
+
                 need [ srcName , tplName ]
                 liftIO $ print ("srcName",srcName)
                 src <- readFile' srcName
-                liftIO $ print src
-                writeFile' out src
+--                liftIO $ print src
+
+                -- now follow links
+                let q :: Rewrite () KureM XTree
+                    q = promoteR (matchXTag (mkName "a")) >>> prunetdR p
+
+                    p :: Rewrite () KureM XTree
+                    p = promoteR (matchXAttr (mkName "href")) >>> prunetdR r
+
+                    r :: Rewrite () KureM XTree
+                    r = promoteR (textT idR $ \ txt stuff -> NTree (XText $ f txt) stuff)
+
+                    f ('/':rest) = replaceExtension (local_prefix ++ rest) "html"
+                    f other      | "http://" `isPrefixOf` other
+                                || "https://" `isPrefixOf` other = other
+                                 | otherwise = "##bad URL " ++ other
+{-
+
+                    p :: Translate () KureM [NTree XNode] String
+                    p = extractT (oneT (promoteT r) :: Translate () KureM XTree String)
+
+                    r :: Translate () KureM (NTree XNode) String
+                    r = matchXAttr (mkName "href") >>> xattrT s (\ attr sub -> sub)
+
+                    s :: Translate () KureM [NTree XNode] String
+                    s = extractT (allT (promoteT t) :: Translate () KureM XTree String)
+
+                    t :: Translate () KureM (NTree XNode) String
+                    t = textT idR $ \ txt _ -> txt
+-}
+                    {-
+                    (extractT (oneT (promoteT s) :: Translate () KureM XTree String))
+
+                    s :: Translate () KureM [NTree XNode] String
+                    s = pure "X" -- textT idR $ \ txt _ -> txt
+                    -}
+
+                let contents = parseHtmlDocument "input" src
+                let XTrees res0 = fromKureM error $ KURE.apply (tryR (prunetdR q)) () (XTrees contents)
+
+                let src' = xshow res0
+
+--                liftIO $ print ("res0",res0)
+
+                writeFile' out src'
 
         -- make the content files, using pandoc.
         "_make/contents//*.html" *> \ out -> do
+--                liftIO $ prepareDirectory out
                 let srcName = dropDirectory1 $ dropDirectory1 $ replaceExtension out ".markdown"
                 let input = site_dir </> srcName
                 liftIO $ print ("A",input)
@@ -120,7 +179,7 @@ main2 ["import"] = do
 
                 -- now follow links
                 let q :: Translate () KureM (NTree XNode) [String]
-                    q = matchXTag (mkName "a") >>> (tagT p idR $ \ a b -> [a])
+                    q = matchXTag (mkName "a") >>> (tagT p idR $ \ _ a b -> [a])
 
                     p :: Translate () KureM [NTree XNode] String
                     p = extractT (oneT (promoteT r) :: Translate () KureM XTree String)
@@ -192,6 +251,11 @@ getRecursiveContents topdir = E.handle (\ E.SomeException {} -> return []) $ do 
       else return [path]
   return (concat paths)
 
+-----------------------------------------------------------
+
+-- Prepare a directory for a target file
+prepareDirectory :: FilePath -> IO ()
+prepareDirectory = createDirectoryIfMissing True . takeDirectory
 
 -----------------------------------------------------------
 
@@ -252,9 +316,9 @@ matchXText      = acceptR $ \ e -> case e of
         _ -> False
 
 
-tagT :: (Monad m) => Translate c m [NTree XNode] a -> Translate c m [NTree XNode] b -> (a -> b -> x) -> Translate c m (NTree XNode) x
+tagT :: (Monad m) => Translate c m [NTree XNode] a -> Translate c m [NTree XNode] b -> (QName -> a -> b -> x) -> Translate c m (NTree XNode) x
 tagT ta tb f = translate $ \ c -> \ case
-         (NTree (XTag tag attrs) rest) -> liftM2 f (KURE.apply ta c attrs) (KURE.apply tb c rest)
+         (NTree (XTag tag attrs) rest) -> liftM2 (f tag) (KURE.apply ta c attrs) (KURE.apply tb c rest)
          _ -> fail "not XTag"
 
 xattrT :: (Monad m) => Translate c m [NTree XNode] a -> (QName -> a -> x) -> Translate c m (NTree XNode) x
@@ -267,5 +331,12 @@ textT ta f = translate $ \ c -> \ case
          (NTree (XText text) rest) -> liftM (f text) (KURE.apply ta c rest)
          _ -> fail "not XText"
 
+
 --test = collectT (contextfreeT $ \ (
+genericT :: forall a b c
+         .  (Injection c XTree)
+         => (Translate () KureM XTree a -> Translate () KureM XTree b)
+         -> Translate () KureM c a -> Translate () KureM c b
+genericT f r = extractT (f (promoteT r))
+
 
