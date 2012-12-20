@@ -1,3 +1,5 @@
 _make/*
 import/*
 .shake.*
+tmp/*
+*~
