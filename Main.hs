@@ -18,6 +18,7 @@ import Control.Arrow
 import Control.Applicative hiding ((*>))
 import Data.List
 import Data.Char
+import Debug.Trace
 
 import Text.XML.HXT.Parser.HtmlParsec
 import Text.XML.HXT.DOM.ShowXml
@@ -99,14 +100,15 @@ main2 ["build"] = shake shakeOptions { shakeVerbosity = Loud } $ do
 --                liftIO $ print src
 
                 -- now follow links
-                let q :: Rewrite () KureM XTree
-                    q = promoteR (matchXTag (mkName "a")) >>> prunetdR p
-
-                    p :: Rewrite () KureM XTree
-                    p = promoteR (matchXAttr (mkName "href")) >>> prunetdR r
-
-                    r :: Rewrite () KureM XTree
-                    r = promoteR (textT idR $ \ txt stuff -> NTree (XText $ f txt) stuff)
+                let q :: Rewrite XContext KureM XTree
+                    q = promoteR (do
+                          (NTree (XText txt) []) <- idR
+                          c <- contextT
+                          case c of
+                            XContext (XAttr href:XTag a _:_)
+                                | href == mkName "href" && a == mkName "a" -> do
+                                    return (NTree (XText $ f txt) [])
+                            _ -> fail "not correct context for txt")
 
                     f ('/':rest) = replaceExtension (local_prefix ++ rest) "html"
                     f other      | "http://" `isPrefixOf` other
@@ -134,7 +136,7 @@ main2 ["build"] = shake shakeOptions { shakeVerbosity = Loud } $ do
                     -}
 
                 let contents = parseHtmlDocument "input" src
-                let XTrees res0 = fromKureM error $ KURE.apply (tryR (prunetdR q)) () (XTrees contents)
+                let XTrees res0 = fromKureM error $ KURE.apply (tryR (prunetdR q)) (noContext) (XTrees contents)
 
                 let src' = xshow res0
 
@@ -176,7 +178,7 @@ main2 ["import"] = do
 
         -- What you need to import
         want start   -- root
-
+{-
         "import//*.markdown" *> \ out -> do
                 let url = "http://ittc.ku.edu/csdl/fpg/" ++ dropDirectory1 (replaceExtension out "")
 --                liftIO $ print (out,url)
@@ -251,7 +253,7 @@ main2 ["import"] = do
                 liftIO $ print ("need",out,res4)
                 need res4
                 return ()
-
+-}
 main2 _ = putStrLn $ unlines
         [ "usage:"
         , "./Main clean          clean up"
@@ -279,6 +281,11 @@ prepareDirectory = createDirectoryIfMissing True . takeDirectory
 
 -----------------------------------------------------------
 
+newtype XContext = XContext [XNode]  -- list of all nodes on the way down
+        deriving Show
+
+noContext = XContext []
+
 data XTree = XTree (NTree XNode)
            | XTrees [NTree XNode]
          deriving Show
@@ -294,27 +301,26 @@ instance Injection [NTree XNode] XTree where
         project _          = Nothing
 
 -- Really simple!
-instance Walker () XTree where
-        allR :: forall m . MonadCatch m => Rewrite () m XTree -> Rewrite () m XTree
+instance Walker XContext XTree where
+        allR :: forall m . MonadCatch m => Rewrite XContext m XTree -> Rewrite XContext m XTree
         allR rr = prefixFailMsg "allR failed: " $
           rewrite $ \ c -> \ case
-            XTree  ntree  -> liftM inject $ KURE.apply allRXtree c ntree
-            XTrees ntrees -> liftM inject $ KURE.apply allRXtrees c ntrees
-          where
-          -- uses translations over XTrees
-            allRXtree :: MonadCatch m => Rewrite () m (NTree XNode)
-            allRXtree = rewrite $ \ c -> \ case
-                            NTree x xs -> do
-                                x' <- case x of
-                                        XPi n ys -> liftM (XPi n) $ KURE.apply (extractR rr) c ys
-                                        XTag n ys -> liftM (XTag n) $ KURE.apply (extractR rr) c ys
-                                        other -> return other
-                                xs' <- KURE.apply (extractR rr) c xs
-                                return $ NTree x' xs'
+            XTree  ntree  -> liftM inject $ KURE.apply (allRXtree rr) c ntree
+            XTrees ntrees -> liftM inject $ KURE.apply (allRXtrees rr) c ntrees
 
-          -- uses translations over XTree
-            allRXtrees :: MonadCatch m => Rewrite () m [NTree XNode]
-            allRXtrees = rewrite $ \ c xs -> mapM (KURE.apply (extractR rr) c) xs
+-- uses translations over XTrees; treeT is used to fix context.
+allRXtree :: MonadCatch m => Rewrite XContext m XTree -> Rewrite XContext m (NTree XNode)
+allRXtree rr = treeT rrNode rrRest $ NTree
+   where
+           rrNode = rewrite $ \ c  -> \ case
+                XPi  n ys -> liftM (XPi n)  $ KURE.apply (extractR rr) c ys
+                XTag n ys -> liftM (XTag n) $ KURE.apply (extractR rr) c ys
+                other     -> return other
+           rrRest = extractR rr
+
+-- uses translations over XTree
+allRXtrees :: MonadCatch m => Rewrite XContext m XTree -> Rewrite XContext m [NTree XNode]
+allRXtrees rr = rewrite $ \ c xs -> mapM (KURE.apply (extractR rr) c) xs
 
 allRL :: (Monad m) => Translate () m a b -> Translate () m [a] [b]
 allRL rr = translate $ \ c -> mapM (KURE.apply rr c)
@@ -351,6 +357,10 @@ textT ta f = translate $ \ c -> \ case
          (NTree (XText text) rest) -> liftM (f text) (KURE.apply ta c rest)
          _ -> fail "not XText"
 
+treeT :: (Monad m) => Translate XContext m XNode a -> Translate XContext m [NTree XNode] b -> (a -> b -> x) -> Translate XContext m (NTree XNode) x
+treeT ta tb f = translate $ \ (XContext cs) (NTree node rest) ->
+                let c = XContext (node : cs) in liftM2 f (KURE.apply ta c node) (KURE.apply tb c rest)
+
 
 --test = collectT (contextfreeT $ \ (
 genericT :: forall a b c
@@ -358,5 +368,8 @@ genericT :: forall a b c
          => (Translate () KureM XTree a -> Translate () KureM XTree b)
          -> Translate () KureM c a -> Translate () KureM c b
 genericT f r = extractT (f (promoteT r))
+
+--traceR :: (a -> String) -> Rewrite c m a
+--traceR f = rewrite $ \ _ a -> trace (f a) a
 
 
