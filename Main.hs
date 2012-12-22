@@ -51,15 +51,29 @@ main2 ["build"] = shake shakeOptions { shakeVerbosity = Loud } $ do
 
         -- Require the final html files in place
         action $ do
-                liftIO $ createDirectoryIfMissing True $ build_dir
-                files <- liftIO $ getRecursiveContents "site"
---                files <- getDirectoryFiles "." "site//*.markdown"
-                let target_files = id
-                                 $ map ( build_dir </> "html" </>)
-                                 $ map dropDirectory1
-                                 $ map (flip replaceExtension ".html")
-                                 $ filter ("site//*.markdown" ?==)
-                                 $ files
+--                liftIO $ removeFile "_make/html/index.html"
+                liftIO $ createDirectoryIfMissing True $ build_dir      -- is this needed?
+
+                html_files <- ( map dropDirectory1
+                              . map (flip replaceExtension ".html")
+                              . filter ("site//*.markdown" ?==))
+                                <$> (liftIO $ getRecursiveContents "site")
+                img_files <- filter (\ nm -> "img//*.gif" ?== nm
+                                          || "img//*.png" ?== nm
+                                     )
+                                <$> (liftIO $ getRecursiveContents "img")
+                js_files <- filter ("js//*.js" ?==)
+                                <$> (liftIO $ getRecursiveContents "js")
+                css_files <- filter ("css//*.css" ?==)
+                                <$> (liftIO $ getRecursiveContents "css")
+
+
+                let target_files = map (build_dir </> "html" </>)
+                                 $ html_files
+                                        ++ img_files
+                                        ++ js_files
+                                        ++ css_files
+
                 liftIO $ print target_files
                 need target_files
 
@@ -136,6 +150,12 @@ main2 ["build"] = shake shakeOptions { shakeVerbosity = Loud } $ do
                 liftIO $ print ("A",input)
                 need [ input ]
                 system' "pandoc" ["-o",out,input]
+
+        [ "_make/html/img/*.gif",
+          "_make/html/img/*.png",
+          "_make/html/js/*.js",
+          "_make/html/css/*.css"] **> \ out -> do
+                system' "cp" [dropDirectory1 $ dropDirectory1 $ out,out]
 
 
 main2 ["clean"] = do
