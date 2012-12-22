@@ -12,7 +12,7 @@
     <link href="../css/bootstrap.css" rel="stylesheet">
     <style>
       body {
-        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+--        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
         }
      .well {
              background-color: white;
@@ -22,7 +22,8 @@
               border-top: 1px solid #0022B4;
       }
       .navbar-inner {
-              border-bottom: 1px solid #0022B4;
+              border: 1px solid #0022B4;
+              margin-bottom: 14pt;
       }      
 
       .jayhawk {
@@ -60,7 +61,8 @@
 
   <body>
 
-    <div class="navbar navbar-fixed-top">
+    <div>
+    <div class="navbar navbar-static-top">
       <div class="navbar-inner">
         <div class="container">
           <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
@@ -71,17 +73,18 @@
           <div class="nav-collapse collapse">
             <ul class="nav">
               <li class="active"><a href="#"><i class="icon-home"></i> Home</a></li>
-              <li><a href="#about">Research</a></li>
+              <li><a href="#about">Research Projects</a></li>
               <li><a href="#about">Software</a></li>
               <li><a href="#about">Publications</a></li>
               <li><a href="#about">Talks</a></li>
               <li><a href="#about">About Us</a></li>
             </ul>
-            <div class="brand nav pull-right">Functional Programming Group at KU</div>
+            <div class="brand nav pull-right">FPG@KU</div>
           </div><!--/.nav-collapse -->
         </div>
       </div>
     </div>
+</div>
 
     <div class="container">
 
@@ -133,13 +136,13 @@
                       <h6>Functional Programming Group at KU</h6>
 
                       <ul class="nav nav-list">
-                              <li><a href="#"><i class="icon-home"></i> Home</a></li>
+                              <li class="active"><a href="#"><i class="icon-home"></i> Home</a></li>
                               <li><a href="#"><i class="icon-wrench"></i> Research</a></li>
                               <li><a href="#"><i class=" icon-hdd"></i> Software</a></li>
 
                               <ul class="nav nav-list" style="margin-left: 0pt">
                                       <li><a href="#"><i class=" icon-minus"></i> Andy Gill</a></li>
-                                      <li class="active"><a href="#"><i class=" icon-play"></i> Forest Gump </a></li>
+                                      <li class="active"><a href="#"><i class="icon-minus icon-white">  </i> Forest Gump </a></li>
                                       <li><a href="#"><i class=" icon-minus"></i>Captain Kirk</a></li>
                                               
                               </ul>
@@ -183,8 +186,8 @@
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="../assets/js/jquery-1.8.3.min.js"></script>
-    <script src="../assets/js/bootstrap.js"></script>
+    <script src="../js/jquery-1.8.3.min.js"></script>
+    <script src="../js/bootstrap.js"></script>
 
     <script>
         
@@ -192,6 +195,7 @@
 
 <div id="footer">
       <div class="container">
+
     <ul class="breadcrumb">
     <li><a href="#">Home</a> <span class="divider">/</span></li>
     <li><a href="#">Library</a> <span class="divider">/</span></li>
