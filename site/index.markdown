@@ -1,6 +1,8 @@
 [About Functional Programming at KU](/About "About Functional Programming at KU")
 ------------------------------------------------------------------------------------------
 
+<a class="teaser" href="/About">[Read more about About Functional Programming at KU]</a>
+
 The Functional Programming Group, led by Andy Gill, apply and extend
 functional programming technologies to the diverse areas of building
 computer systems, high-performance computing, information assurance and
