@@ -1,6 +1,6 @@
 <div class="teaser">
 
-We use tools, typically written in Haskell, to explore and validate our
+We build tools and libraries, typically written in Haskell, to explore and validate our
 ideas. The main research challenge we are addressing is improving the
 high assurance narrative for functional languages. We release our tools
 open source, under a BSD license, use git for version control, and
@@ -8,12 +8,17 @@ github for external contributions.
 
 </div>
 
-This page is a tool-centric view of our research. Please email us if you
+This page is a software-centric view of our research. Please email us if you
 are interested in contributing, or want more details about a specific
 tool.
 
 Haskell Domain Specific Languages (DSLs)
 ========================================
+
+## Kansas Lava
+
+<a href="/Software/KansasLava" class="teaser">More about Kansas Lava</a>
+
 
 [Kansas Lava](/Tools/KansasLava "Kansas Lava")
 -------------------------------------------------------
