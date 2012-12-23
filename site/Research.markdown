@@ -1,3 +1,5 @@
+<div class="teaser">
+        
 We use functional programming to solve problems in ways that are
 amicable to acceleration (GPUs, Multi-cores, FPGAs), and supports
 assurance arguments (using semi-formal methods like equational
@@ -13,6 +15,8 @@ perform effectively as a concise executable specification of a solution
 to a problem. However, the scope and influence of our ideas is intended
 to be broader than simply their use inside our functional language
 community.
+
+</div>
 
 Overview of Research
 ====================
