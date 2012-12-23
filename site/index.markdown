@@ -1,6 +1,5 @@
 ## Functional Programming Group at KU
 
-
 <a class="teaser" href="/About">[Read more about About Functional Programming at KU]</a>
 
 ## Recently at KU
@@ -14,8 +13,4 @@
 ## Tools and Libraries
 
 <a class="teaser" href="/Software">[Read more about our Tools and Libraries]</a>
-
-Hello
-
-
 
