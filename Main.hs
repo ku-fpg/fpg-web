@@ -9,7 +9,7 @@
 import Development.Shake hiding (getDirectoryContents)
 import Development.Shake.FilePath
 
-import System.Directory
+import System.Directory hiding (doesFileExist)
 import System.Environment
 import Control.Monad
 import qualified Control.Exception as E
@@ -52,7 +52,9 @@ main2 ["build"] = shake shakeOptions { shakeVerbosity = Loud } $ do
 
         -- Require the final html files in place
         action $ do
---                liftIO $ removeFile "_make/html/index.html"
+                b <- doesFileExist "_make/html/index.html"
+                liftIO $ if b then removeFile "_make/html/index.html"
+                              else return ()
                 liftIO $ createDirectoryIfMissing True $ build_dir      -- is this needed?
 
                 html_files <- ( map dropDirectory1
@@ -95,6 +97,8 @@ main2 ["build"] = shake shakeOptions { shakeVerbosity = Loud } $ do
                 liftIO $ print(out,count,local_prefix)
 
                 need [ srcName , tplName ]
+
+                -- next, the contents
                 liftIO $ print ("srcName",srcName)
                 src <- readFile' srcName
 --                liftIO $ print src
@@ -114,35 +118,63 @@ main2 ["build"] = shake shakeOptions { shakeVerbosity = Loud } $ do
                     f other      | "http://" `isPrefixOf` other
                                 || "https://" `isPrefixOf` other = other
                                  | otherwise = "##bad URL " ++ other
-{-
-
-                    p :: Translate () KureM [NTree XNode] String
-                    p = extractT (oneT (promoteT r) :: Translate () KureM XTree String)
-
-                    r :: Translate () KureM (NTree XNode) String
-                    r = matchXAttr (mkName "href") >>> xattrT s (\ attr sub -> sub)
-
-                    s :: Translate () KureM [NTree XNode] String
-                    s = extractT (allT (promoteT t) :: Translate () KureM XTree String)
-
-                    t :: Translate () KureM (NTree XNode) String
-                    t = textT idR $ \ txt _ -> txt
--}
-                    {-
-                    (extractT (oneT (promoteT s) :: Translate () KureM XTree String))
-
-                    s :: Translate () KureM [NTree XNode] String
-                    s = pure "X" -- textT idR $ \ txt _ -> txt
-                    -}
 
                 let contents = parseHtmlDocument "input" src
-                let XTrees res0 = fromKureM error $ KURE.apply (tryR (prunetdR q)) (noContext) (XTrees contents)
+--                let XTrees contents0 = fromKureM error $ KURE.apply (tryR (prunetdR q)) (noContext) (XTrees contents)
 
-                let src' = xshow res0
-
+--                let src' = xshow contents0
 --                liftIO $ print ("res0",res0)
 
-                writeFile' out src'
+                -- next, read the template
+                template <- readFile' tplName
+                let page = parseHtmlDocument tplName template
+                let normalizeTplURL nm
+                        -- should really check for ccs, js, img, etc.
+                        | "../" `isPrefixOf` nm = dropDirectory1 nm
+                        | otherwise             = nm
+                let relativeURL ('/':rest) = replaceExtension (local_prefix ++ rest) "html"
+                    relativeURL other      | "http://" `isPrefixOf` other
+                                          || "https://" `isPrefixOf` other = other
+                                           | otherwise = other
+
+                -- The <i> icons can not use the <i/> versions
+                let iconHack = promoteR $ do
+                          (NTree t@(XTag tag _) []) <- idR
+                          if tag == mkName "i"
+                             then return (NTree t [NTree (XText "") []])
+                             else idR
+
+                let macro :: String -> Maybe [NTree XNode]
+                    macro "fpg-contents" = return contents
+                    macro _              = fail "macro failure"
+
+                let macroExpand :: Translate XContext KureM (NTree XNode) [NTree XNode]
+                    macroExpand = do
+--                         tree@(NTree t []) <- idR
+--                         () <- trace ("trace: " ++ show t) $ return ()
+                         tree@(NTree t@(XTag tag _) _) <- idR
+                         True <- return (tag == mkName "div")
+--                         () <- trace ("trace: " ++ show tag) $ return ()
+                         if tag == mkName "div"
+                            then do clss <- extractT $ childT 0 $ crushbuT $ (getAttr >>> arr (: []))
+                                    () <- trace ("trace: " ++ show clss) $ return ()
+                                    case lookup (mkName "class") clss of
+                                      Nothing -> fail "no macro match for div"
+                                      Just nm -> case macro nm of
+                                                   Nothing -> fail $ "no macro match for div / " ++ nm
+                                                   Just t  -> pure t
+                            else fail "no macro match"
+                        -- * Needs to be a div
+                        -- * Needs tag
+
+                let tpl_prog = tryR (prunetdR (mapURL normalizeTplURL))
+                           >>> tryR (prunetdR iconHack)
+                           >>> alltdR (tryR (allT (promoteT (macroExpand <+ arr (: []))) >>> arr XTrees))
+                           >>> tryR (prunetdR (mapURL relativeURL))
+                let XTrees page0 = fromKureM error $ KURE.apply tpl_prog (noContext) (XTrees page)
+
+                writeFile' out $ xshow page0
+
 
         -- make the content files, using pandoc.
         "_make/contents//*.html" *> \ out -> do
@@ -372,4 +404,43 @@ genericT f r = extractT (f (promoteT r))
 --traceR :: (a -> String) -> Rewrite c m a
 --traceR f = rewrite $ \ _ a -> trace (f a) a
 
+--------------------------------
 
+debugR :: (Show a) => Rewrite XContext KureM a
+debugR = acceptR (\ a -> trace ("traceR: " ++ take 100 (show a)) True)
+
+-- change an embedded URL
+mapURL :: (String -> String) -> Rewrite XContext KureM XTree
+mapURL f = promoteR $ do
+                  (NTree (XText txt) []) <- idR
+                  c <- contextT
+                  case c of
+                    XContext (XAttr href:XTag a _:_)
+                        | href == mkName "href" && a == mkName "a" -> do
+                            return (NTree (XText $ f txt) [])
+                    XContext (XAttr href:XTag link _:_)
+                        | href == mkName "href" && link == mkName "link" -> do
+                            return (NTree (XText $ f txt) [])
+                    XContext (XAttr src:XTag script _:_)
+                        | src == mkName "src" && script == mkName "script" -> do
+                            return (NTree (XText $ f txt) [])
+                    XContext (XAttr src:XTag img _:_)
+                        | src == mkName "src" && img == mkName "img" -> do
+                            return (NTree (XText $ f txt) [])
+                    _ -> fail "not correct context for txt"
+
+getAttr :: Translate XContext KureM XTree (QName,String)
+getAttr = promoteT $ do
+                (NTree (XText txt) []) <- idR
+                c <- contextT
+                case c of
+                    XContext (XAttr attr:_) -> return (attr,txt)
+                    _ -> fail "getAttrib failed"
+
+
+concatMapRXtree :: Translate XContext KureM (NTree XNode) [NTree XNode] -> Rewrite XContext KureM XTree
+concatMapRXtree rr = promoteR $ rewrite $ \ c xs -> do
+        xs' <- mapM (KURE.apply (extractT rr) c) xs
+        return (concat xs' :: [NTree XNode])
+
+--fillContent :: Translate KureM XTree (NTree XNode) [NTree XNode]
