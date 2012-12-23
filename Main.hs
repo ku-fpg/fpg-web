@@ -206,7 +206,70 @@ main2 ["build"] = shake shakeOptions { shakeVerbosity = Loud } $ do
                 -- Make sure you already have the teaser contents. Assumes no loops.
                 need [ takeDirectory out </> url | url <- urls ]
 
-                writeFile' out $ xshow page0
+                let extract_teaser :: Translate XContext KureM XTree [NTree XNode]
+                    extract_teaser = promoteT $ do
+                          (NTree (XTag tag attrs) rest) <- idR
+                          if tag == mkName "div"
+                             then do clss <- extractT $ childT 0 $ crushbuT $ (getAttr >>> arr (: []))
+                                     () <- trace ("traceX: " ++ show clss) $ return ()
+                                     case lookup (mkName "class") clss of
+                                        Just "teaser" -> pure rest
+                                        _ -> fail "no teaser class in div"
+                             else fail "no match for div"
+
+                teaser_map <- sequence
+                        [ do src <- readFile' (takeDirectory out </> url)
+                             let remote_page = parseHtmlDocument (takeDirectory out </> url) src
+                             let content0 = fromKureM error $ KURE.apply (onetdT extract_teaser) (noContext) (XTrees remote_page)
+                             return (url,content0)
+                        | url <- urls
+                        ]
+
+
+
+                liftIO $ print ("teaser_map",teaser_map)
+
+                let insert_teaser :: Translate XContext KureM (NTree XNode) [NTree XNode]
+                    insert_teaser = do
+--                         tree@(NTree t []) <- idR
+--                         () <- trace ("trace: " ++ show t) $ return ()
+                          tree@(NTree t@(XTag tag _) rest) <- idR
+--                          True <- return (tag == mkName "div")
+--                          () <- trace ("traceZ: " ++ show tag) $ return ()
+                          if tag == mkName "a"
+                             then do clss <- extractT $ childT 0 $ crushbuT $ (getAttr >>> arr (: []))
+                                     () <- trace ("trace!: " ++ show clss) $ return ()
+                                     case lookup (mkName "class") clss of
+                                        Just "teaser" ->
+                                          case lookup (mkName "href") clss of
+                                              Just url ->
+                                                case lookup url teaser_map of
+                                                   Just trees -> do
+                                                        () <- trace ("traceY: " ++ show trees) $ return ()
+                                                        -- Need to renormalize URLs
+                                                        pure (trees ++ [NTree (XTag (mkName "a")
+                                                                          [ NTree (XAttr (mkName "href")) [NTree (XText url) []]
+                                                                          ])
+                                                                          ([ NTree (XTag (mkName "i")
+                                                                                [ NTree (XAttr (mkName "class"))
+                                                                                        [NTree (XText "icon-chevron-right") []]
+                                                                                ])
+                                                                                [NTree (XText "") []]
+                                                                           , NTree (XText " ") []
+                                                                           ] ++ rest)
+                                                                       ])
+
+--                             <i class="icon-chevron-right"></i> <a href="About.html" class="">Read more about About Functional Programming at KU</a>
+
+                                                   Nothing -> fail "can not find url teaser"
+                                              _ -> fail "no href in teaser"
+                                        _ -> fail "no teaser class in anchor"
+                             else fail "no match for anchor"
+
+                let teaser = alltdR (tryR (allT (promoteT (insert_teaser <+ arr (: []))) >>> arr XTrees))
+                let XTrees page1 = fromKureM error $ KURE.apply teaser (noContext) (XTrees page0)
+
+                writeFile' out $ xshow page1
 
 
         -- make the content files, using pandoc.
