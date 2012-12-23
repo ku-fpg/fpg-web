@@ -1,3 +1,10 @@
+
+The Functional Programming Group
+================================
+
+<div class="teaser">
+
+
 The Functional Programming Group, led by Andy Gill, apply and extend
 functional programming technologies to the diverse areas of building
 computer systems, high-performance computing, information assurance and
@@ -9,66 +16,52 @@ bringing our research and development expertise to work on our
 collaborators' open issues, as well as their assurance and performance
 needs.
 
-FPG Members
------------
+</div>
 
-### Current Members
+## Current Members
 
-Jan Bracker
+<div class="row"><div class="span4">
 
-MS exchange student
+-----------                                                     --------------------
+Jan Bracker                                                     MS exchange student
+[Andrew Farmer](/users/andrewfarmer)                            PhD, expected 2014
+[Andy Gill](/Users/AndyGill)                                    Faculty
+[Ed Komp](http://www.ittc.ku.edu/view_contact.phtml?id=28)      Staff
+[Bowe Neuenschwander](/users/boweneuenschwander)                MS, expected 2012
+[Neil Sculthorpe](/users/neilsculthorpe)                        PostDoc
+-----------                                                     -------------------
 
-[Andrew Farmer](/users/andrewfarmer)
+</div></div>
 
-PhD, expected 2014
+## Group Alumni
 
-[Andy Gill](/Users/AndyGill)
+<div class="row"><div class="span4">
 
-Faculty
+-----------                                                                     ---------
+Patrick Miller                                                                  BS 2012
+Tristan Bull                                                                    MS 2011
+Kevin Matlage                                                                   MS 2011
+Brandon Smith                                                                   BS 2011
+Brett Werling  (Garmin)                                                         MS 2010         
+[Garrin Kimmell](http://www.ittc.ku.edu/~kimmell/) (Kestrel Institute)          PhD 2009        
+-----------                                                                     --------
 
-[Ed Komp](http://www.ittc.ku.edu/view_contact.phtml?id=28)
+</div></div>
 
-Staff
 
-[Bowe Neuenschwander](/users/boweneuenschwander)
+## Visitors
 
-MS, expected 2012
+These are people who have visited the lab recently for more than a day or so.
 
-[Neil Sculthorpe](/users/neilsculthorpe)
+<div class="row"><div class="span4">
+        
+------------------------------------------------------------                    --------                -----------
+[Anders Persson](http://www.chalmers.se/cse/EN/people/persson-anders)           Oct 2011                (Chalmers)
+[Jun Inoue](http://www.owlnet.rice.edu/~ji2)                                    Oct/Nov 2010            (Rice University)
+------------------------------------------------------------                    ----------              ------------
 
-PostDoc
+</div></div>
 
-### Group Alumni
-
-Tristan Bull
-
-MS, 2011
-
-[Garrin Kimmell](http://www.ittc.ku.edu/~kimmell/), PhD 2009
-
-(University of Iowa)
-
-Kevin Matlage
-
-MS, 2011
-
-Patrick Miller
-
-BS, 2012
-
-Brandon Smith
-
-BS, 2011
-
-Brett Werling, MS 2010
-
-(Garmin)
-
-### Visitor
-
-  ------------------------------------------------------------ -------------------
-  [Jun Inoue](http://www.owlnet.rice.edu/~ji2), October 2010   (Rice University)
-  ------------------------------------------------------------ -------------------
 
 Computer Systems Design Laboratory
 ----------------------------------
@@ -93,11 +86,10 @@ group](https://wiki.ittc.ku.edu/lambda/Main_Page) for anyone that is
 interested, discussing topics related to programming and specification
 languages, semantic models, and programming paradigms.
 
-ICFP Programming Contest 2009
------------------------------
+Joining the Lab
+---------------
 
-CSDL organized the [ICFP programming
-contest](http://www.icfpcontest.org/) in 2009. Here is a picture taking
-during the hectic preparation before the content started.
+New members are always welcome. Typically, at the graduate level you
+will need some experience in Haskell (for example, via [EECS 776](/Members/AndyGill/Teaching/EECS776)).
+Email Professor Gill for a discussion.
 
-![](http://www.ittc.ku.edusites/default/files/us.jpg)

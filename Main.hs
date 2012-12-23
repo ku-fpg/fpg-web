@@ -167,11 +167,44 @@ main2 ["build"] = shake shakeOptions { shakeVerbosity = Loud } $ do
                         -- * Needs to be a div
                         -- * Needs tag
 
+                let fixTable :: Rewrite XContext KureM XTree
+                    fixTable = promoteR $ do
+                          (NTree (XTag tag attrs) rest) <- idR
+                          if tag == mkName "table"
+                             then return (NTree (XTag tag (attrs ++
+                                     [NTree (XAttr $ mkName "class") [NTree (XText "table table-bordered table-condensed") []]])) rest)
+                             else fail "not table"
+
                 let tpl_prog = tryR (prunetdR (mapURL normalizeTplURL))
                            >>> tryR (prunetdR iconHack)
                            >>> alltdR (tryR (allT (promoteT (macroExpand <+ arr (: []))) >>> arr XTrees))
                            >>> tryR (prunetdR (mapURL relativeURL))
+                           >>> tryR (prunetdR fixTable)
                 let XTrees page0 = fromKureM error $ KURE.apply tpl_prog (noContext) (XTrees page)
+
+                -- Now, we find the teaser links
+
+                let teaser_links :: Translate XContext KureM XTree [String]
+                    teaser_links = promoteT $ do
+                          (NTree (XTag tag attrs) rest) <- idR
+                          if tag == mkName "a"
+                             then do clss <- extractT $ childT 0 $ crushbuT $ (getAttr >>> arr (: []))
+--                                     () <- trace ("traceX: " ++ show clss) $ return ()
+                                     case lookup (mkName "class") clss of
+                                        Just "teaser" -> case lookup (mkName "href") clss of
+                                                           Just url -> do
+                                                                () <- trace ("traceX: " ++ show clss) $ return ()
+                                                                pure [url]
+                                                           _ -> fail "no href in teaser"
+                                        _ -> fail "no teaser class in anchor"
+                             else fail "no match for anchor"
+
+                let urls = fromKureM error $ KURE.apply (crushbuT teaser_links) (noContext) (XTrees page0)
+
+                liftIO $ print ("urls",urls, takeDirectory out)
+
+                -- Make sure you already have the teaser contents. Assumes no loops.
+                need [ takeDirectory out </> url | url <- urls ]
 
                 writeFile' out $ xshow page0
 
