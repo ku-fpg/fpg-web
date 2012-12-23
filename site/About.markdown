@@ -20,31 +20,38 @@ needs.
 
 ## Current Members
 
-<div class="row"><div class="span4">
+<div class="row"><div class="span5">
 
------------                                                     --------------------
-Jan Bracker                                                     MS exchange student
-[Andrew Farmer](/users/andrewfarmer)                            PhD, expected 2014
-[Andy Gill](/Users/AndyGill)                                    Faculty
-[Ed Komp](http://www.ittc.ku.edu/view_contact.phtml?id=28)      Staff
-[Bowe Neuenschwander](/users/boweneuenschwander)                MS, expected 2012
-[Neil Sculthorpe](/users/neilsculthorpe)                        PostDoc
------------                                                     -------------------
+-----------                                                     --------------------            -----
+Robert F Blair                                                  HERMIT/Android                  BS CS
+Jan Bracker                                                     HERMIT/Sunroof                  MS exchange student
+[Andrew Farmer](/users/andrewfarmer)                            HERMIT                          PhD, expected 2014
+Patrick G Flor                                                  HERMIT/Android                  BS CS
+Nicolas Frisby                                                  HERMIT                          Post-PhD
+Adam Howell                                                     HERMIT/Android                  BS CS
+[Ed Komp](http://www.ittc.ku.edu/view_contact.phtml?id=28)      HERMIT                          Staff
+[Bowe Neuenschwander](/users/boweneuenschwander)                Lambda Bridge                   MS, expected 2013
+Ryan Scott                                                      HERMIT/Android                  BS CS
+[Neil Sculthorpe](/users/neilsculthorpe)                        HERMIT                          PostDoc
+Michael Tabone                                                  HERMIT/Android                  BS CS
+-----------                                                     -------------------             ------
 
 </div></div>
 
 ## Group Alumni
 
-<div class="row"><div class="span4">
+These are people who has worked for FPG, or locals who has worked with the group in some capacity.
 
------------                                                                     ---------
-Patrick Miller                                                                  BS 2012
-Tristan Bull                                                                    MS 2011
-Kevin Matlage                                                                   MS 2011
-Brandon Smith                                                                   BS 2011
-Brett Werling  (Garmin)                                                         MS 2010         
-[Garrin Kimmell](http://www.ittc.ku.edu/~kimmell/) (Kestrel Institute)          PhD 2009        
------------                                                                     --------
+<div class="row"><div class="span5">
+
+Who                                                     What                    Where after FPG
+-----------                                             -----                   ---------
+Tristan Bull                                            HFEC, MS 2011
+[Garrin Kimmell](http://www.ittc.ku.edu/~kimmell/)      HFEC, PostDoc           University of Iowa
+Kevin Matlage                                           ChalkBoard, MS 2011
+Patrick Miller                                          Lambda Bridge, BS 2012    PhD student, ????
+Brandon Smith                                           ChalkBoard, BS 2011
+-----------                                             ------                  --------
 
 </div></div>
 
@@ -53,7 +60,7 @@ Brett Werling  (Garmin)                                                         
 
 These are people who have visited the lab recently for more than a day or so.
 
-<div class="row"><div class="span4">
+<div class="row"><div class="span5">
         
 ------------------------------------------------------------                    --------                -----------
 [Anders Persson](http://www.chalmers.se/cse/EN/people/persson-anders)           Oct 2011                (Chalmers)
