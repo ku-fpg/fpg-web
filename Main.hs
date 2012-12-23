@@ -92,9 +92,9 @@ main2 ["build"] = shake shakeOptions { shakeVerbosity = Loud } $ do
                 --- now get the relative name for this file.
 
                 let count = length [ () | '/' <- out ]
-                let local_prefix = concat (take (count - 2) (repeat "../"))
+                let local_prefix nm = concat (take (count - 2) (repeat "../")) ++ nm
 
-                liftIO $ print(out,count,local_prefix)
+                liftIO $ print(out,count,local_prefix "")
 
                 need [ srcName , tplName ]
 
@@ -114,7 +114,7 @@ main2 ["build"] = shake shakeOptions { shakeVerbosity = Loud } $ do
                                     return (NTree (XText $ f txt) [])
                             _ -> fail "not correct context for txt")
 
-                    f ('/':rest) = replaceExtension (local_prefix ++ rest) "html"
+                    f ('/':rest) = replaceExtension (local_prefix rest) "html"
                     f other      | "http://" `isPrefixOf` other
                                 || "https://" `isPrefixOf` other = other
                                  | otherwise = "##bad URL " ++ other
@@ -130,9 +130,9 @@ main2 ["build"] = shake shakeOptions { shakeVerbosity = Loud } $ do
                 let page = parseHtmlDocument tplName template
                 let normalizeTplURL nm
                         -- should really check for ccs, js, img, etc.
-                        | "../" `isPrefixOf` nm = dropDirectory1 nm
+                        | "../" `isPrefixOf` nm = local_prefix (dropDirectory1 nm)
                         | otherwise             = nm
-                let relativeURL ('/':rest) = replaceExtension (local_prefix ++ rest) "html"
+                let relativeURL ('/':rest) = replaceExtension (local_prefix rest) "html"
                     relativeURL other      | "http://" `isPrefixOf` other
                                           || "https://" `isPrefixOf` other = other
                                            | otherwise = other
