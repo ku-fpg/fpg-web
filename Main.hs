@@ -256,8 +256,6 @@ main2 ["build"] = shake shakeOptions { shakeVerbosity = Loud
                         | url <- urls
                         ]
 
-
-
                 liftIO $ print ("teaser_map",teaser_map)
 
                 let insert_teaser :: Translate XContext FPGM (NTree XNode) [NTree XNode]
@@ -300,7 +298,36 @@ main2 ["build"] = shake shakeOptions { shakeVerbosity = Loud
                 let teaser = alltdR (tryR (allT (promoteT (insert_teaser <+ arr (: []))) >>> arr XTrees))
                 XTrees page1 <- applyFPGM teaser (XTrees page0)
 
-                writeFile' out $ xshow page1
+--
+--              Add the marker for links that are *this* page
+--
+
+--  <li class="active"><a href="#"><i class="icon-home"></i> Home</a></li>
+
+                let findActive :: R XTree
+                    findActive = promoteR $ do
+                            matchTag "li"
+                            -- Find the inner link
+                            let findHR :: T XTree ()
+                                findHR = promoteT $ do
+                                    matchTag "a"
+                                    attrs <- getAttrs
+                                    case lookup (mkName "href") attrs of
+                                      -- Fix for recusive names
+                                      Just nm | nm == dropDirectory1 (dropDirectory1 out) -> return ()
+                                      _ -> fail "findHR failed"
+                            -- check to see if we contain our own link
+                            extractT $ onetdT $ findHR
+                            idR
+
+                            -- grab the tree, add a class active
+                            (NTree (XTag tag attrs) rest) <- idR
+                            pure $ NTree (XTag tag (mkAttr (mkName "class") [mkText "active"] : attrs))
+                                          rest
+
+                XTrees page2 <- applyFPGM (tryR $ prunetdR findActive) (XTrees page1)
+
+                writeFile' out $ xshow page2
 
 
         -- make the content files, using pandoc.
@@ -541,7 +568,7 @@ matchXText      = acceptR $ \ e -> case e of
         (NTree (XText _) _) -> True
         _ -> False
 
-
+{-
 tagT :: (Monad m) => Translate c m [NTree XNode] a -> Translate c m [NTree XNode] b -> (QName -> a -> b -> x) -> Translate c m (NTree XNode) x
 tagT ta tb f = translate $ \ c -> \ case
          (NTree (XTag tag attrs) rest) -> liftM2 (f tag) (KURE.apply ta c attrs) (KURE.apply tb c rest)
@@ -556,24 +583,17 @@ textT :: (Monad m) => Translate c m [NTree XNode] a -> (String -> a -> x) -> Tra
 textT ta f = translate $ \ c -> \ case
          (NTree (XText text) rest) -> liftM (f text) (KURE.apply ta c rest)
          _ -> fail "not XText"
+-}
 
 treeT :: (Monad m) => Translate XContext m XNode a -> Translate XContext m [NTree XNode] b -> (a -> b -> x) -> Translate XContext m (NTree XNode) x
 treeT ta tb f = translate $ \ (XContext cs) (NTree node rest) ->
                 let c = XContext (node : cs) in liftM2 f (KURE.apply ta c node) (KURE.apply tb c rest)
 
 
---traceR :: (a -> String) -> Rewrite c m a
---traceR f = rewrite $ \ _ a -> trace (f a) a
-
---------------------------------
--- Use
-
-
-
 --------------------------------
 
---debugR :: (Show a) => Rewrite XContext FPGM a
---debugR = acceptR (\ a -> trace ("traceR: " ++ take 100 (show a)) True)
+debugR :: (Show a) => String -> R a
+debugR msg = acceptR (\ a -> trace (msg ++ " : " ++ take 100 (show a)) True)
 
 -- change an embedded URL
 mapURL :: (Monad m) => (String -> String) -> Rewrite XContext m XTree
@@ -603,6 +623,29 @@ getAttr = promoteT $ do
                     XContext (XAttr attr:_) -> return (attr,txt)
                     _ -> fail "getAttrib failed"
 
+getAttrs :: T (NTree XNode) [(QName,String)]
+getAttrs = extractT $ childT 0 $ crushbuT $ find
+  where
+          find :: T XTree [(QName,String)]
+          find = promoteT $ do
+                  (NTree (XText txt) []) <- idR
+                  XContext (XAttr attr:_) <- contextT
+                  return [(attr,txt)]
 
+matchTag :: String -> T (NTree XNode) ()
+matchTag nm = do
+        (NTree (XTag tag _) rest) <- idR
+        if tag == mkName nm then return ()
+                            else fail "matchTag failed"
+
+{-
+--getTree :: (QName -> Bool) -> Translate XContext m XTree (QName,[(QName,String)],NTrees)
+extractTag :: Bool -> T (NTree XNode) ([(QName, String)], NTrees XNode)
+extractTag pred = do
+        (NTree (XTag tag _) rest) <- idR
+        if mkName nm == tag then do clss <- extractT $ childT 0 $ crushbuT $ (getAttr >>> arr (: []))
+                                    return (clss,rest)
+                    else fail "getTree failed"
+-}
 
 --fillContent :: Translate FPGM XTree (NTree XNode) [NTree XNode]
