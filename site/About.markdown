@@ -22,6 +22,7 @@ needs.
 
 <div class="row"><div class="span5">
 
+Who                                                             Project(s)                      Status
 -----------                                                     --------------------            -----
 Robert F Blair                                                  HERMIT/Android                  BS CS
 Jan Bracker                                                     HERMIT/Sunroof                  MS exchange student
@@ -33,6 +34,7 @@ Adam Howell                                                     HERMIT/Android  
 [Bowe Neuenschwander](/users/boweneuenschwander)                Lambda Bridge                   MS, expected 2013
 Ryan Scott                                                      HERMIT/Android                  BS CS
 [Neil Sculthorpe](/users/neilsculthorpe)                        HERMIT                          PostDoc
+Rama Subramanian                                                TBD                             MS CS
 Michael Tabone                                                  HERMIT/Android                  BS CS
 -----------                                                     -------------------             ------
 
@@ -61,10 +63,11 @@ Brandon Smith                                           ChalkBoard, BS 2011
 These are people who have visited the lab recently for more than a day or so.
 
 <div class="row"><div class="span5">
-        
+
+Who                                                                             When                    From
 ------------------------------------------------------------                    --------                -----------
-[Anders Persson](http://www.chalmers.se/cse/EN/people/persson-anders)           Oct 2011                (Chalmers)
-[Jun Inoue](http://www.owlnet.rice.edu/~ji2)                                    Oct/Nov 2010            (Rice University)
+[Anders Persson](http://www.chalmers.se/cse/EN/people/persson-anders)           Oct 2011                Chalmers
+[Jun Inoue](http://www.owlnet.rice.edu/~ji2)                                    Oct/Nov 2010            Rice University
 ------------------------------------------------------------                    ----------              ------------
 
 </div></div>
@@ -83,7 +86,7 @@ collaborate closely.
 IRC
 ---
 
-We have an IRC group, `#ku-csdl`, on irc.freenode.net.
+We have an IRC group, **#ku-csdl**, on irc.freenode.net.
 
 LAMBDA Reading Group
 --------------------
