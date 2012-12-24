@@ -58,9 +58,13 @@ main2 ["build"] = shake shakeOptions { shakeVerbosity = Loud
 
         -- Require the final html files in place
         action $ do
+
+                -- Create work for yourself
                 b <- doesFileExist "_make/html/index.html"
                 liftIO $ if b then removeFile "_make/html/index.html"
                               else return ()
+
+
                 liftIO $ createDirectoryIfMissing True $ build_dir      -- is this needed?
 
                 html_files <- ( map dropDirectory1
@@ -91,243 +95,8 @@ main2 ["build"] = shake shakeOptions { shakeVerbosity = Loud
 
         -- make the indiviual html files for uploading, in the html directory.
         "_make/html//*.html" *> \ out -> do
---                liftIO $ prepareDirectory out
-                let srcName = build_dir </> "contents" </> dropDirectory1 (dropDirectory1 out)
-                let tplName = "template" </> "page.html"
 
-                --- now get the relative name for this file.
-
-                let count = length [ () | '/' <- out ]
-                let local_prefix nm = concat (take (count - 2) (repeat "../")) ++ nm
-
-                liftIO $ print(out,count,local_prefix "")
-
-
-                -- Compute breadcrumbs
-                let path0 = [ nm | nm <- splitDirectories $ dropDirectory1 $ dropDirectory1 $  out ]
-
-                -- index itself does not have an entry, but *is* home.
-                let path1 = case path0 of
-                             ["index.html"] -> []
-                             _               -> path0
-
-
-                let crumbs = [mkElement (mkName "li") []
-                                [mkElement (mkName "a") [mkAttr (mkName "href") [mkText "ABCD"]]
-                                   []
-                                ]
-                             ]
-
---                            <li><a href="#">Library</a> <span class="divider">/</span></li>
---    <li class="active">Data</li>
-
-
-                liftIO $ print("path",path1,crumbs)
-
-                need [ srcName , tplName ]
-
-                -- next, the contents
-                liftIO $ print ("srcName",srcName)
-                src <- readFile' srcName
---                liftIO $ print src
-
-                -- now follow links
-                let q :: Rewrite XContext KureM XTree
-                    q = promoteR (do
-                          (NTree (XText txt) []) <- idR
-                          c <- contextT
-                          case c of
-                            XContext (XAttr href:XTag a _:_)
-                                | href == mkName "href" && a == mkName "a" -> do
-                                    return (NTree (XText $ f txt) [])
-                            _ -> fail "not correct context for txt")
-
-                    f ('/':rest) = replaceExtension (local_prefix rest) "html"
-                    f other      | "http://" `isPrefixOf` other
-                                || "https://" `isPrefixOf` other = other
-                                 | otherwise = "##bad URL " ++ other
-
-                let contents = parseHtmlDocument "input" src
---                let XTrees contents0 = fromKureM error $ KURE.apply (tryR (prunetdR q)) (noContext) (XTrees contents)
-
---                let src' = xshow contents0
---                liftIO $ print ("res0",res0)
-
-                -- next, read the template
-                template <- readFile' tplName
-                let page = parseHtmlDocument tplName template
-                let normalizeTplURL nm
-                        -- should really check for ccs, js, img, etc.
-                        | "../" `isPrefixOf` nm = local_prefix (dropDirectory1 nm)
-                        | otherwise             = nm
-                let relativeURL ('/':rest) = replaceExtension (local_prefix rest) "html"
-                    relativeURL other      | "http://" `isPrefixOf` other
-                                          || "https://" `isPrefixOf` other = other
-                                           | otherwise = other
-
-                -- The <i> icons can not use the <i/> versions
-                let iconHack = promoteR $ do
-                          (NTree t@(XTag tag _) []) <- idR
-                          if tag == mkName "i"
-                             then return (NTree t [NTree (XText "") []])
-                             else idR
-
-                let macro :: String -> FPGM [NTree XNode]
-                    macro "fpg-contents" = return contents
-                    macro "fpg-update-time" = do
-                            tm <- liftIO $ getZonedTime
-                            let txt = formatTime defaultTimeLocale rfc822DateFormat tm
-                            () <- trace (show ("tm",tm,txt)) $ return ()
-                            return [mkText $ txt]
-                    macro _              = fail "macro failure"
-
-                let macroExpand :: Translate XContext FPGM (NTree XNode) [NTree XNode]
-                    macroExpand = do
---                         tree@(NTree t []) <- idR
---                         () <- trace ("trace: " ++ show t) $ return ()
-                         tree@(NTree t@(XTag tag _) _) <- idR
-                         True <- return (tag == mkName "div" || tag == mkName "span")
---                         () <- trace ("trace: " ++ show tag) $ return ()
-                         if True -- tag == mkName "div"
-                            then do clss <- extractT $ childT 0 $ crushbuT $ (getAttr >>> arr (: []))
---                                    () <- trace ("trace: " ++ show clss) $ return ()
-                                    case lookup (mkName "class") clss of
-                                      Nothing -> fail "no macro match for div"
-                                      Just nm -> constT $ macro nm
-                            else fail "no macro match"
-                        -- * Needs to be a div
-                        -- * Needs tag
-
-                let fixTable :: Rewrite XContext FPGM XTree
-                    fixTable = promoteR $ do
-                          (NTree (XTag tag attrs) rest) <- idR
-                          if tag == mkName "table"
-                             then return (NTree (XTag tag (attrs ++
-                                     [NTree (XAttr $ mkName "class") [NTree (XText "table table-bordered table-condensed") []]])) rest)
-                             else fail "not table"
-
-                let tpl_prog = tryR (prunetdR (mapURL normalizeTplURL))
-                           >>> tryR (prunetdR iconHack)
-                           >>> alltdR (tryR (allT (promoteT (macroExpand <+ arr (: []))) >>> arr XTrees))
-                           >>> tryR (prunetdR (mapURL relativeURL))
-                           >>> tryR (prunetdR fixTable)
-                XTrees page0 <- applyFPGM tpl_prog (XTrees page)
-
-                -- Now, we find the teaser links
-
-                let teaser_links :: Translate XContext FPGM XTree [String]
-                    teaser_links = promoteT $ do
-                          (NTree (XTag tag attrs) rest) <- idR
-                          if tag == mkName "a"
-                             then do clss <- extractT $ childT 0 $ crushbuT $ (getAttr >>> arr (: []))
---                                     () <- trace ("traceX: " ++ show clss) $ return ()
-                                     case lookup (mkName "class") clss of
-                                        Just "teaser" -> case lookup (mkName "href") clss of
-                                                           Just url -> do
---                                                                () <- trace ("traceX: " ++ show clss) $ return ()
-                                                                pure [url]
-                                                           _ -> fail "no href in teaser"
-                                        _ -> fail "no teaser class in anchor"
-                             else fail "no match for anchor"
-
-                urls <- applyFPGM (crushbuT teaser_links) (XTrees page0)
-
-                liftIO $ print ("urls",urls, takeDirectory out)
-
-                -- Make sure you already have the teaser contents. Assumes no loops.
-                need [ takeDirectory out </> url | url <- urls ]
-
-                let extract_teaser :: Translate XContext FPGM XTree [NTree XNode]
-                    extract_teaser = promoteT $ do
-                          (NTree (XTag tag attrs) rest) <- idR
-                          if tag == mkName "div"
-                             then do clss <- extractT $ childT 0 $ crushbuT $ (getAttr >>> arr (: []))
---                                     () <- trace ("traceX: " ++ show clss) $ return ()
-                                     case lookup (mkName "class") clss of
-                                        Just "teaser" -> pure rest
-                                        _ -> fail "no teaser class in div"
-                             else fail "no match for div"
-
-                teaser_map <- sequence
-                        [ do src <- readFile' (takeDirectory out </> url)
-                             let remote_page = parseHtmlDocument (takeDirectory out </> url) src
-                             content0 <- applyFPGM (onetdT extract_teaser) (XTrees remote_page)
-                             return (url,content0)
-                        | url <- urls
-                        ]
-
-                liftIO $ print ("teaser_map",teaser_map)
-
-                let insert_teaser :: Translate XContext FPGM (NTree XNode) [NTree XNode]
-                    insert_teaser = do
---                         tree@(NTree t []) <- idR
---                         () <- trace ("trace: " ++ show t) $ return ()
-                          tree@(NTree t@(XTag tag _) rest) <- idR
---                          True <- return (tag == mkName "div")
---                          () <- trace ("traceZ: " ++ show tag) $ return ()
-                          if tag == mkName "a"
-                             then do clss <- extractT $ childT 0 $ crushbuT $ (getAttr >>> arr (: []))
---                                     () <- trace ("trace!: " ++ show clss) $ return ()
-                                     case lookup (mkName "class") clss of
-                                        Just "teaser" ->
-                                          case lookup (mkName "href") clss of
-                                              Just url ->
-                                                case lookup url teaser_map of
-                                                   Just trees -> do
---                                                        () <- trace ("traceY: " ++ show trees) $ return ()
-                                                        -- Need to renormalize URLs
-                                                        pure (trees ++ [NTree (XTag (mkName "a")
-                                                                          [ NTree (XAttr (mkName "href")) [NTree (XText url) []]
-                                                                          ])
-                                                                          ([ NTree (XTag (mkName "i")
-                                                                                [ NTree (XAttr (mkName "class"))
-                                                                                        [NTree (XText "icon-chevron-right") []]
-                                                                                ])
-                                                                                [NTree (XText "") []]
-                                                                           , NTree (XText " ") []
-                                                                           ] ++ rest)
-                                                                       ])
-
---                             <i class="icon-chevron-right"></i> <a href="About.html" class="">Read more about About Functional Programming at KU</a>
-
-                                                   Nothing -> fail "can not find url teaser"
-                                              _ -> fail "no href in teaser"
-                                        _ -> fail "no teaser class in anchor"
-                             else fail "no match for anchor"
-
-                let teaser = alltdR (tryR (allT (promoteT (insert_teaser <+ arr (: []))) >>> arr XTrees))
-                XTrees page1 <- applyFPGM teaser (XTrees page0)
-
---
---              Add the marker for links that are *this* page
---
-
---  <li class="active"><a href="#"><i class="icon-home"></i> Home</a></li>
-
-                let findActive :: R XTree
-                    findActive = promoteR $ do
-                            matchTag "li"
-                            -- Find the inner link
-                            let findHR :: T XTree ()
-                                findHR = promoteT $ do
-                                    matchTag "a"
-                                    attrs <- getAttrs
-                                    case lookup (mkName "href") attrs of
-                                      -- Fix for recusive names
-                                      Just nm | nm == dropDirectory1 (dropDirectory1 out) -> return ()
-                                      _ -> fail "findHR failed"
-                            -- check to see if we contain our own link
-                            extractT $ onetdT $ findHR
-                            idR
-
-                            -- grab the tree, add a class active
-                            (NTree (XTag tag attrs) rest) <- idR
-                            pure $ NTree (XTag tag (mkAttr (mkName "class") [mkText "active"] : attrs))
-                                          rest
-
-                XTrees page2 <- applyFPGM (tryR $ prunetdR findActive) (XTrees page1)
-
-                writeFile' out $ xshow page2
+                makeHtmlHtml out
 
 
         -- make the content files, using pandoc.
@@ -344,6 +113,9 @@ main2 ["build"] = shake shakeOptions { shakeVerbosity = Loud
           "_make/html/js/*.js",
           "_make/html/css/*.css"] **> \ out -> do
                 system' "cp" [dropDirectory1 $ dropDirectory1 $ out,out]
+
+        "_make/meta/redirect.txt" *> \ out -> do
+                writeFile' out "[]"     -- none.
 
 
 main2 ["clean"] = do
@@ -649,3 +421,245 @@ extractTag pred = do
 -}
 
 --fillContent :: Translate FPGM XTree (NTree XNode) [NTree XNode]
+-----------------------------------------------------------------------
+
+
+makeHtmlHtml out = do
+
+--                liftIO $ prepareDirectory out
+                let srcName = build_dir </> "contents" </> dropDirectory1 (dropDirectory1 out)
+                let tplName = "template" </> "page.html"
+
+                --- now get the relative name for this file.
+
+                let count = length [ () | '/' <- out ]
+                let local_prefix nm = concat (take (count - 2) (repeat "../")) ++ nm
+
+                liftIO $ print(out,count,local_prefix "")
+
+
+                -- Compute breadcrumbs
+                let path0 = [ nm | nm <- splitDirectories $ dropDirectory1 $ dropDirectory1 $  out ]
+
+                -- index itself does not have an entry, but *is* home.
+                let path1 = case path0 of
+                             ["index.html"] -> []
+                             _               -> path0
+
+
+                let crumbs = [mkElement (mkName "li") []
+                                [mkElement (mkName "a") [mkAttr (mkName "href") [mkText "ABCD"]]
+                                   []
+                                ]
+                             ]
+
+--                            <li><a href="#">Library</a> <span class="divider">/</span></li>
+--    <li class="active">Data</li>
+
+
+                liftIO $ print("path",path1,crumbs)
+
+                need [ srcName , tplName ]
+
+                -- next, the contents
+                liftIO $ print ("srcName",srcName)
+                src <- readFile' srcName
+--                liftIO $ print src
+
+                -- now follow links
+                let q :: Rewrite XContext KureM XTree
+                    q = promoteR (do
+                          (NTree (XText txt) []) <- idR
+                          c <- contextT
+                          case c of
+                            XContext (XAttr href:XTag a _:_)
+                                | href == mkName "href" && a == mkName "a" -> do
+                                    return (NTree (XText $ f txt) [])
+                            _ -> fail "not correct context for txt")
+
+                    f ('/':rest) = replaceExtension (local_prefix rest) "html"
+                    f other      | "http://" `isPrefixOf` other
+                                || "https://" `isPrefixOf` other = other
+                                 | otherwise = "##bad URL " ++ other
+
+                let contents = parseHtmlDocument "input" src
+--                let XTrees contents0 = fromKureM error $ KURE.apply (tryR (prunetdR q)) (noContext) (XTrees contents)
+
+--                let src' = xshow contents0
+--                liftIO $ print ("res0",res0)
+
+                -- next, read the template
+                template <- readFile' tplName
+                let page = parseHtmlDocument tplName template
+                let normalizeTplURL nm
+                        -- should really check for ccs, js, img, etc.
+                        | "../" `isPrefixOf` nm = local_prefix (dropDirectory1 nm)
+                        | otherwise             = nm
+                let relativeURL ('/':rest) = replaceExtension (local_prefix rest) "html"
+                    relativeURL other      | "http://" `isPrefixOf` other
+                                          || "https://" `isPrefixOf` other = other
+                                           | otherwise = other
+
+                -- The <i> icons can not use the <i/> versions
+                let iconHack = promoteR $ do
+                          (NTree t@(XTag tag _) []) <- idR
+                          if tag == mkName "i"
+                             then return (NTree t [NTree (XText "") []])
+                             else idR
+
+                let macro :: String -> FPGM [NTree XNode]
+                    macro "fpg-contents" = return contents
+                    macro "fpg-update-time" = do
+                            tm <- liftIO $ getZonedTime
+                            let txt = formatTime defaultTimeLocale rfc822DateFormat tm
+                            () <- trace (show ("tm",tm,txt)) $ return ()
+                            return [mkText $ txt]
+                    macro _              = fail "macro failure"
+
+                let macroExpand :: Translate XContext FPGM (NTree XNode) [NTree XNode]
+                    macroExpand = do
+--                         tree@(NTree t []) <- idR
+--                         () <- trace ("trace: " ++ show t) $ return ()
+                         tree@(NTree t@(XTag tag _) _) <- idR
+                         True <- return (tag == mkName "div" || tag == mkName "span")
+--                         () <- trace ("trace: " ++ show tag) $ return ()
+                         if True -- tag == mkName "div"
+                            then do clss <- extractT $ childT 0 $ crushbuT $ (getAttr >>> arr (: []))
+--                                    () <- trace ("trace: " ++ show clss) $ return ()
+                                    case lookup (mkName "class") clss of
+                                      Nothing -> fail "no macro match for div"
+                                      Just nm -> constT $ macro nm
+                            else fail "no macro match"
+                        -- * Needs to be a div
+                        -- * Needs tag
+
+                let fixTable :: Rewrite XContext FPGM XTree
+                    fixTable = promoteR $ do
+                          (NTree (XTag tag attrs) rest) <- idR
+                          if tag == mkName "table"
+                             then return (NTree (XTag tag (attrs ++
+                                     [NTree (XAttr $ mkName "class") [NTree (XText "table table-bordered table-condensed") []]])) rest)
+                             else fail "not table"
+
+                let tpl_prog = tryR (prunetdR (mapURL normalizeTplURL))
+                           >>> tryR (prunetdR iconHack)
+                           >>> alltdR (tryR (allT (promoteT (macroExpand <+ arr (: []))) >>> arr XTrees))
+                           >>> tryR (prunetdR (mapURL relativeURL))
+                           >>> tryR (prunetdR fixTable)
+                XTrees page0 <- applyFPGM tpl_prog (XTrees page)
+
+                -- Now, we find the teaser links
+
+                let teaser_links :: Translate XContext FPGM XTree [String]
+                    teaser_links = promoteT $ do
+                          (NTree (XTag tag attrs) rest) <- idR
+                          if tag == mkName "a"
+                             then do clss <- extractT $ childT 0 $ crushbuT $ (getAttr >>> arr (: []))
+--                                     () <- trace ("traceX: " ++ show clss) $ return ()
+                                     case lookup (mkName "class") clss of
+                                        Just "teaser" -> case lookup (mkName "href") clss of
+                                                           Just url -> do
+--                                                                () <- trace ("traceX: " ++ show clss) $ return ()
+                                                                pure [url]
+                                                           _ -> fail "no href in teaser"
+                                        _ -> fail "no teaser class in anchor"
+                             else fail "no match for anchor"
+
+                urls <- applyFPGM (crushbuT teaser_links) (XTrees page0)
+
+                liftIO $ print ("urls",urls, takeDirectory out)
+
+                -- Make sure you already have the teaser contents. Assumes no loops.
+                need [ takeDirectory out </> url | url <- urls ]
+
+                let extract_teaser :: Translate XContext FPGM XTree [NTree XNode]
+                    extract_teaser = promoteT $ do
+                          (NTree (XTag tag attrs) rest) <- idR
+                          if tag == mkName "div"
+                             then do clss <- extractT $ childT 0 $ crushbuT $ (getAttr >>> arr (: []))
+--                                     () <- trace ("traceX: " ++ show clss) $ return ()
+                                     case lookup (mkName "class") clss of
+                                        Just "teaser" -> pure rest
+                                        _ -> fail "no teaser class in div"
+                             else fail "no match for div"
+
+                teaser_map <- sequence
+                        [ do src <- readFile' (takeDirectory out </> url)
+                             let remote_page = parseHtmlDocument (takeDirectory out </> url) src
+                             content0 <- applyFPGM (onetdT extract_teaser) (XTrees remote_page)
+                             return (url,content0)
+                        | url <- urls
+                        ]
+
+                liftIO $ print ("teaser_map",teaser_map)
+
+                let insert_teaser :: Translate XContext FPGM (NTree XNode) [NTree XNode]
+                    insert_teaser = do
+--                         tree@(NTree t []) <- idR
+--                         () <- trace ("trace: " ++ show t) $ return ()
+                          tree@(NTree t@(XTag tag _) rest) <- idR
+--                          True <- return (tag == mkName "div")
+--                          () <- trace ("traceZ: " ++ show tag) $ return ()
+                          if tag == mkName "a"
+                             then do clss <- extractT $ childT 0 $ crushbuT $ (getAttr >>> arr (: []))
+--                                     () <- trace ("trace!: " ++ show clss) $ return ()
+                                     case lookup (mkName "class") clss of
+                                        Just "teaser" ->
+                                          case lookup (mkName "href") clss of
+                                              Just url ->
+                                                case lookup url teaser_map of
+                                                   Just trees -> do
+--                                                        () <- trace ("traceY: " ++ show trees) $ return ()
+                                                        -- Need to renormalize URLs
+                                                        pure (trees ++ [NTree (XTag (mkName "a")
+                                                                          [ NTree (XAttr (mkName "href")) [NTree (XText url) []]
+                                                                          ])
+                                                                          ([ NTree (XTag (mkName "i")
+                                                                                [ NTree (XAttr (mkName "class"))
+                                                                                        [NTree (XText "icon-chevron-right") []]
+                                                                                ])
+                                                                                [NTree (XText "") []]
+                                                                           , NTree (XText " ") []
+                                                                           ] ++ rest)
+                                                                       ])
+
+--                             <i class="icon-chevron-right"></i> <a href="About.html" class="">Read more about About Functional Programming at KU</a>
+
+                                                   Nothing -> fail "can not find url teaser"
+                                              _ -> fail "no href in teaser"
+                                        _ -> fail "no teaser class in anchor"
+                             else fail "no match for anchor"
+
+                let teaser = alltdR (tryR (allT (promoteT (insert_teaser <+ arr (: []))) >>> arr XTrees))
+                XTrees page1 <- applyFPGM teaser (XTrees page0)
+
+--
+--              Add the marker for links that are *this* page
+--
+
+--  <li class="active"><a href="#"><i class="icon-home"></i> Home</a></li>
+
+                let findActive :: R XTree
+                    findActive = promoteR $ do
+                            matchTag "li"
+                            -- Find the inner link
+                            let findHR :: T XTree ()
+                                findHR = promoteT $ do
+                                    matchTag "a"
+                                    attrs <- getAttrs
+                                    case lookup (mkName "href") attrs of
+                                      -- Fix for recusive names
+                                      Just nm | nm == dropDirectory1 (dropDirectory1 out) -> return ()
+                                      _ -> fail "findHR failed"
+                            -- check to see if we contain our own link
+                            extractT $ onetdT $ findHR
+                            idR
+
+                            -- grab the tree, add a class active
+                            (NTree (XTag tag attrs) rest) <- idR
+                            pure $ NTree (XTag tag (mkAttr (mkName "class") [mkText "active"] : attrs))
+                                          rest
+
+                XTrees page2 <- applyFPGM (tryR $ prunetdR findActive) (XTrees page1)
+
+                writeFile' out $ xshow page2
