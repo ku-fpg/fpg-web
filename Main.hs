@@ -73,9 +73,9 @@ main2 ["build"] = shake shakeOptions { shakeVerbosity = Loud
                 liftIO $ if b then removeFile "_make/html/index.html"
                               else return ()
 
-                b <- doesFileExist "_make/meta/redirect.txt"
-                liftIO $ if b then removeFile "_make/meta/redirect.txt"
-                              else return ()
+--                b <- doesFileExist "_make/meta/redirect.txt"
+--                liftIO $ if b then removeFile "_make/meta/redirect.txt"
+--                              else return ()
 
                 liftIO $ createDirectoryIfMissing True $ build_dir      -- is this needed?
 
@@ -112,7 +112,7 @@ main2 ["build"] = shake shakeOptions { shakeVerbosity = Loud
 
                 redirects :: [(String,String)] <- readMeta "redirect.txt"
 
-                liftIO $ print (redirects, dropDirectory1 $ dropDirectory1 $ out)
+--                liftIO $ print (redirects, dropDirectory1 $ dropDirectory1 $ out)
 
                 case lookup (dropDirectory1 $ dropDirectory1 $ out) redirects of
                   Just target -> makeHtmlRedirect out target
