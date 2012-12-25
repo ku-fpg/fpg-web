@@ -1,3 +1,4 @@
+<div class="row"><div class="span6">
 
 The Functional Programming Group
 ================================
@@ -18,9 +19,18 @@ needs.
 
 </div>
 
-## Current Members
 
-<div class="row"><div class="span5">
+Joining the Lab
+---------------
+
+New members are always welcome. Typically, at the graduate level you
+will need some experience in Haskell (for example, via [EECS 776](/Members/AndyGill/Teaching/EECS776)).
+Email Professor Gill for a discussion.
+
+
+</div><div class="span6">
+
+## Current Members
 
 Who                                                             Project(s)                      Status
 -----------                                                     --------------------            -----
@@ -29,6 +39,7 @@ Jan Bracker                                                     HERMIT/Sunroof  
 [Andrew Farmer](/users/andrewfarmer)                            HERMIT                          PhD, expected 2014
 Patrick G Flor                                                  HERMIT/Android                  BS CS
 Nicolas Frisby                                                  HERMIT                          Post-PhD
+Andy Gill                                                       -                               Faculty
 Adam Howell                                                     HERMIT/Android                  BS CS
 [Ed Komp](http://www.ittc.ku.edu/view_contact.phtml?id=28)      HERMIT                          Staff
 [Bowe Neuenschwander](/users/boweneuenschwander)                Lambda Bridge                   MS, expected 2013
@@ -40,11 +51,13 @@ Michael Tabone                                                  HERMIT/Android  
 
 </div></div>
 
+----------------------------------------------
+
+<div class="row"><div class="span6">
+
 ## Group Alumni
 
-These are people who has worked for FPG, or locals who has worked with the group in some capacity.
-
-<div class="row"><div class="span5">
+These are people who has worked for or with FPG in some capacity.
 
 Who                                                     What                    Where after FPG
 -----------                                             -----                   ---------
@@ -55,14 +68,11 @@ Patrick Miller                                          Lambda Bridge, BS 2012  
 Brandon Smith                                           ChalkBoard, BS 2011
 -----------                                             ------                  --------
 
-</div></div>
-
+</div><div class="span6">
 
 ## Visitors
 
 These are people who have visited the lab recently for more than a day or so.
-
-<div class="row"><div class="span5">
 
 Who                                                                             When                    From
 ------------------------------------------------------------                    --------                -----------
@@ -72,6 +82,9 @@ Who                                                                             
 
 </div></div>
 
+---------------------------------------
+
+<div class="row"><div class="span4">
 
 Computer Systems Design Laboratory
 ----------------------------------
@@ -83,10 +96,8 @@ lead by [Perry Alexander](http://www.ittc.ku.edu/~alex/), who also uses
 functional programming for system engineering, and with whom we
 collaborate closely.
 
-IRC
----
 
-We have an IRC group, **#ku-csdl**, on irc.freenode.net.
+</div><div class="span4">
 
 LAMBDA Reading Group
 --------------------
@@ -96,10 +107,12 @@ group](https://wiki.ittc.ku.edu/lambda/Main_Page) for anyone that is
 interested, discussing topics related to programming and specification
 languages, semantic models, and programming paradigms.
 
-Joining the Lab
----------------
+</div><div class="span4">
 
-New members are always welcome. Typically, at the graduate level you
-will need some experience in Haskell (for example, via [EECS 776](/Members/AndyGill/Teaching/EECS776)).
-Email Professor Gill for a discussion.
+IRC
+---
 
+We have an IRC group, **#ku-csdl**, on irc.freenode.net.
+
+
+</div></div>
