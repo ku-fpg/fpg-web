@@ -43,6 +43,15 @@ build_dir    = "_make"
 
 all_src_files = build_dir </> "all_src_files" -- DEAD
 
+
+-- tables about the website
+
+redirects :: [(String,String)]
+redirects =
+        [("Tools.html","Software.html")]
+
+-- The Makefile part
+
 main = do
         args <- getArgs
         main2 ["clean"]
@@ -64,6 +73,9 @@ main2 ["build"] = shake shakeOptions { shakeVerbosity = Loud
                 liftIO $ if b then removeFile "_make/html/index.html"
                               else return ()
 
+                b <- doesFileExist "_make/meta/redirect.txt"
+                liftIO $ if b then removeFile "_make/meta/redirect.txt"
+                              else return ()
 
                 liftIO $ createDirectoryIfMissing True $ build_dir      -- is this needed?
 
@@ -80,12 +92,14 @@ main2 ["build"] = shake shakeOptions { shakeVerbosity = Loud
                 css_files <- filter ("css//*.css" ?==)
                                 <$> (liftIO $ getRecursiveContents "css")
 
+                redirected_files :: [(String,String)] <- readMeta "redirect.txt"
 
                 let target_files = map (build_dir </> "html" </>)
                                  $ html_files
                                         ++ img_files
                                         ++ js_files
                                         ++ css_files
+                                        ++ map fst redirected_files
 
                 liftIO $ print target_files
                 need target_files
@@ -96,7 +110,13 @@ main2 ["build"] = shake shakeOptions { shakeVerbosity = Loud
         -- make the indiviual html files for uploading, in the html directory.
         "_make/html//*.html" *> \ out -> do
 
-                makeHtmlHtml out
+                redirects :: [(String,String)] <- readMeta "redirect.txt"
+
+                liftIO $ print (redirects, dropDirectory1 $ dropDirectory1 $ out)
+
+                case lookup (dropDirectory1 $ dropDirectory1 $ out) redirects of
+                  Just target -> makeHtmlRedirect out target
+                  Nothing     -> makeHtmlHtml out
 
 
         -- make the content files, using pandoc.
@@ -115,8 +135,7 @@ main2 ["build"] = shake shakeOptions { shakeVerbosity = Loud
                 system' "cp" [dropDirectory1 $ dropDirectory1 $ out,out]
 
         "_make/meta/redirect.txt" *> \ out -> do
-                writeFile' out "[]"     -- none.
-
+                writeMeta out $ redirects
 
 main2 ["clean"] = do
         b <- doesDirectoryExist build_dir
@@ -128,7 +147,6 @@ main2 ["import"] = do
         let start = ["import/Home.markdown"]
         v <- newMVar start
         shake shakeOptions { shakeVerbosity = Diagnostic } $ do
-
 
         action $ do
                 liftIO $ createDirectoryIfMissing True $ build_dir
@@ -663,3 +681,19 @@ makeHtmlHtml out = do
                 XTrees page2 <- applyFPGM (tryR $ prunetdR findActive) (XTrees page1)
 
                 writeFile' out $ xshow page2
+
+makeHtmlRedirect :: String -> String -> Action ()
+makeHtmlRedirect out target = do
+        writeFile' out $ "<meta http-equiv=\"Refresh\" content=\"0; url=Research.html\">\n"
+  where
+
+readMeta :: (Read a) => String -> Action a
+readMeta nm = do
+        need ["_make/meta/" ++ nm]
+        txt <- readFile' $ "_make/meta/" ++ nm
+        return $ read txt
+
+writeMeta :: (Show a) => String -> a -> Action ()
+writeMeta nm = writeFileChanged nm . show
+
+
