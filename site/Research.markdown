@@ -10,13 +10,15 @@ implementations. We then deploy our new technologies into diverse
 application areas, including telemetry, high performance computing and
 real-time systems.
 
+</div>
+
+
 Our operating assumption is that a well written functional program can
 perform effectively as a concise executable specification of a solution
 to a problem. However, the scope and influence of our ideas is intended
 to be broader than simply their use inside our functional language
 community.
 
-</div>
 
 Overview of Research
 ====================
