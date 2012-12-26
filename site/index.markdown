@@ -1,7 +1,7 @@
 
 <div class="row"><div class="span10 offset1">
         
-<div class="well" style="background: #DAD6CB;">
+<div class="well">
 
 ## Functional Programming Group at KU
 
