@@ -23,17 +23,20 @@
       }
 
 
-      #footer {
-              border-top: 1px dashed #0022B4;
-      }
+#footer {
+  border-top: 1px dashed #0022B4;
+  background: #FFC82D; 
+  margin-top: 14px;
+}
 
       hr { 
               border-top: 1px solid #0022B4;
       }
-      .navbar-inner {
-              border: 1px solid #0022B4;
-              margin-bottom: 14pt;
-      }      
+
+.navbar-inner {
+  border: 1px solid #0022B4;
+  margin-bottom: 14pt;
+}      
 
       .jayhawk {
               display: block;
