@@ -596,6 +596,32 @@ makeHtmlHtml out contents = do
                                 txt <- readFile' fileName
                                 return $ parseHtmlDocument "Sitemap.html" txt
 
+                    macro nm | match `isPrefixOf` nm  && all isDigit rest = do
+                            liftActionFPGM $ do
+                                let fileName = build_dir </> "contents" </> "Events.html"
+                                need [ fileName ]
+                                txt <- readFile' fileName
+                                let html = parseHtmlDocument "Events.html" txt
+                                tm <- liftIO $ getZonedTime
+                                let time_txt = formatTime defaultTimeLocale "%Y" tm
+                                let fn []           = [[]]
+                                    fn (tree:trees) = case tree of
+                                           NTree (XTag tag attr) [NTree (XText h2_txt) []]
+                                              | tag == mkName "h2" && h2_txt == time_txt -> fn trees
+                                           NTree (XTag tag attr) rest
+                                              | tag == mkName "h3" -> [] : insert tree (fn trees)
+                                           _ -> insert tree (fn trees)
+                                let filtered = fn html
+                                return [ NTree (XTag (mkName "div") [mkAttr (mkName "class") [mkText "fpg-event-list"]])
+                                       $ concat
+                                       $ take (read rest + 1)
+                                       $ filtered
+                                       ]
+                      where
+                        match = "fpg-recently-"
+                        rest = drop (length match) nm
+                        insert x (xs:xss) = (x : xs) : xss
+
                     macro _             = fail "macro failure"
 
                 let macroExpand :: Translate XContext FPGM (NTree XNode) [NTree XNode]
