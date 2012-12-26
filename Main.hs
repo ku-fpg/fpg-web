@@ -649,11 +649,20 @@ makeHtmlHtml out contents = do
                                      [NTree (XAttr $ mkName "class") [NTree (XText "table table-bordered table-condensed") []]])) rest)
                              else fail "not table"
 
+                let fixLandingPage :: Rewrite XContext FPGM XTree
+                    fixLandingPage = promoteR $ do
+                          (NTree (XTag tag attrs) rest) <- idR
+                          if tag == mkName "body"
+                             then return (NTree (XTag tag (attrs ++
+                                     [NTree (XAttr $ mkName "class") [NTree (XText "fpg-landing") []]])) rest)
+                             else fail "not body"
+
                 let tpl_prog = tryR (prunetdR (mapURL normalizeTplURL))
                            >>> tryR (prunetdR iconHack)
                            >>> alltdR (tryR (allT (promoteT (macroExpand <+ arr (: []))) >>> arr XTrees))
                            >>> tryR (prunetdR (mapURL relativeURL))
                            >>> tryR (prunetdR fixTable)
+                           >>> tryR (prunetdR fixLandingPage)
                 XTrees page0 <- applyFPGM tpl_prog (XTrees page)
 
                 -- Now, we find the teaser links
