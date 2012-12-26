@@ -126,7 +126,7 @@ main2 ["build"] = do
                 alwaysRerun
                 contents :: [(String,Build)] <- readMeta "contents.txt"
                 let trees = genSiteMap "/" (map (("/" ++) . dropDirectory1 . dropDirectory1 . fst) contents)
-                let sitemap = mkElement (mkName "p") [mkAttr (mkName "align") [mkText "justify"]] trees
+                let sitemap = mkElement (mkName "p") [] trees
                 writeFileChanged out $ (xshow [sitemap])
 
 
