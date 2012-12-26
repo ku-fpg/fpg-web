@@ -23,7 +23,7 @@
 <div class="row"><div class="span6">
 
 
-## Site Map
+## Site Pages
 
 <div class="fpg-sitemap"> </div> 
 
