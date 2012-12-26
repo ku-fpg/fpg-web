@@ -25,11 +25,7 @@
 
 ## Site Map
 
- * [Home](index)
- * [Research](Research)
- * [Software](Software)
- * [Talks](Talks)
- * [About Us](About)
+<div class="fpg-sitemap"> </div> 
 
 </div><div class="span6">
 
