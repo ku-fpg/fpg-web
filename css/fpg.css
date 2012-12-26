@@ -73,3 +73,27 @@
               border-left: 1px solid #0022B4;
               padding-left: 10px;
       }
+
+.fpg-event-list > h3 {
+	font-size: 100%;
+	border: 0px;
+  	line-height: 14px;
+	margin:  0px;
+	padding: 0px;
+}
+
+.fpg-event-list > h2 {
+	font-size: 120%;
+	border: 0px;
+  	line-height: 15px;
+	margin:  0px;
+	padding: 0px;
+	text-align: center;
+}
+
+.fpg-event-list > p {
+	font-size: 80%;
+	border: 0px;
+	padding-left: 10px;
+  	line-height: 12px;
+}
