@@ -2,21 +2,36 @@
 
 ### December 21st 
 
-Brent Yorgey, PhD student at the University of Pennsylvania, visits the FP group and talks about his diagrams package.
+Brent Yorgey, PhD student at the University of Pennsylvania, 
+visits the FP group and talks about his diagrams package.
+
+
+### December 10th
+
+Andrew Farmer passed his
+comprehensive PhD oral examination,
+with dissertation title ''Mechanizing Worker/Wrapper for Domain Specific Optimizations''.
+Congratulations Andrew!
 
 ### September 13th
+
+Neil Sculthorpe gave a [talk](http://www.youtube.com/watch?v=x2QH3jJCJso) 
+about the internals of [HERMIT](/Projects/HERMIT)
+at the [Haskell Symposium](http://www.haskell.org/haskell-symposium/2012/)
+
+### September 9th
 
 Andrew Farmer gave a [talk](http://www.youtube.com/watch?v=ivMHHreMTvM) 
 about [HERMIT](/Projects/HERMIT)'s web interface technology
 at the [XLDI Workshop](http://workshops.inf.ed.ac.uk/xldi2012/)
 
-### September 13th
+### August 31st
 
-Neil Sculthorpe gave a [talk](http://www.youtube.com/watch?v=x2QH3jJCJso) 
-about [HERMIT](/Projects/HERMIT)
-at the [Haskell Symposium](http://www.haskell.org/haskell-symposium/2012/)
+Neil Sculthorpe gave a [talk](http://www.youtube.com/watch?v=fB6SjYPfye4)
+about using [HERMIT](/Projects/HERMIT)
+at the [IFL 2012](http://www.cs.ox.ac.uk/conferences/IFL2012/)
 
-### March 5th 
+### March 5th
 
 Neil Sculthorpe joins the FP group. He will work as a PostDoc on
 the HERMIT project. Welcome aboard Neil!
