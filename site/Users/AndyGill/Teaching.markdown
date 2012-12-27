@@ -1,10 +1,15 @@
-I am teaching Programming Language Paradigms (EECS 368) in Fall 2011.
+I am teaching Programming I (EECS 168) in the Spring, and
+will be teaching EECS 776 again in the Fall.
 
 Schedule
 --------
 
   -------------- ----------------------------------------------------------------
-  Fall 2010:     EECS 368 Programming Language Paradigms
+  Fall 2012:     EECS 368 Programming Language Paradigms
+                 EECS 776 Functional Programming and Domain Specific Languages
+  Spring 2012:   EECS 700 Functional Programming
+                 EECS 168 Programming I
+  Fall 2011:     EECS 368 Programming Language Paradigms
   Spring 2011:   EECS 700 Functional Programming
                  EECS 800 High Assurance Engineering using Functional Languages
   Fall 2010:     EECS 368 Programming Language Paradigms
@@ -26,7 +31,8 @@ courses. The course will provide theoretical insight into various
 aspects of modern languages while requiring hands-on development of
 programs using Java, Scheme, and Haskell.
 
-EECS 700 **Functional Programming** teaches how to solve engineering
+EECS 776 **Functional Programming and Domain Specific Languages**, 
+also known as EECS 700 and EECS 690, teaches how to solve engineering
 problems efficiently in a modern functional language. Topics may include
 basic functional idioms, introduction to Haskell, IO and purity,
 functional data structures and algorithms, monads and applicative
