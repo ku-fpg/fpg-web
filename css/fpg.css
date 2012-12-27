@@ -74,7 +74,7 @@
               padding-left: 10px;
       }
 
-.fpg-event-list > h3 {
+.fpg-event-list h3 {
 	font-size: 100%;
 	border: 0px;
   	line-height: 14px;
@@ -82,7 +82,7 @@
 	padding: 0px;
 }
 
-.fpg-event-list > h2 {
+.fpg-event-list h2 {
 	font-size: 120%;
 	border: 0px;
   	line-height: 15px;
@@ -91,13 +91,39 @@
 	text-align: center;
 }
 
-.fpg-event-list > p {
+.fpg-event-list p {
 	font-size: 80%;
 	border: 0px;
 	padding-left: 10px;
   	line-height: 12px;
 }
 
-.fpg-landing {
-	background: #6DC6E7;
+.fpg-small p {
+	font-size: 80%;
+	line-height: 14px;
 }
+
+.fpg-small h2 {
+	font-size: 100%;
+	border: 0px;
+  	line-height: 14px;
+--	margin:  0px;
+	padding: 0px;
+	text-align: center;
+}
+
+.fpg-small h3 {
+	font-size: 90%;
+	border: 0px;
+  	line-height: 12px;
+	margin:  6px;
+	padding: 0px;
+	text-align: center;
+}
+
+
+.fpg-landing {
+	background: #f0f0f0;
+}
+
+
