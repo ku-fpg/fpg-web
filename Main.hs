@@ -662,7 +662,9 @@ makeHtmlHtml out contents = do
                            >>> alltdR (tryR (allT (promoteT (macroExpand <+ arr (: []))) >>> arr XTrees))
                            >>> tryR (prunetdR (mapURL relativeURL))
                            >>> tryR (prunetdR fixTable)
-                           >>> tryR (prunetdR fixLandingPage)
+                           >>> (if path0 == ["index.html"]
+                                then tryR (prunetdR fixLandingPage)
+                                else idR)
                 XTrees page0 <- applyFPGM tpl_prog (XTrees page)
 
                 -- Now, we find the teaser links
