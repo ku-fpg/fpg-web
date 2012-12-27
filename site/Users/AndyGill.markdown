@@ -1,34 +1,47 @@
 ![](http://www.ittc.ku.edusites/default/files/me.jpg)
 
-Assistant Professor
--------------------
+<div class="row"><div class="span6 offset0">
 
-[Electrical Engineering and Computer
-Science](http://www.eecs.ku.edu/), \
- [School of Engineering](http://www.engr.ku.edu/), \
- [The University of Kansas](http://www.ku.edu/)\
- \
+<div class="well">
 
-  --------------- -----------------------------
-  Email:          andygill at ku.edu
+<address style="font-size: 15pt; line-height: 20pt; text-align: right">
+<strong>Andy Gill</strong><br>
+Assistant Professor<br>
+[Electrical Engineering and Computer Science](http://www.eecs.ku.edu/)<br>
+[School of Engineering](http://www.engr.ku.edu/)<br>
+[The University of Kansas](http://www.ku.edu/)
+</address>
 
-  Phone:          +1 785-864-8817 (Eaton) / \
-                  +1 785-864-4712 (ITTC)\
-                   +1 785-864-3226 (FAX)
+</div>
 
-  Address:        The University of Kansas, \
-                   2001 Eaton Hall, \
-                   1520 West 15th Street, \
-                   Lawrence, KS 66045-7621
+</div><div class="span5 offset1">
 
-  Office:         Room 2024 (Eaton) / \
-                   Room 252 (Nichols Hall)
+--------------- -----------------------------
+<b>Email:<b>    andygill at ku.edu
 
-  Office hours:   Wednesday 2:00-4:00\
-                   (or by appointment)
-  --------------- -----------------------------
+Phone:          +1 785-864-8817 (Eaton) / <BR>
+                +1 785-864-4712 (ITTC) <BR>
+                +1 785-864-3226 (FAX)
 
-[Research](/Research "Research")
+Address:        The University of Kansas, <BR>
+                2001 Eaton Hall, <BR>
+                1520 West 15th Street, <BR>
+                Lawrence, KS 66045-7621
+
+Office:         Room 2024 (Eaton) / <BR>
+                Room 252 (Nichols Hall)
+
+Office hours:   Wednesday 2:00-4:00 <BR>
+                 (or by appointment)
+--------------- -----------------------------
+
+        
+</div></div>
+
+
+<div class="row"><div class="span4">
+
+[Research](/Research 'Research")
 -----------------------------------------
 
 We use functional programming to solve problems in ways that are
@@ -40,6 +53,40 @@ gaps between high level specifications and highly efficient
 implementations. We then deploy our new technologies into diverse
 application areas, including telemetry, high performance computing and
 real-time systems.
+
+</div><div class="span4">
+
+[Research](/Research 'Research")
+-----------------------------------------
+
+We use functional programming to solve problems in ways that are
+amicable to acceleration (GPUs, Multi-cores, FPGAs), and supports
+assurance arguments (using semi-formal methods like equational
+reasoning). As a group we make aggressive use of functional languages,
+extending the technology where needed, and ultimately strive to close
+gaps between high level specifications and highly efficient
+implementations. We then deploy our new technologies into diverse
+application areas, including telemetry, high performance computing and
+real-time systems.
+
+</div><div class="span4">
+
+[Research](/Research 'Research")
+-----------------------------------------
+
+We use functional programming to solve problems in ways that are
+amicable to acceleration (GPUs, Multi-cores, FPGAs), and supports
+assurance arguments (using semi-formal methods like equational
+reasoning). As a group we make aggressive use of functional languages,
+extending the technology where needed, and ultimately strive to close
+gaps between high level specifications and highly efficient
+implementations. We then deploy our new technologies into diverse
+application areas, including telemetry, high performance computing and
+real-time systems.
+</div>
+
+<br>
+
 
 Our operating assumption is that a well written functional program can
 perform effectively as a concise executable specification of a solution
