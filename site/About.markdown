@@ -5,7 +5,6 @@ The Functional Programming Group
 
 <div class="teaser">
 
-
 The Functional Programming Group, led by Andy Gill, apply and extend
 functional programming technologies to the diverse areas of building
 computer systems, high-performance computing, information assurance and
@@ -39,7 +38,7 @@ Jan Bracker                                                     HERMIT/Sunroof  
 [Andrew Farmer](/users/andrewfarmer)                            HERMIT                          PhD, expected 2014
 Patrick G Flor                                                  HERMIT/Android                  BS CS
 Nicolas Frisby                                                  HERMIT                          Post-PhD
-Andy Gill                                                       HERMIT &amp; KansasLava         PI / Faculty
+[Andy Gill](/Users/AndyGill)                                    HERMIT &amp; KansasLava         PI / Faculty
 Adam Howell                                                     HERMIT/Android                  BS CS
 [Ed Komp](http://www.ittc.ku.edu/view_contact.phtml?id=28)      HERMIT                          Staff
 [Bowe Neuenschwander](/users/boweneuenschwander)                KansasLava / &lambda;Bridge     MS, expected 2013
