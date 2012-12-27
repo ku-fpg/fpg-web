@@ -39,14 +39,15 @@ Jan Bracker                                                     HERMIT/Sunroof  
 [Andrew Farmer](/users/andrewfarmer)                            HERMIT                          PhD, expected 2014
 Patrick G Flor                                                  HERMIT/Android                  BS CS
 Nicolas Frisby                                                  HERMIT                          Post-PhD
-Andy Gill                                                       HERMIT &amp; KansasLava               PI / Faculty
+Andy Gill                                                       HERMIT &amp; KansasLava         PI / Faculty
 Adam Howell                                                     HERMIT/Android                  BS CS
 [Ed Komp](http://www.ittc.ku.edu/view_contact.phtml?id=28)      HERMIT                          Staff
-[Bowe Neuenschwander](/users/boweneuenschwander)                KansasLava / &lambda;Bridge                   MS, expected 2013
+[Bowe Neuenschwander](/users/boweneuenschwander)                KansasLava / &lambda;Bridge     MS, expected 2013
 Ryan Scott                                                      HERMIT/Android                  BS CS
 [Neil Sculthorpe](/users/neilsculthorpe)                        HERMIT                          PostDoc
 Rama Subramanian                                                TBD                             MS CS
 Michael Tabone                                                  HERMIT/Android                  BS CS
+Brad Torrence                                                   Artificial Life                 MS CS
 -----------                                                     -------------------             ------
 
 </div></div>
