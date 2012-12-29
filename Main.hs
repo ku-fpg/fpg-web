@@ -109,15 +109,99 @@ main2 ["build"] = do
                 system' "pandoc" ["-o",out,input]
 
         "_make/autogen/Sitemap.html" *> \ out -> do
-                alwaysRerun     -- TODO: can the need for a contents.txt remove this?
                 contents :: [(String,Build)] <- readMeta meta_contents
                 let trees = genSiteMap "/" (map (("/" ++) . dropDirectory1 . dropDirectory1 . fst) contents)
                 let sitemap = mkElement (mkName "p") [] trees
                 writeFileChanged out $ (xshow [sitemap])
 
-        "_make/autogen/papers/*.html" *> \ out -> do
+        "_make/autogen/Papers/*.html" *> \ out -> do
+                liftIO $ print "######################"
                 need [ "data/fpg.bib" ]
-                writeFile' out "HA"
+                bib <- readMeta meta_bibtex
+                let bib' =  [ (tagToFileName nm,(nm,dat))
+                            | (nm,dat) <- bib
+                            ]
+                case lookup (takeFileName out) bib' of
+                  Nothing -> error $ "abort: " ++ show out
+                  Just (nm,bb@(BibTeX _ stuff)) -> do
+                    writeFile' out
+                        $ xshow
+                        [ mkElement (mkName "div")
+                                [ mkAttr (mkName "class") [mkText "row"]]
+                                [ mkElement (mkName "div")
+                                        [ mkAttr (mkName "class") [mkText "span8 offset2"]]
+                                        [ mkElement (mkName "p")
+                                                []
+                                                (buildBibNode nm bb)
+                                        , mkElement (mkName "h3") [] [mkText "Abstract"]
+                                        , mkElement (mkName "blockquote")
+                                                []
+                                                [ case lookup "abstract" stuff of
+                                                    Just txt -> mkText $ txt
+                                                    Nothing -> mkText $ "no abstract"
+                                                ]
+                                        , mkElement (mkName "h3") [] [mkText "BibTeX"]
+                                        , mkElement (mkName "pre")
+                                                []
+                                                [ asciiBibNode nm bb ]
+                                         ]
+                                 ]
+                        ]
+
+        "_make/autogen/Publications.html" *> \ out -> do
+                liftIO $ print "######################"
+                need [ "data/fpg.bib" ]
+                bib <- readMeta meta_bibtex
+                let years :: [Int] = reverse $ sort $ nub
+                                [ read y
+                                | (_,BibTeX _ stuff) <- bib
+                                , Just y <- [lookup "year" stuff]
+                                ]
+
+
+
+                let entries = concat
+                        [ [  {- mkElement (mkName "div")
+                                [ mkAttr (mkName "class") [mkText "row"]]
+                                [ mkElement (mkName "div")
+                                        [ mkAttr (mkName "class") [mkText "span8"]]
+                                        [ mkElement (mkName "hr") [] []]
+                                ]
+                          , -} mkElement (mkName "div")
+                                [ mkAttr (mkName "class") [mkText "row"]]
+                                [ mkElement (mkName "div")
+                                        [ mkAttr (mkName "class") [mkText "span1 offset2"]]
+                                        [ mkElement (mkName "h3")
+                                                [mkAttr (mkName "style") [mkText "margin-top: -7px; border-top: 1px dotted;"]]
+                                                [mkText $ show year ]]
+                                , mkElement (mkName "div")
+                                        [ mkAttr (mkName "class") [mkText "span6"]]
+                                        [ mkElement (mkName "ul")
+                                                []
+                                                [ mkElement (mkName "li")
+                                                   [mkAttr (mkName "style") [mkText "margin-bottom: 2px;"]]
+                                                   (buildBibNode nm dat)
+                                                | (nm,dat@(BibTeX _ stuff)) <- bib
+                                                , Just y <- [lookup "year" stuff]
+                                                , read y == year
+                                                ]
+                                        ]
+                                ]
+                          ]
+                        | year <- years
+                        ]
+
+                liftIO $ print ("years",years)
+                writeFile' out
+                        $ xshow
+                        $ entries
+{-
+                        [ mkElement (mkName "li")
+                            []
+                            (buildBibNode nm dat)
+                        | (nm,dat) <- bib
+                        ]
+-}
 
         -- Finally, building visable results, all in the html sub-directory
         ("_make/html//*") *> \ out -> do
@@ -140,9 +224,15 @@ main2 ["build"] = do
         -- Require the final html files in place
         action $ do
                 -- Create work for yourself
-                b <- doesFileExist "_make/html/index.html"
-                liftIO $ if b then removeFile "_make/html/index.html"
-                              else return ()
+                let work = ["_make/autogen/Publications.html"
+                           ,"_make/html/Publications.html"
+                           , "_make/autogen/Papers/Gill_09_KansasLava.html"
+                           ]
+--                b <- doesFileExist "_make/autogen/Papers/Framer_12_HERMITinMachine.html"
+                sequence_ [ do
+                        b <- doesFileExist f
+                        liftIO $ if b then removeFile f
+                                 else return () | f <- work ]
 
                 build_cmds <- readMeta meta_contents
                 need $ map fst $ build_cmds
@@ -282,7 +372,7 @@ findBuildDirections bib = do
                  | file <- map fst redirects
                  ] ++
                  [ (prefixed file,AutoGenerated)
-                 | file <- ["Sitemap.html"]
+                 | file <- ["Sitemap.html","Publications.html"]
                  ] ++
                  [ (prefixed (paper_page_dir </> tagToFileName tag),AutoGenerated)
                  | (tag,_) <- bib
@@ -891,10 +981,10 @@ test = do
           Right bibs -> return bibs
 
 paper_page_dir :: String
-paper_page_dir = "papers"
+paper_page_dir = "Papers"
 
 files_dir :: String
-files_dir = "files"
+files_dir = "Files"
 
 -- W. V. Sorin, “Optical reflectometry for component characterization,” in
 -- Fiber Optic Test and Measurement, D. Derickson, Ed. Englewood
@@ -911,12 +1001,13 @@ files_dir = "files"
    month="January"
 -}
 
-asciiBibNode :: B.T -> NTree XNode -- escaped
-asciiBibNode bib = mkText $ unlines $
-        ["@" ++ B.entryType bib ++ "{" ++ B.identifier bib ++ ","] ++
+asciiBibNode :: String -> BibTeX -> NTree XNode -- escaped
+asciiBibNode id (BibTeX ty stuff) = mkText $ unlines $
+        ["@" ++ ty ++ "{" ++ id ++ ","] ++
         [ "    " ++ tag ++ " = {" ++ dat ++ "}"
-        | (tag,dat) <- B.fields bib
+        | (tag,dat) <- stuff
         , tag /= "abstract"
+        , head tag /= 'X'
         ] ++
         ["}"]
 
@@ -927,27 +1018,49 @@ asciiBibNode bib = mkText $ unlines $
   -}
 
 
-buildBibNode :: B.T -> [NTree XNode]
-buildBibNode bib =
-        [ mkText $ names
-             ++ ", &#8220;" ++ title ++ ",&#8220; "
-             ++ inside ++ ", "
-             ++ date
+buildBibNode :: String -> BibTeX -> [NTree XNode]
+buildBibNode id (BibTeX ty stuff) =
+        [ mkText $ names ++ ", &#8220;"
+        , mkElement (mkName "a")
+                [mkAttr (mkName "href") [mkText $ "/" ++ paper_page_dir ++ "/" ++ tagToFileName id]]
+                [mkText title]
+        , mkText $ ",&#8221; "
+             ++ inside
+             ++ publisher
+             ++ location
+             ++ date ++ "."
         ]
   where
-          f = B.fields bib
+          names = case lookup "author" stuff of
+                    Just n -> n
+                    Nothing -> case lookup "editor" stuff of
+                                  Just n -> n ++ " (editors)"
+                                  Nothing -> error "X"
 
-          names = case lookup "author" (B.fields bib) of
+          title = case lookup "title" stuff of
                     Just n -> n
 
-          title = case lookup "title" (B.fields bib) of
-                    Just n -> n
+          inside = case (lookup "booktitle" stuff) of
+                    Just m -> m ++ ", "
+                    Nothing -> ""
 
-          inside = ""
+          publisher = case (lookup "publisher" stuff) of
+                    Just m -> m ++ ", "
+                    Nothing -> ""
 
-          date = case (lookup "month" f,lookup "year" f) of
+          location = case (lookup "location" stuff) of
+                    Just m -> m ++ ", "
+                    Nothing -> ""
+
+          note = case (lookup "note" stuff) of
+                    Just m -> m ++ ", "
+                    Nothing -> ""
+
+
+          date = case (lookup "month" stuff,lookup "year" stuff) of
                    (Nothing,Just y) -> y
                    (Just m,Just y) -> m ++ " " ++ y
+                   _ -> ""
 
 --          E.Cons {E.entryType :: String,
 --            E.identifier :: String,
