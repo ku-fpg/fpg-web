@@ -132,7 +132,7 @@ main2 ["build"] = do
                                         [ mkAttr (mkName "class") [mkText "span8 offset2"]]
                                         [ mkElement (mkName "p")
                                                 []
-                                                (buildBibNode nm bb)
+                                                (buildBibCite nm bb)
                                         , mkElement (mkName "h3") [] [mkText "Abstract"]
                                         , mkElement (mkName "blockquote")
                                                 []
@@ -142,7 +142,7 @@ main2 ["build"] = do
                                                 ]
                                         , mkElement (mkName "h3") [] [mkText "BibTeX"]
                                         , mkElement (mkName "pre")
-                                                []
+                                                [ mkAttr (mkName "style") [mkText "font-size: 70%"]]
                                                 [ asciiBibNode nm bb ]
                                          ]
                                  ]
@@ -170,17 +170,17 @@ main2 ["build"] = do
                           , -} mkElement (mkName "div")
                                 [ mkAttr (mkName "class") [mkText "row"]]
                                 [ mkElement (mkName "div")
-                                        [ mkAttr (mkName "class") [mkText "span1 offset2"]]
+                                        [ mkAttr (mkName "class") [mkText "span1 offset1"]]
                                         [ mkElement (mkName "h3")
                                                 [mkAttr (mkName "style") [mkText "margin-top: -7px; border-top: 1px dotted;"]]
                                                 [mkText $ show year ]]
                                 , mkElement (mkName "div")
-                                        [ mkAttr (mkName "class") [mkText "span6"]]
+                                        [ mkAttr (mkName "class") [mkText "span8"]]
                                         [ mkElement (mkName "ul")
                                                 []
                                                 [ mkElement (mkName "li")
                                                    [mkAttr (mkName "style") [mkText "margin-bottom: 2px;"]]
-                                                   (buildBibNode nm dat)
+                                                   (buildBibCite nm dat)
                                                 | (nm,dat@(BibTeX _ stuff)) <- bib
                                                 , Just y <- [lookup "year" stuff]
                                                 , read y == year
@@ -1017,18 +1017,34 @@ asciiBibNode id (BibTeX ty stuff) = mkText $ unlines $
       fields :: [(String, String)]
   -}
 
-
-buildBibNode :: String -> BibTeX -> [NTree XNode]
-buildBibNode id (BibTeX ty stuff) =
+-- Build textual citatation, with link(s).
+buildBibCite :: String -> BibTeX -> [NTree XNode]
+buildBibCite id (BibTeX ty stuff) =
         [ mkText $ names ++ ", &#8220;"
-        , mkElement (mkName "a")
-                [mkAttr (mkName "href") [mkText $ "/" ++ paper_page_dir ++ "/" ++ tagToFileName id]]
+        , mkElement (mkName "strong")
+                []
                 [mkText title]
         , mkText $ ",&#8221; "
              ++ inside
              ++ publisher
              ++ location
              ++ date ++ "."
+        ] ++
+        [ mkText " "
+        , mkElement (mkName "a")
+                [ mkAttr (mkName "href") [mkText $ "/" ++ paper_page_dir ++ "/" ++ tagToFileName id]
+                , mkAttr (mkName "class") [mkText "label"]
+                ]
+                [mkText $ "Details"]
+        ] ++ concat
+        [ [ mkText " "
+          , mkElement (mkName "a")
+                [ mkAttr (mkName "href") [mkText $ url]
+                , mkAttr (mkName "class") [mkText "label"]
+                ]
+                [mkText $ "Download " ++ takeExtension url]
+          ]
+        | Just url <- return $ lookup "url" stuff
         ]
   where
           names = case lookup "author" stuff of
