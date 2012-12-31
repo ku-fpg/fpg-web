@@ -41,6 +41,8 @@ import qualified Text.BibTeX.Entry as B
 import qualified Text.BibTeX.Parse as P
 import qualified Text.Parsec as Parsec
 
+import Data.Monoid
+
 import Control.Concurrent.STM
 
 import KURE
@@ -129,6 +131,8 @@ main2 ["build"] = do
                   Nothing -> error $ "abort: " ++ show out
                   Just (nm,bb@(BibTeX _ stuff)) -> do
                     writeFile' out
+                        "PAPERS.HTML file"
+{-
                         $ xshow
                         [ mkElement (mkName "div")
                                 [ mkAttr (mkName "class") [mkText "row"]]
@@ -151,7 +155,7 @@ main2 ["build"] = do
                                          ]
                                  ]
                         ]
-
+-}
         "_make/autogen/Publications.html" *> \ out -> do
                 liftIO $ print "######################"
                 need [ "data/fpg.bib" ]
@@ -161,7 +165,7 @@ main2 ["build"] = do
                                 | (_,BibTeX _ stuff) <- bib
                                 , Just y <- [lookup "year" stuff]
                                 ]
-
+{-
 
 
                 let entries = concat
@@ -188,11 +192,11 @@ main2 ["build"] = do
                           ]
                         | year <- years
                         ]
-
+-}
                 liftIO $ print ("years",years)
                 writeFile' out
                         $ xshow
-                        $ entries
+                        $ [] -- entries
 
         -- Finally, building visable results, all in the html sub-directory
         ("_make/html//*") *> \ out -> do
@@ -215,10 +219,11 @@ main2 ["build"] = do
         -- Require the final html files in place
         action $ do
                 -- Create work for yourself
-                let work = ["_make/autogen/Publications.html"
-                           ,"_make/html/Publications.html"
-                           , "_make/autogen/Papers/Gill_09_KansasLava.html"
-                           ]
+                let work = ---["_make/autogen/Publications.html"
+--                           ,"_make/html/Publications.html"
+--                           , "_make/autogen/Papers/Gill_09_KansasLava.html"
+--                           ]
+                        ["_make/html/About.html"]
 --                b <- doesFileExist "_make/autogen/Papers/Framer_12_HERMITinMachine.html"
                 sequence_ [ do
                         b <- doesFileExist f
@@ -306,6 +311,13 @@ newtype FPGM a = FPGM { runFPGM :: Action (Either String a) }
 applyFPGM :: T a b -> a -> Action b
 applyFPGM t a = do
         res <- runFPGM $ KURE.apply t noContext a
+        case res of
+          Left msg -> error $ "applyFPGM " ++ msg
+          Right a -> return a
+
+applyFPGM' :: Translate Context FPGM a b -> a -> Action b
+applyFPGM' t a = do
+        res <- runFPGM $ KURE.apply t (Context []) a
         case res of
           Left msg -> error $ "applyFPGM " ++ msg
           Right a -> return a
@@ -411,7 +423,7 @@ treeT ta tb f = translate $ \ (XContext cs) (NTree node rest) ->
 
 --------------------------------
 
-debugR :: (Show a) => String -> R a
+debugR :: (Monad m, Show a) => String -> Rewrite c m a
 debugR msg = acceptR (\ a -> trace (msg ++ " : " ++ take 100 (show a)) True)
 
 -- change an embedded URL
@@ -434,6 +446,37 @@ mapURL f = promoteR $ do
                             return (NTree (XText $ f txt) [])
                     _ -> fail "not correct context for txt"
 
+-- change an embedded URL
+
+mapURL' :: (Monad m) => (String -> String) -> Rewrite Context m Node
+mapURL' f = promoteR $ do
+                (nm,val) <- attrT (,)
+                Context c <- contextT
+                case (nm,c) of
+                   ("href","a":_)     -> return $ attrC nm $ f val
+                   ("href","link":_)  -> return $ attrC nm $ f val
+                   ("src","script":_) -> return $ attrC nm $ f val
+                   ("src","img":_)    -> return $ attrC nm $ f val
+                   _                  -> fail "no correct context"
+
+{-
+                  (NTree (XText txt) []) <- idR
+                  c <- contextT
+                  case c of
+                    XContext (XAttr href:XTag a _:_)
+                        | href == mkName "href" && a == mkName "a" -> do
+                            return (NTree (XText $ f txt) [])
+                    XContext (XAttr href:XTag link _:_)
+                        | href == mkName "href" && link == mkName "link" -> do
+                            return (NTree (XText $ f txt) [])
+                    XContext (XAttr src:XTag script _:_)
+                        | src == mkName "src" && script == mkName "script" -> do
+                            return (NTree (XText $ f txt) [])
+                    XContext (XAttr src:XTag img _:_)
+                        | src == mkName "src" && img == mkName "img" -> do
+                            return (NTree (XText $ f txt) [])
+                    _ -> fail "not correct context for txt"
+-}
 getAttr' :: Monad m => Translate XContext m XTree (QName,String)
 getAttr' = promoteT $ do
                 (NTree (XText txt) []) <- idR
@@ -482,19 +525,6 @@ makeHtmlHtml out contents = do
                              ["index.html"] -> []
                              _               -> path0
 
-
-                let crumbs = [mkElement (mkName "li") []
-                                [mkElement (mkName "a") [mkAttr (mkName "href") [mkText "ABCD"]]
-                                   []
-                                ]
-                             ]
-
---                            <li><a href="#">Library</a> <span class="divider">/</span></li>
---    <li class="active">Data</li>
-
-
-                liftIO $ print("path",path1,crumbs)
-
                 need [ srcName , tplName ]
 
                 -- next, the contents
@@ -502,6 +532,7 @@ makeHtmlHtml out contents = do
                 src <- readFile' srcName
 --                liftIO $ print src
 
+{-
                 -- now follow links
                 let q :: Rewrite XContext KureM XTree
                     q = promoteR (do
@@ -518,7 +549,8 @@ makeHtmlHtml out contents = do
                                 || "https://" `isPrefixOf` other = other
                                  | otherwise = "##bad URL " ++ other
 
-                let contents = parseHtmlDocument "input" src
+-}
+                let contents = parseHTML srcName src
 --                let XTrees contents0 = fromKureM error $ KURE.apply (tryR (prunetdR q)) (noContext) (XTrees contents)
 
 --                let src' = xshow contents0
@@ -526,7 +558,8 @@ makeHtmlHtml out contents = do
 
                 -- next, read the template
                 template <- readFile' tplName
-                let page = parseHtmlDocument tplName template
+                let page0 = parseHTML tplName template
+
                 let normalizeTplURL nm
                         -- should really check for ccs, js, img, etc.
                         | "../" `isPrefixOf` nm = local_prefix (dropDirectory1 nm)
@@ -536,6 +569,7 @@ makeHtmlHtml out contents = do
                                           || "https://" `isPrefixOf` other = other
                                            | otherwise = other
 
+{-
                 -- The <i> icons can not use the <i/> versions
                 let iconHack = promoteR $ do
                           (NTree t@(XTag tag _) []) <- idR
@@ -543,13 +577,15 @@ makeHtmlHtml out contents = do
                              then return (NTree t [NTree (XText "") []])
                              else idR
 
-                let macro :: String -> FPGM [NTree XNode]
+-}
+                let macro :: String -> FPGM HTML
                     macro "fpg-contents" = return contents
                     macro "fpg-update-time" = do
                             tm <- liftIO $ getZonedTime
                             let txt = formatTime defaultTimeLocale rfc822DateFormat tm
                             () <- trace (show ("tm",tm,txt)) $ return ()
-                            return [mkText $ txt]
+                            return (text txt)
+{-
 
                     macro "fpg-sitemap" = do
                             liftActionFPGM $ do
@@ -583,33 +619,36 @@ makeHtmlHtml out contents = do
                         match = "fpg-recently-"
                         rest = drop (length match) nm
                         insert x (xs:xss) = (x : xs) : xss
-
+-}
                     macro _             = fail "macro failure"
 
-                let macroExpand :: Translate XContext FPGM (NTree XNode) [NTree XNode]
+                let macroExpand :: Translate Context FPGM Block HTML
                     macroExpand = do
---                         tree@(NTree t []) <- idR
---                         () <- trace ("trace: " ++ show t) $ return ()
-                         tree@(NTree t@(XTag tag _) _) <- idR
-                         True <- return (tag == mkName "div" || tag == mkName "span")
---                         () <- trace ("trace: " ++ show tag) $ return ()
-                         if True -- tag == mkName "div"
-                            then do clss <- extractT $ childT 0 $ crushbuT $ (getAttr' >>> arr (: []))
---                                    () <- trace ("trace: " ++ show clss) $ return ()
-                                    case lookup (mkName "class") clss of
-                                      Nothing -> fail "no macro match for div"
-                                      Just nm -> constT $ macro nm
-                            else fail "no macro match"
-                        -- * Needs to be a div
-                        -- * Needs tag
+                         () <- trace ("macroExpand") $ return ()
+                         tag <- getTag
+                         guardMsg (tag == "div" || tag == "span") "wrong tag"
+                         () <- trace ("trace: " ++ show tag) $ return ()
+                         cls <- getAttr "class"
+                         () <- trace ("$$$$$$$$$$$$$$$$$ trace: " ++ show (tag,cls)) $ return ()
+                         constT $ macro cls
 
-                let fixTable :: Rewrite XContext FPGM XTree
+                let fixTable :: Rewrite Context FPGM Node
                     fixTable = promoteR $ do
-                          (NTree (XTag tag attrs) rest) <- idR
+                          "table" <- getTag
+                          extractR' $ anyR $ promoteR' $ do
+                                  ss <- attrsT idR id
+                                  return $ attrs (attr "class" "table table-bordered table-condensed" : ss)
+
+--                                  return $ [] ++ attr
+{-
+                          return
                           if tag == mkName "table"
                              then return (NTree (XTag tag (attrs ++
                                      [NTree (XAttr $ mkName "class") [NTree (XText "table table-bordered table-condensed") []]])) rest)
                              else fail "not table"
+
+-}
+{-
 
                 let fixLandingPage :: Rewrite XContext FPGM XTree
                     fixLandingPage = promoteR $ do
@@ -618,17 +657,31 @@ makeHtmlHtml out contents = do
                              then return (NTree (XTag tag (attrs ++
                                      [NTree (XAttr $ mkName "class") [NTree (XText "fpg-landing") []]])) rest)
                              else fail "not body"
+-}
 
-                let tpl_prog = tryR (prunetdR (mapURL normalizeTplURL))
-                           >>> tryR (prunetdR iconHack)
-                           >>> alltdR (tryR (allT (promoteT (macroExpand <+ arr (: []))) >>> arr XTrees))
-                           >>> tryR (prunetdR (mapURL relativeURL))
+                let tpl_prog :: Rewrite Context FPGM Node
+                    tpl_prog = tryR (prunetdR (mapURL' normalizeTplURL))
+                           >>> tryR (alltdR (debugR "X" >>> tryR (promoteR (mapHTML macroExpand))))
+
+-- tryR (debugR "Y" >>> allT (promoteT' macroExpand <+ arr html))))
+
+--                                allT html_line >>> debugR "T" >>> injectT)))
+
+--                         (allT (promoteT' (debugR "Y" >>> (macroExpand <+ arr blockToHTML) :: Translate Context FPGM Block HTML)) >>> injectT)))
+
+ -- >>> tryR (allT (promoteT (macroExpand <+ arr blockToHTML)) >>> injectT)))
+
+
+--                           >>> tryR (prunetdR (mapURL relativeURL))
                            >>> tryR (prunetdR fixTable)
-                           >>> (if path0 == ["index.html"]
-                                then tryR (prunetdR fixLandingPage)
-                                else idR)
-                XTrees page0 <- applyFPGM tpl_prog (XTrees page)
+--                           >>> (if path0 == ["index.html"]
+--                                then tryR (prunetdR fixLandingPage)
+--                                else idR) -}
 
+                page1 <- applyFPGM' (extractR tpl_prog) page0
+
+                liftIO $ print "DONE"
+{-
                 -- Now, we find the teaser links
 
                 let teaser_links :: Translate XContext FPGM XTree [String]
@@ -742,8 +795,9 @@ makeHtmlHtml out contents = do
                                           rest
 
                 XTrees page2 <- applyFPGM (tryR $ prunetdR findActive) (XTrees page1)
-
-                writeFile' out $ xshow page2
+-}
+--                writeFile' out $ xshow page2
+                writeFile' out $ show page1
 
 makeHtmlRedirect :: String -> String -> Action ()
 makeHtmlRedirect out target = do
@@ -752,7 +806,6 @@ makeHtmlRedirect out target = do
 
 ----------------------------------------------------
 -- ShakeVar (call them shake vars)
-
 
 
 genSiteMap :: String -> [String] -> NTrees XNode
