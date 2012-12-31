@@ -28,6 +28,8 @@ newtype Attrs = Attrs XmlTrees     -- attributes for a block
 
 newtype Attr  = Attr XmlTree       -- single attribute
 
+newtype Syntax  = Syntax XmlTree       -- XML/HTML syntax, like <? or <!
+
 newtype Context = Context [String]  -- all the containing nodes, in inside to outside order
 
 data Node
@@ -36,6 +38,7 @@ data Node
         | TextNode      Text
         | AttrsNode     Attrs
         | AttrNode      Attr
+        | SyntaxNode    Syntax
         deriving Show
 
 -----------------------------------------------------------------------------
@@ -54,6 +57,9 @@ instance Show Attrs where
 
 instance Show Attr where
         show (Attr html) = xshow [html]
+
+instance Show Syntax where
+        show (Syntax syntax) = xshow [syntax]
 
 instance Monoid HTML where
         mempty = HTML []
@@ -87,40 +93,56 @@ instance Injection Attr Node where
         project u = do AttrNode t <- return u
                        return t
 
+instance Injection Syntax Node where
+        inject    = SyntaxNode
+        project u = do SyntaxNode t <- return u
+                       return t
+
 instance Walker Context Node where
         allR :: forall m . MonadCatch m => Rewrite Context m Node -> Rewrite Context m Node
         allR rr = prefixFailMsg "allR failed: " $
           rewrite $ \ c -> \ case
-            HTMLNode  o -> liftM HTMLNode  $ KURE.apply (htmlT rrEither                     $ htmlC)  c o
-            BlockNode o -> liftM BlockNode $ KURE.apply (blockT (extractR rr) (extractR rr) $ blockC) c o
-            TextNode  o -> liftM TextNode  $ return o
-            AttrsNode o -> liftM AttrsNode $ KURE.apply (attrsT (extractR rr)               $ attrsC) c o
-            AttrNode  o -> liftM AttrNode  $ return o
-          where
-            rrEither :: Rewrite Context m (Either Block Text)
-            rrEither = rewrite $ \ c -> \ case
-                Left  o -> liftM Left  $ KURE.apply (extractR rr) c o
-                Right o -> liftM Right $ KURE.apply (extractR rr) c o
+            HTMLNode  o  -> liftM HTMLNode  $ KURE.apply (htmlT  (extractR rr >>> arr html)
+                                                                 (extractR rr >>> arr html)
+                                                                 (extractR rr >>> arr html)   $ htmlC) c o
+            BlockNode o  -> liftM BlockNode  $ KURE.apply (blockT (extractR rr) (extractR rr) $ blockC) c o
+            TextNode  o  -> liftM TextNode   $ return o
+            AttrsNode o  -> liftM AttrsNode  $ KURE.apply (attrsT (extractR rr)               $ attrsC) c o
+            AttrNode  o  -> liftM AttrNode   $ return o
+            SyntaxNode o -> liftM SyntaxNode $ return o -- never processed
+
+class Html a where
+        html :: a -> HTML
+
+instance Html Block where
+        html (Block b) = HTML [b]
+
+instance Html Text where
+        html (Text b) = HTML [b]
+
+instance Html Syntax where
+        html (Syntax b) = HTML [b]
+
 
 -----------------------------------------------------------------------------
 
 htmlT :: (Monad m)
-     => Translate Context m (Either Block Text) a       -- used many times
+     => Translate Context m Block a             -- used many times
+     -> Translate Context m Text a              -- used many times
+     -> Translate Context m Syntax a            -- used many times
      -> ([a] -> x)
      -> Translate Context m HTML x
-htmlT tr k = translate $ \ c (HTML ts) -> liftM k $ flip mapM ts $ \ case
-                        t@(NTree (XTag {}) _) -> apply tr c (Left $ Block t)
-                        t@(NTree (XText {}) _)   -> apply tr c (Right $ Text t)
-                        _ -> fail "not XTag or XText"
+htmlT tr1 tr2 tr3 k = translate $ \ c (HTML ts) -> liftM k $ flip mapM ts $ \ case
+                        t@(NTree (XTag {}) _)     -> apply tr1 c (Block t)
+                        t@(NTree (XText {}) _)    -> apply tr2 c (Text t)
+                        t@(NTree (XCharRef n) _)  -> apply tr2 c (Text t)
+                        t@(NTree (XPi {}) _)      -> apply tr3 c (Syntax t)
+                        t@(NTree (XDTD {}) _)     -> apply tr3 c (Syntax t)
+                        t@(NTree (XCmt {}) _)     -> apply tr3 c (Syntax t)
+                        t -> fail $ "not XTag or XText: " ++ take 100 (show t)
 
-
-htmlC :: [Either Block Text] -> HTML
-htmlC os = HTML
-          $ [ case o of
-               Left (Block t) -> t
-               Right (Text t) -> t
-            | o <- os
-            ]
+htmlC :: [HTML] -> HTML
+htmlC = mconcat
 
 blockT :: (Monad m)
      => Translate Context m Attrs a
@@ -147,6 +169,7 @@ textT :: (Monad m)
       -> Translate Context m Text x
 textT k = translate $ \ c -> \ case
                 Text (NTree (XText txt) []) -> return $ k txt
+                Text t@(NTree (XCharRef n) []) -> return $ k $ xshow [t]
                 _                           -> fail "textT runtime error"
 
 textC :: String -> Text
@@ -173,9 +196,12 @@ attrT k = translate $ \ c -> \ case
                   && namespaceUri nm == "" -> return $ k (localPart nm) txt
                 _                          -> fail "textT runtime error"
 
-
 attrC :: String -> String -> Attr
 attrC nm val = Attr $ mkAttr (mkName nm) [mkText val]
+
+attr = attrC
+
+attrs = attrsC
 
 --------------------------------------------------
 -- HTML Builders.
@@ -193,8 +219,8 @@ text txt = HTML [t]
 --------------------------------------------------
 -- observers
 
-getAttr :: forall m . (MonadCatch m) => String -> Translate Context m Attrs String
-getAttr nm = extractT' $ oneT $ promoteT' (find >>> joinT)
+getAttr :: forall a m g . (MonadCatch m, Injection a g, g ~ Node) => String -> Translate Context m a String
+getAttr nm = extractT' $ onetdT $ promoteT' (find >>> joinT)
   where
           find = attrT $ \ nm' val -> if nm' == nm
                                       then return val
@@ -202,6 +228,9 @@ getAttr nm = extractT' $ oneT $ promoteT' (find >>> joinT)
 
 isTag :: (Monad m) => String -> Translate Context m Block ()
 isTag nm = blockT idR idR (\ nm' _ _ -> nm == nm') >>> guardT
+
+getTag :: (Monad m) => Translate Context m Block String
+getTag = blockT idR idR (\ nm _ _ -> nm)
 
 --------------------------------------------------
 -- common pattern; promote a translation over a block to over
@@ -215,8 +244,17 @@ extractT' = extractT
 promoteT' :: (Monad m, Injection a g, g ~ Node) => Translate c m a b -> Translate c m g b
 promoteT' = promoteT
 
+extractR' :: (Monad m, Injection a g, g ~ Node) => Rewrite c m g -> Rewrite c m a
+extractR' = extractR
+
+promoteR' :: (Monad m, Injection a g, g ~ Node) => Rewrite c m a -> Rewrite c m g
+promoteR' = promoteR
+
+
 ---------------------------------------
 
+mapHTML :: (Monad m) => Translate Context m Block HTML -> Translate Context m HTML HTML
+mapHTML tr = htmlT tr (arr html) (arr html) htmlC
 
 parseHTML :: FilePath -> String -> HTML
 parseHTML fileName input = HTML $ parseHtmlDocument fileName input
