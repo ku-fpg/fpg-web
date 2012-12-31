@@ -452,6 +452,7 @@ mapURL' :: (Monad m) => (String -> String) -> Rewrite Context m Node
 mapURL' f = promoteR $ do
                 (nm,val) <- attrT (,)
                 Context c <- contextT
+--                () <- trace (show ("mapURL",nm,val,c)) $ return ()
                 case (nm,c) of
                    ("href","a":_)     -> return $ attrC nm $ f val
                    ("href","link":_)  -> return $ attrC nm $ f val
@@ -627,9 +628,9 @@ makeHtmlHtml out contents = do
                          () <- trace ("macroExpand") $ return ()
                          tag <- getTag
                          guardMsg (tag == "div" || tag == "span") "wrong tag"
-                         () <- trace ("trace: " ++ show tag) $ return ()
+--                         () <- trace ("trace: " ++ show tag) $ return ()
                          cls <- getAttr "class"
-                         () <- trace ("$$$$$$$$$$$$$$$$$ trace: " ++ show (tag,cls)) $ return ()
+--                         () <- trace ("$$$$$$$$$$$$$$$$$ trace: " ++ show (tag,cls)) $ return ()
                          constT $ macro cls
 
                 let fixTable :: Rewrite Context FPGM Node
@@ -639,44 +640,20 @@ makeHtmlHtml out contents = do
                                   ss <- attrsT idR id
                                   return $ attrs (attr "class" "table table-bordered table-condensed" : ss)
 
---                                  return $ [] ++ attr
-{-
-                          return
-                          if tag == mkName "table"
-                             then return (NTree (XTag tag (attrs ++
-                                     [NTree (XAttr $ mkName "class") [NTree (XText "table table-bordered table-condensed") []]])) rest)
-                             else fail "not table"
-
--}
-{-
-
-                let fixLandingPage :: Rewrite XContext FPGM XTree
+                let fixLandingPage :: Rewrite Context FPGM Node
                     fixLandingPage = promoteR $ do
-                          (NTree (XTag tag attrs) rest) <- idR
-                          if tag == mkName "body"
-                             then return (NTree (XTag tag (attrs ++
-                                     [NTree (XAttr $ mkName "class") [NTree (XText "fpg-landing") []]])) rest)
-                             else fail "not body"
--}
+                          guardMsg (path0 == ["index.html"]) "is not landing page"
+                          "body" <- getTag
+                          extractR' $ anyR $ promoteR' $ do
+                                  ss <- attrsT idR id
+                                  return $ attrs (attr "class" "fpg-landing" : ss)
 
                 let tpl_prog :: Rewrite Context FPGM Node
                     tpl_prog = tryR (prunetdR (mapURL' normalizeTplURL))
-                           >>> tryR (alltdR (debugR "X" >>> tryR (promoteR (mapHTML macroExpand))))
-
--- tryR (debugR "Y" >>> allT (promoteT' macroExpand <+ arr html))))
-
---                                allT html_line >>> debugR "T" >>> injectT)))
-
---                         (allT (promoteT' (debugR "Y" >>> (macroExpand <+ arr blockToHTML) :: Translate Context FPGM Block HTML)) >>> injectT)))
-
- -- >>> tryR (allT (promoteT (macroExpand <+ arr blockToHTML)) >>> injectT)))
-
-
---                           >>> tryR (prunetdR (mapURL relativeURL))
+                           >>> tryR (alltdR (tryR (promoteR (mapHTML macroExpand))))
+                           >>> tryR (prunetdR (mapURL' relativeURL))
                            >>> tryR (prunetdR fixTable)
---                           >>> (if path0 == ["index.html"]
---                                then tryR (prunetdR fixLandingPage)
---                                else idR) -}
+                           >>> tryR (prunetdR fixLandingPage)
 
                 page1 <- applyFPGM' (extractR tpl_prog) page0
 
