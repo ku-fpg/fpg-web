@@ -233,6 +233,9 @@ isTag nm = blockT idR idR (\ nm' _ _ -> nm == nm') >>> guardT
 getTag :: (Monad m) => Translate Context m Block String
 getTag = blockT idR idR (\ nm _ _ -> nm)
 
+getInner :: (Monad m) => Translate Context m Block HTML
+getInner = blockT idR idR (\ _ _ h -> h)
+
 --------------------------------------------------
 -- common pattern; promote a translation over a block to over
 
