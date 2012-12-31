@@ -223,7 +223,7 @@ main2 ["build"] = do
 --                           ,"_make/html/Publications.html"
 --                           , "_make/autogen/Papers/Gill_09_KansasLava.html"
 --                           ]
-                        ["_make/html/index.html"]
+                        ["_make/html/Users/AndyGill.html"]
 --                        []
 --                b <- doesFileExist "_make/autogen/Papers/Framer_12_HERMITinMachine.html"
                 sequence_ [ do
@@ -398,31 +398,7 @@ makeHtmlHtml out contents = do
                 -- next, the contents
                 liftIO $ print ("srcName",srcName)
                 src <- readFile' srcName
---                liftIO $ print src
-
-{-
-                -- now follow links
-                let q :: Rewrite XContext KureM XTree
-                    q = promoteR (do
-                          (NTree (XText txt) []) <- idR
-                          c <- contextT
-                          case c of
-                            XContext (XAttr href:XTag a _:_)
-                                | href == mkName "href" && a == mkName "a" -> do
-                                    return (NTree (XText $ f txt) [])
-                            _ -> fail "not correct context for txt")
-
-                    f ('/':rest) = replaceExtension (local_prefix rest) "html"
-                    f other      | "http://" `isPrefixOf` other
-                                || "https://" `isPrefixOf` other = other
-                                 | otherwise = "##bad URL " ++ other
-
--}
                 let contents = parseHTML srcName src
---                let XTrees contents0 = fromKureM error $ KURE.apply (tryR (prunetdR q)) (noContext) (XTrees contents)
-
---                let src' = xshow contents0
---                liftIO $ print ("res0",res0)
 
                 -- next, read the template
                 template <- readFile' tplName
@@ -452,34 +428,39 @@ makeHtmlHtml out contents = do
                                 txt <- readFile' fileName
                                 liftIO $ print $ "FPG: " ++ txt
                                 return $ parseHTML "Sitemap.html" txt
-{-
 
                     macro nm | match `isPrefixOf` nm  && all isDigit rest = do
                             liftActionFPGM $ do
                                 let fileName = build_dir </> "contents" </> "Events.html"
                                 need [ fileName ]
                                 txt <- readFile' fileName
-                                let html = parseHtmlDocument "Events.html" txt
+                                let events = parseHTML "Events.html" txt
                                 tm <- liftIO $ getZonedTime
                                 let time_txt = formatTime defaultTimeLocale "%Y" tm
-                                let fn []           = [[]]
-                                    fn (tree:trees) = case tree of
-                                           NTree (XTag tag attr) [NTree (XText h2_txt) []]
-                                              | tag == mkName "h2" && h2_txt == time_txt -> fn trees
-                                           NTree (XTag tag attr) rest
-                                              | tag == mkName "h3" -> [] : insert tree (fn trees)
-                                           _ -> insert tree (fn trees)
-                                let filtered = fn html
-                                return [ NTree (XTag (mkName "div") [mkAttr (mkName "class") [mkText "fpg-event-list"]])
-                                       $ concat
-                                       $ take (read rest + 1)
-                                       $ filtered
-                                       ]
+
+                                let spotH2 = do "h3" <- getTag
+                                                arr (\ x -> (True,html x))
+
+                                let up :: (Html h) => T h (Bool,HTML)
+                                    up = arr html >>> arr (\ x -> (False,x))
+
+                                xs <- applyFPGM' (htmlT (spotH2 <+ up) up up id) events
+
+                                let counts :: [Int]
+                                    counts = [ i
+                                             | ((True,_),i) <- xs `zip` [0..]
+                                             ]
+
+                                let events' = take (head (drop (read rest) counts ++ [0])) (map snd xs)
+
+                                return $ block "div" [attr "class" "fpg-event-list"]
+                                       $ mconcat events'
+
                       where
                         match = "fpg-recently-"
                         rest = drop (length match) nm
                         insert x (xs:xss) = (x : xs) : xss
--}
+
                     macro _             = fail "macro failure"
 
                 let macroExpand :: Translate Context FPGM Block HTML
@@ -507,12 +488,58 @@ makeHtmlHtml out contents = do
                                   ss <- attrsT idR id
                                   return $ attrs (attr "class" "fpg-landing" : ss)
 
+
+                let insertTeaser :: T Block HTML
+                    insertTeaser = do
+                            "a"      <- getTag
+                            "teaser" <- getAttr "class"
+                            url      <- getAttr "href"
+                            arr html
+{-
+                            pure
+
+--                          True <- return (tag == mkName "div")
+--                          () <- trace ("traceZ: " ++ show tag) $ return ()
+                          if tag == mkName "a"
+                             then do clss <- extractT $ childT 0 $ crushbuT $ (getAttr' >>> arr (: []))
+--                                     () <- trace ("trace!: " ++ show clss) $ return ()
+                                     case lookup (mkName "class") clss of
+                                        Just "teaser" ->
+                                          case lookup (mkName "href") clss of
+                                              Just url ->
+                                                case lookup url teaser_map of
+                                                   Just trees -> do
+--                                                        () <- trace ("traceY: " ++ show trees) $ return ()
+                                                        -- Need to renormalize URLs
+                                                        pure (trees ++ [NTree (XTag (mkName "a")
+                                                                          [ NTree (XAttr (mkName "href")) [NTree (XText url) []]
+                                                                          ])
+                                                                          ([ NTree (XTag (mkName "i")
+                                                                                [ NTree (XAttr (mkName "class"))
+                                                                                        [NTree (XText "icon-chevron-right") []]
+                                                                                ])
+                                                                                [NTree (XText "") []]
+                                                                           , NTree (XText " ") []
+                                                                           ] ++ rest)
+                                                                       ])
+
+--                             <i class="icon-chevron-right"></i> <a href="About.html" class="">Read more about About Functional Programming at KU</a>
+
+                                                   Nothing -> fail "can not find url teaser"
+                                              _ -> fail "no href in teaser"
+                                        _ -> fail "no teaser class in anchor"
+                             else fail "no match for anchor"
+
+-}
+
+
                 let tpl_prog :: Rewrite Context FPGM Node
                     tpl_prog = tryR (prunetdR (mapURL' normalizeTplURL))
-                           >>> tryR (alltdR (tryR (promoteR (debugR "A" >>> mapHTML (macroExpand <+ arr html) >>> debugR "B"))))
+                           >>> tryR (alltdR (tryR (promoteR (debugR "A" >>> mapHTML (macroExpand <+ arr html)))))
                            >>> tryR (prunetdR (mapURL' relativeURL))
                            >>> tryR (prunetdR fixTable)
                            >>> tryR (prunetdR fixLandingPage)
+                           >>> tryR (alltdR (tryR (promoteR (mapHTML (insertTeaser <+ arr html)))))
 
                 page1 <- applyFPGM' (extractR tpl_prog) page0
 
