@@ -139,7 +139,8 @@ htmlT tr1 tr2 tr3 k = translate $ \ c (HTML ts) -> liftM k $ flip mapM ts $ \ ca
                         t@(NTree (XPi {}) _)      -> apply tr3 c (Syntax t)
                         t@(NTree (XDTD {}) _)     -> apply tr3 c (Syntax t)
                         t@(NTree (XCmt {}) _)     -> apply tr3 c (Syntax t)
-                        t -> fail $ "not XTag or XText: " ++ take 100 (show t)
+                        t@(NTree (XError {}) _)   -> apply tr3 c (Syntax t)
+                        t -> error $ "not XTag or XText: " ++ take 100 (show t)
 
 htmlC :: [HTML] -> HTML
 htmlC = mconcat
