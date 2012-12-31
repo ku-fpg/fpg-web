@@ -1,16 +1,16 @@
 ![](http://www.ittc.ku.edusites/default/files/me.jpg)
 
-<div class="row"><div class="span6 offset0">
+<div class="row"><div class="span6 offset1">
 
-<blockquote class="pull-right">
-<address style="font-size: 15pt; line-height: 20pt; text-align: right">
+<blockquote class="x-pull-right">
+<address style="font-size: 15pt; line-height: 20pt; text-align: left">
 <strong>Andy Gill</strong><br>
 Assistant Professor<br>
 [Electrical Engineering and Computer Science](http://www.eecs.ku.edu/)<br>
 [School of Engineering](http://www.engr.ku.edu/)<br>
 [The University of Kansas](http://www.ku.edu/)</address></blockquote>
 
-</div><div class="span4 offset2">
+</div><div class="span4 offset1">
 
 --------------- -----------------------------
 <b>Email:<b>    andygill at ku.edu
