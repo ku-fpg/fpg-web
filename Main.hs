@@ -223,7 +223,8 @@ main2 ["build"] = do
 --                           ,"_make/html/Publications.html"
 --                           , "_make/autogen/Papers/Gill_09_KansasLava.html"
 --                           ]
-                        ["_make/html/About.html"]
+                        ["_make/html/index.html"]
+--                        []
 --                b <- doesFileExist "_make/autogen/Papers/Framer_12_HERMITinMachine.html"
                 sequence_ [ do
                         b <- doesFileExist f
@@ -307,14 +308,7 @@ prepareDirectory = createDirectoryIfMissing True . takeDirectory
 newtype FPGM a = FPGM { runFPGM :: Action (Either String a) }
 
 --                let urls = fromKureM error $ KURE.apply (crushbuT teaser_links) (noContext) (XTrees page0)
-{-
-applyFPGM :: T a b -> a -> Action b
-applyFPGM t a = do
-        res <- runFPGM $ KURE.apply t noContext a
-        case res of
-          Left msg -> error $ "applyFPGM " ++ msg
-          Right a -> return a
--}
+
 applyFPGM' :: Translate Context FPGM a b -> a -> Action b
 applyFPGM' t a = do
         res <- runFPGM $ KURE.apply t (Context []) a
@@ -355,77 +349,10 @@ instance MonadIO FPGM where
         liftIO m = FPGM (Right <$> liftIO m)
 
 -----------------------------------------------------------
-{-
-newtype XContext = XContext [XNode]  -- list of all nodes on the way down
-        deriving Show
-
-noContext = XContext []
-
-data XTree = XTree (NTree XNode)
-           | XTrees [NTree XNode]
-         deriving Show
-
-instance Injection (NTree XNode) XTree where
-        inject = XTree
-        project (XTree t) = Just t
-        project _         = Nothing
-
-instance Injection [NTree XNode] XTree where
-        inject = XTrees
-        project (XTrees t) = Just t
-        project _          = Nothing
-
--- Really simple!
-instance Walker XContext XTree where
-        allR :: forall m . MonadCatch m => Rewrite XContext m XTree -> Rewrite XContext m XTree
-        allR rr = prefixFailMsg "allR failed: " $
-          rewrite $ \ c -> \ case
-            XTree  ntree  -> liftM inject $ KURE.apply (allRXtree rr) c ntree
-            XTrees ntrees -> liftM inject $ KURE.apply (allRXtrees rr) c ntrees
-
--- uses translations over XTrees; treeT is used to fix context.
-allRXtree :: MonadCatch m => Rewrite XContext m XTree -> Rewrite XContext m (NTree XNode)
-allRXtree rr = treeT rrNode rrRest $ NTree
-   where
-           rrNode = rewrite $ \ c  -> \ case
-                XPi  n ys -> liftM (XPi n)  $ KURE.apply (extractR rr) c ys
-                XTag n ys -> liftM (XTag n) $ KURE.apply (extractR rr) c ys
-                other     -> return other
-           rrRest = extractR rr
-
--- uses translations over XTree
-allRXtrees :: MonadCatch m => Rewrite XContext m XTree -> Rewrite XContext m [NTree XNode]
-allRXtrees rr = rewrite $ \ c xs -> mapM (KURE.apply (extractR rr) c) xs
-
-allRL :: (Monad m) => Translate () m a b -> Translate () m [a] [b]
-allRL rr = translate $ \ c -> mapM (KURE.apply rr c)
-
--- Rewrite in terms of tagT
-matchXTag :: Monad m => QName -> Rewrite c m (NTree XNode)
-matchXTag tag = acceptR $ \ e -> case e of
-        (NTree (XTag tag' _) _) -> tag == tag'
-        _ -> False
-
-matchXAttr :: Monad m => QName -> Rewrite c m (NTree XNode)
-matchXAttr tag = acceptR $ \ e -> case e of
-        (NTree (XAttr tag') _) -> tag == tag'
-        _ -> False
-
-matchXText :: Monad m => Rewrite c m (NTree XNode)
-matchXText      = acceptR $ \ e -> case e of
-        (NTree (XText _) _) -> True
-        _ -> False
-
-treeT :: (Monad m) => Translate XContext m XNode a -> Translate XContext m [NTree XNode] b -> (a -> b -> x) -> Translate XContext m (NTree XNode) x
-treeT ta tb f = translate $ \ (XContext cs) (NTree node rest) ->
-                let c = XContext (node : cs) in liftM2 f (KURE.apply ta c node) (KURE.apply tb c rest)
--}
---------------------------------
 
 debugR :: (Monad m, Show a) => String -> Rewrite c m a
 debugR msg = acceptR (\ a -> trace (msg ++ " : " ++ take 100 (show a)) True)
 
--- change an embedded URL
 -- change an embedded URL
 
 mapURL' :: (Monad m) => (String -> String) -> Rewrite Context m Node
@@ -440,48 +367,7 @@ mapURL' f = promoteR $ do
                    ("src","img":_)    -> return $ attrC nm $ f val
                    _                  -> fail "no correct context"
 
-{-
-                  (NTree (XText txt) []) <- idR
-                  c <- contextT
-                  case c of
-                    XContext (XAttr href:XTag a _:_)
-                        | href == mkName "href" && a == mkName "a" -> do
-                            return (NTree (XText $ f txt) [])
-                    XContext (XAttr href:XTag link _:_)
-                        | href == mkName "href" && link == mkName "link" -> do
-                            return (NTree (XText $ f txt) [])
-                    XContext (XAttr src:XTag script _:_)
-                        | src == mkName "src" && script == mkName "script" -> do
-                            return (NTree (XText $ f txt) [])
-                    XContext (XAttr src:XTag img _:_)
-                        | src == mkName "src" && img == mkName "img" -> do
-                            return (NTree (XText $ f txt) [])
-                    _ -> fail "not correct context for txt"
--}
-{-
-getAttr' :: Monad m => Translate XContext m XTree (QName,String)
-getAttr' = promoteT $ do
-                (NTree (XText txt) []) <- idR
-                c <- contextT
-                case c of
-                    XContext (XAttr attr:_) -> return (attr,txt)
-                    _ -> fail "getAttrib failed"
 
-getAttrs :: T (NTree XNode) [(QName,String)]
-getAttrs = extractT $ childT 0 $ crushbuT $ find
-  where
-          find :: T XTree [(QName,String)]
-          find = promoteT $ do
-                  (NTree (XText txt) []) <- idR
-                  XContext (XAttr attr:_) <- contextT
-                  return [(attr,txt)]
-
-matchTag :: String -> T (NTree XNode) ()
-matchTag nm = do
-        (NTree (XTag tag _) rest) <- idR
-        if tag == mkName nm then return ()
-                            else fail "matchTag failed"
--}
 -----------------------------------------------------------------------
 
 
@@ -551,15 +437,6 @@ makeHtmlHtml out contents = do
                                           || "https://" `isPrefixOf` other = other
                                            | otherwise = other
 
-{-
-                -- The <i> icons can not use the <i/> versions
-                let iconHack = promoteR $ do
-                          (NTree t@(XTag tag _) []) <- idR
-                          if tag == mkName "i"
-                             then return (NTree t [NTree (XText "") []])
-                             else idR
-
--}
                 let macro :: String -> FPGM HTML
                     macro "fpg-contents" = return contents
                     macro "fpg-update-time" = do
@@ -567,14 +444,15 @@ makeHtmlHtml out contents = do
                             let txt = formatTime defaultTimeLocale rfc822DateFormat tm
                             () <- trace (show ("tm",tm,txt)) $ return ()
                             return (text txt)
-{-
-
                     macro "fpg-sitemap" = do
+                            liftIO $ print "FPG-SITEMAP"
                             liftActionFPGM $ do
                                 let fileName = build_dir </> "autogen" </> "Sitemap.html"
                                 need [ fileName ]
                                 txt <- readFile' fileName
-                                return $ parseHtmlDocument "Sitemap.html" txt
+                                liftIO $ print $ "FPG: " ++ txt
+                                return $ parseHTML "Sitemap.html" txt
+{-
 
                     macro nm | match `isPrefixOf` nm  && all isDigit rest = do
                             liftActionFPGM $ do
@@ -611,7 +489,7 @@ makeHtmlHtml out contents = do
                          guardMsg (tag == "div" || tag == "span") "wrong tag"
 --                         () <- trace ("trace: " ++ show tag) $ return ()
                          cls <- getAttr "class"
---                         () <- trace ("$$$$$$$$$$$$$$$$$ trace: " ++ show (tag,cls)) $ return ()
+                         () <- trace ("$$$$$$$$$$$$$$$$$ trace: " ++ show (tag,cls)) $ return ()
                          constT $ macro cls
 
                 let fixTable :: Rewrite Context FPGM Node
@@ -631,7 +509,7 @@ makeHtmlHtml out contents = do
 
                 let tpl_prog :: Rewrite Context FPGM Node
                     tpl_prog = tryR (prunetdR (mapURL' normalizeTplURL))
-                           >>> tryR (alltdR (tryR (promoteR (mapHTML macroExpand))))
+                           >>> tryR (alltdR (tryR (promoteR (debugR "A" >>> mapHTML (macroExpand <+ arr html) >>> debugR "B"))))
                            >>> tryR (prunetdR (mapURL' relativeURL))
                            >>> tryR (prunetdR fixTable)
                            >>> tryR (prunetdR fixLandingPage)
