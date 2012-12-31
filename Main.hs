@@ -307,14 +307,14 @@ prepareDirectory = createDirectoryIfMissing True . takeDirectory
 newtype FPGM a = FPGM { runFPGM :: Action (Either String a) }
 
 --                let urls = fromKureM error $ KURE.apply (crushbuT teaser_links) (noContext) (XTrees page0)
-
+{-
 applyFPGM :: T a b -> a -> Action b
 applyFPGM t a = do
         res <- runFPGM $ KURE.apply t noContext a
         case res of
           Left msg -> error $ "applyFPGM " ++ msg
           Right a -> return a
-
+-}
 applyFPGM' :: Translate Context FPGM a b -> a -> Action b
 applyFPGM' t a = do
         res <- runFPGM $ KURE.apply t (Context []) a
@@ -325,7 +325,7 @@ applyFPGM' t a = do
 liftActionFPGM :: Action a -> FPGM a
 liftActionFPGM = FPGM . fmap Right
 
-type T a b = Translate XContext FPGM a b
+type T a b = Translate Context FPGM a b
 type R a   = T a a
 
 instance Monad FPGM where
@@ -355,7 +355,7 @@ instance MonadIO FPGM where
         liftIO m = FPGM (Right <$> liftIO m)
 
 -----------------------------------------------------------
-
+{-
 newtype XContext = XContext [XNode]  -- list of all nodes on the way down
         deriving Show
 
@@ -419,33 +419,13 @@ matchXText      = acceptR $ \ e -> case e of
 treeT :: (Monad m) => Translate XContext m XNode a -> Translate XContext m [NTree XNode] b -> (a -> b -> x) -> Translate XContext m (NTree XNode) x
 treeT ta tb f = translate $ \ (XContext cs) (NTree node rest) ->
                 let c = XContext (node : cs) in liftM2 f (KURE.apply ta c node) (KURE.apply tb c rest)
-
-
+-}
 --------------------------------
 
 debugR :: (Monad m, Show a) => String -> Rewrite c m a
 debugR msg = acceptR (\ a -> trace (msg ++ " : " ++ take 100 (show a)) True)
 
 -- change an embedded URL
-mapURL :: (Monad m) => (String -> String) -> Rewrite XContext m XTree
-mapURL f = promoteR $ do
-                  (NTree (XText txt) []) <- idR
-                  c <- contextT
-                  case c of
-                    XContext (XAttr href:XTag a _:_)
-                        | href == mkName "href" && a == mkName "a" -> do
-                            return (NTree (XText $ f txt) [])
-                    XContext (XAttr href:XTag link _:_)
-                        | href == mkName "href" && link == mkName "link" -> do
-                            return (NTree (XText $ f txt) [])
-                    XContext (XAttr src:XTag script _:_)
-                        | src == mkName "src" && script == mkName "script" -> do
-                            return (NTree (XText $ f txt) [])
-                    XContext (XAttr src:XTag img _:_)
-                        | src == mkName "src" && img == mkName "img" -> do
-                            return (NTree (XText $ f txt) [])
-                    _ -> fail "not correct context for txt"
-
 -- change an embedded URL
 
 mapURL' :: (Monad m) => (String -> String) -> Rewrite Context m Node
@@ -478,6 +458,7 @@ mapURL' f = promoteR $ do
                             return (NTree (XText $ f txt) [])
                     _ -> fail "not correct context for txt"
 -}
+{-
 getAttr' :: Monad m => Translate XContext m XTree (QName,String)
 getAttr' = promoteT $ do
                 (NTree (XText txt) []) <- idR
@@ -500,7 +481,7 @@ matchTag nm = do
         (NTree (XTag tag _) rest) <- idR
         if tag == mkName nm then return ()
                             else fail "matchTag failed"
-
+-}
 -----------------------------------------------------------------------
 
 
