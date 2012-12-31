@@ -43,6 +43,8 @@ import qualified Text.Parsec as Parsec
 
 import Control.Concurrent.STM
 
+import KURE
+
 import Shake
 
 site_dir     = "site"
@@ -163,13 +165,7 @@ main2 ["build"] = do
 
 
                 let entries = concat
-                        [ [  {- mkElement (mkName "div")
-                                [ mkAttr (mkName "class") [mkText "row"]]
-                                [ mkElement (mkName "div")
-                                        [ mkAttr (mkName "class") [mkText "span8"]]
-                                        [ mkElement (mkName "hr") [] []]
-                                ]
-                          , -} mkElement (mkName "div")
+                        [ [  mkElement (mkName "div")
                                 [ mkAttr (mkName "class") [mkText "row"]]
                                 [ mkElement (mkName "div")
                                         [ mkAttr (mkName "class") [mkText "span1 offset1"]]
@@ -197,13 +193,6 @@ main2 ["build"] = do
                 writeFile' out
                         $ xshow
                         $ entries
-{-
-                        [ mkElement (mkName "li")
-                            []
-                            (buildBibNode nm dat)
-                        | (nm,dat) <- bib
-                        ]
--}
 
         -- Finally, building visable results, all in the html sub-directory
         ("_make/html//*") *> \ out -> do
@@ -240,109 +229,12 @@ main2 ["build"] = do
                 need $ map fst $ build_cmds
 
 
-{-
-                bib <- readBibTeX "data/fpg.bib"
---                case lookup (tagToFileName
-                contents :: [(String,Build)] <- readShakeVar "contents.txt"
-                let trees = genSiteMap "/" (map (("/" ++) . dropDirectory1 . dropDirectory1 . fst) contents)
-                let sitemap = mkElement (mkName "p") [] trees
-                writeFileChanged out $ (xshow [sitemap])
--}
-
-
 main2 ["clean"] = do
         b <- doesDirectoryExist build_dir
         when b $ do
            removeDirectoryRecursive build_dir
         return ()
 
-main2 ["import"] = do
-        let start = ["import/Home.markdown"]
-        v <- newMVar start
-        shake shakeOptions { shakeVerbosity = Diagnostic } $ do
-
-        action $ do
-                liftIO $ createDirectoryIfMissing True $ build_dir
-                liftIO $ createDirectoryIfMissing True $ "import"
-
-        -- What you need to import
-        want start   -- root
-{-
-        "import//*.markdown" *> \ out -> do
-                let url = "http://ittc.ku.edu/csdl/fpg/" ++ dropDirectory1 (replaceExtension out "")
---                liftIO $ print (out,url)
-                (std_out,std_err) <- systemOutput "curl" [url]
-                let contents = parseHtmlDocument url std_out
---                liftIO $ putStrLn $ xshow contents
-                let q = (acceptR $ \ e -> case e of
-                           (XTree (NTree (XTag tag [NTree (XAttr cls) [NTree (XText "content") []]]) _)) ->
-                                tag == mkName "div" && cls == mkName "class"
-                           _ -> False)
-                liftIO $ print 1
-                let res0 = fromKureM error $ KURE.apply (collectPruneT $ q) () (XTrees contents)
-                liftIO $ print ("len",length res0)
-                let (XTree res:_) = res0
-                liftIO $ putStrLn $ (take 50 $ show res0)
-                let tmp_file = build_dir </> "tmp.html"
-                liftIO $ writeFile tmp_file (xshow [res])
-                liftIO $ print 3
-                system' "pandoc" ["-f","HTML","-t","markdown","-o",out,tmp_file]
-
-                -- now follow links
-                let q :: Translate () FPGM (NTree XNode) [String]
-                    q = matchXTag (mkName "a") >>> (tagT p idR $ \ _ a b -> [a])
-
-                    p :: Translate () FPGM [NTree XNode] String
-                    p = extractT (oneT (promoteT r) :: Translate () FPGM XTree String)
-
-                    r :: Translate () FPGM (NTree XNode) String
-                    r = matchXAttr (mkName "href") >>> xattrT s (\ attr sub -> sub)
-
-                    s :: Translate () FPGM [NTree XNode] String
-                    s = extractT (allT (promoteT t) :: Translate () FPGM XTree String)
-
-                    t :: Translate () FPGM (NTree XNode) String
-                    t = textT idR $ \ txt _ -> txt
-
-                    {-
-                    (extractT (oneT (promoteT s) :: Translate () FPGM XTree String))
-
-                    s :: Translate () FPGM [NTree XNode] String
-                    s = pure "X" -- textT idR $ \ txt _ -> txt
-                    -}
-
-                let res0 :: [String] = fromKureM error $ KURE.apply (prunetdT (promoteT q)) () (XTrees contents)
-
-                let prefix = "/csdl/fpg/"
-                let res1 = [ drop (length prefix) x |  x <- res0, prefix `isPrefixOf` x ]
-
-                sequence_ [ liftIO $  createDirectoryIfMissing True $ "import" ++ takeDirectory1 x
-                          | x <- res1
-                          , '/' `elem` x
-                          , isUpper (head x)
-                          , not ("biblio" `isPrefixOf` x)
-                          , not ("node" `isPrefixOf` x)
-                          , not ("user" `isPrefixOf` x)
-                          , not ("book" `isPrefixOf` x)
-                          ]
---                 liftIO $ createDirectoryIfMissing True $ "import"
-
-                let res2 = nub (filter (not . null) res1)
-                let res3 = [ "import/" ++ x ++ ".markdown" | x <- res2
-                               , x /= "front_page"
-                          , not ("biblio" `isPrefixOf` x)
-                          , not ("node" `isPrefixOf` x)
-                          , not ("user" `isPrefixOf` x)
-                          , not ("book" `isPrefixOf` x)
-                          ]
-                var <- liftIO $ takeMVar v
-                liftIO $ print var
-                liftIO $ putMVar v (out : var)
-                let res4 = [ x | x <- res3, not (x `elem` (out:var)) ]
-                liftIO $ print ("need",out,res4)
-                need res4
-                return ()
--}
 main2 _ = putStrLn $ unlines
         [ "usage:"
         , "./Main clean          clean up"
@@ -381,31 +273,6 @@ findBuildDirections bib = do
                  ]
 
   where prefixed = (build_dir </> "html" </>)
-
-        {-
-
-                html_files <- ( map dropDirectory1
-                              . map (flip replaceExtension ".html")
-                              . filter ("site//*.markdown" ?==))
-                                <$> (liftIO $ getRecursiveContents "site")
-                img_files <- filter (\ nm -> "img//*.gif" ?== nm
-                                          || "img//*.png" ?== nm
-                                     )
-                                <$> (liftIO $ getRecursiveContents "img")
-                js_files <- filter ("js//*.js" ?==)
-                                <$> (liftIO $ getRecursiveContents "js")
-                css_files <- filter ("css//*.css" ?==)
-                                <$> (liftIO $ getRecursiveContents "css")
-
-                redirected_files :: [(String,String)] <- readShakeVar "redirect.txt"
-
-                let target_files = map (build_dir </> "html" </>)
-                                 $ html_files
-                                        ++ img_files
-                                        ++ js_files
-                                        ++ css_files
-                                        ++ map fst redirected_files
--}
 
 -----------------------------------------------------------
 
@@ -537,23 +404,6 @@ matchXText      = acceptR $ \ e -> case e of
         (NTree (XText _) _) -> True
         _ -> False
 
-{-
-tagT :: (Monad m) => Translate c m [NTree XNode] a -> Translate c m [NTree XNode] b -> (QName -> a -> b -> x) -> Translate c m (NTree XNode) x
-tagT ta tb f = translate $ \ c -> \ case
-         (NTree (XTag tag attrs) rest) -> liftM2 (f tag) (KURE.apply ta c attrs) (KURE.apply tb c rest)
-         _ -> fail "not XTag"
-
-xattrT :: (Monad m) => Translate c m [NTree XNode] a -> (QName -> a -> x) -> Translate c m (NTree XNode) x
-xattrT ta f = translate $ \ c -> \ case
-         (NTree (XAttr attr) rest) -> liftM (f attr) (KURE.apply ta c rest)
-         _ -> fail "not XAttr"
-
-textT :: (Monad m) => Translate c m [NTree XNode] a -> (String -> a -> x) -> Translate c m (NTree XNode) x
-textT ta f = translate $ \ c -> \ case
-         (NTree (XText text) rest) -> liftM (f text) (KURE.apply ta c rest)
-         _ -> fail "not XText"
--}
-
 treeT :: (Monad m) => Translate XContext m XNode a -> Translate XContext m [NTree XNode] b -> (a -> b -> x) -> Translate XContext m (NTree XNode) x
 treeT ta tb f = translate $ \ (XContext cs) (NTree node rest) ->
                 let c = XContext (node : cs) in liftM2 f (KURE.apply ta c node) (KURE.apply tb c rest)
@@ -584,8 +434,8 @@ mapURL f = promoteR $ do
                             return (NTree (XText $ f txt) [])
                     _ -> fail "not correct context for txt"
 
-getAttr :: Monad m => Translate XContext m XTree (QName,String)
-getAttr = promoteT $ do
+getAttr' :: Monad m => Translate XContext m XTree (QName,String)
+getAttr' = promoteT $ do
                 (NTree (XText txt) []) <- idR
                 c <- contextT
                 case c of
@@ -607,17 +457,6 @@ matchTag nm = do
         if tag == mkName nm then return ()
                             else fail "matchTag failed"
 
-{-
---getTree :: (QName -> Bool) -> Translate XContext m XTree (QName,[(QName,String)],NTrees)
-extractTag :: Bool -> T (NTree XNode) ([(QName, String)], NTrees XNode)
-extractTag pred = do
-        (NTree (XTag tag _) rest) <- idR
-        if mkName nm == tag then do clss <- extractT $ childT 0 $ crushbuT $ (getAttr >>> arr (: []))
-                                    return (clss,rest)
-                    else fail "getTree failed"
--}
-
---fillContent :: Translate FPGM XTree (NTree XNode) [NTree XNode]
 -----------------------------------------------------------------------
 
 
@@ -755,7 +594,7 @@ makeHtmlHtml out contents = do
                          True <- return (tag == mkName "div" || tag == mkName "span")
 --                         () <- trace ("trace: " ++ show tag) $ return ()
                          if True -- tag == mkName "div"
-                            then do clss <- extractT $ childT 0 $ crushbuT $ (getAttr >>> arr (: []))
+                            then do clss <- extractT $ childT 0 $ crushbuT $ (getAttr' >>> arr (: []))
 --                                    () <- trace ("trace: " ++ show clss) $ return ()
                                     case lookup (mkName "class") clss of
                                       Nothing -> fail "no macro match for div"
@@ -796,7 +635,7 @@ makeHtmlHtml out contents = do
                     teaser_links = promoteT $ do
                           (NTree (XTag tag attrs) rest) <- idR
                           if tag == mkName "a"
-                             then do clss <- extractT $ childT 0 $ crushbuT $ (getAttr >>> arr (: []))
+                             then do clss <- extractT $ childT 0 $ crushbuT $ (getAttr' >>> arr (: []))
 --                                     () <- trace ("traceX: " ++ show clss) $ return ()
                                      case lookup (mkName "class") clss of
                                         Just "teaser" -> case lookup (mkName "href") clss of
@@ -818,7 +657,7 @@ makeHtmlHtml out contents = do
                     extract_teaser = promoteT $ do
                           (NTree (XTag tag attrs) rest) <- idR
                           if tag == mkName "div"
-                             then do clss <- extractT $ childT 0 $ crushbuT $ (getAttr >>> arr (: []))
+                             then do clss <- extractT $ childT 0 $ crushbuT $ (getAttr' >>> arr (: []))
 --                                     () <- trace ("traceX: " ++ show clss) $ return ()
                                      case lookup (mkName "class") clss of
                                         Just "teaser" -> pure rest
@@ -843,7 +682,7 @@ makeHtmlHtml out contents = do
 --                          True <- return (tag == mkName "div")
 --                          () <- trace ("traceZ: " ++ show tag) $ return ()
                           if tag == mkName "a"
-                             then do clss <- extractT $ childT 0 $ crushbuT $ (getAttr >>> arr (: []))
+                             then do clss <- extractT $ childT 0 $ crushbuT $ (getAttr' >>> arr (: []))
 --                                     () <- trace ("trace!: " ++ show clss) $ return ()
                                      case lookup (mkName "class") clss of
                                         Just "teaser" ->
@@ -927,17 +766,6 @@ genSiteMap dir files = concat
         , let file0 = tail file
         , takeExtension file == ".html"
         ]
---   where
---        (dir,file) = splitFileName
---                (dropDirectory1 :: FilePath -> FilePathSource
-
-
-{-
-                                [mkElement (mkName "a") [mkAttr (mkName "href") [mkText "ABCD"]]
-                                   []
-                                ]
-                             ]
--}
 
 
 
@@ -967,20 +795,6 @@ paper_page_dir = "Papers"
 files_dir :: String
 files_dir = "Files"
 
--- W. V. Sorin, “Optical reflectometry for component characterization,” in
--- Fiber Optic Test and Measurement, D. Derickson, Ed. Englewood
--- Cliffs, NJ: Prentice-Hall, 1998.
-{-
-   title = {Handshaking in {K}ansas {L}ava using Patch Logic},
-   author = {Andy Gill and Bowe Neuenschwander},
-   booktitle = {Practical Aspects of Declarative Languages},
-   publisher = {Springer-Verlag},
-   series= {LNCS},
-   volume = {7149},
-   location = "Philadelphia, PA",
-   year=2012,
-   month="January"
--}
 
 asciiBibNode :: String -> BibTeX -> NTree XNode -- escaped
 asciiBibNode id (BibTeX ty stuff) = mkText $ unlines $
@@ -991,12 +805,6 @@ asciiBibNode id (BibTeX ty stuff) = mkText $ unlines $
         , head tag /= 'X'
         ] ++
         ["}"]
-
-{-
-      entryType :: String,
-      identifier :: String,
-      fields :: [(String, String)]
-  -}
 
 -- Build textual citatation, with link(s).
 buildBibCite :: String -> BibTeX -> [NTree XNode]
