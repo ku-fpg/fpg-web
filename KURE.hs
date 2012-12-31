@@ -18,20 +18,6 @@ import Control.Monad
 import qualified Language.KURE as KURE
 import Language.KURE hiding ()
 
-{-
-parseHTML :: String -> String -> Either String HTML
-
-singleton :: String -> [Attr]           -> HTML
-
-block :: String -> [Attr] -> HTML       -> HTML
-
-text :: String                          -> HTML
-
-attr :: String -> String                -> Attr
-
--}
-
-
 newtype HTML  = HTML XmlTrees       -- list of blocks and/or text
 
 newtype Block = Block XmlTree      -- block with tag and attrs
@@ -228,4 +214,11 @@ extractT' = extractT
 
 promoteT' :: (Monad m, Injection a g, g ~ Node) => Translate c m a b -> Translate c m g b
 promoteT' = promoteT
+
+---------------------------------------
+
+
+parseHTML :: FilePath -> String -> HTML
+parseHTML fileName input = HTML $ parseHtmlDocument fileName input
+
 
