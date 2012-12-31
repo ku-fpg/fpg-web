@@ -223,7 +223,7 @@ main2 ["build"] = do
 --                           ,"_make/html/Publications.html"
 --                           , "_make/autogen/Papers/Gill_09_KansasLava.html"
 --                           ]
-                        ["_make/html/Users/AndyGill.html"]
+                        ["_make/html/index.html"]
 --                        []
 --                b <- doesFileExist "_make/autogen/Papers/Framer_12_HERMITinMachine.html"
                 sequence_ [ do
@@ -465,12 +465,11 @@ makeHtmlHtml out contents = do
 
                 let macroExpand :: Translate Context FPGM Block HTML
                     macroExpand = do
-                         () <- trace ("macroExpand") $ return ()
                          tag <- getTag
                          guardMsg (tag == "div" || tag == "span") "wrong tag"
 --                         () <- trace ("trace: " ++ show tag) $ return ()
                          cls <- getAttr "class"
-                         () <- trace ("$$$$$$$$$$$$$$$$$ trace: " ++ show (tag,cls)) $ return ()
+--                         () <- trace ("$$$$$$$$$$$$$$$$$ trace: " ++ show (tag,cls)) $ return ()
                          constT $ macro cls
 
                 let fixTable :: Rewrite Context FPGM Node
@@ -488,14 +487,42 @@ makeHtmlHtml out contents = do
                                   ss <- attrsT idR id
                                   return $ attrs (attr "class" "fpg-landing" : ss)
 
+                let findTeaser :: T Block HTML
+                    findTeaser = do
+                            "div" <- getTag
+                            "teaser" <- getAttr "class"
+                            getInner
 
                 let insertTeaser :: T Block HTML
                     insertTeaser = do
-                            "a"      <- getTag
-                            "teaser" <- getAttr "class"
-                            url      <- getAttr "href"
-                            arr html
+                            "a"       <- getTag
+                            "teaser"  <- getAttr "class"
+                            ('/':url) <- getAttr "href"
+                            inside    <- getInner
+
+--                            contextfreeT $ \ _ -> liftActionFPGM $ do
+--                                need [ "
+
+                            let sub_content = build_dir </> "contents" </> replaceExtension url "html"
+
+                            inside_content <- contextfreeT $ \ _ -> liftActionFPGM $ do
+                                    need [ sub_content ]
+                                    sub_txt <- readFile' sub_content
+                                    let sub_html = parseHTML sub_content sub_txt
+                                    applyFPGM' (extractT' (onetdT (promoteT findTeaser))
+                                                <+ return (text ("Can not find teaser in " ++ sub_content)))
+                                         sub_html
+
+                            () <- trace (show ("url",inside_content)) $ return ()
+
+                            return $ mconcat [ inside_content
+                                             , block "a" [ attr "href" ('/':url)
+                                                         , attr "class" "label"
+                                                         ]
+                                                         inside
+                                             ]
 {-
+
                             pure
 
 --                          True <- return (tag == mkName "div")
@@ -535,11 +562,11 @@ makeHtmlHtml out contents = do
 
                 let tpl_prog :: Rewrite Context FPGM Node
                     tpl_prog = tryR (prunetdR (mapURL' normalizeTplURL))
-                           >>> tryR (alltdR (tryR (promoteR (debugR "A" >>> mapHTML (macroExpand <+ arr html)))))
+                           >>> tryR (alltdR (tryR (promoteR (mapHTML (macroExpand <+ arr html)))))
+                           >>> tryR (alltdR (tryR (promoteR (mapHTML (insertTeaser <+ arr html)))))
                            >>> tryR (prunetdR (mapURL' relativeURL))
                            >>> tryR (prunetdR fixTable)
                            >>> tryR (prunetdR fixLandingPage)
-                           >>> tryR (alltdR (tryR (promoteR (mapHTML (insertTeaser <+ arr html)))))
 
                 page1 <- applyFPGM' (extractR tpl_prog) page0
 
