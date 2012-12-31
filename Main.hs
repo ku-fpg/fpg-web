@@ -46,8 +46,8 @@ import Data.Monoid
 import Control.Concurrent.STM
 
 import KURE
-
 import Shake
+import BibTeX
 
 site_dir     = "site"
 build_dir    = "_make"
@@ -85,9 +85,9 @@ main2 ["build"] = do
     meta_bibtex   :: ShakeVar [(String,BibTeX)] <- newShakeVar "_make/meta/bibtex.txt"
 
     shake shakeOptions { shakeVerbosity = Loud
---                                     , shakeReport = return "report.html"
---                                     , shakeThreads = 4
-                                     } $ do
+                       , shakeReport = return "report.html"
+                       , shakeThreads = 4
+                       } $ do
 
         meta_bibtex !> do
                 alwaysRerun     -- because we are reading the filesystem.
@@ -130,8 +130,22 @@ main2 ["build"] = do
                 case lookup (takeFileName out) bib' of
                   Nothing -> error $ "abort: " ++ show out
                   Just (nm,bb@(BibTeX _ stuff)) -> do
-                    writeFile' out
-                        "PAPERS.HTML file"
+                    writeFile' out $ show
+                        $ block "div" [attr "class" "row"]
+                          $ block "div" [attr "class" "span8 offset2"]
+                            $ htmlC
+                              [ block "p" [] (buildBibCite nm bb)
+                              , block "h3" [] $ text "Abstract"
+                              , block "blockquote" [] $
+                                  case lookup "abstract" stuff of
+                                    Just txt -> text $ txt
+                                    Nothing -> text $ "(no abstract)"
+                              , block "h3" [] $ text "BibTeX"
+                              , block "pre" [ attr "style" "font-size: 70%"]
+                                $ text $ asciiBibText nm bb
+                              ]
+
+
 {-
                         $ xshow
                         [ mkElement (mkName "div")
@@ -165,38 +179,33 @@ main2 ["build"] = do
                                 | (_,BibTeX _ stuff) <- bib
                                 , Just y <- [lookup "year" stuff]
                                 ]
-{-
 
 
-                let entries = concat
-                        [ [  mkElement (mkName "div")
-                                [ mkAttr (mkName "class") [mkText "row"]]
-                                [ mkElement (mkName "div")
-                                        [ mkAttr (mkName "class") [mkText "span1 offset1"]]
-                                        [ mkElement (mkName "h3")
-                                                [mkAttr (mkName "style") [mkText "margin-top: -7px; border-top: 1px dotted;"]]
-                                                [mkText $ show year ]]
-                                , mkElement (mkName "div")
-                                        [ mkAttr (mkName "class") [mkText "span8"]]
-                                        [ mkElement (mkName "ul")
-                                                []
-                                                [ mkElement (mkName "li")
-                                                   [mkAttr (mkName "style") [mkText "margin-bottom: 2px;"]]
-                                                   (buildBibCite nm dat)
-                                                | (nm,dat@(BibTeX _ stuff)) <- bib
-                                                , Just y <- [lookup "year" stuff]
-                                                , read y == year
-                                                ]
-                                        ]
-                                ]
-                          ]
+                let entries :: HTML
+                    entries = mconcat
+                        [ block "div" [attr "class" "row"]
+                          $ ( block "div" [attr "class" "span1 offset1"]
+                              $ block "h3" [attr "style" "margin-top: -7px; border-top: 1px dotted;"]
+                                $ text (show year)
+                            ) <>
+                            (block "div" [attr "class" "span8"]
+                             $ block "ul" []
+                               $ htmlC [ block "li" [attr "style" "margin-bottom: 2px;"]
+                                        $ buildBibCite nm dat
+                                      | (nm,dat@(BibTeX _ stuff)) <- bib
+                                      , Just y <- [lookup "year" stuff]
+                                      ,         read y == year
+                                      ]
+                            )
+
                         | year <- years
                         ]
--}
+
+
                 liftIO $ print ("years",years)
                 writeFile' out
-                        $ xshow
-                        $ [] -- entries
+                        $ show
+                        $ entries
 
         -- Finally, building visable results, all in the html sub-directory
         ("_make/html//*") *> \ out -> do
@@ -223,7 +232,7 @@ main2 ["build"] = do
 --                           ,"_make/html/Publications.html"
 --                           , "_make/autogen/Papers/Gill_09_KansasLava.html"
 --                           ]
-                        ["_make/html/index.html"]
+                        ["_make/html/Publications.html"]
 --                        []
 --                b <- doesFileExist "_make/autogen/Papers/Framer_12_HERMITinMachine.html"
                 sequence_ [ do
@@ -574,112 +583,9 @@ genSiteMap dir files = concat
 
 
 
-data BibTeX = BibTeX String [(String,String)]
-        deriving (Show, Read)
-
-
-readBibTeX :: String -> IO [(String,BibTeX)]
-readBibTeX fileName = do
-        txt <- readFile fileName
-        let bib = Parsec.runP P.file () fileName txt
-        case bib of
-          Right bibs -> return [ (B.identifier bib,BibTeX (B.entryType bib) (B.fields bib))
-                               | bib <- bibs
-                               ]
-          Left msg -> fail $ show msg
-
-test = do
-        txt <- readFile "data/fpg.bib"
-        let bib = Parsec.runP P.file () "data/fpg.bib" txt
-        case bib of
-          Right bibs -> return bibs
-
-paper_page_dir :: String
-paper_page_dir = "Papers"
-
-files_dir :: String
-files_dir = "Files"
-
-
-asciiBibNode :: String -> BibTeX -> NTree XNode -- escaped
-asciiBibNode id (BibTeX ty stuff) = mkText $ unlines $
-        ["@" ++ ty ++ "{" ++ id ++ ","] ++
-        [ "    " ++ tag ++ " = {" ++ dat ++ "}"
-        | (tag,dat) <- stuff
-        , tag /= "abstract"
-        , head tag /= 'X'
-        ] ++
-        ["}"]
-
--- Build textual citatation, with link(s).
-buildBibCite :: String -> BibTeX -> [NTree XNode]
-buildBibCite id (BibTeX ty stuff) =
-        [ mkText $ names ++ ", &#8220;"
-        , mkElement (mkName "strong")
-                []
-                [mkText title]
-        , mkText $ ",&#8221; "
-             ++ inside
-             ++ publisher
-             ++ location
-             ++ date ++ "."
-        ] ++
-        [ mkText " "
-        , mkElement (mkName "a")
-                [ mkAttr (mkName "href") [mkText $ "/" ++ paper_page_dir ++ "/" ++ tagToFileName id]
-                , mkAttr (mkName "class") [mkText "label"]
-                ]
-                [mkText $ "Details"]
-        ] ++ concat
-        [ [ mkText " "
-          , mkElement (mkName "a")
-                [ mkAttr (mkName "href") [mkText $ url]
-                , mkAttr (mkName "class") [mkText "label"]
-                ]
-                [mkText $ "Download " ++ takeExtension url]
-          ]
-        | Just url <- return $ lookup "url" stuff
-        ]
-  where
-          names = case lookup "author" stuff of
-                    Just n -> n
-                    Nothing -> case lookup "editor" stuff of
-                                  Just n -> n ++ " (editors)"
-                                  Nothing -> error "X"
-
-          title = case lookup "title" stuff of
-                    Just n -> n
-
-          inside = case (lookup "booktitle" stuff) of
-                    Just m -> m ++ ", "
-                    Nothing -> ""
-
-          publisher = case (lookup "publisher" stuff) of
-                    Just m -> m ++ ", "
-                    Nothing -> ""
-
-          location = case (lookup "location" stuff) of
-                    Just m -> m ++ ", "
-                    Nothing -> ""
-
-          note = case (lookup "note" stuff) of
-                    Just m -> m ++ ", "
-                    Nothing -> ""
-
-
-          date = case (lookup "month" stuff,lookup "year" stuff) of
-                   (Nothing,Just y) -> y
-                   (Just m,Just y) -> m ++ " " ++ y
-                   _ -> ""
-
 --          E.Cons {E.entryType :: String,
 --            E.identifier :: String,
 --            E.fields :: [(String, String)]}
 
 --buildBibPage ::
 
-tagToFileName :: String -> String
-tagToFileName nm = map fn nm ++ ".html"
-  where
-          fn ':' = '_'
-          fn o   = o
