@@ -1,0 +1,775 @@
+// These are bib entries that would appear on ITTC / CSDL websites
+// Its in reverse chronological order.
+// There is typically more detail, like contribution percent (FTSOTBF),
+// acceptance rate, etc.
+
+// ------------------------------------------------------------------------------
+// In prep
+
+// ------------------------------------------------------------------------------
+// Submitted
+
+@misc{Gill:13:TypesKansasLava,
+   title={Types and Associated Type Families for Hardware Simulation and Synthesis: 
+          The Internals and Externals of {K}ansas {L}ava},
+   author="Andy Gill and Tristan Bull and Andrew Farmer and Garrin Kimmell and Ed Komp",
+   booktitle = "Proceedings of Trends in Functional Programming",
+   journal = "Submitted to the Journal of HOSC",
+   year={2012},
+   abstract={In this article
+we overview the design and implementation of the second generation
+of Kansas Lava.
+Driven by the needs and experiences
+of implementing telemetry decoders and other circuits,
+we have made a number of improvements to both the external API
+and the internal representations used.
+We have retained our dual shallow/deep
+representation of signals in general, but now have a number of externally visible
+abstractions for combinatorial and sequential circuits, and enabled signals.
+We introduce these abstractions, as well as our abstractions for
+reading and writing memory.
+Internally, we found the need to represent unknown values inside our circuits,
+so we made aggressive use of associated type families to lift our values in a principled
+and regular way. We discuss this design decision, how it unfortunately
+complicates the internals of Kansas Lava, and how
+we mitigate this complexity.
+Finally, when connecting Kansas Lava to the real world,
+the standardized idiom of using named input and output ports
+is provided by Kansas Lava using a new monad, called \verb|Fabric|.
+We present the design of this \verb|Fabric| monad, and
+illustrate its use in a small but complete example.}
+}
+
+
+
+@misc{Sculthorpe:12:HERMITinTree-Submitted,
+    author      = "Neil Sculthorpe and Andrew Farmer and Andy Gill",
+    title       = {The HERMIT in the Tree: Mechanizing Program Transformations in the GHC Core Language},
+    location    = "Oxford, England",
+    booktitle={Submitted to the Post-conference Proceedings of the 24th Symposium on Implementation and Application of Functional Languages ({IFL} '12)},
+    year = {2012},
+    abstract = {In this paper we describe our experiences of using the HERMIT toolkit 
+to apply well-known transformations to the Glasgow Haskell Compiler's internal core language.
+HERMIT provides several mechanisms to support
+writing general-purpose transformations:
+a strategic programming domain-specific language
+specialized to the internal core language,
+a library of primitive rewrites,
+and a shell-style--based scripting language for
+interactive and batch usage.
+
+There are many program transformation techniques that have been described 
+in theory but have not been mechanized and made available inside GHC
+--- either because they are too specialized to include in a general-purpose compiler, 
+or because the developers' interest is in theory rather than implementation.
+The mechanization process can often reveal pragmatic
+obstacles that are glossed over in pen-and-paper proofs;
+understanding and removing these obstacles is our concern.
+Using HERMIT, we implement eleven examples of three program transformations,
+report on our experiences, and describe improvements made in the process.}
+}
+
+// ------------------------------------------------------------------------------
+// In press
+
+// ------------------------------------------------------------------------------
+// Published
+
+@inproceedings {Farmer:12:HERMITinMachine,
+	author = {Andrew Farmer and Andy Gill and Ed Komp and Neil Sculthorpe},
+	       title = {The HERMIT in the Machine: A Plugin for the Interactive Transformation of GHC Core Language Programs},
+	       booktitle = {ACM SIGPLAN Haskell Symposium},
+	       location = {Copenhagen, Denmark},
+	       year = 2012,
+	       month = {Sep},
+	       abstract = {The importance of reasoning about and refactoring programs
+is a central tenet of functional programming.
+Yet our compilers and development toolchains
+only provide rudimentary support for these tasks.
+This paper introduces
+a programmatic and compiler-centric interface
+that facilitates refactoring and equational reasoning.
+To develop our ideas, we have implemented HERMIT, a toolkit enabling
+informal but systematic transformation of Haskell
+programs from \emph{inside} the Glasgow Haskell Compiler{\textquoteright}s
+optimization pipeline.
+With HERMIT, users can experiment with optimizations
+and equational reasoning, while the
+tedious heavy lifting of performing the actual transformations
+is done for them.
+
+HERMIT provides a transformation API that can be
+used to build higher-level rewrite tools.
+One use-case is
+prototyping new optimizations as clients of this API
+before being committed to the GHC toolchain.
+We describe a HERMIT application---a
+read-eval-print shell for performing transformations using HERMIT.
+We also demonstrate using this shell to prototype an optimization
+on a specific example, and report our initial experiences and
+remaining challenges.
+},
+	Xurl = {http://ittc.ku.edu/csdl/fpg/sites/default/files/Farmer-12-HERMITinMachine.pdf},
+	Xattachments = {http://ittc.ku.edu/csdl/fpg/sites/default/files/Farmer-12-HERMITinMachine.pdf}
+}
+
+@inproceedings{Farmer:12:WebDSLs,
+        author={Andrew Farmer and Andy Gill},
+        title = {Haskell DSLs for Interactive Web Services},
+        booktitle="1st International Workshop on Cross-model Language Design and Implementation",
+        location = {Copenhagen, Denmark},
+        year = 2012,
+        month = {Sep},
+        abstract={Robust cross-platform GUI-based applications are challenging to write in Haskell,
+not because providing hooks into existing GUI frameworks is hard,
+but because these hooks are both platform dependent and prone to rapid bit-rot.
+Browser-based user interfaces implemented using
+Javascript and HTML5 offer some relief from this situation,
+providing a standardized cross-platform API.
+However, Javascript is a client-side scripting language, and
+a traditional shallow, foreign-function-call style Haskell
+interface to the client does not scale well because calling a
+Javascript command involves sending the command, and optionally waiting for a response, over a network.
+Instead, we build a deep embedding of Javascript commands inside a Javascript monad.
+Along with supporting web-based infrastructure,
+we deliver entire program fragments
+to our web-based applications.
+Using our monad, the Haskell programmer can choose the
+granularity of interaction, with the option of
+having reactive interfaces that are completely
+handled by the client.},
+        note={(published on workshop website, http://workshops.inf.ed.ac.uk/xldi2012/)}
+}
+
+@inproceedings{Frisby:12:AlmostHomomorphicFunctions,
+	       author = {Nicolas Frisby and Andy Gill and Perry Alexander},
+	       title = {A Pattern for Almost Homomorphic Functions},
+	       booktitle = {ACM SIGPLAN Workshop on Generic Programming},
+	       location = {Copenhagen, Denmark},
+	       year = 2012,
+	       month = {Sep},
+	       abstract = {Strong typing presents the programmer with a trade-off between correctness and
+code complexity: more exact types prevent errors but less exact types enable
+reuse.
+Current functional programming practice prefers general types over exact types
+in large programs like compilers because of the reuse. Exact typing in these
+programs would require numerous similar data types and conversions between
+them.
+We factor out a pattern in such conversions as a reusable Haskell function. We
+extend existing generic programming techniques to define it and to use it
+without introducing undue obfuscation.
+Our reusable function eliminates the boilerplate for conversions between the
+numerous exact types. It therefore delivers the benefits of exact types and
+simulates the reusability of general types with lightweight generic
+programming.
+We demonstrate our function by using it to define a lambda-lifting function
+with an exact range type that has no constructor for lambdas.}
+}
+
+@inproceedings {Gill:12:PatchLogic,
+   title = {Handshaking in {K}ansas {L}ava using Patch Logic},
+   author = {Andy Gill and Bowe Neuenschwander},
+   booktitle = {Practical Aspects of Declarative Languages},
+   publisher = {Springer-Verlag},
+   series= {LNCS},
+   volume = {7149},
+   location = "Philadelphia, PA",
+   year=2012,
+   month="January"
+}
+
+@inproceedings {Gill:11:Declarative,
+	       title = {Declarative {FPGA} Circuit Synthesis using {K}ansas {L}ava},
+	       booktitle = {The International Conference on Engineering of Reconfigurable Systems and Algorithms},
+	       year = {2011},
+	       month = {July},
+	       location = {Las Vegas, Nevada, USA},
+	       author = {Andy Gill}
+}
+
+@inproceedings{Gill:11:DerivingLDPC,
+	title = {Deriving an Efficient {FPGA} Implementation of a Low Density Parity Check Forward Error Corrector},
+	booktitle = {Proceedings of the 16th ACM SIGPLAN International Conference on Functional Programming},
+	author = {Andy Gill and Andrew Farmer},
+        month = {Sep},
+        year = 2011,
+        location = {Tokyo, Japan},
+}
+
+
+@inproceedings{Gill:11:GeneratingLDPC,
+   author = "Andy Gill and Tristan Bull and Dan DePardo and Andrew Farmer and Ed Komp and Erik Perrins",
+   title={Using Functional Programming to Generate an {LDPC} Forward Error Corrector},
+   year=2011,
+   booktitle="IEEE Symposium on Field-Programmable Custom Computing Machines",
+   month={May},
+   location = {Salt Lake City, UT, USA},
+}
+
+@unpublished{Gill:11:CatchingSat,
+	title = {Capturing Functions and Catching Satellites},
+	note = {ITTC Technical Report ITTC-FY2011-TR-29952011-1},
+	year = {2011},
+	month = Jan,
+	abstract = {The 2009 ICFP programming contest problem required contestants to control
+virtual satellites that obey basic physical laws.  The orbital physics
+behavior of the system was simulated via a binary provided to contestants
+which ran on top of a simple virtual machine.  Contestants were required to
+implement the virtual machine along with a controller program to manipulate
+the satellite{\textquoteright}s behavior. In this paper, we describe the modeling of the
+simulation environment, with a focus on the compilation and testing
+infrastructure for the generated binaries for this virtual machine. This
+infrastructure makes novel use of an implementation of a deeply embedded
+Domain Specific Language (DSL) within Haskell.  In particular, with use of
+IO-based observable sharing, it was straightforward for a function to be both
+an executable specification as well as a portable implementation,
+and because of this the rendered binary was found to be robust and reliable.},
+	author = {Andy Gill and Garrin Kimmell}
+}
+
+
+@article{WWF52009,
+	author = "Graham Hutton and Mauro Jaskelioff and Andy Gill",
+        title  = "Factorising Folds for Faster Functions",
+        abstract ={The worker/wrapper transformation is a general technique for improving the performance of
+        recursive programs by changing their types. The previous formalisation (Gill & Hutton, 2009) was
+based upon a simple fixed point semantics of recursion. In this article we develop a more structured
+approach, based upon initial algebra semantics. In particular, we show how the worker/wrapper
+transformation can be applied to programs defined using the structured pattern of recursion captured
+by fold operators, and illustrate our new technique with a number of examples.},
+ journal = "Journal of Functional Programming",
+ publisher = "Cambridge University Press",
+ volume = 20,
+ number = "3-4",
+ pages = "353--373",
+ year = 2010,
+}
+
+@inproceedings{Matlage:10:BeginningMiddleEnd,
+   title="Every Animation Should Have a Beginning, a Middle, and an End",
+   author="Kevin Matlage and Andy Gill",
+   booktitle = "Proceedings of Trends in Functional Programming",
+   month="May",
+   year="2010",
+   publisher = {Springer-Verlag},
+   series= {LNCS},
+   volume = {6546}
+}
+
+@inproceedings{Gill:10:TypesKansasLava,
+   title="Types and Type Families for Hardware Simulation and Synthesis: The Internals and Externals of {K}ansas {L}ava",
+   author="Andy Gill and Tristan Bull and Andrew Farmer and Garrin Kimmell and Ed Komp",
+   booktitle = "Proceedings of Trends in Functional Programming",
+   month="May",
+   year="2010",
+   publisher = {Springer-Verlag},
+   series= {LNCS},
+   volume = {6546},
+	abstract = {In this paper,
+
+we overview the design and implementation of our latest
+version of Kansas Lava. Driven by needs and experiences
+of implementing telemetry circuits,
+we have made a number of recent improvements to both the external API
+and the internal representations used.
+We have retained our dual shallow/deep
+representation of signals in general, but now have a number of externally visible
+abstractions for combinatorial, sequential, and enabled signals.
+We introduce these abstractions, as well as our new abstractions for
+memory and memory updates.
+Internally, we found the need to represent unknown values inside our circuits,
+so we made aggressive use of type families to lift our values in a principled
+and regular way. We discuss this design decision, how it unfortunately
+complicates the internals of Kansas Lava, and how
+we mitigate this complexity.}
+}
+
+@inproceedings{Farmer:10:WhatsTheMatter,
+   title="What's the matter with {K}ansas {L}ava?",
+   author="Andrew Farmer and Garrin Kimmell and Andy Gill",
+   booktitle = "Proceedings of Trends in Functional Programming",
+   month="May",
+   publisher = {Springer-Verlag, LNCS 6546},
+   year="2010",
+	abstract = {Kansas Lava is a functional hardware description language implemented
+in Haskell. In the course of attempting to generate ever larger circuits,
+we have found the need to effectively test and debug the internals of
+Kansas Lava. This includes confirming both the simulated behavior of the
+circuit and its hardware realization via generated VHDL. In
+this paper we share our approach to this problem, and discuss
+the results of these efforts.
+}
+}
+
+@inproceedings {Gill:10:ImprovingVideo,
+	title = {Improving the Presentation of Technical Material in Video Talks using Post Production},
+	booktitle = {2010 Midwest Section Conference of the American Society for Engineering Education},
+	year = {2010},
+	month = {September},
+	address = {Lawrence, KS},
+	abstract = {In this paper, we present our experiences using our image processing toolkit
+ChalkBoard and other video processing tools to post-process a pre-recorded
+conference talk. With inexpensive video cameras, video services like youtube.com
+and vimeo.com, and widely available and inexpensive video editing software, we
+expect this new media to be increasingly used as a mechanism to both promote
+research agendas and deliver technical content. In order to explore the use of
+such media in more detail, the Functional Programming group at KU recorded a
+technical talk and experimented with various post-processing tricks to enhance
+the value of the talk. Specifically, we fixed a common lensing issue in software,
+added small animations and pictures which matched the gestures of the actors,
+improved the visual quality of the slides being talked to,
+and experimented with a post-hoc zoom. Overall, the post-processing
+stage took considerably longer than anticipated, but did add perceivable
+value and impact to the final video.
+},
+	url = {http://www.ittc.ku.edu/csdl/fpg/sites/default/files/Gill-10-ImprovingVideo.pdf},
+	author = {Andy Gill and Garrin Kimmell and Kevin Matlage},
+      what      = {Minor}
+}
+
+
+
+@inproceedings{Matlage:09:ChalkBoard,
+        author="Kevin Matlage and Andy Gill",
+        title="Chalk{B}oard: {M}apping Functions to Polygons",
+        booktitle = "Proceedings of the Symposium on Implementation and Application of Functional Languages",
+        publisher = {Springer-Verlag},
+        series= {LNCS},
+        volume = {6041},
+        abstract={ChalkBoard is a domain specific language for describing images.
+                The ChalkBoard language is uncompromisingly functional
+                and encourages the use of modern functional idioms.
+                ChalkBoard uses off-the-shelf
+                graphics cards to speed up rendering of functional descriptions.
+                In this paper, we
+                describe the design of the core ChalkBoard language,
+                and the architecture of our static image generation accelerator.},
+        month={Sep},
+        year      = 2009
+}
+
+@inproceedings{Gill:09:KansasLava,
+        author="Andy Gill and Tristan Bull and Garrin Kimmell and Erik Perrins and Ed Komp and Brett Werling",
+        title="Introducing {K}ansas {L}ava",
+        booktitle = "Proceedings of the Symposium on Implementation and Application of Functional Languages",
+        publisher = {Springer-Verlag},
+        series= {LNCS},
+        volume = {6041},
+        abstract={Kansas Lava is a domain specific language for hardware description.
+                Though there have been a number of previous implementations of Lava,
+                we have found the design space rich, with unexplored choices.
+                We use a direct (Chalmers style)
+                specification of circuits, and make significant use of Haskell
+                overloading of standard classes, leading to concise circuit
+                descriptions.
+                Kansas Lava supports both simulation (inside GHCi),
+                and execution via VHDL, by having a dual shallow and deep embedding
+                inside our Signal type.
+                We also have a lightweight sized-type mechanism,
+                allowing for MATLAB style matrix based specifications to be directly
+                expressed in Kansas Lava.},
+        month={Sep},
+        year      = 2009
+}
+
+@inproceedings{ITCWerling09,
+	author	= "B. Werling and E. Perrins and A. Gill",
+	title   = {Implementation of an {LDPC} decoder using Functional Programming Languages},
+      booktitle = {Proceedings of the International Telemetering Conference},
+      location  = "Las Vegas, NV",
+      year      = 2009,
+      month     = {Oct},
+      note      = "(Student Paper)",
+      what      = {Other},
+}
+
+@inproceedings{ITCBull09,
+	author	= "T. Bull and E. Perrins and A. Gill",
+	title   = {Implementation of the Viterbi Algorithm using Functional Programming Languages},
+      booktitle = {Proceedings of the International Telemetering Conference},
+      location  = "Las Vegas, NV",
+      year      = 2009,
+      month     = {Oct},
+      note      = "(Student Paper)",
+      what      = {Other},
+}
+
+@inproceedings{Gill:09:TypeSafeReification,
+    author      = {Andy Gill},
+    title       = {Type-Safe Observable Sharing in {H}askell},
+    booktitle   = {Proceedings of the Second {ACM} {SIGPLAN} {H}askell Symposium},
+    year        = 2009,
+    month       = {Sep},
+    abstract    = {Haskell is a great language for writing and supporting
+embedded Domain Specific Languages (DSLs).
+Some form of observable sharing
+is often a critical capability for allowing so-called deep DSLs
+to be compiled and processed. In this paper,
+we describe and explore uses of an IO function
+for reification which allows direct observation of sharing.},
+}
+
+@inproceedings{KUREDSL09,
+ author = {Andy Gill},
+ title = {A {H}askell Hosted {DSL} for Writing Transformation Systems},
+ booktitle = "IFIP Working Conference on Domain Specific Languages",
+ abstract = { KURE is a Haskell hosted Domain Specific Language (DSL)
+                  for writing transformation systems based on rewrite
+                  strategies.  When writing transformation systems, a
+                  significant amount of engineering effort goes into
+                  setting up plumbing to make sure that specific
+                  rewrite rules can fire.  Systems like Stratego and
+                  Strafunski provide most of this plumbing as
+                  infrastructure, allowing the DSL user to focus on
+                  the rewrites rules.  KURE is a strongly typed
+                  strategy control language in the tradition of
+                  Stratego and Strafunski.  It is intended for writing
+                  reasonably efficient rewrite systems, makes use of
+                  type families to provide a delimited generic
+                  mechanism for tree rewriting, and provides support
+                  for efficient identity rewrite detection. },
+ month = {July}
+}
+
+@TechReport{ICFPContestProblem09,
+author	= "Garrin Kimmell and Kevin Matlage and
+	Tristan Bull and Nicolas Frisby and Andy Gill and
+	Michael Jantz and Ed Komp and Megan Peck and
+	Wesley Peck and  Mark Snyder and Brett Werling",
+title	= "The 2009 {ICFP} Programming Contest Problem Specification",
+month	= "June",
+year	= "2009",
+institution	= "Information Telecommunication and Technology Center, University of Kansas, Lawrence, KS"
+}
+
+
+@proceedings{PADL09,
+  title={Practical Aspects of Declarative Languages},
+  editor={Andy Gill and Terrance Swift},
+  publisher={Springer, LNCS 5418},
+  year=2009,
+  month={January}
+}
+@article{WorkerWrapper08,
+ author = {Andy Gill and Graham Hutton},
+ title = {The worker/wrapper transformation},
+ abstract = {The worker/wrapper transformation is a technique for changing the type
+of a computation, usually with the aim of improving its performance.
+It has been used by compiler writers for many years, but the technique
+is little-known in the wider functional programming community, and has
+never been described precisely.  In this article we explain, formalise,
+and explore the generality of the worker/wrapper transformation. We
+also provide a systematic recipe for its use as an equational reasoning
+technique for improving the performance of programs, and illustrate the
+power of this recipe using a range of examples.
+},
+ journal = "Journal of Functional Programming",
+        publisher = "Cambridge University Press",
+        volume = 19,
+        number = 2,
+        pages = "227--251",
+        month = {March},
+        year = 2009
+}
+
+
+@inproceedings{RecBinds08,
+ author = {Johan Nordlander and Magnus Carlsson and Andy Gill},
+ title = {Unrestricted Call-by-Value Recursion},
+ booktitle = "ACM SIGPLAN Workshop on ML",
+ abstract = {Call-by-value languages commonly restrict recursive
+             definitions by only allowing functions and syntactically
+             explicit values in the right-hand sides. As a
+             consequence, some very appealing programming patterns
+             that work well in lazy functional languages are hard to
+             apply in a call-by-value setting, even though they might
+             not be using laziness for any other purpose than to
+             enable the desired form of recursion.
+
+             In this paper we present an operational semantics as well
+             as a straightforward implementation technique for
+             unrestricted recursion under pure call-by-value.  On that
+             basis we are able to demonstrate that highly recursive
+             programming idioms such as combinator-based parsing are
+             indeed compatible with call-by-value evaluation.},
+ month = {September},
+ year = 2008
+}
+
+@inproceedings{Async08,
+ author = {William L. Harrison and Gerard Allwein and Andy Gill and Adam Procter},
+ title = {Asynchronous Exceptions as an Effect},
+ booktitle = "Ninth International Conference on Mathematics of Program Construction",
+ year = 2008,
+ month = "July",
+ publisher = "Springer-Verlag",
+ abstract = {Asynchronous interrupts abound in computing systems, yet
+             they remain a thorny concept for both programming and
+             verification practice.  The ubiquity of interrupts
+             underscores the importance of developing programming
+             models to aid the development and verification of
+             interrupt-driven programs.  The research reported here
+             recognizes asynchronous interrupts as a computational
+             effect and encapsulates them as a building block in
+             modular monadic semantics.  The resulting integrated
+             semantic model can serve as both a guide for functional
+             programming with interrupts and as a formal basis for
+             reasoning about interrupt-driven computation as well.},
+}
+
+
+@inproceedings{Hpc07,
+    author      = {Andy Gill and Colin Runciman},
+    title       = {Haskell {P}rogram {C}overage},
+    booktitle   = {Proceedings of the 2007 {ACM} {SIGPLAN} {W}orkshop on Haskell},
+    year        = 2007,
+    month       = {September},
+    publisher   = {ACM Press},
+    abstract    = {We describe the design, implementation and use of HPC,
+        a tool-kit to record and display Haskell Program Coverage. HPC includes tools that
+        instrument Haskell programs to record program coverage, run instrumented
+        programs, and display information derived from coverage data in various ways.},
+}
+
+@inproceedings{GhciDebugger07,
+    author      = {Simon Marlow and Jos\'{e} Iborra and Bernard Pope and Andy Gill},
+    title       = {A lightweight interactive debugger for {H}askell},
+    booktitle   = {Proceedings of the 2007 {ACM} {SIGPLAN} {W}orkshop on Haskell},
+    year        = 2007,
+    month       = {September},
+    publisher   = {ACM Press},
+    abstract    = {This paper describes the design and construction of a Haskell
+        source-level debugger built into the GHCi interactive environment.  We
+        have taken a pragmatic approach: the debugger is based on the
+        traditional stop-examine-continue model of online debugging, which is
+        simple and intuitive, but has traditionally been shunned in the
+        context of Haskell because it exposes the lazy evaluation order.  We
+        argue that this drawback is not as severe as it may seem, and in some
+        cases is an advantage.
+
+        The design focuses on availability: our debugger is intended
+        to work on all programs that can be compiled with GHC, and without
+        requiring the programmer to jump through additional hoops to debug
+        their program.  The debugger has a novel approach for reconstructing
+        the type of runtime values in a polymorphic context.  Our
+        implementation is light on complexity, and was integrated into GHC
+        without significant upheaval.},
+}
+
+@inproceedings{Gill:06:IntroHERA,
+  author    = {Andy Gill},
+  title     = {Introducing the {H}askell {E}quational {R}easoning {A}ssistant},
+  booktitle = {Proceedings of the 2006 ACM SIGPLAN {W}orkshop on Haskell},
+  year      = 2006,
+  pages     = {108--109},
+  isbn      = {1-59593-489-8},
+  location  = {Portland, Oregon, USA},
+  publisher = {ACM Press},
+  abstract  = {We introduce the new, improved version of the
+        Haskell Equational Reasoning Assistant, which consists
+        of an Ajax application for rewriting Haskell fragments
+        in their context, and an API for scripting non-trivial rewrites.}
+}
+
+@inproceedings{Legacy01,
+  author        = {Andrew Moran and Jim Teisher and Andrew Gill and Emir Pasalic and John Veneruso},
+  title         = {Automated translation of legacy code for {ATE}},
+  booktitle     = {Proceedings of the IEEE International Test Conference},
+  year          = 2001,
+  isbn          = {0-7803-7169-0},
+  pages         = {148--156},
+  publisher     = {IEEE Computer Society},
+  address       = {Washington, DC, USA},
+  abstract      = {When an Automated Testing Equipment (ATE) company
+          designs a new system, the issue of backward compatibility is
+          always a major concern, both for the company and its
+          customers. If backward compatibility is maintained, the ATE
+          application engineers face the difficult task of trying to
+          support new features on an aging system. The alternative is
+          to face the problem of converting old test programs to the
+          new environment. Translation of legacy code involves an
+          automatic translation tool, and some application effort
+          applied to those problems the translator couldn't
+          resolve. To minimize the amount of work required from the
+          application engineers, the tool needs to be
+          semantically aware; that is, the tool must contain
+          domain specific knowledge and use that knowledge when
+          translating. The more knowledge a tool has at its disposal,
+          the less code an application engineer is forced to translate
+          by hand.
+
+          Until recently, it has been difficult to perform automatic
+          translation satisfactorily because it was not cost effective
+          to write a translator that possessed such semantic
+          understanding of the test programs. By making good use of
+          Functional Programming techniques and tools, we were able to
+          construct a cost effective, semantically aware translation
+          tool in a fraction of the time needed by traditional
+          methods. Based upon its performance during testing, we
+          believe the tool to correctly translate the majority of
+          test programs, thereby greatly easing the applications
+          engineers' burden.},
+}
+
+@inproceedings{Hood00,
+  author        = "Andy Gill",
+  title         = "Debugging {H}askell by observing intermediate data structures",
+  booktitle     = "Proceedings of the 2000 ACM SIGPLAN {W}orkshop on Haskell,
+                   Technical report of the University of Nottingham",
+  year          = 2000,
+    abstract    = {Haskell has long needed a debugger. Although there has
+          been much research into the topic of debugging lazy functional
+          programs, no robust tool has yet come from the Haskell community
+          that can help debug full Haskell - until now. This paper describes
+          a portable debugger for full Haskell, building only on commonly
+          implemented extensions. It is based on the concept of observation
+          of intermediate data structures, rather than the more traditional
+          stepping and variable examination paradigm used by traditional
+          imperative debuggers.},
+}
+
+@inproceedings{Okasaki:98:IntMap,
+  author        = "Chris Okasaki and Andy Gill",
+  title         = "Fast mergeable integer maps",
+  pages         = {77--86},
+  booktitle     = "ACM SIGPLAN Workshop on ML",
+  year          = "1998",
+  month         = {September},
+  abstract      = {Finite maps are ubiquitous in many applications, but
+        perhaps nowhere more so than in compilers and other language
+        processors. In these applications, three operations on finite
+        maps dominate all others: looking up the value associated with
+        a key, inserting a new binding, and merging two finite
+        maps. Most implementations of finite maps in functional
+        languages are based on balanced binary search trees, which
+        perform well on the first two, but poorly on the third. We
+        describe an implementation of finite maps with integer keys
+        that performs well in practice on all three operations. This
+        data structure is not new-indeed, it is thirty years old this
+        year-but it deserves to be more widely known.},
+  citations    = "23",
+  contribution = "30%"
+}
+
+
+@phdthesis{Gill:96:PhD,
+   author   = {Andrew Gill},
+   title    = {Cheap deforestation for non-strict functional languages},
+   school   = {The University of Glasgow},
+   month    = {January},
+   year     = 1996,
+   abstract = {In functional languages intermediate data structures are
+	  often used as ''glue'' to connect separate parts of a program
+	  together. Deforestation is the process of automatically removing
+	  intermediate data structures. In this thesis we present and analyse a
+	  new approach to deforestation. This new approach is both practical and
+	  general.
+
+	  We analyse in detail the problem of list removal rather than
+	  the more general problem of arbitrary data structure removal. This
+	  more limited scope allows a complete evaluation of the pragmatic
+	  aspects of using our deforestation technology.
+
+	  We have implemented our list deforestation algorithm in the
+	  Glasgow Haskell compiler. Our implementation has allowed
+	  practical feedback. One important conclusion is that a new
+	  analysis is required to infer function arities and the
+	  linearity of lambda abstractions. This analysis renders the
+	  basic deforestation algorithm far more effective.
+
+	  We give a detailed assessment of our implementation of
+	  deforestation. We measure the effectiveness of our
+	  deforestation on a suite of real application programs. We
+	  also observe the costs of our deforestation algorithm.}
+}
+
+@inproceedings{Gill:95:TechGUIHERA,
+   author       = {Andy Gill},
+   title        = {The technology behind a graphical user interface for an equational reasoning assistant},
+   booktitle    = {Proceedings of the 1995 Glasgow Workshop on Functional Programming,
+                   Electronic Workshops in Computing, Ullapool, Scotland},
+   year         = 1995,
+   abstract     = {The Haskell Equational Reasoning Assistant (HERA) is an application
+        written in Haskell that helps users construct and present equational
+        reasoning style proofs. In this paper we discuss the technology behind
+        HERA's graphical user interface.}
+}
+
+
+@inproceedings{Gill:94:CheapDeforestationPrac,
+  author        = {Andrew Gill and Simon Peyton~Jones},
+  title         = {Cheap Deforestation in Practice: An Optimizer for {H}askell},
+  booktitle     = {IFIP Congress (1)},
+  year          = 1994,
+  pages         = {581--586},
+  abstract      = {We present a simple, automatic transformation - the
+    foldr/build transformation - which successfully removes many
+    intermediate lists from programs written in non-strict functional
+    programming languages. While the idea is simple and elegant, it
+    turns out that some care is needed in the compiler to set up the
+    right conditions for the foldr/build transformation to be
+    applicable. We report on this practical experience, and present
+    results which quantify the benefits that can in practice be
+    achieved.}
+}
+
+@inproceedings{Gill:93:ShortCutFusion,
+  author       = {Andrew Gill and John Launchbury and Simon Peyton~Jones},
+  title        = {A short cut to deforestation},
+  booktitle    = {FPCA '93: Proceedings of the conference on Functional Programming Languages and Computer Architecture},
+  year         = 1993,
+  isbn         = {0-89791-595-X},
+  pages        = {223--232},
+  location     = {Copenhagen, Denmark},
+  doi          = {http://doi.acm.org/10.1145/165180.165214},
+  publisher    = {ACM Press},
+  address      = {New York, NY, USA},
+  abstract     = {Lists are often used as ``glue'' to connect separate
+  parts of a program together. We propose an automatic technique for
+  improving the efficiency of such programs, by removing many of these
+  intermediate lists, based on a single, simple, local
+  transformation. We have implemented the method in the Glasgow
+  Haskell compiler.}
+}
+
+@inproceedings{Avoid92,
+  author       = {John Launchbury and Andrew Gill and John Hughes and Simon Marlow and Simon Peyton~Jones and Philip Wadler},
+  title        = {Avoiding Unnecessary Updates},
+  booktitle    = {Glasgow Workshop on Functional Programming, Workshops in Computing},
+  pages        = {144-153},
+  year         = {1992},
+  location     = {Ayr, Scotland},
+  publisher    = {Springer-Verlag},
+  abstract     = {Graph reduction underlies most implementations of lazy functional
+      languages, allowing separate computations to share results when
+      sub-terms are evaluated. Once a term is evaluated, the node of the
+      graph representing the computation is updated with the value of
+      the term. However, in many cases, no other computation requires
+      this value, so the update is unnecessary. In this paper we take
+      some steps towards an analysis for determining when these updates
+      may be omitted.}
+}
+
+@inproceedings{NovelPeep91,
+  author      = {Andrew Gill},
+  title       = {A Novel Approach Towards Peephole Optimisations},
+  booktitle   = {Proceedings of the 1991 Glasgow Workshop on Functional Programming},
+  year        = 1991,
+  month       = {August},
+  pages       = {100--111},
+  editor      = {Rogardt Heldal and
+               Carsten Kehler Holst and
+               Philip Wadler},
+  publisher   = {Springer},
+  series      = {Workshops in Computing},
+  isbn        = {3-540-19760-5},
+  abstract    = {In this paper we examine alternative approaches towards the
+    traditional optimisation technique of peepholing. Three simple
+    methods of generating quality code are given. The first method
+    improves poor juxtapositions while generating code, the second is
+    an alternative usage of a solution to the knapsack problem. A
+    third hybrid algorithm combines the strong points of both these
+    solutions, and is presented as an alternative to conventional
+    peepholing.}
+}
+
