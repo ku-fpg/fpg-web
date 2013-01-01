@@ -145,31 +145,6 @@ main2 ["build"] = do
                                 $ text $ asciiBibText nm bb
                               ]
 
-
-{-
-                        $ xshow
-                        [ mkElement (mkName "div")
-                                [ mkAttr (mkName "class") [mkText "row"]]
-                                [ mkElement (mkName "div")
-                                        [ mkAttr (mkName "class") [mkText "span8 offset2"]]
-                                        [ mkElement (mkName "p")
-                                                []
-                                                (buildBibCite nm bb)
-                                        , mkElement (mkName "h3") [] [mkText "Abstract"]
-                                        , mkElement (mkName "blockquote")
-                                                []
-                                                [ case lookup "abstract" stuff of
-                                                    Just txt -> mkText $ txt
-                                                    Nothing -> mkText $ "no abstract"
-                                                ]
-                                        , mkElement (mkName "h3") [] [mkText "BibTeX"]
-                                        , mkElement (mkName "pre")
-                                                [ mkAttr (mkName "style") [mkText "font-size: 70%"]]
-                                                [ asciiBibNode nm bb ]
-                                         ]
-                                 ]
-                        ]
--}
         "_make/autogen/Publications.html" *> \ out -> do
                 liftIO $ print "######################"
                 need [ "data/fpg.bib" ]
