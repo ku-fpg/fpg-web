@@ -84,8 +84,8 @@ main2 ["build"] = do
     meta_redirect :: ShakeVar [(String,String)] <- newShakeVar "_make/meta/redirect.txt"
     meta_bibtex   :: ShakeVar [(String,BibTeX)] <- newShakeVar "_make/meta/bibtex.txt"
 
-    shake shakeOptions { shakeVerbosity = Loud
-                       , shakeReport = return "report.html"
+    shake shakeOptions { {- shakeVerbosity = Loud
+                       , -}shakeReport = return "report.html"
                        , shakeThreads = 4
                        } $ do
 
@@ -110,7 +110,6 @@ main2 ["build"] = do
 --                liftIO $ prepareDirectory out
                 let srcName = dropDirectory1 $ dropDirectory1 $ replaceExtension out ".markdown"
                 let input = site_dir </> srcName
-                liftIO $ print ("A",input)
                 need [ input ]
                 system' "pandoc" ["-o",out,input]
 
@@ -121,7 +120,6 @@ main2 ["build"] = do
                 writeFileChanged out $ (xshow [sitemap])
 
         "_make/autogen/Papers/*.html" *> \ out -> do
-                liftIO $ print "######################"
                 need [ "data/fpg.bib" ]
                 bib <- readShakeVar meta_bibtex
                 let bib' =  [ (tagToFileName nm,(nm,dat))
@@ -130,7 +128,7 @@ main2 ["build"] = do
                 case lookup (takeFileName out) bib' of
                   Nothing -> error $ "abort: " ++ show out
                   Just (nm,bb@(BibTeX _ stuff)) -> do
-                    writeFile' out $ show
+                    traced "paper-out" $ writeFile out $ show
                         $ block "div" [attr "class" "row"]
                           $ block "div" [attr "class" "span8 offset2"]
                             $ htmlC
@@ -146,7 +144,7 @@ main2 ["build"] = do
                               ]
 
         "_make/autogen/Publications.html" *> \ out -> do
-                liftIO $ print "######################"
+
                 need [ "data/fpg.bib" ]
                 bib <- readShakeVar meta_bibtex
                 let years :: [Int] = reverse $ sort $ nub
@@ -177,7 +175,6 @@ main2 ["build"] = do
                         ]
 
 
-                liftIO $ print ("years",years)
                 writeFile' out
                         $ show
                         $ entries
@@ -324,7 +321,7 @@ makeHtmlHtml out contents = do
                 let count = length [ () | '/' <- out ]
                 let local_prefix nm = concat (take (count - 2) (repeat "../")) ++ nm
 
-                liftIO $ print(out,count,local_prefix "")
+--                liftIO $ print(out,count,local_prefix "")
 
 
                 -- Compute breadcrumbs
@@ -338,7 +335,7 @@ makeHtmlHtml out contents = do
                 need [ srcName , tplName ]
 
                 -- next, the contents
-                liftIO $ print ("srcName",srcName)
+--                liftIO $ print ("srcName",srcName)
                 src <- readFile' srcName
                 let contents = parseHTML srcName src
 
@@ -360,15 +357,15 @@ makeHtmlHtml out contents = do
                     macro "fpg-update-time" = do
                             tm <- liftIO $ getZonedTime
                             let txt = formatTime defaultTimeLocale rfc822DateFormat tm
-                            () <- trace (show ("tm",tm,txt)) $ return ()
+--                            () <- trace (show ("tm",tm,txt)) $ return ()
                             return (text txt)
                     macro "fpg-sitemap" = do
-                            liftIO $ print "FPG-SITEMAP"
+--                            liftIO $ print "FPG-SITEMAP"
                             liftActionFPGM $ do
                                 let fileName = build_dir </> "autogen" </> "Sitemap.html"
                                 need [ fileName ]
                                 txt <- readFile' fileName
-                                liftIO $ print $ "FPG: " ++ txt
+--                                liftIO $ print $ "FPG: " ++ txt
                                 return $ parseHTML "Sitemap.html" txt
 
                     macro nm | match `isPrefixOf` nm  && all isDigit rest = do
@@ -455,7 +452,7 @@ makeHtmlHtml out contents = do
                                                 <+ return (text ("Can not find teaser in " ++ sub_content)))
                                          sub_html
 
-                            () <- trace (show ("url",inside_content)) $ return ()
+--                            () <- trace (show ("url",inside_content)) $ return ()
 
                             return $ mconcat [ inside_content
                                              , block "a" [ attr "href" ('/':url)
@@ -489,9 +486,8 @@ makeHtmlHtml out contents = do
 
                 page1 <- applyFPGM' (extractR tpl_prog) page0
 
-                writeFile' out $ show page1
+                traced "out1" $ writeFile out $ show page1
 
-                liftIO $ print "DONE"
 
 makeHtmlRedirect :: String -> String -> Action ()
 makeHtmlRedirect out target = do
