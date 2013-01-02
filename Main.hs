@@ -561,6 +561,26 @@ instance Functor LinkData where
 isAdminFile :: String -> Bool
 isAdminFile nm = takeDirectory (dropDirectory1 (dropDirectory1 nm)) /= "admin"
 
+data URLResponse = URLResponse [Int] Int deriving Show
+
+
+getURLResponse :: String -> IO URLResponse
+getURLResponse url = do
+        tm1 <- getCurrentTime
+        (res,out,err) <- readProcessWithExitCode "curl"
+                                ["curl","-L","-m","5","-s","--head",url]
+                                ""
+        tm2 <- getCurrentTime
+        let code = concat
+               $ map (\ case
+                  ("HTTP/1.1":n:_) | all isDigit n  -> [read n :: Int]
+                  _                                 -> [])
+               $ map words
+               $  lines
+               $ filter (/= '\r')
+               $ out
+        putStrLn $        "examining " ++ url ++ " ==> " ++ show code
+        return $ URLResponse code (floor (diffUTCTime tm2 tm1 * 1000))
 
 generateStatus :: [(String, Build)] -> Action HTML
 generateStatus inp = do
@@ -599,26 +619,9 @@ generateStatus inp = do
         let fake = False
         external_links <- liftIO $ withPool 32
                 $ \ pool -> parallelInterleaved pool
-                         [ do tm1 <- getCurrentTime
-                              (res,out,err) <- if fake
-                                           then if url == "http://ittc.ku.edusites/default/files/class17.pdf"
-                                                then return (ExitSuccess,"HTTP/1.1 404","")
-                                                else return (ExitSuccess,"HTTP/1.1 200","")
-
-                                           else readProcessWithExitCode "curl"
-                                                        ["curl","-L","-m","5","-s","--head",url]
-                                                        ""
-                              tm2 <- getCurrentTime
-                              let code = concat
-                                       $ map (\ case
-                                                ("HTTP/1.1":n:_) | all isDigit n  -> [read n :: Int]
-                                                _                                 -> [])
-                                       $ map words
-                                       $  lines
-                                       $ filter (/= '\r')
-                                       $ out
-                              putStrLn $        "examining " ++ url ++ " ==> " ++ show code
-                              return (url,(code,floor (diffUTCTime tm2 tm1 * 1000)))
+                         [ do resp <- getURLResponse url
+                              putStrLn $ "examining " ++ url ++ " ==> " ++ show resp
+                              return (url,resp)
                          | url <- take 500 $ nub (concatMap ld_remoteURLs links)
                          ]
 
@@ -636,18 +639,18 @@ Content-Type: text/html; charset=iso-8859-1
 orange:fpg-web andy$ curl -s --head http://www.haskell.org/
 -}
 
-        let goodLinkCode :: [Int] -> Bool
-            goodLinkCode [] = False
-            goodLinkCode xs = last xs == 200
+        let goodLinkCode :: URLResponse -> Bool
+            goodLinkCode (URLResponse [] _) = False
+            goodLinkCode (URLResponse xs _) = last xs == 200
 
         let findBadLinks :: LinkData [String] -> LinkData [String]
             findBadLinks link = link
                 { ld_localURLs    = filter (`notElem` good_local_links) $ ld_localURLs link
                 , ld_remoteURLs = filter (\ url -> case lookup url external_links of
                                                        Nothing -> error "should never happen! (all links looked at)"
-                                                       Just (xs,_) -> not (goodLinkCode xs))
+                                                       Just resp -> not (goodLinkCode resp))
                                 $ ld_remoteURLs link
-                 }
+                }
 
             markupCount :: [a] -> HTML
             markupCount = text . show . length
@@ -699,19 +702,21 @@ orange:fpg-web andy$ curl -s --head http://www.haskell.org/
                                                     (bad_links)
                         ]
 
-        let colorURLCode :: [Int] -> HTML
-            colorURLCode [] =
+        let colorURLCode :: URLResponse -> HTML
+            colorURLCode (URLResponse [] _) =
                     block "span" [attr "class" $ "badge badge-important"]
                     $ block "i" [attr "class" "icon-warning-sign icon-white"]
                       $ text "" -- intentionally
 
-            colorURLCode xs =
+            colorURLCode resp@(URLResponse xs _) =
                     mconcat $ [ block "span" [attr "class" $ "badge " ++ label] $ text $ show x
                               | x <- xs
                               ]
-                where label = if goodLinkCode xs
+                where label = if goodLinkCode resp
                               then "badge-success"
                               else "badge-important"
+
+        let timing (_,URLResponse _ t1) (_,URLResponse _ t2) = t1 `compare` t2
 
         let link_tabel = block "table" [] $ mconcat $
                         [ block "tr" [] $ mconcat
@@ -727,10 +732,10 @@ orange:fpg-web andy$ curl -s --head http://www.haskell.org/
                             $ block "a" [attr "href" url ]
                               $ text $ url
                           , block "td" [attr "style" "text-align: right"]
-                            $ colorURLCode $ code
+                            $ colorURLCode resp
                           , block "td" [attr "style" "text-align: right"] $ text $ show tm
                           ]
-                        | (n,(url,(code,tm))) <- zip [1..] external_links
+                        | (n,(url,resp@(URLResponse _ tm))) <- zip [1..] $ sortBy timing external_links
                         ]
 
         let f = block "div" [attr "class" "row"] . block "div" [attr "class" "span10  offset1"]
