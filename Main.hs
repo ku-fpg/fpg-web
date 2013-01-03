@@ -53,7 +53,7 @@ import Control.Concurrent.STM
 
 import Control.Concurrent.ParallelIO.Local
 
-import KURE
+import Text.HTML.KURE
 import Shake
 import BibTeX
 
@@ -326,9 +326,9 @@ debugR msg = acceptR (\ a -> trace (msg ++ " : " ++ take 100 (show a)) True)
 mapURL' :: (Monad m) => (String -> String) -> Rewrite Context m Node
 mapURL' f = promoteR $ do
                 (nm,val) <- attrT (,)
-                Context c <- contextT
---                () <- trace (show ("mapURL",nm,val,c)) $ return ()
-                case (nm,c) of
+                cxt@(Context (c:_)) <- contextT
+                tag <- KURE.apply getTag cxt c
+                case (nm,[tag]) of
                    ("href","a":_)     -> return $ attrC nm $ f val
                    ("href","link":_)  -> return $ attrC nm $ f val
                    ("src","script":_) -> return $ attrC nm $ f val
@@ -445,7 +445,7 @@ makeHtmlHtml out contents = do
                           "table" <- getTag
                           extractR' $ anyR $ promoteR' $ do
                                   ss <- attrsT idR id
-                                  return $ attrs (attr "class" "table table-bordered table-condensed" : ss)
+                                  return $ attrsC (attr "class" "table table-bordered table-condensed" : ss)
 
                 let fixLandingPage :: Rewrite Context FPGM Node
                     fixLandingPage = promoteR $ do
@@ -453,7 +453,7 @@ makeHtmlHtml out contents = do
                           "body" <- getTag
                           extractR' $ anyR $ promoteR' $ do
                                   ss <- attrsT idR id
-                                  return $ attrs (attr "class" "fpg-landing" : ss)
+                                  return $ attrsC (attr "class" "fpg-landing" : ss)
 
                 let findTeaser :: T Block HTML
                     findTeaser = do
@@ -501,7 +501,7 @@ makeHtmlHtml out contents = do
                                 return ()
                             extractR' $ anyR $ promoteR' $ do
                                   ss <- attrsT idR id
-                                  return $ attrs (attr "class" "active" : ss)
+                                  return $ attrsC (attr "class" "active" : ss)
 
 
                 let tpl_prog :: Rewrite Context FPGM Node
@@ -754,8 +754,9 @@ orange:fpg-web andy$ curl -s --head http://www.haskell.org/
 findURL :: (Monad m) => Translate Context m Node String
 findURL = promoteT $ do
                 (nm,val) <- attrT (,)
-                Context c <- contextT
-                case (nm,c) of
+                cxt@(Context (c:_)) <- contextT
+                tag <- KURE.apply getTag cxt c
+                case (nm,[tag]) of
                    ("href","a":_)     -> return val
                    ("href","link":_)  -> return val
                    ("src","script":_) -> return val

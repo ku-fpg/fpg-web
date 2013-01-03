@@ -40,7 +40,7 @@ import Data.Monoid
 
 import Control.Concurrent.STM
 
-import KURE
+import Text.HTML.KURE
 
 import Shake
 
@@ -83,7 +83,9 @@ asciiBibText id (BibTeX ty stuff) = unlines $
 
 -- Build textual citatation, with link(s).
 buildBibCite :: String -> BibTeX -> HTML
-buildBibCite id (BibTeX ty stuff) = HTML $
+buildBibCite id (BibTeX ty stuff) = mconcat[]
+{-
+        HTML $
         [ mkText $ names ++ ", &#8220;"
         , mkElement (mkName "strong")
                 []
@@ -141,6 +143,7 @@ buildBibCite id (BibTeX ty stuff) = HTML $
                    (Nothing,Just y) -> y
                    (Just m,Just y) -> m ++ " " ++ y
                    _ -> ""
+-}
 
 tagToFileName :: String -> String
 tagToFileName nm = map fn nm ++ ".html"

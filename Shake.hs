@@ -11,7 +11,9 @@ import Language.KURE hiding (apply)
 import Control.Concurrent
 import Control.Concurrent.STM
 import Control.Exception
-import KURE
+import Data.Monoid
+import Text.HTML.KURE(Context)
+
 
 data ShakeVar a = ShakeVar (TVar (Maybe a)) String
 
@@ -60,7 +62,7 @@ applyFPGM' t a = do
             run m = do res <- traced "apply-yah" $ runFPGM m
                        loop res
 
-        run $ KURE.apply t (Context []) a
+        run $ KURE.apply t mempty a
 
 liftActionFPGM :: Action a -> FPGM a
 liftActionFPGM m = FPGM $ return $ FPGMAction  m return
