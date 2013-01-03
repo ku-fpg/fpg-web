@@ -506,8 +506,8 @@ makeHtmlHtml out contents = do
 
                 let tpl_prog :: Rewrite Context FPGM Node
                     tpl_prog = tryR (prunetdR (mapURL' normalizeTplURL))
-                           >>> tryR (alltdR (tryR (promoteR (mapHTML (macroExpand <+ arr html)))))
-                           >>> tryR (alltdR (tryR (promoteR (mapHTML (insertTeaser <+ arr html)))))
+                           >>> tryR (alltdR (tryR (promoteR (concatMapHTML (macroExpand <+ arr html)))))
+                           >>> tryR (alltdR (tryR (promoteR (concatMapHTML (insertTeaser <+ arr html)))))
                            >>> tryR (prunetdR (mapURL' relativeURL))
                            >>> tryR (alltdR (tryR (promoteR findActive)))
                            >>> tryR (prunetdR fixTable)
@@ -559,7 +559,7 @@ instance Functor LinkData where
         fmap f (LinkData n a b) = LinkData n (f a) (f b)
 
 isAdminFile :: String -> Bool
-isAdminFile nm = takeDirectory (dropDirectory1 (dropDirectory1 nm)) /= "admin"
+isAdminFile nm = takeDirectory (dropDirectory1 (dropDirectory1 nm)) == "admin"
 
 data URLResponse = URLResponse [Int] Int deriving Show
 
@@ -586,7 +586,7 @@ generateStatus :: [(String, Build)] -> Action HTML
 generateStatus inp = do
         let files = [ nm0
                     | (nm0,_) <- inp
-                    , takeDirectory (dropDirectory1 (dropDirectory1 nm0)) /= "admin"    -- ignore admin dir
+                    , not (isAdminFile nm0)
                     , "//*.html" ?== nm0
                     ]
 
@@ -662,16 +662,18 @@ orange:fpg-web andy$ curl -s --head http://www.haskell.org/
 
         let bad_links = map findBadLinks links
 
+            br = block "br" [] mempty
+
         let page_tabel = block "table" [] $ mconcat $
                         [ block "tr" [] $ mconcat
                           [ block "th" [] $ text $ "#"
                           , block "th" [] $ text $ "Page Name"
-                          , block "th" [attr "style" "text-align: center"] $ text $ "file<BR/>type"
-                          , block "th" [attr "style" "text-align: right"] $ text $ "local<BR/>links"
-                          , block "th" [attr "style" "text-align: right"] $ text $ "extern<BR/>links"
-                          , block "th" [attr "style" "text-align: right"] $ text $ "local<BR/>fail"
-                          , block "th" [attr "style" "text-align: right"] $ text $ "extern<BR/>fail"
-                          , block "th" [attr "style" "text-align: right"] $ text $ "bad links"
+                          , block "th" [attr "style" "text-align: center"] $ mconcat [text "file",br,text "type"]
+                          , block "th" [attr "style" "text-align: right"] $ mconcat [text "local",br,text "links"]
+                          , block "th" [attr "style" "text-align: right"] $ mconcat [text "extern",br,text "links"]
+                          , block "th" [attr "style" "text-align: right"] $ mconcat [text "local",br,text "fail"]
+                          , block "th" [attr "style" "text-align: right"] $ mconcat [text "extern",br,text "fail"]
+                          , block "th" [attr "style" "text-align: center"] $ mconcat [text "bad links"]
                           ]
                         ] ++
                         [ block "tr" [] $ mconcat
@@ -691,7 +693,7 @@ orange:fpg-web andy$ curl -s --head http://www.haskell.org/
                           , block "td" [attr "style" "text-align: right"] $ ld_localURLs page_bad
                           , block "td" [attr "style" "text-align: right"] $ ld_remoteURLs page_bad
                           , block "td" [] $ mconcat
-                                [ text bad <> single "br" []
+                                [ text bad <> br
                                 | bad <- ld_localURLs page_bad' ++ ld_remoteURLs page_bad'
                                 ]
 
@@ -740,7 +742,7 @@ orange:fpg-web andy$ curl -s --head http://www.haskell.org/
 
         let f = block "div" [attr "class" "row"] . block "div" [attr "class" "span10  offset1"]
 
-        return $ text $ show $ f $ mconcat
+        return $ f $ mconcat
                 [ block "h2" [] $ text "Status"
                 , text $ "Nominal"
                 , block "h2" [] $ text "Pages"

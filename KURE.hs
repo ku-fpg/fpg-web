@@ -239,9 +239,6 @@ getInner = blockT idR idR (\ _ _ h -> h)
 --------------------------------------------------
 -- common pattern; promote a translation over a block to over
 
-blockToHTML :: Block -> HTML
-blockToHTML (Block t) = HTML [t]
-
 extractT' :: (Monad m, Injection a g, g ~ Node) => Translate c m g b -> Translate c m a b
 extractT' = extractT
 
@@ -257,8 +254,8 @@ promoteR' = promoteR
 
 ---------------------------------------
 
-mapHTML :: (Monad m) => Translate Context m Block HTML -> Translate Context m HTML HTML
-mapHTML tr = htmlT tr (arr html) (arr html) htmlC
+concatMapHTML :: (Monad m) => Translate Context m Block HTML -> Translate Context m HTML HTML
+concatMapHTML tr = htmlT tr (arr html) (arr html) htmlC
 
 parseHTML :: FilePath -> String -> HTML
 parseHTML fileName input = HTML $ parseHtmlDocument fileName input
