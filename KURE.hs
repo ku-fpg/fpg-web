@@ -7,12 +7,16 @@ import Text.XML.HXT.DOM.ShowXml
 import Text.XML.HXT.DOM.TypeDefs
 import Text.XML.HXT.DOM.XmlNode
 import Data.Tree.NTree.TypeDefs
+import Text.XML.HXT.Parser.XmlParsec
+import Text.XML.HXT.Parser.XhtmlEntities
 
 import Control.Arrow
 import Control.Applicative
-
+import Data.Char
 import Data.Monoid
 import Control.Monad
+
+import Test.QuickCheck
 
 --import Language.KURE.Walker
 import qualified Language.KURE as KURE
@@ -22,7 +26,7 @@ newtype HTML  = HTML XmlTrees       -- list of blocks and/or text
 
 newtype Block = Block XmlTree      -- block with tag and attrs
 
-newtype Text  = Text XmlTree        -- text
+newtype Text  = Text XmlTrees      -- text, including escapes
 
 newtype Attrs = Attrs XmlTrees     -- attributes for a block
 
@@ -50,7 +54,7 @@ instance Show Block where
         show (Block html) = xshow [html]
 
 instance Show Text where
-        show (Text html) = xshow [html]
+        show (Text html) = xshow html
 
 instance Show Attrs where
         show (Attrs html) = xshow html
@@ -118,7 +122,7 @@ instance Html Block where
         html (Block b) = HTML [b]
 
 instance Html Text where
-        html (Text b) = HTML [b]
+        html (Text b) = HTML b
 
 instance Html Syntax where
         html (Syntax b) = HTML [b]
@@ -134,8 +138,8 @@ htmlT :: (Monad m)
      -> Translate Context m HTML x
 htmlT tr1 tr2 tr3 k = translate $ \ c (HTML ts) -> liftM k $ flip mapM ts $ \ case
                         t@(NTree (XTag {}) _)     -> apply tr1 c (Block t)
-                        t@(NTree (XText {}) _)    -> apply tr2 c (Text t)
-                        t@(NTree (XCharRef n) _)  -> apply tr2 c (Text t)
+                        t@(NTree (XText {}) _)    -> apply tr2 c (Text [t])
+                        t@(NTree (XCharRef n) _)  -> apply tr2 c (Text [t])
                         t@(NTree (XPi {}) _)      -> apply tr3 c (Syntax t)
                         t@(NTree (XDTD {}) _)     -> apply tr3 c (Syntax t)
                         t@(NTree (XCmt {}) _)     -> apply tr3 c (Syntax t)
@@ -165,16 +169,24 @@ blockT tr1 tr2 k = translate $ \ (Context cs) (Block t) ->
 blockC :: String -> Attrs -> HTML -> Block
 blockC nm (Attrs attrs) (HTML rest) = Block (NTree (XTag (mkName nm) attrs) rest)
 
+-- | 'textT' takes a Text to bits. The string is fully unescaped (a regular Haskell string)
 textT :: (Monad m)
       => (String -> x)
       -> Translate Context m Text x
-textT k = translate $ \ c -> \ case
-                Text (NTree (XText txt) []) -> return $ k txt
-                Text t@(NTree (XCharRef n) []) -> return $ k $ xshow [t]
-                _                           -> fail "textT runtime error"
+textT k = translate $ \ _ (Text txt) ->
+          return $ k $ unescapeText $ [ fn t | (NTree t _) <- txt ]
+  where
+          fn (XText    xs) = Left xs
+          fn (XCharRef c)  = Right c
+          fn _             = error "found non XText / XCharRef in Text"
 
+--                Text (NTree (XText txt) []) -> return $ k txt
+--                Text t@(NTree (XCharRef n) []) -> return $ k $ xshow [t]
+
+
+-- 'textC' constructs a Text from a fully unescaped string.
 textC :: String -> Text
-textC = Text . mkText
+textC str = Text [ NTree t [] | t <-  map (either XText XCharRef) $ escapeText str ]
 
 attrsT :: (Monad m)
        => Translate Context m Attr a
@@ -211,10 +223,7 @@ block :: String -> [Attr] -> HTML -> HTML
 block nm xs inner = HTML [t]
   where Block t = blockC nm (attrsC xs) inner
 
-single :: String -> [Attr] -> HTML
-single nm xs = block nm xs mempty
-
-text txt = HTML [t]
+text txt = HTML t
   where Text t = textC txt
 
 --------------------------------------------------
@@ -259,5 +268,30 @@ concatMapHTML tr = htmlT tr (arr html) (arr html) htmlC
 
 parseHTML :: FilePath -> String -> HTML
 parseHTML fileName input = HTML $ parseHtmlDocument fileName input
+
+---------------------------------------
+
+escapeText :: String -> [Either String Int]
+escapeText = foldr join [] . map f
+  where f n | n == '<'  = Right (ord n)
+            | n == '"'  = Right (ord n)
+            | n == '&'  = Right (ord n)
+            | n == '\n' = Left n
+            | n == '\t' = Left n
+            | n == '\r' = Left n
+            | n > '~'   = Right (ord n)
+            | n < ' '   = Right (ord n)
+            | otherwise = Left n
+        join (Left x) (Left xs :rest) = Left (x : xs) : rest
+        join (Left x) rest            = Left [x] : rest
+        join (Right x) rest           = Right x : rest
+
+unescapeText :: [Either String Int] -> String
+unescapeText = concatMap (either id ((: []) . chr))
+
+
+
+
+
 
 
