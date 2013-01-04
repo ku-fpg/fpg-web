@@ -1,6 +1,16 @@
 module Web.Chione
         ( Build(..)
-        , module Web.Chione     -- include everything right now
+          -- * key directory names
+         , build_dir
+         , html_dir
+         , admin_dir
+         -- * Build target detection
+         , findBuildTargets
+         -- * KURE rewrites
+         , findURL
+         , templateToHTML
+         , injectHTML
+--        , module Web.Chione     -- include everything right now
         ) where
 
 import Development.Shake hiding (getDirectoryContents)
@@ -50,6 +60,7 @@ import Control.Concurrent.STM
 
 import Control.Concurrent.ParallelIO.Local
 
+import Shake
 import Text.HTML.KURE
 
 -- | 'Build' is the various ways of building a final HTML webpage.
@@ -65,11 +76,17 @@ data Build = FromContent        -- ^ from content directory
 build_dir :: String
 build_dir    = "_make"
 
+-- | Name of location of our target HTML directory.
 html_dir :: String
 html_dir    = build_dir </> "html"
 
+-- | Name of location of our admin HTML directory.
+admin_dir :: String
+admin_dir    = build_dir </> "admin"
+
 -- | 'findBuildTargets' looks to find the names and build instructions for
--- the final website.
+-- the final website. It looks in the directories "site" for markdown files,
+-- and "img", "js" and "css" for image, js and css files.
 findBuildTargets :: IO [(String,Build)]
 findBuildTargets = do
         site <- getRecursiveContents "site"
@@ -91,7 +108,7 @@ findBuildTargets = do
         html_prefixed = (html_dir </>)
 
 
--- local to this module.
+-- (local to this module.)
 -- From RWH, first edition, with handle from Johann Giwer.
 getRecursiveContents :: FilePath -> IO [FilePath]
 getRecursiveContents topdir = E.handle (\ E.SomeException {} -> return []) $ do       -- 5
@@ -106,3 +123,59 @@ getRecursiveContents topdir = E.handle (\ E.SomeException {} -> return []) $ do 
   return (concat paths)
 
 
+------------------------------------------------------------------------------------
+
+findURL :: (Monad m) => Translate Context m Node String
+findURL = promoteT $ do
+                (nm,val) <- attrT (,)
+                cxt@(Context (c:_)) <- contextT
+                tag <- KURE.apply getTag cxt c
+                case (nm,[tag]) of
+                   ("href","a":_)     -> return val
+                   ("href","link":_)  -> return val
+                   ("src","script":_) -> return val
+                   ("src","img":_)    -> return val
+                   _                  -> fail "no correct context"
+
+
+templateToHTML :: String -> R Node -> String -> Action ()
+templateToHTML tplName tr outFile = do
+        template <- readFile' tplName
+        let page0 = parseHTML tplName template
+        page1 <- applyFPGM' (extractR tr) page0
+        writeFile' outFile $ show page1
+
+-- | Replace given id (2nd argument) with an HTML file (filename is first argument).
+--
+-- > let tr = inject "Foo.hs" "contents"
+--
+injectHTML :: String -> String -> R Node
+injectHTML fileName idName = prunetdR (promoteR (anyBlockHTML fn))
+  where
+        fn :: T Block HTML
+        fn = do nm <- getAttr "id"
+                debugR $ show ("inject",idName,nm)
+                if nm == idName
+                then translate $ \ _ _ -> do
+                        file <- liftActionFPGM $ readFile' fileName
+                        return $ parseHTML fileName file
+                        -- read the file
+                else fail "no match"
+
+
+{--- T HTML [HTML]
+unconcatHTML :: T HTML [HTML]
+unconcatHTML = undefined
+
+allRList :: R a -> R [a]
+allRList
+-}
+
+
+
+-- T [HTML] HTML   -- easy, mconcat
+
+debugR :: (Monad m, Show a) => String -> Rewrite c m a
+debugR msg = acceptR (\ a -> trace (msg ++ " : " ++ take 100 (show a)) True)
+
+-- template :: [(String,HTML)] -> T HTML HTML
