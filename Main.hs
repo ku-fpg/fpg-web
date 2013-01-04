@@ -312,18 +312,6 @@ debugR msg = acceptR (\ a -> trace (msg ++ " : " ++ take 100 (show a)) True)
 
 -- change an embedded URL
 
-mapURL' :: (Monad m) => (String -> String) -> Rewrite Context m Node
-mapURL' f = promoteR $ do
-                (nm,val) <- attrT (,)
-                cxt@(Context (c:_)) <- contextT
-                tag <- KURE.apply getTag cxt c
-                case (nm,[tag]) of
-                   ("href","a":_)     -> return $ attrC nm $ f val
-                   ("href","link":_)  -> return $ attrC nm $ f val
-                   ("src","script":_) -> return $ attrC nm $ f val
-                   ("src","img":_)    -> return $ attrC nm $ f val
-                   _                  -> fail "no correct context"
-
 
 -----------------------------------------------------------------------
 
@@ -444,40 +432,6 @@ makeHtmlHtml out contents = do
                                   ss <- attrsT idR id
                                   return $ attrsC (attr "class" "fpg-landing" : ss)
 
-                let findTeaser :: T Block HTML
-                    findTeaser = do
-                            "div" <- getTag
-                            "teaser" <- getAttr "class"
-                            getInner
-
-                let insertTeaser :: T Block HTML
-                    insertTeaser = do
-                            "a"       <- getTag
-                            "teaser"  <- getAttr "class"
-                            ('/':url) <- getAttr "href"
-                            inside    <- getInner
-
---                            contextfreeT $ \ _ -> liftActionFPGM $ do
---                                need [ "
-
-                            let sub_content = build_dir </> "contents" </> replaceExtension url "html"
-
-                            inside_content <- contextfreeT $ \ _ -> liftActionFPGM $ do
-                                    need [ sub_content ]
-                                    sub_txt <- readFile' sub_content
-                                    let sub_html = parseHTML sub_content sub_txt
-                                    applyFPGM' (extractT' (onetdT (promoteT findTeaser))
-                                                <+ return (text ("Can not find teaser in " ++ sub_content)))
-                                         sub_html
-
---                            () <- trace (show ("url",inside_content)) $ return ()
-
-                            return $ mconcat [ inside_content
-                                             , block "a" [ attr "href" ('/':url)
-                                                         , attr "class" "label"
-                                                         ]
-                                                         inside
-                                             ]
 
 
                 let findActive :: R Block
@@ -493,28 +447,23 @@ makeHtmlHtml out contents = do
                                   return $ attrsC (attr "class" "active" : ss)
 
 
-                let tpl_prog :: Rewrite Context FPGM Node
-                    tpl_prog = tryR (prunetdR (mapURL' normalizeTplURL))
+                let tpl_prog :: Rewrite Context FPGM HTML
+                    tpl_prog = extractR' (tryR (prunetdR (promoteR $ mapURL normalizeTplURL)))
                            >>> injectHTML srcName "contents"
-                           >>> tryR (alltdR (tryR (promoteR (anyBlockHTML (macroExpand)))))
-                           >>> tryR (alltdR (tryR (promoteR (anyBlockHTML (insertTeaser)))))
-                           >>> tryR (prunetdR (mapURL' relativeURL))
-                           >>> tryR (alltdR (tryR (promoteR findActive)))
-                           >>> tryR (prunetdR fixTable)
-                           >>> tryR (prunetdR fixLandingPage)
-
+                           >>> extractR' (tryR (alltdR (tryR (promoteR (anyBlockHTML (macroExpand))))))
+                           >>> extractR' (tryR (alltdR (tryR (promoteR (anyBlockHTML (insertTeaser))))))
+                           >>> extractR' (tryR (prunetdR (promoteR $ mapURL relativeURL)))
+                           >>> extractR' (tryR (alltdR (tryR (promoteR findActive))))
+                           >>> extractR' (tryR (prunetdR fixTable))
+                           >>> extractR' (tryR (prunetdR fixLandingPage))
 
 --                page1 <- applyFPGM' (extractR tpl_prog) page0
 
-                templateToHTML tplName tpl_prog out
+                templateToHTML tplName (extractR tpl_prog) out
 
 --                traced "out1" $ writeFile out $ show page1
 
 
-makeHtmlRedirect :: String -> String -> Action ()
-makeHtmlRedirect out target = do
-        writeFile' out $ "<meta http-equiv=\"Refresh\" content=\"0; url=Research.html\">\n"
-  where
 
 ----------------------------------------------------
 -- ShakeVar (call them shake vars)
@@ -541,15 +490,6 @@ genSiteMap dir files = concat
 --buildBibPage ::
 -------------------------------------------------------
 
-data LinkData a = LinkData
-        { ld_pageName :: String
-        , ld_localURLs :: a
-        , ld_remoteURLs :: a
-        }
-        deriving Show
-
-instance Functor LinkData where
-        fmap f (LinkData n a b) = LinkData n (f a) (f b)
 
 isAdminFile :: String -> Bool
 isAdminFile nm = takeDirectory (dropDirectory1 nm) == "admin"
@@ -763,29 +703,6 @@ findURL = promoteT $ do
                    _                  -> fail "no correct context"
 -}
 
-findLinks :: String -> Action (LinkData [String])
-findLinks nm = do
-        let name = dropDirectory1 (dropDirectory1 nm)
-
-        txt <- readFile' nm
-        let tree = parseHTML nm txt
-
-        urls <- applyFPGM' (extractT $ collectT findURL) tree
-
---        liftIO $ print urls
-
-        -- What about ftp?
-        let isRemote url = ("http://" `isPrefixOf` url)
-                        || ("https://" `isPrefixOf` url)
-
-        let locals = [ takeDirectory name </> url
-                     | url <- urls
-                     , not (isRemote url)
-                     ]
-
-        let globals = filter isRemote urls
-
-        return $ LinkData name locals globals
 
 shorten n xs | length xs < n = xs
               | otherwise     = take (n - 3) xs ++ "..."
