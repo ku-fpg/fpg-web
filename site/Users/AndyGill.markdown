@@ -1,4 +1,4 @@
-![](http://www.ittc.ku.edusites/default/files/me.jpg)
+![](http://www.ittc.ku.edu/csdl/fpg/sites/default/files/me.jpg)
 
 <div class="row"><div class="span6 offset1">
 

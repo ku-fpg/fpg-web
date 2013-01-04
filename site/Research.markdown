@@ -119,17 +119,17 @@ Other Sponsors
 
 #### 
 
-[![](http://www.ittc.ku.edusites/default/files/sicsa_logo.gif)](http://www.sicsa.ac.uk/)
+[![](http://www.ittc.ku.edu/csdl/fpg/sites/default/files/sicsa_logo.gif)](http://www.sicsa.ac.uk/)
 
 #### International Foundation for Telemetering (IFT)
 
-[![](http://www.ittc.ku.edusites/default/files/IFT_logo.gif)](http://www.telemetry.org/pages/ift/whoisift.php)
+[![](http://www.ittc.ku.edu/csdl/fpg/sites/default/files/IFT_logo.gif)](http://www.telemetry.org/pages/ift/whoisift.php)
 
 #### Xilinx
 
 #### 
 
-[![](http://www.ittc.ku.edusites/default/files/xilinx_logo.gif)](http://www.xilinx.com/)
+[![](http://www.ittc.ku.edu/csdl/fpg/sites/default/files/xilinx_logo.gif)](http://www.xilinx.com/)
 
 Research Before KU
 ==================

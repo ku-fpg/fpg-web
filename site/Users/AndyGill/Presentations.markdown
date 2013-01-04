@@ -20,9 +20,9 @@ briefings.
 -   **May 11^th^**, ***Generating Implementations of Error Correcting
     Codes using Kansas Lava,***10th Annual High Confidence Software and
     Systems Conference, Linthicum Heights, MD,
-    [Slides](http://www.ittc.ku.edusites/default/files/20105011-hcss.pdf),
+    [Slides](http://www.ittc.ku.edu/csdl/fpg/sites/default/files/20105011-hcss.pdf),
     [Quicktime
-    Slides](http://www.ittc.ku.edusites/default/files/20105011-hcss.mov).
+    Slides](http://www.ittc.ku.edu/csdl/fpg/sites/default/files/20105011-hcss.mov).
 -   **March 11^th^**, ***Information Assurance, Functional Programming
     and Kansas Lava,***Information Assurance Visit, ITTC.
 -   **February 26^th^**, ***Forward Error Correction Codes and Kansas
@@ -38,47 +38,47 @@ briefings.
 -   **September 23^rd^**, ***Chalkboard: Mapping Functions to
     Polygons,***21st Symposium on Implementation and Application of
     Functional Languages, Seton Hall University, South Orange, NJ,
-    [Paper](http://www.ittc.ku.edusites/default/files/chalkboard-ifl09.pdf),
-    [Slides](http://www.ittc.ku.edusites/default/files/20090923-ifl-cb.pdf),
+    [Paper](http://www.ittc.ku.edu/csdl/fpg/sites/default/files/chalkboard-ifl09.pdf),
+    [Slides](http://www.ittc.ku.edu/csdl/fpg/sites/default/files/20090923-ifl-cb.pdf),
     [Animated
-    Slides](http://www.ittc.ku.edusites/default/files/20090923-anim-ifl-cb.pdf).
+    Slides](http://www.ittc.ku.edu/csdl/fpg/sites/default/files/20090923-anim-ifl-cb.pdf).
 -   **September 23^rd^**, ***Introducing Kansas Lava,***21st Symposium
     on Implementation and Application of Functional Languages, Seton
     Hall University, South Orange, NJ,
-    [Paper](http://www.ittc.ku.edusites/default/files/kansas-lava-ifl09.pdf),
-    [Slides](http://www.ittc.ku.edusites/default/files/20090923-ifl-kl.pdf),
+    [Paper](http://www.ittc.ku.edu/csdl/fpg/sites/default/files/kansas-lava-ifl09.pdf),
+    [Slides](http://www.ittc.ku.edu/csdl/fpg/sites/default/files/20090923-ifl-kl.pdf),
     [Animated
-    Slides](http://www.ittc.ku.edusites/default/files/20090923-anim-ifl-kl.pdf).
+    Slides](http://www.ittc.ku.edu/csdl/fpg/sites/default/files/20090923-anim-ifl-kl.pdf).
 -   **September 3^rd^**, ***Type-Safe Observable Sharing in
     Haskell,***2009 ACM SIGPLAN Haskell Symposium, Edinburgh, UK,
     [Paper](http://www.ittc.ku.edunode/15),
-    [Slides](http://www.ittc.ku.edusites/default/files/20090903-hask.pdf),
+    [Slides](http://www.ittc.ku.edu/csdl/fpg/sites/default/files/20090903-hask.pdf),
     [Animated
-    Slides](http://www.ittc.ku.edusites/default/files/20090903-anim-hask.pdf),
+    Slides](http://www.ittc.ku.edu/csdl/fpg/sites/default/files/20090903-anim-hask.pdf),
     [Video](http://www.vimeo.com/6679785).
 -   **September 1^st^**, ***The 12th ICFP Programming Contest
     Report,***ACM SIGPLAN ICFP 2009, Edinburgh, UK,
-    [Slides](http://www.ittc.ku.edusites/default/files/20090901-icfp.pdf),
+    [Slides](http://www.ittc.ku.edu/csdl/fpg/sites/default/files/20090901-icfp.pdf),
     [Animated
-    Slides](http://www.ittc.ku.edusites/default/files/20090901-anim-icfp.pdf),
+    Slides](http://www.ittc.ku.edu/csdl/fpg/sites/default/files/20090901-anim-icfp.pdf),
     [Video](http://www.vimeo.com/6613815).
 -   **July 15^th^**, ***KURE: A Haskell Hosted DSL for Writing
     Transformation Systems,***IFIP TC2 Working Conference, DSL 2009,
     Oxford, UK, [Paper](http://www.ittc.ku.edunode/16),
-    [Slides](http://www.ittc.ku.edusites/default/files/20090715-kure.pdf).
+    [Slides](http://www.ittc.ku.edu/csdl/fpg/sites/default/files/20090715-kure.pdf).
 -   **June 3^rd^**, ***Type Directed Observable Sharing,***Functional
     Programming Laboratory, Seminar Series, University of Nottingham,
     [Paper](http://www.ittc.ku.edunode/15).
 -   **April 3^rd^**, ***Language Technology and Functional
     Programming,***2009 ITTC Industry Advisory Board and KTEC Peer
     Review Meeting,
-    [Slides](http://www.ittc.ku.edusites/default/files/20090403-slides.pdf),
+    [Slides](http://www.ittc.ku.edu/csdl/fpg/sites/default/files/20090403-slides.pdf),
     [Animated
-    Slides](http://www.ittc.ku.edusites/default/files/20090403-anim-slides.pdf).
+    Slides](http://www.ittc.ku.edu/csdl/fpg/sites/default/files/20090403-anim-slides.pdf).
 -   **March 26^th^**, ***The Worker/Wrapper Transformation,***Kansas
     State University, Department of Computing and Information Sciences,
     [Paper](http://www.ittc.ku.edunode/19),
-    [Slides](http://www.ittc.ku.edusites/default/files/20090326-ww.pdf),
+    [Slides](http://www.ittc.ku.edu/csdl/fpg/sites/default/files/20090326-ww.pdf),
     [Web Page](http://www.workerwrapper.com).
 -   **October 28^th^**, ***Why Functional Programming Matters (Building
     Trustworthy Systems),***Department of Computer Science, University
@@ -94,17 +94,17 @@ briefings.
     relationship to rippling,***[CISA Seminar Series,
     Edinburgh](http://homepages.inf.ed.ac.uk/ldixon/cisa/),
     [Paper](http://www.ittc.ku.edunode/19),
-    [Slides](http://www.ittc.ku.edusites/default/files/20080212-ww.pdf),
+    [Slides](http://www.ittc.ku.edu/csdl/fpg/sites/default/files/20080212-ww.pdf),
     [Web Page](http://www.workerwrapper.com).
 -   **February 12^th^**, ***The Worker/Wrapper Transformation,***[5th
     Fun in the Afternoon, London](http://sneezy.cs.nott.ac.uk/fun/),
     [Paper](http://www.ittc.ku.edunode/19),
-    [Slides](http://www.ittc.ku.edusites/default/files/20080212-ww.pdf),
+    [Slides](http://www.ittc.ku.edu/csdl/fpg/sites/default/files/20080212-ww.pdf),
     [Web Page](http://www.workerwrapper.com).
 -   **February 5^th^**, ***The Worker/Wrapper
     Transformation,***[Edinburgh LFCS Seminar
     Series](http://www.lfcs.inf.ed.ac.uk/events/theory-seminars/),
     [Paper](http://www.ittc.ku.edunode/19),
-    [Slides](http://www.ittc.ku.edusites/default/files/20080205-ww.pdf),
+    [Slides](http://www.ittc.ku.edu/csdl/fpg/sites/default/files/20080205-ww.pdf),
     [Web Page](http://www.workerwrapper.com).
 

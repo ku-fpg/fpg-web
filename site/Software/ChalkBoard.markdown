@@ -14,7 +14,7 @@ principal image type, a `Board`, is abstract.
 -   [ChalkBoard
     Tutorial](http://www.ittc.ku.eduTools/ChalkBoard/Tutorial)
 -   [ChalkBoard
-    Documentation](http://www.ittc.ku.edusites/default/files/chalkboardhaddock/index.html)
+    Documentation](http://www.ittc.ku.edu/csdl/fpg/sites/default/files/chalkboardhaddock/index.html)
 
 Download
 --------

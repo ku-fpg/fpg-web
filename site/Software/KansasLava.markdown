@@ -18,7 +18,7 @@ Tutorial and Resources
 ----------------------
 
 -   [Draft
-    Tutorial](http://ittc.ku.edusites/default/files/manual.pdf)
+    Tutorial](http://ittc.ku.edu/csdl/fpg/sites/default/files/manual.pdf)
     [pdf] for Kansas Lava
 -   [A walkthrough of our
     tutorial](http://www.youtube.com/playlist?list=PL211F8711E3B3DF9C)
