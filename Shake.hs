@@ -50,6 +50,14 @@ data FPGMResult a
         | FPGMFail String
         | forall r . FPGMAction (Action r) (r -> FPGM a)
 
+-- for testint
+applyFPGM'' :: forall a b . Translate Context FPGM a b -> a -> IO b
+applyFPGM'' t a = do
+        r <- runFPGM (KURE.apply t mempty a)
+        case r of
+          FPGMResult a -> return a
+          FPGMFail msg  -> fail msg
+
 applyFPGM' :: forall a b . Translate Context FPGM a b -> a -> Action b
 applyFPGM' t a = do
 
