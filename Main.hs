@@ -549,13 +549,17 @@ instance Functor LinkData where
 isAdminFile :: String -> Bool
 isAdminFile nm = takeDirectory (dropDirectory1 (dropDirectory1 nm)) == "admin"
 
-data URLResponse = URLResponse [Int] Int deriving Show
+data URLResponse
+        = URLResponse [Int] Int
+        deriving Show
 
 getURLResponse :: String -> IO URLResponse
+getURLResponse url | "http://scholar.google.com/" `isPrefixOf` url = return $ URLResponse [200] 999
 getURLResponse url = do
+
         tm1 <- getCurrentTime
         (res,out,err) <- readProcessWithExitCode "curl"
-                                ["curl","-L","-m","5","-s","--head",url]
+                                ["curl","-A","Other","-L","-m","5","-s","--head",url]
                                 ""
         tm2 <- getCurrentTime
         let code = concat
@@ -667,7 +671,7 @@ orange:fpg-web andy$ curl -s --head http://www.haskell.org/
                           [ block "td" [attr "style" "text-align: right"] $ text $ show n
                           , block "td" []
                             $ block "a" [attr "href" (ld_pageName page) ]
-                              $ text $ ld_pageName page
+                              $ text $ shorten 50 $ ld_pageName page
                           , block "td" []
                             $ case lookup (html_prefixed $ ld_pageName page) inp of
                                  Nothing  -> text "ERROR"
@@ -692,10 +696,13 @@ orange:fpg-web andy$ curl -s --head http://www.haskell.org/
                         ]
 
         let colorURLCode :: URLResponse -> HTML
-            colorURLCode (URLResponse [] _) =
+            colorURLCode (URLResponse [] n) =
                     block "span" [attr "class" $ "badge badge-important"]
-                    $ block "i" [attr "class" "icon-warning-sign icon-white"]
-                      $ text "" -- intentionally
+                    $ text $ if n > 3000
+                             then "..."
+                             else "!"
+--                    $ block "i" [attr "class" "icon-warning-sign icon-white"]
+--                      $ text "" -- intentionally
 
             colorURLCode resp@(URLResponse xs _) =
                     mconcat $ [ block "span" [attr "class" $ "badge " ++ label] $ text $ show x
@@ -711,15 +718,15 @@ orange:fpg-web andy$ curl -s --head http://www.haskell.org/
                         [ block "tr" [] $ mconcat
                           [ block "th" [] $ text $ "#"
                           , block "th" [] $ text $ "External URL"
-                          , block "th" [attr "style" "text-align: center"] $ text $ "URL<BR/>code(s)"
-                          , block "th" [attr "style" "text-align: right"] $ text $ "time<BR/>(ms)"
+                          , block "th" [attr "style" "text-align: center"] $ mconcat [text "HTTP",br,text "code(s)"]
+                          , block "th" [attr "style" "text-align: right"] $ mconcat [text "time",br,text "ms"]
                           ]
                         ] ++
                         [ block "tr" [] $ mconcat
                           [ block "td" [attr "style" "text-align: right"] $ text $ show n
                           , block "td" []
                             $ block "a" [attr "href" url ]
-                              $ text $ url
+                              $ text $ shorten 50 $ url
                           , block "td" [attr "style" "text-align: right"]
                             $ colorURLCode resp
                           , block "td" [attr "style" "text-align: right"] $ text $ show tm
@@ -774,3 +781,6 @@ findLinks nm = do
         let globals = filter isRemote urls
 
         return $ LinkData name locals globals
+
+shorten n xs | length xs < n = xs
+              | otherwise     = take (n - 3) xs ++ "..."
