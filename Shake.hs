@@ -15,30 +15,34 @@ import Data.Monoid
 import Text.HTML.KURE(Context)
 
 
-data ShakeVar a = ShakeVar (TVar (Maybe a)) String
+data ShakeVar a = ShakeVar (TVar (Maybe a)) String (Action a)
 
-newShakeVar :: String -> IO (ShakeVar a)
-newShakeVar nm = do
+newShakeVar :: String -> Action a -> IO (ShakeVar a)
+newShakeVar nm act = do
         v <- atomically $ newTVar $ Nothing
-        return $ ShakeVar v nm
+        return $ ShakeVar v nm act
 
 infix 1 !>
 
+shakeVarRule :: (Show a) => ShakeVar a -> Rules ()
+shakeVarRule var@(ShakeVar _ _ act) = var !> act
+
+-- OLD, plz inline
 (!>) :: (Show a) => ShakeVar a -> Action a -> Rules ()
-(!>) (ShakeVar _ nm) m = (== nm) ?> \ out -> do
+(!>) (ShakeVar _ nm _) m = (== nm) ?> \ out -> do
         r <- m
         writeFileChanged out $ show r
 
 readShakeVar :: (Read a) => ShakeVar a -> Action a
-readShakeVar (ShakeVar v nm) = do
+readShakeVar (ShakeVar v nm _) = do
         need [nm]
         txt <- readFile' $ nm
         return $ read txt
-
+{-
 writeShakeVar :: (Show a) => ShakeVar a -> a -> Action ()
-writeShakeVar (ShakeVar _ nm) = do
+writeShakeVar (ShakeVar _ nm _) = do
         writeFileChanged nm . show
-
+-}
 -------------------------------------------------------
 
 --newtype FPGM a = FPGM { runFPGM :: Action (Either String a) }
@@ -106,5 +110,5 @@ instance MonadCatch FPGM where
                     f (FPGMFail msg) = runFPGM (handle msg)
                     f (FPGMAction act rest) = return (FPGMAction act rest)
                 f r
-instance MonadIO FPGM where
-        liftIO m = FPGM (FPGMResult <$> m)
+--instance MonadIO FPGM where
+--        liftIO m = FPGM (FPGMResult <$> m)

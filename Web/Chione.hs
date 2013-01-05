@@ -1,5 +1,9 @@
+{-# LANGUAGE FlexibleInstances, MultiParamTypeClasses, ScopedTypeVariables, LambdaCase, InstanceSigs, FlexibleContexts #-}
 module Web.Chione
-        ( Build(..)
+         ( -- * main things
+           clean
+         , build
+         , Build(..)
           -- * key directory names
          , build_dir
          , html_dir
@@ -8,8 +12,14 @@ module Web.Chione
          , findBuildTargets
          -- * Utils
          , makeHtmlRedirect
+         , isAdminFile
+         -- * Link and URL issues
          , findLinks
          , LinkData(..)
+         , getURLResponse
+         , URLResponse(..)
+         -- * Building content
+         , generateStatus
          -- * KURE rewrites
          , findURL
          , mapURL
@@ -174,32 +184,13 @@ injectHTML fileName idName = extractR' $ prunetdR (promoteR (anyBlockHTML fn))
   where
         fn :: T Block HTML
         fn = do nm <- getAttr "id"
-                debugR $ show ("inject",idName,nm)
+                debugR 100 $ show ("inject",idName,nm)
                 if nm == idName
                 then translate $ \ _ _ -> do
                         file <- liftActionFPGM $ readFile' fileName
                         return $ parseHTML fileName file
                         -- read the file
                 else fail "no match"
-
-
-{--- T HTML [HTML]
-unconcatHTML :: T HTML [HTML]
-unconcatHTML = undefined
-
-allRList :: R a -> R [a]
-allRList
--}
-
-
-
--- T [HTML] HTML   -- easy, mconcat
-
-debugR :: (Monad m, Show a) => String -> Rewrite c m a
-debugR msg = acceptR (\ a -> trace (msg ++ " : " ++ take 100 (show a)) True)
-
--- template :: [(String,HTML)] -> T HTML HTML
-
 
 
 insertTeaser :: T Block HTML
@@ -254,7 +245,7 @@ data LinkData a = LinkData
 instance Functor LinkData where
         fmap f (LinkData n a b) = LinkData n (f a) (f b)
 
--- Reads an HTML file, finds all the local and global links.
+-- | Reads an HTML file, finds all the local and global links.
 -- The local links are normalize to the site-root.
 findLinks :: String -> Action (LinkData [String])
 findLinks nm = do
@@ -279,3 +270,245 @@ findLinks nm = do
         let globals = filter isRemote urls
 
         return $ LinkData name locals globals
+
+
+data URLResponse
+        = URLResponse [Int] Int
+        deriving Show
+
+-- | Check external link for viability. Returns time in ms, and list of codes returned; redirections are followed.
+
+getURLResponse :: String -> IO URLResponse
+getURLResponse url | "http://scholar.google.com/" `isPrefixOf` url = return $ URLResponse [200] 999
+getURLResponse url = do
+
+        tm1 <- getCurrentTime
+        (res,out,err) <- readProcessWithExitCode "curl"
+                                ["curl","-A","Other","-L","-m","5","-s","--head",url]
+                                ""
+        tm2 <- getCurrentTime
+        let code = concat
+               $ map (\ case
+                  ("HTTP/1.1":n:_) | all isDigit n  -> [read n :: Int]
+                  _                                 -> [])
+               $ map words
+               $  lines
+               $ filter (/= '\r')
+               $ out
+        return $ URLResponse code (floor (diffUTCTime tm2 tm1 * 1000))
+
+----------------------------------------------------------
+
+isAdminFile :: String -> Bool
+isAdminFile nm = takeDirectory (dropDirectory1 nm) == "admin"
+
+generateStatus :: [(String, Build)] -> Action HTML
+generateStatus inp = do
+        let files = [ nm0
+                    | (nm0,_) <- inp
+                    , not (isAdminFile nm0)
+                    , "//*.html" ?== nm0
+                    ]
+
+        links <- mapM findLinks files
+
+        good_local_links <- liftM concat $ sequence
+                         [ do b <- liftIO $ Directory.doesFileExist $ (build_dir </> "html" </> file)
+                              if b then return [file]
+                                   else return []
+                         | file <- nub (concatMap ld_localURLs links)
+                         ]
+
+-- sh -c 'curl -m 1 -s --head http://www.chalmers.se/cse/EN/people/persson-anders || echo ""'
+-- -L <= redirect automatically
+{-
+        let classify (x:xs) = case words x of
+                    ("HTTP/1.1":n:_) | all isDigit n -> classifyCode (read n) xs
+                    _                                -> []
+            classify _             = []
+
+            classifyCode :: Int -> [String] -> String
+            classifyCode n xs | n >= 300 && n < 400 = if again == unknown
+                                                      then show n
+                                                      else again
+                  where again = classify xs
+
+            classifyCode n _ = show n
+-}
+
+        let fake = False
+        external_links <- liftIO $ withPool 32
+                $ \ pool -> parallelInterleaved pool
+                         [ do resp <- getURLResponse url
+                              putStrLn $ "examining " ++ url ++ " ==> " ++ show resp
+                              return (url,resp)
+                         | url <- take 500 $ nub (concatMap ld_remoteURLs links)
+                         ]
+
+        liftIO$ print $ external_links
+
+{-
+   curl -s --head http://www.haskell.org/
+HTTP/1.1 307 Temporary Redirect
+Date: Wed, 02 Jan 2013 02:51:59 GMT
+Server: Apache/2.2.9 (Debian) PHP/5.2.6-1+lenny13 with Suhosin-Patch
+Location: http://www.haskell.org/haskellwiki/Haskell
+Vary: Accept-Encoding
+Content-Type: text/html; charset=iso-8859-1
+
+orange:fpg-web andy$ curl -s --head http://www.haskell.org/
+-}
+
+        let goodLinkCode :: URLResponse -> Bool
+            goodLinkCode (URLResponse [] _) = False
+            goodLinkCode (URLResponse xs _) = last xs == 200
+
+        let findBadLinks :: LinkData [String] -> LinkData [String]
+            findBadLinks link = link
+                { ld_localURLs    = filter (`notElem` good_local_links) $ ld_localURLs link
+                , ld_remoteURLs = filter (\ url -> case lookup url external_links of
+                                                       Nothing -> error "should never happen! (all links looked at)"
+                                                       Just resp -> not (goodLinkCode resp))
+                                $ ld_remoteURLs link
+                }
+
+            markupCount :: [a] -> HTML
+            markupCount = text . show . length
+
+            markupCount' :: [a] -> HTML
+            markupCount' xs = block "span" [attr "class" $ "badge " ++ label] $ text (show len)
+                 where len = length xs
+                       label = if len == 0 then "badge-success" else "badge-important"
+
+        let bad_links = map findBadLinks links
+
+            br = block "br" [] mempty
+
+        let page_tabel = block "table" [] $ mconcat $
+                        [ block "tr" [] $ mconcat
+                          [ block "th" [] $ text $ "#"
+                          , block "th" [] $ text $ "Page Name"
+                          , block "th" [attr "style" "text-align: center"] $ mconcat [text "file",br,text "type"]
+                          , block "th" [attr "style" "text-align: right"] $ mconcat [text "local",br,text "links"]
+                          , block "th" [attr "style" "text-align: right"] $ mconcat [text "extern",br,text "links"]
+                          , block "th" [attr "style" "text-align: right"] $ mconcat [text "local",br,text "fail"]
+                          , block "th" [attr "style" "text-align: right"] $ mconcat [text "extern",br,text "fail"]
+                          , block "th" [attr "style" "text-align: center"] $ mconcat [text "bad links"]
+                          ]
+                        ] ++
+                        [ block "tr" [] $ mconcat
+                          [ block "td" [attr "style" "text-align: right"] $ text $ show n
+                          , block "td" []
+                            $ block "a" [attr "href" (ld_pageName page) ]
+                              $ text $ shorten 50 $ ld_pageName page
+                          , block "td" []
+                            $ case lookup (html_dir </> ld_pageName page) inp of
+                                 Nothing  -> text "ERROR"
+                                 Just FromContent   -> text "content"
+                                 Just AutoGenerated -> text "autogen"
+                                 Just Redirect      -> text "redirect"
+                                 Just Copy          -> text "copied"
+                          , block "td" [attr "style" "text-align: right"] $ ld_localURLs page
+                          , block "td" [attr "style" "text-align: right"] $ ld_remoteURLs page
+                          , block "td" [attr "style" "text-align: right"] $ ld_localURLs page_bad
+                          , block "td" [attr "style" "text-align: right"] $ ld_remoteURLs page_bad
+                          , block "td" [] $ mconcat
+                                [ text bad <> br
+                                | bad <- ld_localURLs page_bad' ++ ld_remoteURLs page_bad'
+                                ]
+
+                          ]
+                        | (n,page,page_bad,page_bad') <- zip4 [1..]
+                                                    (map (fmap markupCount) links)
+                                                    (map (fmap markupCount') bad_links)
+                                                    (bad_links)
+                        ]
+
+        let colorURLCode :: URLResponse -> HTML
+            colorURLCode (URLResponse [] n) =
+                    block "span" [attr "class" $ "badge badge-important"]
+                    $ text $ if n > 3000
+                             then "..."
+                             else "!"
+--                    $ block "i" [attr "class" "icon-warning-sign icon-white"]
+--                      $ text "" -- intentionally
+
+            colorURLCode resp@(URLResponse xs _) =
+                    mconcat $ [ block "span" [attr "class" $ "badge " ++ label] $ text $ show x
+                              | x <- xs
+                              ]
+                where label = if goodLinkCode resp
+                              then "badge-success"
+                              else "badge-important"
+
+        let timing (_,URLResponse _ t1) (_,URLResponse _ t2) = t1 `compare` t2
+
+        let link_tabel = block "table" [] $ mconcat $
+                        [ block "tr" [] $ mconcat
+                          [ block "th" [] $ text $ "#"
+                          , block "th" [] $ text $ "External URL"
+                          , block "th" [attr "style" "text-align: center"] $ mconcat [text "HTTP",br,text "code(s)"]
+                          , block "th" [attr "style" "text-align: right"] $ mconcat [text "time",br,text "ms"]
+                          ]
+                        ] ++
+                        [ block "tr" [] $ mconcat
+                          [ block "td" [attr "style" "text-align: right"] $ text $ show n
+                          , block "td" []
+                            $ block "a" [attr "href" url ]
+                              $ text $ shorten 50 $ url
+                          , block "td" [attr "style" "text-align: right"]
+                            $ colorURLCode resp
+                          , block "td" [attr "style" "text-align: right"] $ text $ show tm
+                          ]
+                        | (n,(url,resp@(URLResponse _ tm))) <- zip [1..] $ sortBy timing external_links
+                        ]
+
+        let f = block "div" [attr "class" "row"] . block "div" [attr "class" "span10  offset1"]
+
+        return $ f $ mconcat
+                [ block "h2" [] $ text "Status"
+                , text $ "Nominal"
+                , block "h2" [] $ text "Pages"
+                , page_tabel
+                , block "h2" [] $ text "External URLs"
+                , link_tabel
+                ]
+{-
+findURL :: (Monad m) => Translate Context m Node String
+findURL = promoteT $ do
+                (nm,val) <- attrT (,)
+                cxt@(Context (c:_)) <- contextT
+                tag <- KURE.apply getTag cxt c
+                case (nm,[tag]) of
+                   ("href","a":_)     -> return val
+                   ("href","link":_)  -> return val
+                   ("src","script":_) -> return val
+                   ("src","img":_)    -> return val
+                   _                  -> fail "no correct context"
+-}
+
+
+shorten n xs | length xs < n = xs
+              | otherwise     = take (n - 3) xs ++ "..."
+
+
+---------------------------------------------------------
+
+makeStatus :: ShakeVar [(String,Build)] -> Rules ()
+makeStatus meta_contents =
+        "_make/autogen/Status.html" *> \ out -> do
+                contents :: [(String,Build)] <- readShakeVar meta_contents
+                status <- generateStatus contents
+                writeFileChanged out $ show $ status
+
+-------------------------------------------------------------------------
+
+clean :: IO ()
+clean = do
+        b <- doesDirectoryExist build_dir
+        when b $ do
+           removeDirectoryRecursive build_dir
+        return ()
+
+build :: [String] -> [(String,String)] -> IO ()
+build extra redirects = do return ()
