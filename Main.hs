@@ -95,11 +95,12 @@ main2 ("build":extra) = do
 
     let prettyPage file dir = htmlPage file dir $
                             wrapTemplateFile "template/page.html" depth
+                        >>> extractR' (tryR (prunetdR (promoteR (anyBlockHTML insertTeaser))))
                         >>> extractR' (tryR (prunetdR (promoteR $ mapURL $ relativeURL depth)))
                         >>> extractR' (tryR (prunetdR $ promoteR fixTable))
+
           where
                   depth = length $ filter (== '/') file
-
 
     let myURLs = [ prettyPage (flip replaceExtension "html" $ dropDirectory1 $ file) "contents"
                  | file <- markups
