@@ -138,12 +138,14 @@ main2 ("build":extra) = do
                  ]
 
 
-
     shake shakeOptions { shakeVerbosity = Loud
                        , shakeReport = return "report.html"
                        , shakeThreads = 4
                        } $ do
 
+
+        addRedirectOracle redirects
+        chioneRules myURLs
 
         shakeVarRule meta_redirect
         shakeVarRule meta_bibtex
@@ -158,14 +160,14 @@ main2 ("build":extra) = do
                 system' "pandoc" ["-o",out,input]
 
         "_make/autogen/Sitemap.html" *> \ out -> do
-                contents :: [(String,Build)] <- readShakeVar meta_contents
-                let trees = genSiteMap "/" (map (("/" ++) . dropDirectory1 . dropDirectory1 . fst) contents)
+                contents :: [String] <- targetPages
+                let trees = genSiteMap "/" (map (("/" ++) . dropDirectory1 . dropDirectory1) contents)
                 let sitemap = mkElement (mkName "p") [] trees
                 writeFileChanged out $ (xshow [sitemap])
 
         "_make/autogen/Status.html" *> \ out -> do
-                contents :: [(String,Build)] <- readShakeVar meta_contents
-                status <- generateStatus contents
+                contents :: [String] <- targetPages
+                status <- generateStatus (map ((\ x -> (x,FromContent))) contents)
                 writeFileChanged out $ show $ status
 
         "_make/autogen/Papers/*.html" *> \ out -> do
@@ -229,9 +231,7 @@ main2 ("build":extra) = do
                         $ entries
 
 
-        mapM_ urlRules myURLs
 
-        addRedirectOracle redirects
 
 
 {-
@@ -252,7 +252,7 @@ main2 ("build":extra) = do
                   Nothing          -> error $ "can not find command to build " ++ show out
 -}
         (admin_dir ++ "//*") *> \ out -> makeHtmlHtml out "autogen"
-
+{-
         -- Require the final html files in place
         action $ do
                 build_cmds <- readShakeVar meta_contents
@@ -273,7 +273,7 @@ main2 ("build":extra) = do
                 when ("status" `elem` extra) $ do
                         need ["_make/admin/Status.html"]
                         return ()
-
+-}
 
 main2 ["clean"] = clean
 

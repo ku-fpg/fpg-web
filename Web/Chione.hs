@@ -584,13 +584,31 @@ newtype Redirect = Redirect' String deriving (Show,Typeable,Eq,Hashable,Binary,N
 getRedirect :: String -> Action String
 getRedirect = askOracle . Redirect'
 
+chioneRules :: [MyURL] -> Rules()
+chioneRules urls = do
+        mapM_ urlRules urls
+        action $ need $ map (\ (MyURL file _) -> html_dir </> file) $ urls
+        addOracle $ \ Targets{} -> return $ map (\ (MyURL file _) -> file) $ urls
+
+
+newtype Targets = Targets () deriving (Show,Typeable,Eq,Hashable,Binary,NFData)
+
+-- List of all page
+targetPages :: Action [String]
+targetPages = askOracle $ Targets ()
+
+
+----------------------
+
 addRedirectOracle :: [(String,String)] -> Rules ()
 addRedirectOracle db = addOracle $  \ (Redirect' htmlFile) ->
         case lookup htmlFile db of
           Just target -> return target
           Nothing     -> error $ "unknown redirection for file" ++ show htmlFile
 
+-- | needs addRedirectOracle
 redirectPage :: String -> MyURL
 redirectPage htmlFile = buildURL htmlFile $ \ out -> do
         target <- getRedirect htmlFile
         makeHtmlRedirect out target
+
