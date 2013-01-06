@@ -106,27 +106,13 @@ contents_dir    = build_dir </> "contents"
 
 
 -- | 'findBuildTargets' looks to find the names and build instructions for
--- the final website. It looks in the directories "site" for markdown files,
--- and "img", "js" and "css" for image, js and css files.
-findBuildTargets :: IO [(String,Build)]
-findBuildTargets = do
-        site <- getRecursiveContents "site"
-        img  <- getRecursiveContents "img"
-        js   <-  getRecursiveContents "js"
-        css  <- getRecursiveContents "css"
-        return $ [ (html_prefixed $ dropDirectory1 $ flip replaceExtension "html" $ file,FromContent)
-                 | file <- site
-                 , "site//*.markdown" ?== file
-                 ] ++
-                 [ (html_prefixed file,Copy)
-                 | file <- img ++ js ++ css
-                 , "img//*.gif" ?== file
-                        || "img//*.png" ?== file
-                        || "js//*.js" ?== file
-                        || "css//*.css" ?== file
-                 ]
-  where
-        html_prefixed = (html_dir </>)
+-- the final website. The first argument is the subdirectory to look into,
+-- the second is the suffix to find.
+
+findBuildTargets :: String -> String -> IO [String]
+findBuildTargets subdir suffix = do
+        contents <- getRecursiveContents subdir
+        return $ filter ((subdir ++ "//*." ++ suffix) ?==) $ contents
 
 
 -- (local to this module.)
@@ -558,6 +544,9 @@ build extra redirects = do return ()
 data MyURL = MyURL String                 -- name of target (without the _make/html)
                  (Rules ())               -- The rule to build this target
 
+instance Show MyURL where
+        show = urlName
+
 buildURL :: String -> (String -> Action ()) -> MyURL
 buildURL target action = MyURL target $ (== (html_dir </> target)) ?> action
 
@@ -606,7 +595,7 @@ addRedirectOracle :: [(String,String)] -> Rules ()
 addRedirectOracle db = addOracle $  \ (Redirect' htmlFile) ->
         case lookup htmlFile db of
           Just target -> return target
-          Nothing     -> error $ "unknown redirection for file" ++ show htmlFile
+          Nothing     -> error $ "unknown redirection for file " ++ show htmlFile
 
 -- | needs addRedirectOracle
 redirectPage :: String -> MyURL
