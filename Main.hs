@@ -91,10 +91,11 @@ main2 ("build":extra) = do
 
     bib <- readBibTeX "data/fpg.bib"
 
-    let autogen = ["status.html"]
+    let autogen = [] --["status.html"]
 
     let prettyPage file dir = htmlPage file dir $
                             wrapTemplateFile "template/page.html" depth
+                        >>> extractR' (tryR (prunetdR (promoteR (anyBlockHTML (divSpanExpand macro)))))
                         >>> extractR' (tryR (prunetdR (promoteR (anyBlockHTML insertTeaser))))
                         >>> extractR' (tryR (prunetdR (promoteR $ mapURL $ relativeURL depth)))
                         >>> extractR' (tryR (prunetdR $ promoteR fixTable))
@@ -117,7 +118,7 @@ main2 ("build":extra) = do
 
     print myURLs
 
-    shake shakeOptions { shakeVerbosity = Diagnostic
+    shake shakeOptions { shakeVerbosity = Normal
                        , shakeReport = return "report.html"
                        , shakeThreads = 1
                        } $ do
@@ -223,14 +224,6 @@ fixTable = do
           extractR' $ anyR $ promoteR' $ do
               ss <- attrsT idR id
               return $ attrsC (attr "class" "table table-bordered table-condensed" : ss)
-
-relativeURL :: Int -> String -> String
-relativeURL n ('/':rest) = replaceExtension (local_prefix </> rest) "html"
-  where local_prefix = concat (take n $ repeat "../")
-relativeURL n other
-  | "http://" `isPrefixOf` other
-  || "https://" `isPrefixOf` other = other
-  | otherwise                      = other
 
 -----------------------------------------------------------
 -- Find the name of all the (HTML) targets
@@ -436,7 +429,13 @@ genSiteMap dir files = concat
         , takeExtension file == ".html"
         ]
 
-
+macro :: String -> FPGM HTML
+macro "fpg-update-time" = do
+    tm <- liftActionFPGM $ liftIO $ getZonedTime
+    let txt = formatTime defaultTimeLocale rfc822DateFormat tm
+    () <- trace (show ("tm",tm,txt)) $ return ()
+    return (text txt)
+macro nm = fail $ "failed macro" ++ nm
 
 --          E.Cons {E.entryType :: String,
 --            E.identifier :: String,

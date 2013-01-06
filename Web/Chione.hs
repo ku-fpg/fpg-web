@@ -561,3 +561,24 @@ redirectPage htmlFile = buildURL htmlFile $ \ out -> do
 
 ----------------------
 
+relativeURL :: Int -> String -> String
+relativeURL n ('/':rest) = replaceExtension (local_prefix </> rest) "html"
+  where local_prefix = concat (take n $ repeat "../")
+relativeURL n other
+  | "http://" `isPrefixOf` other
+  || "https://" `isPrefixOf` other = other
+  | otherwise                      = other
+
+----------------------
+
+
+divSpanExpand :: (String -> FPGM HTML) -> T Block HTML
+divSpanExpand macro = do
+         tag <- getTag
+         () <- trace ("trace: " ++ tag) $ return ()
+         guardMsg (tag == "div" || tag == "span") "wrong tag"
+         () <- trace ("trace: " ++ show tag) $ return ()
+         cls <- getAttr "class"
+         () <- trace ("$$$$$$$$$$$$$$$$$ trace: " ++ show (tag,cls)) $ return ()
+         constT $ macro cls
+
