@@ -169,6 +169,7 @@ mapURL f = do   (nm,val) <- attrT (,)
                    ("src","img":_)    -> return $ attrC nm $ f val
                    _                  -> fail "no correct context"
 
+-- DEAD CODE
 templateToHTML :: String -> R HTML -> String -> Action ()
 templateToHTML tplName tr outFile = do
         template <- readFile' tplName
@@ -180,6 +181,7 @@ templateToHTML tplName tr outFile = do
 --
 -- > let tr = inject "Foo.hs" "contents"
 --
+-- DEAD CODE
 injectHTML :: String -> String -> R HTML
 injectHTML fileName idName = extractR' $ prunetdR (promoteR (anyBlockHTML fn))
   where
@@ -494,12 +496,28 @@ shorten n xs | length xs < n = xs
 
 
 ---------------------------------------------------------
-{-
-addTemplateFile :: String -> R HTML
-addTemplateFile fullPath = do
-        extractR' (tryR (prunetdR (promoteR $ mapURL normalizeTplURL)))
 
--}
+
+
+-- Call with the path top the wrapper template,
+-- and
+wrapTemplateFile :: String -> String -> R HTML
+wrapTemplateFile fullPath urlName = rewrite $ \ c inside -> do
+        src <- liftActionFPGM $ readFile' fullPath
+        let contents = parseHTML fullPath src
+        let count = length [ () | '/' <- urlName ]
+        let local_prefix nm = concat (take count (repeat "../")) ++ nm
+        let normalizeTplURL nm
+                -- should really check for ccs, js, img, etc.
+                | "../" `isPrefixOf` nm = local_prefix (dropDirectory1 nm)
+                | otherwise             = nm
+        let fn = do
+                "contents" <- getAttr "id"
+                return inside
+        let prog = extractR' (tryR (prunetdR (promoteR $ mapURL normalizeTplURL)))
+               >>> extractR' (prunetdR (promoteR (anyBlockHTML fn)))
+        KURE.apply prog mempty contents
+
 ---------------------------------------------------------
 
 makeStatus :: ShakeVar [(String,Build)] -> Rules ()
