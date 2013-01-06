@@ -579,8 +579,6 @@ htmlPage htmlFile srcDir processor = buildURL htmlFile $ \ out -> do
         page <- applyFPGM' processor contents
         writeFile' out $ show $ page
 
-newtype Redirect = Redirect' String deriving (Show,Typeable,Eq,Hashable,Binary,NFData)
-
 getRedirect :: String -> Action String
 getRedirect = askOracle . Redirect'
 
@@ -599,6 +597,8 @@ targetPages = askOracle $ Targets ()
 
 
 ----------------------
+
+newtype Redirect = Redirect' String deriving (Show,Typeable,Eq,Hashable,Binary,NFData)
 
 addRedirectOracle :: [(String,String)] -> Rules ()
 addRedirectOracle db = addOracle $  \ (Redirect' htmlFile) ->
