@@ -70,15 +70,14 @@ import qualified Text.Parsec as Parsec
 import System.Process
 import System.Exit
 
+import Text.HTML.KURE
+import Shake
 
 import Data.Monoid
 
 import Control.Concurrent.STM
 
 import Control.Concurrent.ParallelIO.Local
-
-import Shake
-import Text.HTML.KURE
 
 -- | 'Build' is the various ways of building a final HTML webpage.
 
@@ -565,6 +564,9 @@ buildURL target action = MyURL target $ (== (html_dir </> target)) ?> action
 urlRules :: MyURL -> Rules ()
 urlRules (MyURL _ rules) = rules
 
+urlName :: MyURL -> String
+urlName (MyURL name _) = name
+
 copyPage :: String -> MyURL
 copyPage urlFile = buildURL urlFile $ \ out -> do
         let src = dropDirectory1 $ dropDirectory1 $ out
@@ -611,4 +613,6 @@ redirectPage :: String -> MyURL
 redirectPage htmlFile = buildURL htmlFile $ \ out -> do
         target <- getRedirect htmlFile
         makeHtmlRedirect out target
+
+----------------------
 
