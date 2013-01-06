@@ -136,7 +136,6 @@ main2 ("build":extra) = do
 --                liftIO $ prepareDirectory out
                 let srcName = dropDirectory1 $ dropDirectory1 $ replaceExtension out ".markdown"
                 let input = site_dir </> srcName
-                liftIO $ print ("CONTENTS",input)
                 need [ input ]
                 system' "pandoc" ["-o",out,input]
 
@@ -275,7 +274,7 @@ debugR msg n = acceptR (\ a -> trace (msg ++ " : " ++ take n (show a)) True)
 
 
 -----------------------------------------------------------------------
-
+{-
 
 makeHtmlHtml out contents = do
 
@@ -414,11 +413,11 @@ makeHtmlHtml out contents = do
 
 --                page1 <- applyFPGM' (extractR tpl_prog) page0
 
-                templateToHTML tplName (extractR tpl_prog) out
+--                templateToHTML tplName (extractR tpl_prog) out
 
 --                traced "out1" $ writeFile out $ show page1
 
-
+-}
 
 ----------------------------------------------------
 -- ShakeVar (call them shake vars)
