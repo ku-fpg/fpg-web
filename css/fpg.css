@@ -126,4 +126,25 @@
 	background: #f0f0f0;
 }
 
+.cite-link {
+	color: #0022B4;
+	text-decoration: none;
+}
+
+.cite-link:hover {
+	background: #f0f0f0;
+	color: #E8000D;
+}
+
+.cite-link a {
+	text-decoration: none;
+	color: inherit;
+}
+
+.cite-link a:hover {
+	text-decoration: none;
+	color: inherit;
+}
+
+
 
