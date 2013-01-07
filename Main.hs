@@ -54,7 +54,6 @@ import Control.Concurrent.STM
 import Control.Concurrent.ParallelIO.Local
 
 import Text.HTML.KURE
-import Shake
 --import BibTeX
 
 import Web.Chione

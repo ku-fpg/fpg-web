@@ -9,7 +9,6 @@ import qualified Text.Parsec as Parsec
 
 
 import Data.Monoid
-import Shake
 import Text.HTML.KURE
 import Data.Hashable
 import Data.Binary
