@@ -61,6 +61,8 @@ import Web.Chione.BibTeX
 
 site_dir     = "site"
 
+bibtex_dir   = build_dir </> "bibtex"
+
 paper_page_dir = html_dir </> "Papers"
 
 -- tables about the website
@@ -91,6 +93,8 @@ main2 ("build":extra) = do
 
     let autogen = [ "papers" </> replaceExtension nm ".html"
                   | (nm,_) <- bib
+                  ] ++
+                  [ "publications.html"
                   ] ++ if "status" `elem` extra
                        then ["status.html"]
                        else []
@@ -184,6 +188,7 @@ main2 ("build":extra) = do
         "_make/bibtex/*.html-citation" *> \ out -> do
                 need [ replaceExtension out "bbl-short"
                      ]
+                -- outputs single paragraph
                 system' "pandoc" ["-f","latex",
                                   "-t", "html",
                                   replaceExtension out "bbl-short",
@@ -198,14 +203,16 @@ main2 ("build":extra) = do
                                  "-o", out ]
 
 
-        want ["_make/bibtex/GhciDebugger07.html-abstract"]
+        let citation :: String -> Action HTML
+            citation nm = do
+                txt <- readFile' (bibtex_dir </> replaceExtension nm  ".html-citation")
+                return $ parseHTML nm txt
 
 -----------------------------------------------------------
 
         "_make/autogen/papers/*.html" *> \ out -> do
                 let name = dropExtension (dropDirectory1 (dropDirectory1 (dropDirectory1 out)))
-                cite@(BibTeXCitation _ _ stuff) <- getBibTeXCitation name
-                writeFile' out $ "HELLO: " ++ show cite
+                cite <- getBibTeXCitation name
                 txt <- readFile'  $ "_make/bibtex" </> replaceExtension name "html-citation"
                 liftIO $ print ("TXT",txt)
                 let html_cite0 = parseHTML "<internal>" txt
@@ -228,6 +235,46 @@ main2 ("build":extra) = do
                                 $ text $ asciiBibText cite
                               ]
 
+        "_make/autogen/publications.html" *> \ out -> do
+
+                citations :: [(String,Int,HTML)] <- sequence
+                        [ do cite <- getBibTeXCitation nm
+                             let year = case lookupBibTexCitation "year" cite of
+                                          Just n | all isDigit n -> read n
+                                          Nothing -> 0
+                             html_txt0 <- citation nm
+                             let tr = extractR' $ allbuR $ tryR $ promoteR $ anyBlockHTML $ do
+                                        -- if the tag is "p", then just return the inside
+                                        "p" <- getTag
+                                        getInner
+
+                             html_txt1 <- applyFPGM tr html_txt0
+                             return (nm,year,html_txt1)
+                        | (nm,_) <- bib
+                        ]
+
+                let years :: [Int] = reverse $ sort $ nub [ y | (_,y,_) <- citations ]
+
+                liftIO $ print $ years
+
+                writeFile' out $ show $ mconcat
+                        [ block "div" [attr "class" "row"]
+                          $ ( block "div" [attr "class" "span1 offset1"]
+                              $ block "h3" [attr "style" "margin-top: -7px; border-top: 1px dotted;"]
+                                $ text (show year)
+                            ) <>
+                            (block "div" [attr "class" "span8"]
+                             $ block "ul" []
+                               $ htmlC [ block "li" [attr "style" "margin-bottom: 2px;"]
+                                         $ block "div" [ attr "class" "cite-link" ]
+                                         $ block "a" [ attr "href" ("papers" </> replaceExtension nm "html") ]
+                                         $ html_txt
+                                       | (nm,y,html_txt) <- citations
+                                       , y == year
+                                       ]
+                            )
+                        | year <- years
+                        ]
 
 
 main2 ["clean"] = clean
