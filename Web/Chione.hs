@@ -575,10 +575,10 @@ relativeURL n other
 divSpanExpand :: (String -> FPGM HTML) -> T Block HTML
 divSpanExpand macro = do
          tag <- getTag
-         () <- trace ("trace: " ++ tag) $ return ()
+  --       () <- trace ("trace: " ++ tag) $ return ()
          guardMsg (tag == "div" || tag == "span") "wrong tag"
-         () <- trace ("trace: " ++ show tag) $ return ()
+--         () <- trace ("trace: " ++ show tag) $ return ()
          cls <- getAttr "class"
-         () <- trace ("$$$$$$$$$$$$$$$$$ trace: " ++ show (tag,cls)) $ return ()
+---         () <- trace ("$$$$$$$$$$$$$$$$$ trace: " ++ show (tag,cls)) $ return ()
          constT $ macro cls
 
