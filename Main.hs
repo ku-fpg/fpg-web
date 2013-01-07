@@ -74,24 +74,27 @@ redirects =
 
 main = do
         args <- getArgs
---        main2 ["clean"]
         main2 args
 
 main2 ("build":extra) = do
-
---    build_cmds <- findBuildDirections
 
     markups <- findBuildTargets "site" "markdown"
 
     files_to_copy <- fmap concat $ sequence
           [ findBuildTargets "img" "jpg"
+          , findBuildTargets "img" "gif"
           , findBuildTargets "js"  "js"
           , findBuildTargets "css" "css"
           ]
 
-    bib <- readBibTeX "data/fpg.bib"
+    bib <- fmap (fmap (\ cite@(BibTeXCitation _ nm _)-> (tagToFileName nm,cite)))
+         $ readBibTeX "data/fpg.bib"
 
-    let autogen = [] --["status.html"]
+    let autogen = [ "papers" </> nm
+                  | (nm,_) <- bib
+                  ] ++ if "status" `elem` extra
+                       then ["status.html"]
+                       else []
 
     let prettyPage file dir = htmlPage file dir $
                             wrapTemplateFile "template/page.html" depth
@@ -125,7 +128,8 @@ main2 ("build":extra) = do
 
 
         addRedirectOracle redirects
-        addBibTeXOracle bib
+        addBibTeXOracle $
+                bib
 
         -- This will make all the target Files / URLs
         chioneRules myURLs
@@ -141,79 +145,35 @@ main2 ("build":extra) = do
                 need [ input ]
                 system' "pandoc" ["-o",out,input]
 
-        "_make/autogen/Sitemap.html" *> \ out -> do
-                contents :: [String] <- targetPages
-                let trees = genSiteMap "/" (map (("/" ++) . dropDirectory1 . dropDirectory1) contents)
-                let sitemap = mkElement (mkName "p") [] trees
-                writeFileChanged out $ (xshow [sitemap])
 
-{-
-        "_make/autogen/Papers/*.html" *> \ out -> do
-                need [ "data/fpg.bib" ]
-                bib <- readShakeVar meta_bibtex
-                let bib' =  [ (tagToFileName nm,(nm,dat))
-                            | (nm,dat) <- bib
-                            ]
-                case lookup (takeFileName out) bib' of
-                  Nothing -> error $ "abort: " ++ show out
-                  Just (nm,bb@(BibTeXCitation _ stuff)) -> do
-                    traced "paper-out" $ writeFile out $ show
+        "_make/autogen/papers/*.html" *> \ out -> do
+                cite@(BibTeXCitation _ _ stuff) <- getBibTeXCitation (dropDirectory1 (dropDirectory1 (dropDirectory1 out)))
+                writeFile' out $ "HELLO: " ++ show cite
+                traced "paper-out" $ writeFile out $ show
                         $ block "div" [attr "class" "row"]
                           $ block "div" [attr "class" "span8 offset2"]
                             $ htmlC
-                              [ block "p" [] (buildBibCite nm bb)
+                              [ block "p" [] (buildBibCite Nothing cite)
+                              , block "h3" [] $ text "Links"
                               , block "h3" [] $ text "Abstract"
                               , block "blockquote" [] $
                                   case lookup "abstract" stuff of
                                     Just txt -> text $ txt
                                     Nothing -> text $ "(no abstract)"
-                              , block "h3" [] $ text "BibTeXCitation"
+                              , block "h3" [] $ text "BibTeX"
                               , block "pre" [ attr "style" "font-size: 70%"]
-                                $ text $ asciiBibText nm bb
+                                $ text $ asciiBibText cite
                               ]
 
-        "_make/autogen/Publications.html" *> \ out -> do
 
-                need [ "data/fpg.bib" ]
-                bib <- readShakeVar meta_bibtex
-                let years :: [Int] = reverse $ sort $ nub
-                                [ read y
-                                | (_,BibTeXCitation _ stuff) <- bib
-                                , Just y <- [lookup "year" stuff]
-                                ]
-
-
-                let entries :: HTML
-                    entries = mconcat
-                        [ block "div" [attr "class" "row"]
-                          $ ( block "div" [attr "class" "span1 offset1"]
-                              $ block "h3" [attr "style" "margin-top: -7px; border-top: 1px dotted;"]
-                                $ text (show year)
-                            ) <>
-                            (block "div" [attr "class" "span8"]
-                             $ block "ul" []
-                               $ htmlC [ block "li" [attr "style" "margin-bottom: 2px;"]
-                                        $ buildBibCite nm dat
-                                      | (nm,dat@(BibTeXCitation _ stuff)) <- bib
-                                      , Just y <- [lookup "year" stuff]
-                                      ,         read y == year
-                                      ]
-                            )
-
-                        | year <- years
-                        ]
-
-
-                writeFile' out
-                        $ show
-                        $ entries
--}
 
 main2 ["clean"] = clean
 
 main2 _ = putStrLn $ unlines
         [ "usage:"
         , "./Main clean          clean up"
+        , "       build          build pages"
+        , "       build status   build pages; report status of pages"
         ]
 
 
@@ -225,209 +185,6 @@ fixTable = do
               ss <- attrsT idR id
               return $ attrsC (attr "class" "table table-bordered table-condensed" : ss)
 
------------------------------------------------------------
--- Find the name of all the (HTML) targets
-
-{-
-findBuildDirections :: [(String,BibTeXCitation)] -> Action [(String,Build)]
-findBuildDirections bib = do
-        site <- liftIO $ getRecursiveContents "site"
-        img  <- liftIO $ getRecursiveContents "img"
-        js   <- liftIO $ getRecursiveContents "js"
-        css  <- liftIO $ getRecursiveContents "css"
-        return $ [ (html_dir </> $ dropDirectory1 $ flip replaceExtension "html" $ file,FromContent)
-                 | file <- site
-                 , "site//*.markdown" ?== file
-                 ] ++
-                 [ (html_dir </> file,Copy)
-                 | file <- img ++ js ++ css
-                 , "img//*.gif" ?== file
-                        || "img//*.png" ?== file
-                        || "js//*.js" ?== file
-                        || "css//*.css" ?== file
-                 ] ++
-                 [ (html_dir </> file,Redirect)
-                 | file <- map fst redirects
-                 ] ++
-                 [ (html_dir </> file,AutoGenerated)
-                 | file <- ["Sitemap.html","Publications.html","admin/Status.html"]
-                 ] ++
-                 [ (html_dir </> (paper_page_dir </> tagToFileName tag),AutoGenerated)
-                 | (tag,_) <- bib
-                 ]
-
-html_dir </> :: String -> String
-html_dir </> = (build_dir </> "html" </>)
--}
------------------------------------------------------------
-
-debugR :: (Monad m, Show a) => String -> Int -> Rewrite c m a
-debugR msg n = acceptR (\ a -> trace (msg ++ " : " ++ take n (show a)) True)
-
--- change an embedded URL
-
-
------------------------------------------------------------------------
-{-
-
-makeHtmlHtml out contents = do
-
---                liftIO $ prepareDirectory out
-                let srcName = build_dir </> contents </> dropDirectory1 (dropDirectory1 out)
-                let tplName = "template" </> "page.html"
-
-                --- now get the relative name for this file.
-
-                let count = length [ () | '/' <- out ]
-                let local_prefix nm = concat (take (count - 2) (repeat "../")) ++ nm
-
---                liftIO $ print(out,count,local_prefix "")
-
-
-                -- Compute breadcrumbs
-                let path0 = [ nm | nm <- splitDirectories $ dropDirectory1 $ dropDirectory1 $  out ]
-
-                -- index itself does not have an entry, but *is* home.
-                let path1 = case path0 of
-                             ["index.html"] -> []
-                             _               -> path0
-
-                need [ srcName , tplName ]
-
-                -- next, the contents
---                liftIO $ print ("srcName",srcName)
-                src <- readFile' srcName
-                let contents = parseHTML srcName src
-
-                -- next, read the template
-                template <- readFile' tplName
-                let page0 = parseHTML tplName template
-
-                let normalizeTplURL nm
-                        -- should really check for ccs, js, img, etc.
-                        | "../" `isPrefixOf` nm = local_prefix (dropDirectory1 nm)
-                        | otherwise             = nm
-                let relativeURL ('/':rest) = replaceExtension (local_prefix rest) "html"
-                    relativeURL other      | "http://" `isPrefixOf` other
-                                          || "https://" `isPrefixOf` other = other
-                                           | otherwise = other
-
-                let macro :: String -> FPGM HTML
---                    macro "fpg-contents" = return contents
-                    macro "fpg-update-time" = do
-                            tm <- liftActionFPGM $ liftIO $ getZonedTime
-                            let txt = formatTime defaultTimeLocale rfc822DateFormat tm
---                            () <- trace (show ("tm",tm,txt)) $ return ()
-                            return (text txt)
-                    macro "fpg-sitemap" = do
---                            liftIO $ print "FPG-SITEMAP"
-                            liftActionFPGM $ do
-                                let fileName = build_dir </> "autogen" </> "Sitemap.html"
-                                need [ fileName ]
-                                txt <- readFile' fileName
---                                liftIO $ print $ "FPG: " ++ txt
-                                return $ parseHTML "Sitemap.html" txt
-
-                    macro nm | match `isPrefixOf` nm  && all isDigit rest = do
-                            liftActionFPGM $ do
-                                let fileName = build_dir </> "contents" </> "Events.html"
-                                need [ fileName ]
-                                txt <- readFile' fileName
-                                let events = parseHTML "Events.html" txt
-                                tm <- liftIO $ getZonedTime
-                                let time_txt = formatTime defaultTimeLocale "%Y" tm
-
-                                let spotH2 = do "h3" <- getTag
-                                                arr (\ x -> (True,html x))
-
-                                let up :: (Html h) => T h (Bool,HTML)
-                                    up = arr html >>> arr (\ x -> (False,x))
-
-                                xs <- applyFPGM' (htmlT (spotH2 <+ up) up up id) events
-
-                                let counts :: [Int]
-                                    counts = [ i
-                                             | ((True,_),i) <- xs `zip` [0..]
-                                             ]
-
-                                let events' = take (head (drop (read rest) counts ++ [0])) (map snd xs)
-
-                                return $ block "div" [attr "class" "fpg-event-list"]
-                                       $ mconcat events'
-
-                      where
-                        match = "fpg-recently-"
-                        rest = drop (length match) nm
-                        insert x (xs:xss) = (x : xs) : xss
-
-                    macro _             = fail "macro failure"
-
-                let macroExpand :: Translate Context FPGM Block HTML
-                    macroExpand = do
-                         tag <- getTag
-                         guardMsg (tag == "div" || tag == "span") "wrong tag"
---                         () <- trace ("trace: " ++ show tag) $ return ()
-                         cls <- getAttr "class"
---                         () <- trace ("$$$$$$$$$$$$$$$$$ trace: " ++ show (tag,cls)) $ return ()
-                         constT $ macro cls
-
-
-                let fixLandingPage :: Rewrite Context FPGM Node
-                    fixLandingPage = promoteR $ do
-                          guardMsg (path0 == ["index.html"]) "is not landing page"
-                          "body" <- getTag
-                          extractR' $ anyR $ promoteR' $ do
-                                  ss <- attrsT idR id
-                                  return $ attrsC (attr "class" "fpg-landing" : ss)
-
-
-
-                let findActive :: R Block
-                    findActive = do
-                            "li" <- getTag
-                            extractT' $ onetdT $ promoteT' $ do
-                                "a" <- getTag
-                                url <- getAttr "href"
-                                guardMsg (url == dropDirectory1 (dropDirectory1 out)) "this link is not active"
-                                return ()
-                            extractR' $ anyR $ promoteR' $ do
-                                  ss <- attrsT idR id
-                                  return $ attrsC (attr "class" "active" : ss)
-
-
-                let tpl_prog :: Rewrite Context FPGM HTML
-                    tpl_prog = extractR' (tryR (prunetdR (promoteR $ mapURL normalizeTplURL)))
-                           >>> injectHTML srcName "contents"
-                           >>> extractR' (tryR (alltdR (tryR (promoteR (anyBlockHTML (macroExpand))))))
-                           >>> extractR' (tryR (alltdR (tryR (promoteR (anyBlockHTML (insertTeaser))))))
-                           >>> extractR' (tryR (prunetdR (promoteR $ mapURL relativeURL)))
-                           >>> extractR' (tryR (alltdR (tryR (promoteR findActive))))
---                           >>> extractR' (tryR (prunetdR fixTable))
-                           >>> extractR' (tryR (prunetdR fixLandingPage))
-
---                page1 <- applyFPGM' (extractR tpl_prog) page0
-
---                templateToHTML tplName (extractR tpl_prog) out
-
---                traced "out1" $ writeFile out $ show page1
-
--}
-
-----------------------------------------------------
--- ShakeVar (call them shake vars)
-
-
-genSiteMap :: String -> [String] -> NTrees XNode
-genSiteMap dir files = concat
-        [ [ mkElement (mkName "a")
-                        [mkAttr (mkName "href") [mkText file],mkAttr (mkName "class") [mkText "label"]]
-                        [mkText $ takeFileName $ dropExtension file0]
-          , mkText " "
-          ]
-        | file <- files
-        , let file0 = tail file
-        , takeExtension file == ".html"
-        ]
 
 macro :: String -> FPGM HTML
 macro "fpg-update-time" = do
@@ -436,12 +193,4 @@ macro "fpg-update-time" = do
     () <- trace (show ("tm",tm,txt)) $ return ()
     return (text txt)
 macro nm = fail $ "failed macro" ++ nm
-
---          E.Cons {E.entryType :: String,
---            E.identifier :: String,
---            E.fields :: [(String, String)]}
-
---buildBibPage ::
--------------------------------------------------------
-
 

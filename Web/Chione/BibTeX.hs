@@ -24,10 +24,13 @@ import Control.DeepSeq
 newtype FindBibTeX = FindBibTeX String deriving (Show,Typeable,Eq,Hashable,Binary,NFData)
 
 addBibTeXOracle :: [(String,BibTeXCitation)] -> Rules ()
-addBibTeXOracle db = return ()
+addBibTeXOracle db = addOracle $ \ (FindBibTeX htmlFile) ->
+        case lookup htmlFile db of
+          Just target -> return target
+          Nothing     -> error $ "unknown bibtex page " ++ show (htmlFile,db)
 
-findBibTeXCitation :: String -> Action BibTeXCitation
-findBibTeXCitation = undefined
+getBibTeXCitation :: String -> Action BibTeXCitation
+getBibTeXCitation = askOracle . FindBibTeX
 
 -----------------------------------
 
@@ -46,14 +49,14 @@ instance Binary BibTeXCitation where
 instance NFData BibTeXCitation where
   rnf (BibTeXCitation a b cs) = rnf (a,b,cs)
 
-readBibTeX :: String -> IO [(String,BibTeXCitation)]
+readBibTeX :: String -> IO [(BibTeXCitation)]
 readBibTeX fileName = do
         txt <- readFile fileName
         let bib = Parsec.runP P.file () fileName txt
         case bib of
-          Right bibs -> return [ (B.identifier bib,BibTeXCitation (B.entryType bib)
-                                                                  (B.identifier bib)
-                                                                  (B.fields bib))
+          Right bibs -> return [ (BibTeXCitation (B.entryType bib)
+                                                 (B.identifier bib)
+                                                 (B.fields bib))
                                | bib <- bibs
                                ]
           Left msg -> fail $ show msg
@@ -61,40 +64,53 @@ readBibTeX fileName = do
 asciiBibText :: BibTeXCitation -> String
 asciiBibText (BibTeXCitation a b cs) = F.entry (B.Cons a b cs)
 
--- Build textual citatation, with link(s).
-buildBibCite :: BibTeXCitation -> HTML
-buildBibCite citation = text "{{{CITATION}}}"
+latexToString :: String -> String
+latexToString = escape
+              . filter (`notElem` "{}")
+  where escape ('\\':'\'':'e':xs) = "\233" ++ escape xs
+        escape ('J':xs) = 'X': escape xs
+        escape (x:xs) = x : escape xs
+        escape [] = []
 
-{-
-mconcat[]
-        HTML $
-        [ mkText $ names ++ ", &#8220;"
-        , mkElement (mkName "strong")
-                []
-                [mkText title]
-        , mkText $ ",&#8221; "
+
+-- Build textual citatation, with link(s).
+buildBibCite :: Maybe String -> BibTeXCitation -> HTML
+buildBibCite url citation@(BibTeXCitation _ _ stuff) = mconcat $
+        [ text' $ names ++ ", \8220"
+        , link
+            $ block "strong" []
+            $ text' title
+        , text' $ ",\8221 "
              ++ inside
              ++ publisher
              ++ location
              ++ date ++ "."
-        ] ++
-        [ mkText " "
-        , mkElement (mkName "a")
-                [ mkAttr (mkName "href") [mkText $ "/" ++ paper_page_dir ++ "/" ++ tagToFileName id]
-                , mkAttr (mkName "class") [mkText "label"]
+        ] ++ []
+{-
+        [ text " "
+        , block ( "a")
+                [ attr "href" $ "/" ++ url
+                , attr "class" $ "label"
                 ]
-                [mkText $ "Details"]
-        ] ++ concat
-        [ [ mkText " "
-          , mkElement (mkName "a")
-                [ mkAttr (mkName "href") [mkText $ url]
-                , mkAttr (mkName "class") [mkText "label"]
+                [text $ "Details"]
+        ] ++ mconcat
+        [ [ text " "
+          , block ( "a")
+                [ attr "href" url
+                , attr "class" "label"
                 ]
-                [mkText $ "Download " ++ takeExtension url]
+                [text $ "Download " ++ takeExtension url]
           ]
         | Just url <- return $ lookup "url" stuff
         ]
+-}
   where
+          text' = text . latexToString
+
+          link :: HTML -> HTML
+          link = case url of
+                   Nothing -> id
+                   Just path -> block "a" [attr "href" path]
           names = case lookup "author" stuff of
                     Just n -> n
                     Nothing -> case lookup "editor" stuff of
@@ -125,7 +141,7 @@ mconcat[]
                    (Nothing,Just y) -> y
                    (Just m,Just y) -> m ++ " " ++ y
                    _ -> ""
--}
+
 
 tagToFileName :: String -> String
 tagToFileName nm = concatMap fn nm ++ ".html"
