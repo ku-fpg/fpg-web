@@ -194,8 +194,11 @@ main2 ("build":extra) = do
 -----------------------------------------------------------
 
         "_make/autogen/papers/*.html" *> \ out -> do
-                cite@(BibTeXCitation _ _ stuff) <- getBibTeXCitation (replaceExtension (dropDirectory1 (dropDirectory1 (dropDirectory1 out))) "")
+                let name = dropExtension (dropDirectory1 (dropDirectory1 (dropDirectory1 out)))
+                cite@(BibTeXCitation _ _ stuff) <- getBibTeXCitation name
                 writeFile' out $ "HELLO: " ++ show cite
+                txt <- readFile'  $ "_make/bibtex" </> replaceExtension name "html-citation"
+                liftIO $ print ("TXT",txt)
                 traced "paper-out" $ writeFile out $ show
                         $ block "div" [attr "class" "row"]
                           $ block "div" [attr "class" "span8 offset2"]
