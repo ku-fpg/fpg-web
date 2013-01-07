@@ -144,7 +144,7 @@ buildBibCite url citation@(BibTeXCitation _ _ stuff) = mconcat $
 
 
 tagToFileName :: String -> String
-tagToFileName nm = concatMap fn nm ++ ".html"
+tagToFileName nm = concatMap fn nm -- ++ ".html"
   where
           fn ':' = "_"
           fn o   = [o]
