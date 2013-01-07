@@ -175,7 +175,7 @@ insertTeaser = do
                             need [ sub_content ]
                             sub_txt <- readFile' sub_content
                             let sub_html = parseHTML sub_content sub_txt
-                            applyFPGM' (extractT' (onetdT (promoteT findTeaser))
+                            applyFPGM (extractT' (onetdT (promoteT findTeaser))
                                         <+ return (text ("Can not find teaser in " ++ sub_content)))
                                         sub_html
 
@@ -223,7 +223,7 @@ findLinks nm = do
         txt <- readFile' nm
         let tree = parseHTML nm txt
 
-        urls <- applyFPGM' (extractT $ collectT $ promoteT' $ findURL) tree
+        urls <- applyFPGM (extractT $ collectT $ promoteT' $ findURL) tree
 
 --        liftIO $ print urls
 
@@ -522,7 +522,7 @@ htmlPage htmlFile srcDir processor = buildURL htmlFile $ \ out -> do
         need [ srcName ]
         src <- readFile' srcName
         let contents = parseHTML srcName src
-        page <- applyFPGM' processor contents
+        page <- applyFPGM processor contents
         writeFile' out $ show $ page
 
 getRedirect :: String -> Action String
@@ -599,8 +599,8 @@ applyFPGM'' t a = do
           FPGMResult a -> return a
           FPGMFail msg  -> fail msg
 
-applyFPGM' :: forall a b . Translate Context FPGM a b -> a -> Action b
-applyFPGM' t a = do
+applyFPGM :: forall a b . Translate Context FPGM a b -> a -> Action b
+applyFPGM t a = do
 
         let loop (FPGMResult a) = return a
             loop (FPGMFail msg) =  fail $ "applyFPGM " ++ msg
