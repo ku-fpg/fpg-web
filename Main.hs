@@ -171,13 +171,23 @@ main2 ("build":extra) = do
                      ]
                 systemCwd (dropFileName out) "bibtex" [dropExtension (takeFileName out)]
 
+        "_make/bibtex/*.bbl-short" *> \ out -> do
+                txt <- readFile' (replaceExtension out "bbl")
+                writeFile' out $ unlines
+                               $ filter (\ str -> not ("\\begin{thebibliography}" `isPrefixOf` str)
+                                               && not ("\\end{thebibliography}" `isPrefixOf` str)
+                                               && not ("\\bibitem" `isPrefixOf` str)
+                                               && not (all isSpace str))
+                               $ lines
+                               $ txt
+
         "_make/bibtex/*.html-citation" *> \ out -> do
-                need [ replaceExtension out "bbl"
+                need [ replaceExtension out "bbl-short"
                      ]
                 system' "pandoc" ["-f","latex",
-                                 "-t", "html",
-                                 replaceExtension out "bbl",
-                                 "-o", out ]
+                                  "-t", "html",
+                                  replaceExtension out "bbl-short",
+                                  "-o", out ]
 
         "_make/bibtex/*.html-abstract" *> \ out -> do
                 need [ replaceExtension out "abstract"
@@ -198,17 +208,21 @@ main2 ("build":extra) = do
                 writeFile' out $ "HELLO: " ++ show cite
                 txt <- readFile'  $ "_make/bibtex" </> replaceExtension name "html-citation"
                 liftIO $ print ("TXT",txt)
+                let html_cite0 = parseHTML "<internal>" txt
+
+                txt <- readFile'  $ "_make/bibtex" </> replaceExtension name "html-abstract"
+                let html_abstract = parseHTML "<internal>" txt
+
                 traced "paper-out" $ writeFile out $ show
                         $ block "div" [attr "class" "row"]
                           $ block "div" [attr "class" "span8 offset2"]
                             $ htmlC
-                              [ block "p" [] (buildBibCite Nothing cite)
+                              [ block "div" [attr "class" "well"]
+                                $ html_cite0
                               , block "h3" [] $ text "Links"
+                              , mconcat [ ]
                               , block "h3" [] $ text "Abstract"
-                              , block "blockquote" [] $
-                                  case lookup "abstract" stuff of
-                                    Just txt -> text $ txt
-                                    Nothing -> text $ "(no abstract)"
+                              , html_abstract
                               , block "h3" [] $ text "BibTeX"
                               , block "pre" [ attr "style" "font-size: 70%"]
                                 $ text $ asciiBibText cite
