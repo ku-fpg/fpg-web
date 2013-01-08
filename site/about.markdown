@@ -22,10 +22,15 @@ needs.
 Joining the Lab
 ---------------
 
-New members are always welcome. Typically, at the graduate level you
+New members (that are already at KU) are always welcome. Typically, at the graduate level you
 will need some experience in Haskell (for example, via [EECS 776](/Members/AndyGill/Teaching/EECS776)).
 Email Professor Gill for a discussion.
 
+If you are not at KU, and are not planning on applying to KU,
+then please outline how you know Haskell, or another functional
+language. The lab does not offer scholarships to outside students,
+though we have people join from other graduate programs from
+time to time.
 
 </div><div class="span6">
 
@@ -79,6 +84,11 @@ Who                                                                             
 [Anders Persson](http://www.chalmers.se/cse/EN/people/persson-anders)           Oct 2011                Chalmers
 [Jun Inoue](http://www.owlnet.rice.edu/~ji2)                                    Oct/Nov 2010            Rice University
 ------------------------------------------------------------                    ----------              ------------
+
+## Visits
+
+This semester (Spring 2012), Andrew Farmer is spending time at Portland State University,
+working with the FP group there.
 
 </div></div>
 
