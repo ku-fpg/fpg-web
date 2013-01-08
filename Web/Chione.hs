@@ -242,7 +242,7 @@ findLinks nm = do
 
 
 data URLResponse
-        = URLResponse [Int] Int
+        = URLResponse { respCodes :: [Int], respTime :: Int }
         deriving Show
 
 -- | Check external link for viability. Returns time in ms, and list of codes returned; redirections are followed.
@@ -250,10 +250,16 @@ data URLResponse
 getURLResponse :: String -> IO URLResponse
 getURLResponse url | "http://scholar.google.com/" `isPrefixOf` url = return $ URLResponse [200] 999
 getURLResponse url = do
-
+      urlRep <- response1
+      case respCodes urlRep of
+         [405] -> do urlRep' <- response2
+                     return $ URLResponse ([405] ++ respCodes urlRep') (respTime urlRep + respTime urlRep')
+         _ -> return urlRep
+  where
+      response1 = do
         tm1 <- getCurrentTime
         (res,out,err) <- readProcessWithExitCode "curl"
-                                ["curl","-A","Other","-L","-m","5","-s","--head",url]
+                                ["-A","Other","-L","-m","5","-s","--head",url]
                                 ""
         tm2 <- getCurrentTime
         let code = concat
@@ -261,7 +267,24 @@ getURLResponse url = do
                   ("HTTP/1.1":n:_) | all isDigit n  -> [read n :: Int]
                   _                                 -> [])
                $ map words
-               $  lines
+               $ lines
+               $ filter (/= '\r')
+               $ out
+        return $ URLResponse code (floor (diffUTCTime tm2 tm1 * 1000))
+      response2 = do
+        tm1 <- getCurrentTime
+        (res,out,err) <- readProcessWithExitCode "curl"
+                                 ["-A","Other","-L","-m","5","-s",
+                                  "-o","/dev/null","-i","-w","%{http_code}",
+                                  url]
+                                ""
+        tm2 <- getCurrentTime
+        let code = concat
+               $ map (\ case
+                  (n:_) | all isDigit n  -> [read n :: Int]
+                  _                                 -> [])
+               $ map words
+               $ lines
                $ filter (/= '\r')
                $ out
         return $ URLResponse code (floor (diffUTCTime tm2 tm1 * 1000))
