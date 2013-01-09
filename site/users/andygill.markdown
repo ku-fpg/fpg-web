@@ -1,16 +1,6 @@
-![](http://www.ittc.ku.edu/csdl/fpg/sites/default/files/me.jpg)
 
-<div class="row"><div class="span6 offset1">
+<div class="row"><div class="span4">
 
-<blockquote class="x-pull-right">
-<address style="font-size: 15pt; line-height: 20pt; text-align: left">
-<strong>Andy Gill</strong><br>
-Assistant Professor<br>
-[Electrical Engineering and Computer Science](http://www.eecs.ku.edu/)<br>
-[School of Engineering](http://www.engr.ku.edu/)<br>
-[The University of Kansas](http://www.ku.edu/)</address></blockquote>
-
-</div><div class="span4 offset1">
 
 --------------- -----------------------------
 <b>Email:<b>    andygill at ku.edu
@@ -31,9 +21,24 @@ Office hours:   Wednesday 2:00-4:00 <BR>
                  (or by appointment)
 --------------- -----------------------------
 
-        
-</div></div>
+</div><div class="span6 offset0">
 
+<blockquote style="push-right">
+<address style="font-size: 15pt; line-height: 20pt; text-align: left">
+<strong>Andy Gill</strong><br>
+Assistant Professor<br>
+[Electrical Engineering and Computer Science](http://www.eecs.ku.edu/)<br>
+[School of Engineering](http://www.engr.ku.edu/)<br>
+[The University of Kansas](http://www.ku.edu/)</address></blockquote>
+
+
+</div><div class="span2">
+
+<div class="pull-right">
+<img src="http://www.ittc.ku.edu/csdl/fpg/sites/default/files/me.jpg" class="img-rounded"/>
+</div>
+
+</div></div>
 
 <div class="row"><div class="span6">
 
@@ -149,12 +154,12 @@ University of Kansas and the Information and Telecommunication
 Technology Center.
 
 Andy believes that functional languages like Haskell are a great medium
-for expressing algorithms and solving problems. Since returning to
-academia, he has targeted the application area of telemetry,
-specializing in generating circuits from specifications. His research
-interests include optimization, language design, debugging, and
-dependability. The long-term goal of his research is to offer software
-engineers and functional language practitioners the opportunity to write
+for expressing algorithms and solving problems.
+Since returning to academia, he has targeted the application areas of
+telemetry and signal processing, specializing in generating high performance
+circuits from specifications. His research interests include optimization,
+language design, debugging, and dependability. The long-term goal of his
+research is to offer engineers and practitioners the opportunity to write
 clear and high-level executable specifications that can realistically be
 compiled into efficient implementations.
 
