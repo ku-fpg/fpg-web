@@ -103,8 +103,8 @@ main2 ("build":extra) = do
 
     let prettyPage file dir = htmlPage file dir $
                             wrapTemplateFile "template/page.html" depth
-                        >>> extractR' (tryR (prunetdR (promoteR (anyBlockHTML (divSpanExpand macro)))))
-                        >>> extractR' (tryR (prunetdR (promoteR (anyBlockHTML insertTeaser))))
+                        >>> extractR' (tryR (prunetdR (promoteR (anyElementHTML (divSpanExpand macro)))))
+                        >>> extractR' (tryR (prunetdR (promoteR (anyElementHTML insertTeaser))))
                         >>> extractR' (tryR (prunetdR (promoteR $ mapURL $ relativeURL depth)))
                         >>> extractR' (tryR (prunetdR $ promoteR fixTable))
 
@@ -223,18 +223,18 @@ main2 ("build":extra) = do
                 txt <- readFile'  $ "_make/bibtex" </> replaceExtension name "html-abstract"
                 let html_abstract = parseHTML "<internal>" txt
 
-                let badge = block "span" [attr "class" $ "badge badge-info"] . text
+                let badge = element "span" [attr "class" $ "badge badge-info"] . text
 
                 traced "paper-out" $ writeFile out $ show
-                        $ block "div" [attr "class" "row"]
-                          $ block "div" [attr "class" "span8 offset2"]
+                        $ element "div" [attr "class" "row"]
+                          $ element "div" [attr "class" "span8 offset2"]
                             $ htmlC
-                              [ block "div" [attr "class" "well"]
+                              [ element "div" [attr "class" "well"]
                                 $ html_cite0
-                              , block "h3" [] $ text "Links"
-                              , block "ul" [] $ mconcat $
-                                   [ block "li" [] $
-                                     mconcat [ block "a" [ attr "href" url ] $ text url
+                              , element "h3" [] $ text "Links"
+                              , element "ul" [] $ mconcat $
+                                   [ element "li" [] $
+                                     mconcat [ element "a" [ attr "href" url ] $ text url
                                              , if "http://doi.acm.org/" `isPrefixOf` url
                                              then text " " <> badge "ACM DL"
                                           else if site_url `isPrefixOf` url
@@ -244,10 +244,10 @@ main2 ("build":extra) = do
                                    | Just url <- [ lookupBibTexCitation f cite | f <- ["url","xurl"] ]
 
                                    ] ++ []
-                              , block "h3" [] $ text "Abstract"
+                              , element "h3" [] $ text "Abstract"
                               , html_abstract
-                              , block "h3" [] $ text "BibTeX"
-                              , block "pre" [ attr "style" "font-size: 70%"]
+                              , element "h3" [] $ text "BibTeX"
+                              , element "pre" [ attr "style" "font-size: 70%"]
                                 $ text $ asciiBibText $ filterBibTexCitation
                                                       (\ tag -> tag /= "abstract" && head tag /= 'X')
                                                       $ cite
@@ -261,7 +261,7 @@ main2 ("build":extra) = do
                                           Just n | all isDigit n -> read n
                                           Nothing -> 0
                              html_txt0 <- citation nm
-                             let tr = extractR' $ allbuR $ tryR $ promoteR $ anyBlockHTML $ do
+                             let tr = extractR' $ allbuR $ tryR $ promoteR $ anyElementHTML $ do
                                         -- if the tag is "p", then just return the inside
                                         "p" <- getTag
                                         getInner
@@ -276,16 +276,16 @@ main2 ("build":extra) = do
                 liftIO $ print $ years
 
                 writeFile' out $ show $ mconcat
-                        [ block "div" [attr "class" "row"]
-                          $ ( block "div" [attr "class" "span1 offset1"]
-                              $ block "h3" [attr "style" "margin-top: -7px; border-top: 1px dotted;"]
+                        [ element "div" [attr "class" "row"]
+                          $ ( element "div" [attr "class" "span1 offset1"]
+                              $ element "h3" [attr "style" "margin-top: -7px; border-top: 1px dotted;"]
                                 $ text (show year)
                             ) <>
-                            (block "div" [attr "class" "span8"]
-                             $ block "ul" []
-                               $ htmlC [ block "li" [attr "style" "margin-bottom: 2px;"]
-                                         $ block "div" [ attr "class" "cite-link" ]
-                                         $ block "a" [ attr "href" ("papers" </> replaceExtension nm "html") ]
+                            (element "div" [attr "class" "span8"]
+                             $ element "ul" []
+                               $ htmlC [ element "li" [attr "style" "margin-bottom: 2px;"]
+                                         $ element "div" [ attr "class" "cite-link" ]
+                                         $ element "a" [ attr "href" ("papers" </> replaceExtension nm "html") ]
                                          $ html_txt
                                        | (nm,y,html_txt) <- citations
                                        , y == year
@@ -311,7 +311,7 @@ macros (x:xs) = x : macros xs
 macros [] = []
 
 
-fixTable :: Rewrite Context FPGM Block
+fixTable :: Rewrite Context FPGM Element
 fixTable = do
           "table" <- getTag
           extractR' $ anyR $ promoteR' $ do

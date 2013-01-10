@@ -149,9 +149,9 @@ mapURL f = do   (nm,val) <- attrT (,)
 --
 -- DEAD CODE
 injectHTML :: String -> String -> R HTML
-injectHTML fileName idName = extractR' $ prunetdR (promoteR (anyBlockHTML fn))
+injectHTML fileName idName = extractR' $ prunetdR (promoteR (anyElementHTML fn))
   where
-        fn :: T Block HTML
+        fn :: T Element HTML
         fn = do nm <- getAttr "id"
                 debugR 100 $ show ("inject",idName,nm)
                 if nm == idName
@@ -162,7 +162,7 @@ injectHTML fileName idName = extractR' $ prunetdR (promoteR (anyBlockHTML fn))
                 else fail "no match"
 
 
-insertTeaser :: T Block HTML
+insertTeaser :: T Element HTML
 insertTeaser = do
                     "a"       <- getTag
                     "teaser"  <- getAttr "class"
@@ -181,14 +181,14 @@ insertTeaser = do
 
                     return $ mconcat
                            [ inside_content
-                           , block "a" [ attr "href" ('/':url)
+                           , element "a" [ attr "href" ('/':url)
                                        , attr "class" "label"
                                        ]
                                        inside
                            ]
 
   where
-          findTeaser :: T Block HTML
+          findTeaser :: T Element HTML
           findTeaser = do
                       "div" <- getTag
                       "teaser" <- getAttr "class"
@@ -368,35 +368,35 @@ orange:fpg-web andy$ curl -s --head http://www.haskell.org/
             markupCount = text . show . length
 
             markupCount' :: [a] -> HTML
-            markupCount' xs = block "span" [attr "class" $ "badge " ++ label] $ text (show len)
+            markupCount' xs = element "span" [attr "class" $ "badge " ++ label] $ text (show len)
                  where len = length xs
                        label = if len == 0 then "badge-success" else "badge-important"
 
         let bad_links = map findBadLinks links
 
-            br = block "br" [] mempty
+            br = element "br" [] mempty
 
-        let page_tabel = block "table" [] $ mconcat $
-                        [ block "tr" [] $ mconcat
-                          [ block "th" [] $ text $ "#"
-                          , block "th" [] $ text $ "Page Name"
-                          , block "th" [attr "style" "text-align: right"] $ mconcat [text "local",br,text "links"]
-                          , block "th" [attr "style" "text-align: right"] $ mconcat [text "extern",br,text "links"]
-                          , block "th" [attr "style" "text-align: right"] $ mconcat [text "local",br,text "fail"]
-                          , block "th" [attr "style" "text-align: right"] $ mconcat [text "extern",br,text "fail"]
-                          , block "th" [attr "style" "text-align: center"] $ mconcat [text "bad links"]
+        let page_tabel = element "table" [] $ mconcat $
+                        [ element "tr" [] $ mconcat
+                          [ element "th" [] $ text $ "#"
+                          , element "th" [] $ text $ "Page Name"
+                          , element "th" [attr "style" "text-align: right"] $ mconcat [text "local",br,text "links"]
+                          , element "th" [attr "style" "text-align: right"] $ mconcat [text "extern",br,text "links"]
+                          , element "th" [attr "style" "text-align: right"] $ mconcat [text "local",br,text "fail"]
+                          , element "th" [attr "style" "text-align: right"] $ mconcat [text "extern",br,text "fail"]
+                          , element "th" [attr "style" "text-align: center"] $ mconcat [text "bad links"]
                           ]
                         ] ++
-                        [ block "tr" [] $ mconcat
-                          [ block "td" [attr "style" "text-align: right"] $ text $ show n
-                          , block "td" []
-                            $ block "a" [attr "href" (ld_pageName page) ]
+                        [ element "tr" [] $ mconcat
+                          [ element "td" [attr "style" "text-align: right"] $ text $ show n
+                          , element "td" []
+                            $ element "a" [attr "href" (ld_pageName page) ]
                               $ text $ shorten 50 $ ld_pageName page
-                          , block "td" [attr "style" "text-align: right"] $ ld_localURLs page
-                          , block "td" [attr "style" "text-align: right"] $ ld_remoteURLs page
-                          , block "td" [attr "style" "text-align: right"] $ ld_localURLs page_bad
-                          , block "td" [attr "style" "text-align: right"] $ ld_remoteURLs page_bad
-                          , block "td" [] $ mconcat
+                          , element "td" [attr "style" "text-align: right"] $ ld_localURLs page
+                          , element "td" [attr "style" "text-align: right"] $ ld_remoteURLs page
+                          , element "td" [attr "style" "text-align: right"] $ ld_localURLs page_bad
+                          , element "td" [attr "style" "text-align: right"] $ ld_remoteURLs page_bad
+                          , element "td" [] $ mconcat
                                 [ text bad <> br
                                 | bad <- ld_localURLs page_bad' ++ ld_remoteURLs page_bad'
                                 ]
@@ -410,15 +410,15 @@ orange:fpg-web andy$ curl -s --head http://www.haskell.org/
 
         let colorURLCode :: URLResponse -> HTML
             colorURLCode (URLResponse [] n) =
-                    block "span" [attr "class" $ "badge badge-important"]
+                    element "span" [attr "class" $ "badge badge-important"]
                     $ text $ if n > 3000
                              then "..."
                              else "!"
---                    $ block "i" [attr "class" "icon-warning-sign icon-white"]
+--                    $ element "i" [attr "class" "icon-warning-sign icon-white"]
 --                      $ text "" -- intentionally
 
             colorURLCode resp@(URLResponse xs _) =
-                    mconcat $ [ block "span" [attr "class" $ "badge " ++ label] $ text $ show x
+                    mconcat $ [ element "span" [attr "class" $ "badge " ++ label] $ text $ show x
                               | x <- xs
                               ]
                 where label = if goodLinkCode resp
@@ -427,36 +427,37 @@ orange:fpg-web andy$ curl -s --head http://www.haskell.org/
 
         let timing (_,URLResponse _ t1) (_,URLResponse _ t2) = t1 `compare` t2
 
-        let link_tabel = block "table" [] $ mconcat $
-                        [ block "tr" [] $ mconcat
-                          [ block "th" [] $ text $ "#"
-                          , block "th" [] $ text $ "External URL"
-                          , block "th" [attr "style" "text-align: center"] $ mconcat [text "HTTP",br,text "code(s)"]
-                          , block "th" [attr "style" "text-align: right"] $ mconcat [text "time",br,text "ms"]
+        let link_tabel = element "table" [] $ mconcat $
+                        [ element "tr" [] $ mconcat
+                          [ element "th" [] $ text $ "#"
+                          , element "th" [] $ text $ "External URL"
+                          , element "th" [attr "style" "text-align: center"] $ mconcat [text "HTTP",br,text "code(s)"]
+                          , element "th" [attr "style" "text-align: right"] $ mconcat [text "time",br,text "ms"]
                           ]
                         ] ++
-                        [ block "tr" [] $ mconcat
-                          [ block "td" [attr "style" "text-align: right"] $ text $ show n
-                          , block "td" []
-                            $ block "a" [attr "href" url ]
+                        [ element "tr" [] $ mconcat
+                          [ element "td" [attr "style" "text-align: right"] $ text $ show n
+                          , element "td" []
+                            $ element "a" [attr "href" url ]
                               $ text $ shorten 50 $ url
-                          , block "td" [attr "style" "text-align: right"]
+                          , element "td" [attr "style" "text-align: right"]
                             $ colorURLCode resp
-                          , block "td" [attr "style" "text-align: right"] $ text $ show tm
+                          , element "td" [attr "style" "text-align: right"] $ text $ show tm
                           ]
                         | (n,(url,resp@(URLResponse _ tm))) <- zip [1..] $ sortBy timing external_links
                         ]
 
-        let f = block "div" [attr "class" "row"] . block "div" [attr "class" "span10  offset1"]
+        let f = element "div" [attr "class" "row"] . element "div" [attr "class" "span10  offset1"]
 
         return $ f $ mconcat
-                [ block "h2" [] $ text "Status"
+                [ element "h2" [] $ text "Status"
                 , text $ "Nominal"
-                , block "h2" [] $ text "Pages"
+                , element "h2" [] $ text "Pages"
                 , page_tabel
-                , block "h2" [] $ text "External URLs"
+                , element "h2" [] $ text "External URLs"
                 , link_tabel
                 ]
+
 {-
 findURL :: (Monad m) => Translate Context m Node String
 findURL = promoteT $ do
@@ -495,7 +496,7 @@ wrapTemplateFile fullPath count = rewrite $ \ c inside -> do
                 "contents" <- getAttr "id"
                 return inside
         let prog = extractR' (tryR (prunetdR (promoteR $ mapURL normalizeTplURL)))
-               >>> extractR' (prunetdR (promoteR (anyBlockHTML fn)))
+               >>> extractR' (prunetdR (promoteR (anyElementHTML fn)))
         KURE.apply prog mempty contents
 
 ---------------------------------------------------------
@@ -594,7 +595,7 @@ relativeURL n other
 ----------------------
 
 
-divSpanExpand :: (String -> FPGM HTML) -> T Block HTML
+divSpanExpand :: (String -> FPGM HTML) -> T Element HTML
 divSpanExpand macro = do
          tag <- getTag
   --       () <- trace ("trace: " ++ tag) $ return ()
