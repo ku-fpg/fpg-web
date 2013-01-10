@@ -22,7 +22,7 @@ import Control.DeepSeq
 
 newtype FindBibTeX = FindBibTeX String deriving (Show,Typeable,Eq,Hashable,Binary,NFData)
 
-addBibTeXOracle :: [(String,BibTeXCitation)] -> Rules ()
+addBibTeXOracle :: [(String,BibTeXCitation)] -> Rules (FindBibTeX -> Action BibTeXCitation)
 addBibTeXOracle db = addOracle $ \ (FindBibTeX htmlFile) ->
         case lookup htmlFile db of
           Just target -> return target

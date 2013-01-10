@@ -558,7 +558,7 @@ chioneRules urls = do
         action $ liftIO $ print ("chioneRules", map (\ (MyURL file _) -> html_dir </> file) $ urls)
         action $ need $ map (\ (MyURL file _) -> html_dir </> file) $ urls
         addOracle $ \ Targets{} -> return $ map (\ (MyURL file _) -> file) $ urls
-
+        return ()
 
 newtype Targets = Targets () deriving (Show,Typeable,Eq,Hashable,Binary,NFData)
 
@@ -571,10 +571,13 @@ targetPages = askOracle $ Targets ()
 newtype Redirect = Redirect' String deriving (Show,Typeable,Eq,Hashable,Binary,NFData)
 
 addRedirectOracle :: [(String,String)] -> Rules ()
-addRedirectOracle db = addOracle $  \ (Redirect' htmlFile) ->
+addRedirectOracle db = do
+    addOracle $  \ (Redirect' htmlFile) ->
         case lookup htmlFile db of
           Just target -> return target
           Nothing     -> error $ "unknown redirection for file " ++ show htmlFile
+    return ()
+
 
 -- | needs addRedirectOracle
 redirectPage :: String -> MyURL
