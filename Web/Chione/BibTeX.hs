@@ -67,6 +67,10 @@ asciiBibText (BibTeXCitation a b cs) = F.entry (B.Cons a b cs)
 lookupBibTexCitation :: String -> BibTeXCitation -> Maybe String
 lookupBibTexCitation nm (BibTeXCitation a b cs) = lookup nm cs
 
+filterBibTexCitation :: (String -> Bool) -> BibTeXCitation -> BibTeXCitation
+filterBibTexCitation fn  (BibTeXCitation a b cs) =  BibTeXCitation a b (filter (fn . fst) cs)
+
+
 tagToFileName :: String -> String
 tagToFileName nm = concatMap fn nm -- ++ ".html"
   where
