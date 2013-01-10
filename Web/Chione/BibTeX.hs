@@ -1,6 +1,17 @@
 {-# LANGUAGE FlexibleInstances, GeneralizedNewtypeDeriving, DeriveDataTypeable, MultiParamTypeClasses, ScopedTypeVariables, LambdaCase, InstanceSigs, FlexibleContexts #-}
 
-module Web.Chione.BibTeX where
+module Web.Chione.BibTeX
+        ( FindBibTeX
+        , addBibTeXOracle
+        , getBibTeXCitation
+        , BibTeXCitation                -- abstract
+        , readBibTeX
+        , asciiBibText
+        , lookupBibTexCitation
+        , filterBibTexCitation
+        , getBibTexCitationTag
+        , tagToFileName
+) where
 
 import qualified Text.BibTeX.Entry as B
 import qualified Text.BibTeX.Parse as P
@@ -70,7 +81,11 @@ lookupBibTexCitation nm (BibTeXCitation a b cs) = lookup nm cs
 filterBibTexCitation :: (String -> Bool) -> BibTeXCitation -> BibTeXCitation
 filterBibTexCitation fn  (BibTeXCitation a b cs) =  BibTeXCitation a b (filter (fn . fst) cs)
 
+getBibTexCitationTag :: BibTeXCitation -> String
+getBibTexCitationTag (BibTeXCitation _ b _) = b
 
+
+-- Try and normalize the name to something reasonable.
 tagToFileName :: String -> String
 tagToFileName nm = concatMap fn nm -- ++ ".html"
   where
