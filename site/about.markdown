@@ -42,7 +42,6 @@ Robert F Blair                                                  HERMIT/Android  
 Jan Bracker                                                     HERMIT/Sunroof                  MS exchange student
 [Andrew Farmer](/users/andrewfarmer)                            HERMIT                          PhD, expected 2014
 Patrick G Flor                                                  HERMIT/Android                  BS CS
-Nicolas Frisby                                                  HERMIT                          Post-PhD
 [Andy Gill](/Users/AndyGill)                                    HERMIT &amp; KansasLava         PI / Faculty
 Adam Howell                                                     HERMIT/Android                  BS CS
 [Ed Komp](http://www.ittc.ku.edu/view_contact.phtml?id=28)      HERMIT                          Staff
@@ -66,10 +65,11 @@ These are people who has worked for or with FPG in some capacity.
 
 Who                                                     What                    Where after FPG
 -----------                                             -----                   ---------
-Tristan Bull                                            HFEC, MS 2011
-[Garrin Kimmell](http://www.ittc.ku.edu/~kimmell/)      HFEC, PostDoc           University of Iowa
-Kevin Matlage                                           ChalkBoard, MS 2011
-Patrick Miller                                          Lambda Bridge, BS 2012    PhD student, ????
+Tristan Bull                                            HFEC, MS 2011           Industry
+Nicolas Frisby                                          HERMIT, after PhD        MSR Cambridge
+[Garrin Kimmell](http://www.ittc.ku.edu/~kimmell/)      HFEC, PostDoc           PostDoc, University of Iowa
+Kevin Matlage                                           ChalkBoard, MS 2011     Industry
+Patrick Miller                                          Lambda Bridge, BS 2012  PhD student, Notre Dame
 Brandon Smith                                           ChalkBoard, BS 2011
 -----------                                             ------                  --------
 
