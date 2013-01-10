@@ -59,6 +59,8 @@ import Text.HTML.KURE
 import Web.Chione
 import Web.Chione.BibTeX
 
+site_url     = "http://www.ittc.ku.edu/csdl/fpg"
+
 site_dir     = "site"
 
 bibtex_dir   = build_dir </> "bibtex"
@@ -221,6 +223,8 @@ main2 ("build":extra) = do
                 txt <- readFile'  $ "_make/bibtex" </> replaceExtension name "html-abstract"
                 let html_abstract = parseHTML "<internal>" txt
 
+                let badge = block "span" [attr "class" $ "badge badge-info"] . text
+
                 traced "paper-out" $ writeFile out $ show
                         $ block "div" [attr "class" "row"]
                           $ block "div" [attr "class" "span8 offset2"]
@@ -228,12 +232,25 @@ main2 ("build":extra) = do
                               [ block "div" [attr "class" "well"]
                                 $ html_cite0
                               , block "h3" [] $ text "Links"
-                              , mconcat [ ]
+                              , block "ul" [] $ mconcat $
+                                   [ block "li" [] $
+                                     mconcat [ block "a" [ attr "href" url ] $ text url
+                                             , if "http://doi.acm.org/" `isPrefixOf` url
+                                             then text " " <> badge "ACM DL"
+                                          else if site_url `isPrefixOf` url
+                                             then text " " <> badge ("local "++ takeExtension url)
+                                             else mempty
+                                             ]
+                                   | Just url <- [ lookupBibTexCitation f cite | f <- ["url","xurl"] ]
+
+                                   ] ++ []
                               , block "h3" [] $ text "Abstract"
                               , html_abstract
                               , block "h3" [] $ text "BibTeX"
                               , block "pre" [ attr "style" "font-size: 70%"]
-                                $ text $ asciiBibText cite
+                                $ text $ asciiBibText $ filterBibTexCitation
+                                                      (\ tag -> tag /= "abstract" && head tag /= 'X')
+                                                      $ cite
                               ]
 
         "_make/autogen/publications.html" *> \ out -> do
