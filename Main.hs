@@ -25,6 +25,7 @@ import Data.Time.Format
 import System.Locale
 
 import Language.KURE.Walker
+import Language.KURE.Debug
 
 import qualified Language.KURE as KURE
 import Language.KURE hiding (apply)
@@ -87,6 +88,7 @@ main2 ("build":extra) = do
                         >>> insertTeasers
                         >>> fixURLs depth
                         >>> fixTables
+                        >>> fixActiveLinks file
 
           where
                   depth = length $ filter (== '/') file
@@ -108,7 +110,7 @@ main2 ("build":extra) = do
 
     shake shakeOptions { shakeVerbosity = Normal
                        , shakeReport = return "report.html"
-                       , shakeThreads = 4
+                       , shakeThreads = 1
                        } $ do
 
 
@@ -316,6 +318,31 @@ fixTables = extractR' $ tryR $ prunetdR $ promoteR $ do
                   extractR' $ anyR $ promoteR' $ do
                           ss <- attrsT idR id
                           return $ attrsC (attr "class" "table table-bordered table-condensed" : ss)
+
+
+
+fixActiveLinks :: String -> R HTML
+fixActiveLinks file = tryR $ extractR' $ anytdR (promoteR is_nav_ul >>> anytdR (promoteR new_li >>> anytdR (promoteR active_link)))
+
+   where
+        is_nav_ul :: R Element
+        is_nav_ul = do
+           "ul" <- getTag
+           cls <- getAttr "class"
+           if "nav" `elem` words cls then idR else fail "not class nav"
+
+        new_li :: R Element
+        new_li = do
+           "li" <- getTag
+           setAttr "class" $ appendClass "active"
+
+        active_link :: R Element
+        active_link = do
+                "a" <- getTag
+                url <- getAttr "href"
+                if url == file then idR else fail "not fount active URL"
+
+
 
 -------------------------------------------------------------------------------------------------
 -- To roll into std library
