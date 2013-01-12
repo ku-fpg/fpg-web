@@ -160,6 +160,9 @@ main2 ("build":extra) = do
 
         "_make/bibtex/*.bbl-short" *> \ out -> do
                 txt <- readFile' (replaceExtension out "bbl")
+                let macros xs | "\\doi{" `isPrefixOf` xs = "doi: \\texttt{" ++ macros (drop 5 xs)
+                    macros (x:xs) = x : macros xs
+                    macros [] = []
                 writeFile' out $ unlines
                                $ map macros
                                $ takeWhile (not . all isSpace)                  -- take until first blank line
@@ -287,9 +290,6 @@ main2 _ = putStrLn $ unlines
 
 
 
-macros xs | "\\doi{" `isPrefixOf` xs = "doi: \\texttt{" ++ macros (drop 5 xs)
-macros (x:xs) = x : macros xs
-macros [] = []
 
 -- Here are the pretty-fication passes
 
