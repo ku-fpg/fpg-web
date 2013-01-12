@@ -49,9 +49,10 @@ paper_page_dir = html_dir </> "Papers"
 
 -- tables about the website
 
+-- Note we also use .htaccess to provide legacy links
 redirects :: [(String,String)]
 redirects =
-        [("Tools.html","Software.html")]
+        [("tools.html","software.html")]
 
 -- The Makefile part
 
@@ -77,16 +78,15 @@ main2 ("build":extra) = do
                   | (nm,_) <- bib
                   ] ++
                   [ "publications.html"
-                  ] ++ if "status" `elem` extra
-                       then ["status.html"]
-                       else []
+                  ] ++
+                  [ "status.html" | "status" `elem` extra ]
 
     let prettyPage file dir = htmlPage file dir $
                             wrapTemplateFile "template/page.html" depth
-                        >>> extractR' (tryR (prunetdR (promoteR (anyElementHTML (divSpanExpand macro)))))
-                        >>> extractR' (tryR (prunetdR (promoteR (anyElementHTML insertTeaser))))
-                        >>> extractR' (tryR (prunetdR (promoteR $ mapURL $ relativeURL depth)))
-                        >>> extractR' (tryR (prunetdR $ promoteR fixTable))
+                        >>> expandMacros
+                        >>> insertTeasers
+                        >>> fixURLs depth
+                        >>> fixTables
 
           where
                   depth = length $ filter (== '/') file
@@ -291,20 +291,29 @@ macros xs | "\\doi{" `isPrefixOf` xs = "doi: \\texttt{" ++ macros (drop 5 xs)
 macros (x:xs) = x : macros xs
 macros [] = []
 
+-- Here are the pretty-fication passes
 
-fixTable :: Rewrite Context FPGM Element
-fixTable = do
-          "table" <- getTag
-          extractR' $ anyR $ promoteR' $ do
-              ss <- attrsT idR id
-              return $ attrsC (attr "class" "table table-bordered table-condensed" : ss)
+expandMacros :: R HTML
+expandMacros = extractR' $ tryR $ prunetdR $ promoteR $ anyElementHTML $ divSpanExpand macro
+ where
+         macro :: String -> FPGM HTML
+         macro "fpg-update-time" = do
+                 tm <- liftActionFPGM $ liftIO $ getZonedTime
+                 let txt = formatTime defaultTimeLocale rfc822DateFormat tm
+                 () <- trace (show ("tm",tm,txt)) $ return ()
+                 return (text txt)
+         macro nm = fail $ "failed macro" ++ nm
 
+insertTeasers :: R HTML
+insertTeasers = extractR' $ tryR $ prunetdR $ promoteR $ anyElementHTML $ insertTeaser
 
-macro :: String -> FPGM HTML
-macro "fpg-update-time" = do
-    tm <- liftActionFPGM $ liftIO $ getZonedTime
-    let txt = formatTime defaultTimeLocale rfc822DateFormat tm
-    () <- trace (show ("tm",tm,txt)) $ return ()
-    return (text txt)
-macro nm = fail $ "failed macro" ++ nm
+fixURLs :: Int -> R HTML
+fixURLs depth = extractR' $ tryR $ prunetdR $ promoteR $ mapURL $ relativeURL depth
+
+fixTables :: R HTML
+fixTables = extractR' $ tryR $ prunetdR $ promoteR $ do
+                  "table" <- getTag
+                  extractR' $ anyR $ promoteR' $ do
+                          ss <- attrsT idR id
+                          return $ attrsC (attr "class" "table table-bordered table-condensed" : ss)
 
