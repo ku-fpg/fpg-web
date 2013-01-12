@@ -82,8 +82,9 @@ main2 ("build":extra) = do
                   ] ++
                   [ "status.html" | "status" `elem` extra ]
 
-    let prettyPage file dir = htmlPage file dir $
-                            wrapTemplateFile "template/page.html" depth
+    let prettyPage file dir = htmlPage file dir $ idR
+                        >>> addDefaultWidth
+                        >>> wrapTemplateFile "template/page.html" depth
                         >>> expandMacros
                         >>> insertTeasers
                         >>> fixURLs depth
@@ -342,7 +343,20 @@ fixActiveLinks file = tryR $ extractR' $ anytdR (promoteR is_nav_ul >>> anytdR (
                 url <- getAttr "href"
                 if url == file then idR else fail "not fount active URL"
 
+-- find out if "row" has been used,
+addDefaultWidth :: R HTML
+addDefaultWidth = has_row <+ add_row
+   where
+     has_row = extractR' $ anytdR $ promoteR $ do
+        "div" <- getTag
+        cls <- getAttr "class"
+        if "row" `elem` words cls then idR else fail "not class row"
 
+     add_row = promoteR $ do
+             h <- idR
+             return $ element "div" [attr "class" "row"]
+                    $ element "div" [attr "class" "span8 offset2"]
+                    $ h
 
 -------------------------------------------------------------------------------------------------
 -- To roll into std library
