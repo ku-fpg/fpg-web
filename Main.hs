@@ -317,3 +317,23 @@ fixTables = extractR' $ tryR $ prunetdR $ promoteR $ do
                           ss <- attrsT idR id
                           return $ attrsC (attr "class" "table table-bordered table-condensed" : ss)
 
+-------------------------------------------------------------------------------------------------
+-- To roll into std library
+consAttr :: Attr -> R Attrs
+consAttr x = attrsT idR (attrsC . (x :))
+
+appendClass :: String -> Maybe String -> String
+appendClass cls Nothing = cls
+appendClass cls (Just rest) = cls ++ " " ++ rest
+
+setAttr :: (MonadCatch m) => String -> (Maybe String -> String) -> Rewrite Context m Element
+setAttr nm update = change <+ append
+  where
+     change = do
+        _ <- getAttr nm -- needs to be here here
+        elementT (attrsT (attrT $ \ n v -> attrC n (if n == nm
+                                                    then update (Just v)
+                                                    else v))
+                                         $ attrsC) idR $ elementC
+        -- otherwise, add the new tag
+     append = elementT (attrsT idR (attrsC . (attrC nm (update Nothing) :))) idR $ elementC
