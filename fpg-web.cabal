@@ -13,6 +13,7 @@ Cabal-version:       >=1.8
 
 Executable Site
   Main-is:	       Main.hs
+  Ghc-options:         -threaded
   Build-depends:       base >= 4.6 && < 5.0,
                        kure >= 2.6.14,
                        html-kure >= 0.2,
