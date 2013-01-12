@@ -14,47 +14,27 @@ import qualified System.Directory as Directory
 import System.Environment
 import Control.Monad
 import qualified Control.Exception as E
-import System.Posix (getSymbolicLinkStatus, isDirectory)
 import Control.Arrow
 import Control.Applicative hiding ((*>))
 import Data.List
 import Data.Char
 import Debug.Trace
-import Control.Monad.IO.Class
 import Data.Time.LocalTime
 import Data.Time.Clock
 import Data.Time.Format
 import System.Locale
 
-import Text.XML.HXT.Parser.HtmlParsec
-import Text.XML.HXT.DOM.ShowXml
-import Text.XML.HXT.DOM.TypeDefs
-import Text.XML.HXT.DOM.XmlNode
-
 import Language.KURE.Walker
-import Data.Tree.NTree.TypeDefs
-import Control.Concurrent
-import Control.Concurrent.MVar
 
 import qualified Language.KURE as KURE
 import Language.KURE hiding (apply)
 
---import qualified Text.BibTeX.Entry as B
---import qualified Text.BibTeX.Parse as P
---import qualified Text.Parsec as Parsec
-
-import System.Process
+--import System.Process
 import System.Exit
-
 
 import Data.Monoid
 
-import Control.Concurrent.STM
-
-import Control.Concurrent.ParallelIO.Local
-
 import Text.HTML.KURE
---import BibTeX
 
 import Web.Chione
 import Web.Chione.BibTeX
@@ -159,7 +139,8 @@ main2 ("build":extra) = do
                 cite <- getBibTeXCitation (dropExtension (dropExtension (dropDirectory1 (dropDirectory1 out))))
                 case lookupBibTexCitation "abstract" cite of
                    Just abs_txt -> writeFile' out abs_txt
-                   Nothing -> return ()
+                   Nothing -> writeFile' out "No Abstract in BiBTeX"
+		   		 -- TODO: use  return ()
 
         "_make/bibtex/*.aux" *> \ out -> do
                 cite <- getBibTeXCitation (replaceExtension (dropDirectory1 (dropDirectory1 out)) "")

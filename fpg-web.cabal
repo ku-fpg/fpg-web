@@ -1,0 +1,23 @@
+Name:                fpg-web
+Version:             0.1
+Synopsis:            Web pages for FPG group
+Description:         Web pages for FPG group
+License:             BSD3
+License-file:        LICENSE
+Author:              Andy Gill
+Maintainer:          andygill@ku.edu
+Stability:           Experimental
+Category:            Web
+Build-type:          Simple
+Cabal-version:       >=1.8
+
+Executable Site
+  Main-is:	       Main.hs
+  Build-depends:       base >= 4.6 && < 5.0,
+                       kure >= 2.6.14,
+                       html-kure >= 0.2,
+                       chione >= 0.2.1,
+                       directory >= 1.2,
+                       shake >= 0.6,
+                       old-locale >= 1.0.0.5,
+                       time >= 1.4.0.1	       
