@@ -23,7 +23,7 @@ Joining the Lab
 ---------------
 
 New members (that are already at KU) are always welcome. Typically, at the graduate level you
-will need some experience in Haskell (for example, via [EECS 776](/Members/AndyGill/Teaching/EECS776)).
+will need some experience in Haskell (for example, via [EECS 776](/users/andygill/teaching)).
 Email Professor Gill for a discussion.
 
 If you are not at KU, and are not planning on applying to KU,
@@ -42,7 +42,7 @@ Robert F Blair                                                  HERMIT/Android  
 Jan Bracker                                                     HERMIT/Sunroof                  MS exchange student
 [Andrew Farmer](/users/andrewfarmer)                            HERMIT                          PhD, expected 2014
 Patrick G Flor                                                  HERMIT/Android                  BS CS
-[Andy Gill](/Users/AndyGill)                                    HERMIT &amp; KansasLava         PI / Faculty
+[Andy Gill](/users/andygill)                                    HERMIT &amp; KansasLava         PI / Faculty
 Adam Howell                                                     HERMIT/Android                  BS CS
 [Ed Komp](http://www.ittc.ku.edu/view_contact.phtml?id=28)      HERMIT                          Staff
 [Bowe Neuenschwander](/users/boweneuenschwander)                KansasLava / &lambda;Bridge     MS, expected 2013
