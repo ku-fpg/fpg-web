@@ -1,10 +1,12 @@
-I am teaching Programming I (EECS 168) in the Spring, and
-will be teaching EECS 776 again in the Fall.
+## Andy Gill's Teaching Schedule
 
-Schedule
---------
+I am teaching Programming I (EECS 168) in the Spring, and
+will be teaching EECS 776 in Fall 2013.
+
+### Schedule
 
   -------------- ----------------------------------------------------------------
+  Spring 2013:   EECS 168 Programming I
   Fall 2012:     EECS 368 Programming Language Paradigms
                  EECS 776 Functional Programming and Domain Specific Languages
   Spring 2012:   EECS 700 Functional Programming
