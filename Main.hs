@@ -40,7 +40,8 @@ import Text.HTML.KURE
 import Web.Chione
 import Web.Chione.BibTeX
 
-site_url     = "http://www.ittc.ku.edu/csdl/fpg"
+--site_url     = "http://www.ittc.ku.edu/csdl/fpg"
+site_url     = "http://localhost/~andy/fpgweb"
 
 site_dir     = "site"
 
@@ -68,6 +69,7 @@ main2 ("build":extra) = do
     files_to_copy <- fmap concat $ sequence
           [ findBuildTargets "img" "jpg"
           , findBuildTargets "img" "gif"
+          , findBuildTargets "img" "png"
           , findBuildTargets "js"  "js"
           , findBuildTargets "css" "css"
           ]
@@ -122,7 +124,7 @@ main2 ("build":extra) = do
         chioneRules myURLs
 
         -- This will make a status file, in the autogen dir
-        makeStatus "autogen"
+        makeStatus site_url "autogen"
 
         -- make the content files, using pandoc.
         "_make/contents//*.html" *> \ out -> do
