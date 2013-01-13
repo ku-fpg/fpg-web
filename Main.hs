@@ -109,7 +109,7 @@ main2 ("build":extra) = do
                  | file <- map fst redirects
                  ]
 
-    print myURLs
+--    print myURLs
 
     shake shakeOptions { shakeVerbosity = Normal
                        , shakeReport = return "report.html"
@@ -195,10 +195,6 @@ main2 ("build":extra) = do
                                  "-o", out ]
 
 
-        let citation :: String -> Action HTML
-            citation nm = do
-                txt <- readFile' (bibtex_dir </> replaceExtension nm  ".html-citation")
-                return $ parseHTML nm txt
 
  -----------------------------------------------------------
 
@@ -206,7 +202,7 @@ main2 ("build":extra) = do
                 let name = dropExtension (dropDirectory1 (dropDirectory1 (dropDirectory1 out)))
                 cite <- getBibTeXCitation name
                 txt <- readFile'  $ "_make/bibtex" </> replaceExtension name "html-citation"
-                liftIO $ print ("TXT",txt)
+--                liftIO $ print ("TXT",txt)
                 let html_cite0 = parseHTML "<internal>" txt
 
                 txt <- readFile'  $ "_make/bibtex" </> replaceExtension name "html-abstract"
@@ -250,19 +246,13 @@ main2 ("build":extra) = do
                                           Just n | all isDigit n -> read n
                                           Nothing -> 0
                              html_txt0 <- citation nm
-                             let tr = extractR' $ allbuR $ tryR $ promoteR $ anyElementHTML $ do
-                                        -- if the tag is "p", then just return the inside
-                                        "p" <- getTag
-                                        getInner
-
-                             html_txt1 <- applyFPGM tr html_txt0
-                             return (nm,year,html_txt1)
+                             return (nm,year,html_txt0)
                         | (nm,_) <- bib
                         ]
 
                 let years :: [Int] = reverse $ sort $ nub [ y | (_,y,_) <- citations ]
 
-                liftIO $ print $ years
+--                liftIO $ print $ years
 
                 writeFile' out $ show $ mconcat
                         [ element "div" [attr "class" "row"]
@@ -294,6 +284,16 @@ main2 _ = putStrLn $ unlines
         ]
 
 
+citation :: String -> Action HTML
+citation nm = do
+        txt <- readFile' (bibtex_dir </> addExtension nm  ".html-citation")
+        let html_txt0 = parseHTML nm txt
+        let tr = extractR' $ allbuR $ tryR $ promoteR $ anyElementHTML $ do
+                        -- if the tag is "p", then just return the inside
+                        "p" <- getTag
+                        getInner
+
+        applyFPGM tr html_txt0
 
 
 -- Here are the pretty-fication passes
@@ -307,6 +307,15 @@ expandMacros = extractR' $ tryR $ prunetdR $ promoteR $ anyElementHTML $ divSpan
                  let txt = formatTime defaultTimeLocale rfc822DateFormat tm
                  () <- trace (show ("tm",tm,txt)) $ return ()
                  return (text txt)
+         macro xs | "cite " `isPrefixOf` xs = do
+                let (_:wds) = words xs
+                liftActionFPGM $ liftIO $ print wds
+                xs <- mapM (liftActionFPGM . citation . tagToFileName) wds
+                return $ element "div" [attr "style" "cite-link"]
+                       $ mconcat
+                        [ element "a" [attr "href" ("/papers/" ++ tagToFileName nm)] c
+                        | (c,nm) <- xs `zip` wds
+                        ]
          macro nm = fail $ "failed macro" ++ nm
 
 insertTeasers :: R HTML
