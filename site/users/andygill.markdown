@@ -82,7 +82,7 @@ EECS 876  Advanced Topics in Functional Languages
 
 I am teaching Programming I (EECS 168) in Spring 2013.
 
-<a class="label" href="/Teaching">Read more about Andy Gill's classes at KU</a>
+<a class="label" href="/users/andygill/teaching">Read more about Andy Gill's classes at KU</a>
 
 </div></div>
 
