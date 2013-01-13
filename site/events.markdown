@@ -17,19 +17,19 @@ Congratulations Andrew!
 ### September 13th
 
 Neil Sculthorpe gave a [talk](http://www.youtube.com/watch?v=x2QH3jJCJso) 
-about the internals of [HERMIT](/Projects/HERMIT)
+about the internals of [HERMIT](/projects/hermit)
 at the [Haskell Symposium](http://www.haskell.org/haskell-symposium/2012/)
 
 ### September 9th
 
 Andrew Farmer gave a [talk](http://www.youtube.com/watch?v=ivMHHreMTvM) 
-about [HERMIT](/Projects/HERMIT)'s web interface technology
+about [HERMIT](/projects/hermit)'s web interface technology
 at the [XLDI Workshop](http://workshops.inf.ed.ac.uk/xldi2012/)
 
 ### August 31st
 
 Neil Sculthorpe gave a [talk](http://www.youtube.com/watch?v=fB6SjYPfye4)
-about using [HERMIT](/Projects/HERMIT)
+about using [HERMIT](/projects/hermit)
 at the [IFL 2012](http://www.cs.ox.ac.uk/conferences/IFL2012/)
 
 ### March 5th
@@ -49,8 +49,8 @@ Kansas Lava is
 
 ### September 8th
 
-We are looking to [hire a PostDoc](/Openings/PostDoc), to work
-on the [HERMIT](/Tools/HERMIT) project. Please apply!
+We are looking to[hire a PostDoc, to work
+on the [HERMIT](/projects/hermit) project. Please apply!
 
 ### July 28th
 
@@ -89,7 +89,7 @@ Iceland.
 ### May 2nd
 
 Andy Gill presented "[Using Functional Programming to Generate an LDPC
-Forward Error Corrector](/node/106)" at the 19th Annual IEEE
+Forward Error Corrector](/papers/Gill-11-GeneratingLDPC)" at the 19th Annual IEEE
 International Symposium on Field-Programmable Custom Computing Machines.
 
 ### April 22nd
@@ -137,7 +137,7 @@ Andy Gill gave a talk at ASEE, about post-processing video talks.
 
 ### Aug 28th
 
-[Paper](/node/63) about using [ChalkBoard](Tools/ChalkBoard)
+[Paper](/node/63) about using ChalkBoard
 for video processing accepted and sent for publication at ASEE.
 
 ### July 19th-23rd
@@ -147,5 +147,5 @@ Portland, Oregon.
 
 ### July 19th
 
-Paper about using [ChalkBoard](/Tools/ChalkBoard) for video processing
+Paper about using ChalkBoard for video processing
 submitted.
