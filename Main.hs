@@ -67,11 +67,12 @@ main2 ("build":extra) = do
     markups <- findBuildTargets "site" "markdown"
 
     files_to_copy <- fmap concat $ sequence
-          [ findBuildTargets "img" "jpg"
-          , findBuildTargets "img" "gif"
-          , findBuildTargets "img" "png"
-          , findBuildTargets "js"  "js"
-          , findBuildTargets "css" "css"
+          [ findBuildTargets "img"   "jpg"
+          , findBuildTargets "img"   "gif"
+          , findBuildTargets "img"   "png"
+          , findBuildTargets "js"    "js"
+          , findBuildTargets "css"   "css"
+          , findBuildTargets "files" "*"
           ]
 
     bib <- fmap (fmap (\ cite -> (tagToFileName $ getBibTexCitationTag cite,cite)))
