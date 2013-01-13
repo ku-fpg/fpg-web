@@ -92,8 +92,12 @@ I am teaching Programming I (EECS 168) in Spring 2013.
 Recent Publications and Submissions
 -----------------------------------
 
-(STUFF)
-
+ * <div class="cite Gill:13:TypesKansasLava-Submitted"/>
+ * <div class="cite Sculthorpe:12:HERMITinTree-Submitted"/>
+ * <div class="cite Farmer:12:HERMITinMachine"/>
+ * <div class="cite Farmer-12-WebDSLs"/>
+ * <div class="cite Frisby:12:AlmostHomomorphicFunctions"/>
+ * <div class="cite Gill:12:PatchLogic"/>
 
 --------------------------------------------------------
 
@@ -103,7 +107,7 @@ Recent Publications and Submissions
 Professional Activities
 -----------------------
 
--   Editor, SIGPLAN Notices
+-   Editor, SIGPLAN Notices & SIGPLAN Information Director
 -   PC Member for the [Workshop on Mathematically Structured Functional
     Programming](http://cs.ioc.ee/msfp/msfp2010/) (MSFP'10)\
 -   PC Member for the [Symposium on the Implementation and Application
