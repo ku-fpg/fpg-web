@@ -211,15 +211,19 @@ main2 ("build":extra) = do
 
                 let badge = element "span" [attr "class" $ "badge badge-info"] . text
 
+                let ul [] = mempty
+                    ul xs = mconcat
+                          [ element "h3" [] $ text "Links"
+                          , element "ul" [] $ mconcat xs
+                          ]
+
                 traced "paper-out" $ writeFile out $ show
                         $ element "div" [attr "class" "row"]
                           $ element "div" [attr "class" "span8 offset2"]
                             $ htmlC
                               [ element "div" [attr "class" "well"]
                                 $ html_cite0
-                              , element "h3" [] $ text "Links"
-                              , element "ul" [] $ mconcat $
-                                   [ element "li" [] $
+                              , ul [ element "li" [] $
                                      mconcat [ element "a" [ attr "href" url ] $ text url
                                              , if "http://doi.acm.org/" `isPrefixOf` url
                                              then text " " <> badge "ACM DL"
@@ -229,7 +233,7 @@ main2 ("build":extra) = do
                                              ]
                                    | Just url <- [ lookupBibTexCitation f cite | f <- ["url","xurl"] ]
 
-                                   ] ++ []
+                                   ]
                               , element "h3" [] $ text "Abstract"
                               , html_abstract
                               , element "h3" [] $ text "BibTeX"
@@ -247,7 +251,12 @@ main2 ("build":extra) = do
                                           Just n | all isDigit n -> read n
                                           Nothing -> 0
                              html_txt0 <- citation nm
-                             return (nm,year,html_txt0)
+                             let tr = extractR' $ allbuR $ tryR $ promoteR $ anyElementHTML $ do
+                                        -- if the tag is an anchor then just return the inside text
+                                        "a" <- getTag
+                                        getInner
+                             html_txt1 <- applyFPGM tr html_txt0
+                             return (nm,year,html_txt1)
                         | (nm,_) <- bib
                         ]
 
