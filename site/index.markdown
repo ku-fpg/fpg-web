@@ -16,7 +16,7 @@
 
 ## Software, Tools and Libraries
 
-<a class="teaser" href="/Software">[Read more about our Tools and Libraries</a>
+<a class="teaser" href="/Software">Read more about our Tools and Libraries</a>
 
 </div></div>
 
