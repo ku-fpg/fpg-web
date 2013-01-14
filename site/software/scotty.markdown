@@ -1,5 +1,9 @@
+<div class="teaser">
+
 A Haskell web framework inspired by Ruby's Sinatra, using WAI and Warp.
 Sinatra + Warp = Scotty.
+
+</div>
 
 Scotty is the cheap and cheerful way to write RESTful, declarative web
 applications.

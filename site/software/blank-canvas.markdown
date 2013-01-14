@@ -1,7 +1,9 @@
-`blank-canvas` is a Haskell port of the HTML5 Canvas API. Tutorials and
+<div class="teaser">
+blank-canvas is a Haskell port of the HTML5 Canvas API. Tutorials and
 examples for the HTML5 Canvas should be trivial to port to this library.
 blank-canvas works by providing a web service that displays the users'
 Haskell commands inside a browser.
+</div>
 
 Example
 -------

@@ -1,11 +1,12 @@
 # ChalkBoard
 
-
+<div class="teaser">
 ChalkBoard was a Haskell-hosted Domain Specific Language (DSL) for image
 generation and processing. The basic structure was a chalk "Board", a
 two-dimensional canvas of values, typically colors. **It has been
 subsumed by the [diagrams](http://projects.haskell.org/diagrams/)
 effort.**
+</div>
 
 ### Key Links
 

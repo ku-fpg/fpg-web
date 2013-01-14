@@ -1,8 +1,10 @@
+<div class="teaser">
 Haskell Program Coverage (Hpc) is a high-fidelity code coverage tool for
 Haskell, now in widespread use throughout the Haskell community. Hpc
 includes tools that instrument Haskell programs to record program
 coverage, run instrumented programs, and display the coverage
 information obtained. It is included with the standard GHC distribution.
+</div>
 
 What is Haskell Program Coverage?
 ---------------------------------

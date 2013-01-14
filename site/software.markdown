@@ -10,130 +10,58 @@ github for external contributions.
 
 This page is a software-centric view of our research. Please email us if you
 are interested in contributing, or want more details about a specific
-tool.
+tool. We also maintain a [Research Projects](/research) webpage,
+which gives the research-centric view of the FPG lab.
 
-Haskell Domain Specific Languages (DSLs)
-========================================
+-----------------------------------------------------------
 
-## Kansas Lava
+## Haskell Domain Specific Languages (DSLs)
+
+### Kansas Lava and Hardware Specification and Generation
 
 <a href="/software/kansas-lava" class="teaser">More about Kansas Lava</a>
 
-[KURE](/Tools/KURE "KURE")
------------------------------------
+<a href="/software/lambda-bridge" class="teaser">More about Lambda Bridge</a>
 
-The **Kansas University Rewrite Engine** (KURE) is a Haskell-hosted
-Domain Specific Language (DSL) for writing transformation systems based
-on rewrite strategies. When writing transformation systems, a
-significant amount of engineering effort goes into setting up plumbing
-to make sure that specific rewrite rules can fire. Systems like Stratego
-and Strafunski provide most of this plumbing as infrastructure, allowing
-the DSL user to focus on the rewrites rules. KURE is a strongly typed
-strategy control language in the tradition of Stratego and Strafunski.
-It is intended for writing reasonably efficient rewrite systems, makes
-use of type families to provide a delimited generic mechanism for tree
-rewriting, and provides support for efficient identity rewrite
-detection.
+### KURE - Term Rewriting
 
--   [Read more](/Tools/KURE "Read the rest of KURE.")
+<a href="/software/kure" class="teaser">More about KURE</a>
 
-[ChalkBoard](/Tools/ChalkBoard "ChalkBoard")
------------------------------------------------------
+### Sunroof and other Web Technologies
 
-ChalkBoard is a Haskell-hosted Domain Specific Language (DSL) for image
-generation and processing. The basic structure is a chalk `Board`, a
-two-dimensional canvas of values, typically colors. ChalkBoard provides
-the usual image processing functions (masking, overlaying, function
-mapping, cropping, warping, rotating, etc.) as well as a few more
-unusual ones. Images can be imported into ChalkBoard as first-class
-color `Board`s. ChalkBoard also provides combinators for drawing shapes
-directly on boards. The system is based loosely on Pan, but the
-principal image type, a `Board`, is abstract.
+<a href="/software/sunroof" class="teaser">More about Sunroof</a>
 
--   [Read
-    more](/Tools/ChalkBoard "Read the rest of ChalkBoard.")
+<a href="/software/scotty" class="teaser">More about Scotty</a>
 
-Tools
-=====
+<a href="/software/blank-canvas" class="teaser">More about Blank Canvas</a>
 
-[Haskell Program Coverage](/Tools/Hpc "Haskell Program Coverage")
---------------------------------------------------------------------------
+### ChalkBoard the Graphics Library
 
-Haskell Program Coverage (Hpc) is a high-fidelity code coverage tool for
-Haskell, now in widespread use throughout the Haskell community. Hpc
-includes tools that instrument Haskell programs to record program
-coverage, run instrumented programs, and display the coverage
-information obtained. It is included with the standard GHC distribution.
+<a href="/software/chalkboard" class="teaser">More about ChalkBoard</a>
 
--   [Read
-    more](/Tools/Hpc "Read the rest of Haskell Program Coverage.")
-
-Group Efforts
-=============
-
-[Lambda Bridge](/Tools/LambdaBridge "Lambda Bridge")
--------------------------------------------------------------
-
-The Lambda Bridge effort provides enabling technology for using
-functional programming on FPGA fabrics and board. The majority of the
-artifacts are shared documentation of ways to use FPGA board, and
-libraries (software and hardware) that facilitate the use of FPGAs.
-
--   [Read
-    more](/Tools/LambdaBridge "Read the rest of Lambda Bridge.")
-
-Libraries
-=========
-
-[Haskell Object Observation Debugger (Hood)](/Tools/Hood "Haskell Object Observation Debugger (Hood)")
----------------------------------------------------------------------------------------------------------------
-
-HOOD is a small post-mortem debugger for the lazy functional language
-[Haskell](http://www.haskell.org). It is based on the concept of
-observation of intermediate data structures, rather than the more
-traditional stepping and variable examination paradigm used by
-imperative language debuggers.
-
--   [Read
-    more](/Tools/Hood "Read the rest of Haskell Object Observation Debugger (Hood).")
-
-[IO Reification](/Tools/IOReification "IO Reification")
 ----------------------------------------------------------------
 
-[data-reify](http://hackage.haskell.org/cgi-bin/hackage-scripts/package/data-reify)
-provided the ability to turn recursive structures into explicit graphs.
-Many (implicitly or explicitly) recursive data structure can be given
-this ability, via a type class instance.
+## Tools
 
--   [Read
-    more](/Tools/IOReification "Read the rest of IO Reification.")
+<a href="/software/hpc" class="teaser">More about Haskell Program Coverage</a>
 
-[Scotty](/Tools/Scotty "Scotty")
------------------------------------------
+## Libraries
 
-A Haskell web framework inspired by Ruby's Sinatra, using WAI and Warp.
-Sinatra + Warp = Scotty.
+### Haskell Object Observation Debugger (Hood)
 
-Scotty is the cheap and cheerful way to write RESTful, declarative web
-applications.
+<a href="/software/hood" class="teaser">More about the Haskell Object Observation Debugger</a>
 
--   A page is as simple as defining the verb, url pattern, and Text
-    content.
--   It is template-language agnostic. Anything that returns a Text value
-    will do.
--   Conforms to WAI Application interface.
--   Uses very fast Warp webserver by default.
+### IO-Based Reification
 
-Hackage:
-[http://hackage.haskell.org/package/scotty](http://hackage.haskell.org/package/scotty "http://hackage.haskell.org/package/scotty")
+<a href="/software/data-reify" class="teaser">More about IO-Based Reification</a>
 
-Github:
-[https://github.com/xich/scotty](https://github.com/xich/scotty "https://github.com/xich/scotty")
 
--   [Read more](/Tools/Scotty "Read the rest of Scotty.")
+-----------------------------------------------------------
 
 Other Libraries
 ---------------
+
+All these libraries are on hackage.
 
 -   [dotgen](http://hackage.haskell.org/package/dotgen) A simple
     interface for building .dot graph files, for input into the dot and
@@ -151,6 +79,4 @@ Other Libraries
 -   [sized-types](http://hackage.haskell.org/package/sized-types)
     Providing indices, matrixes, sparse matrixes, and signed and
     unsigned bit vectors.
--   tumblescope A library for observing and manipulating mainly
-    isomorphic views of a model.
 

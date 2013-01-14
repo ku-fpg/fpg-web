@@ -1,8 +1,12 @@
+<div class="teaser">
+
 HOOD is a small post-mortem debugger for the lazy functional language
 [Haskell](http://www.haskell.org). It is based on the concept of
 observation of intermediate data structures, rather than the more
 traditional stepping and variable examination paradigm used by
 imperative language debuggers.
+
+</div>
 
 Examples
 --------
