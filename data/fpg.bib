@@ -14,7 +14,7 @@
           The Internals and Externals of {K}ansas {L}ava},
    author="Andy Gill and Tristan Bull and Andrew Farmer and Garrin Kimmell and Ed Komp",
    booktitle = "Proceedings of Trends in Functional Programming",
-   journal = "Submitted to the Journal of HOSC",
+   note = "Submitted to the Journal of Higher-Order and Symbolic Computation",
    year={2012},
    abstract={In this article
 we overview the design and implementation of the second generation
@@ -46,7 +46,7 @@ illustrate its use in a small but complete example.}
     author      = "Neil Sculthorpe and Andrew Farmer and Andy Gill",
     title       = {The HERMIT in the Tree: Mechanizing Program Transformations in the GHC Core Language},
     location    = "Oxford, England",
-    booktitle={Submitted to the Post-conference Proceedings of the 24th Symposium on Implementation and Application of Functional Languages ({IFL} '12)},
+    note     = {Submitted to the Post-conference Proceedings of the 24th Symposium on Implementation and Application of Functional Languages ({IFL} '12)},
     year = {2012},
     abstract = {In this paper we describe our experiences of using the HERMIT toolkit 
 to apply well-known transformations to the Glasgow Haskell Compiler's internal core language.
@@ -438,10 +438,22 @@ we describe and explore uses of an IO function
 for reification which allows direct observation of sharing.},
 }
 
-@inproceedings{KUREDSL09,
- author = {Andy Gill},
+@inproceedings{Gill:2009:KUREDSL,
+ author = {Gill, Andy},
  title = {A {H}askell Hosted {DSL} for Writing Transformation Systems},
- booktitle = "IFIP Working Conference on Domain Specific Languages",
+ booktitle = {Proceedings of the IFIP TC 2 Working Conference on Domain-Specific Languages},
+ series = {DSL '09},
+ year = {2009},
+ month = {July},
+ isbn = {978-3-642-03033-8},
+ location = {Oxford, UK},
+ pages = {285--309},
+ numpages = {25},
+ url = {http://dx.doi.org/10.1007/978-3-642-03034-5_14},
+ doi = {10.1007/978-3-642-03034-5_14},
+ acmid = {1575968},
+ publisher = {Springer-Verlag},
+ address = {Berlin, Heidelberg},
  abstract = { KURE is a Haskell hosted Domain Specific Language (DSL)
                   for writing transformation systems based on rewrite
                   strategies.  When writing transformation systems, a
@@ -457,10 +469,9 @@ for reification which allows direct observation of sharing.},
                   type families to provide a delimited generic
                   mechanism for tree rewriting, and provides support
                   for efficient identity rewrite detection. },
- month = {July}
-}
+} 
 
-@TechReport{ICFPContestProblem09,
+@TechReport{Kimmell:09:ICFPContestProblem,
 author	= "Garrin Kimmell and Kevin Matlage and
 	Tristan Bull and Nicolas Frisby and Andy Gill and
 	Michael Jantz and Ed Komp and Megan Peck and
