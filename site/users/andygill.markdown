@@ -1,6 +1,5 @@
 
-<div class="row"><div class="span4">
-
+<div class="row"><div class="span4 offset1">
 
 --------------- -----------------------------
 <b>Email:<b>    andygill at ku.edu
@@ -17,19 +16,18 @@ Address:        The University of Kansas, <BR>
 Office:         Room 2024 (Eaton) / <BR>
                 Room 252 (Nichols Hall)
 
-Office hours:   Wednesday 2:00-4:00 <BR>
+Office<BR>hours:   Wednesday 2:00-4:00 <BR>
                  (or by appointment)
 --------------- -----------------------------
 
-</div><div class="span6 offset0">
+</div><div class="span5 offset0">
 
-<blockquote style="push-right">
-<address style="font-size: 15pt; line-height: 20pt; text-align: left">
+<div style="font-size: 12pt; line-height: 20pt; text-align: left">
 <strong>Andy Gill</strong><br>
 Assistant Professor<br>
 [Electrical Engineering and Computer Science](http://www.eecs.ku.edu/)<br>
 [School of Engineering](http://www.engr.ku.edu/)<br>
-[The University of Kansas](http://www.ku.edu/)</address></blockquote>
+[The University of Kansas](http://www.ku.edu/)</div>
 
 
 </div><div class="span2">
@@ -40,7 +38,7 @@ Assistant Professor<br>
 
 </div></div>
 
-<div class="row"><div class="span6">
+<div class="row"><div class="span5 offset1">
 
 <div style="padding-right: 10pt">
  
@@ -63,7 +61,7 @@ real-time systems.
 
 </div>
 
-</div><div class="span6">
+</div><div class="span5">
 
 Teaching
 --------
@@ -86,7 +84,8 @@ I am teaching Programming I (EECS 168) in Spring 2013.
 
 </div></div>
 
---------------------------------------------------------
+
+<div class="row"><div class="span10 offset1">
 
 
 Recent Publications and Submissions
@@ -99,50 +98,88 @@ Recent Publications and Submissions
  * <div class="cite Frisby:12:AlmostHomomorphicFunctions"/>
  * <div class="cite Gill:12:PatchLogic"/>
 
---------------------------------------------------------
-
-
-<div class="row"><div class="span12">
-
 Professional Activities
 -----------------------
 
 -   Editor, SIGPLAN Notices & SIGPLAN Information Director
--   PC Member for the [Workshop on Mathematically Structured Functional
-    Programming](http://cs.ioc.ee/msfp/msfp2010/) (MSFP'10)\
--   PC Member for the [Symposium on the Implementation and Application
-    of Functional
-    Languages](http://www.cs.uu.nl/wiki/bin/view/IFL2010/WebHome)
-    (IFL'10)\
--   PC Member for the [International Conference on Functional
-    Programming](http://www.icfpconference.org/) (ICFP'10)\
--   PC Member for [Practical Aspects of Declarative
-    Languages](http://clip.dia.fi.upm.es/Conferences/PADL-2010/)
-    (PADL'10)\
--   PC Member for the [Symposium on the Implementation and Application
-    of Functional
-    Languages](http://tltc.shu.edu/blogs/projects/IFL2009/) (IFL'09)\
--   [ICFP Programming Contest](http://www.icfpcontest.org/) Chair, 2009\
--   Chair, Midwest Programming Languages Day, May 8th 2009\
--   PC Member for the [Symposium on the Implementation and Application
-    of Functional Languages](http://events.sac-home.org/ifl2008/)
-    (IFL'08)\
--   PC Co-Chair for [Practical Aspects of Declarative
-    Languages](http://cs.utdallas.edu/padl09/) (PADL'09)\
--   PC Chair for the [Haskell
-    Symposium](http://www.haskell.org/haskell-symposium/2008/)
-    (HASKELL'08)\
--   PC Member for [Mathematically Structured Functional
-    Programming](http://msfp.org.uk/) (MSFP'08)\
--   PC Member for the [Haskell
-    Workshop](http://www.haskell.org/haskell-workshop/2007/)
-    (HASKELL'07)\
-
-</div><div class="span6">
-
-</div></div>
-
-----------------------------
+-   PC Member, 
+        International Symposium on High-level Parallel Programming and Applications,
+        2013
+-   PC Member, 
+        Trends in Functional Programming
+        (TFL'13)
+-   PC Member, 
+        6th International Conference on Software Language Engineering,
+        2013
+-   PC Member, 
+        22nd International Conference on Field Programmable Logic and Applications,
+        2012	
+-   PC Member, 
+        8th ACM SIGPLAN Workshop on Generic Programming,
+        2012
+-   PC Member, 
+        Reconfigurable Architectures Workshop,
+        2012
+-   PC Member, 
+        High-level programming for heterogeneous and hierarchical parallel systems,
+        2012
+-   PC Member, 
+        ACM SIGPLAN Workshop on Partial Evaluation and Program Manipulation
+        (PEPM'12)
+-   Chair & Editor, 
+        International Symposium on the Implementation and Application of Functional Languages
+        (IFL'11)
+-   Member,
+        ACM SIGPLAN Haskell Symposium Steering Committee, 
+        2008-2011 (Chair in 2011)
+-   PC Member, 
+        [ACM SIGPLAN Haskell Symposium](http://www.haskell.org/haskell-symposium/2011/)
+        (HASKELL'11)
+-   Chair, 
+        ICFP Program Committee Workshop, Cambridge, England,
+        2010
+-   PC Member,
+        ACM SIGPLAN International Conference on Functional Programming
+        (ICFP'10)
+-   PC Member, 
+        ACM SIGPLAN Symposium on Practical Aspects of Declarative Languages	
+        (PADL'10)
+-   PC Member for the 
+        [Workshop on Mathematically Structured Functional Programming](http://cs.ioc.ee/msfp/msfp2010/)
+        (MSFP'10)
+-   PC Member for the 
+        [Symposium on the Implementation and Application of Functional Languages](http://www.cs.uu.nl/wiki/bin/view/IFL2010/WebHome) 
+        (IFL'10)
+-   PC Member for the 
+        [ACM SIGPLAN International Conference on Functional Programming](http://www.icfpconference.org/) 
+        (ICFP'10)
+-   PC Member for 
+        [Practical Aspects of Declarative Languages](http://clip.dia.fi.upm.es/Conferences/PADL-2010/)
+        (PADL'10)
+-   PC Member for the 
+        [Symposium on the Implementation and Application of Functional Languages](http://tltc.shu.edu/blogs/projects/IFL2009/)
+        (IFL'09)
+-  Chair,
+        [ICFP Programming Contest](http://www.icfpcontest.org/),
+        2009
+-   Chair, 
+        Midwest Programming Languages Day, 
+        2009
+-   PC Member for the 
+        [Symposium on the Implementation and Application of Functional Languages](http://events.sac-home.org/ifl2008/)
+        (IFL'08)
+-   PC Co-Chair for the
+        [Practical Aspects of Declarative Languages](http://cs.utdallas.edu/padl09/)
+        (PADL'09)
+-   PC Chair for the 
+        [ACM SIGPLAN Haskell Symposium](http://www.haskell.org/haskell-symposium/2008/)
+        (HASKELL'08)
+-   PC Member for 
+        [Mathematically Structured Functional Programming](http://msfp.org.uk/)
+        (MSFP'08)
+-   PC Member for the 
+        [ACM SIGPLAN Haskell  Workshop](http://www.haskell.org/haskell-workshop/2007/)
+        (HASKELL'07)
 
 Bio and Background
 ------------------
@@ -167,54 +204,18 @@ research is to offer engineers and practitioners the opportunity to write
 clear and high-level executable specifications that can realistically be
 compiled into efficient implementations.
 
+</div></div>
+
+<div class="row"><div class="span10 offset1">
 <hr style="border: dotted 1pt;">
+</div></div>
 
-<div class="row fpg-small"><div class="span2">
 
-### (1987-91)
-### Student
-### Edinburgh 
-
-</div><div class="span2">
+<div class="row fpg-small"><div class="span2 offset1">
 
 ### (1991-96)
 ### PhD Student / PostDoc
 ### Glasgow 
-
-</div><div class="span2">
-
-### (1996-99)
-### Engineer
-### Industry
-
-</div><div class="span2">
-
-### (1999-2000)
-### Project Scientist
-### Oregon Graduate<BR>Institute
-
-</div><div class="span2">
-
-### (2000-08)
-### Co-founder
-### Galois 
-
-</div><div class="span2">
-
-### (2008-)
-### Assistant Professor
-### The University<BR>of Kansas 
-
-</div></div>
-
-<div class="row fpg-small"><div class="span2">
-
-Under the supervision
-of Russ Green, Andy built a Just-In-Time (JIT) compiler for the
-interpreted Edinburgh ML, and a hotspot-like profiler to selectively
-detect candidate functions for recompilation.
-
-</div><div class="span2">
 
 While studying for his PhD under the supervision of [Simon Peyton
 Jones](http://research.microsoft.com/en-us/people/simonpj/), Andy
@@ -227,6 +228,10 @@ rewrite engines.
 
 </div><div class="span2">
 
+### (1996-99)
+### Engineer
+### Industry
+
 Andy spend three years as a professional compiler engineer, working
 first for HP on and optimizer for the itanium, worked at Metrowerks on a
 Java JIT for the PowerPC, and for a small startup call Semantic Designs,
@@ -234,10 +239,18 @@ maintaining a parallel compiler for a scheme-like language.
 
 </div><div class="span2">
 
+### (1999-2000)
+### Project Scientist
+### Oregon Graduate<BR>Institute
+
 At OGI, Andy helped Microsoft with their .NET initiative, and developed
 debugging technologies for Haskell.
 
 </div><div class="span2">
+
+### (2000-08)
+### Co-founder & Engineer
+### Galois 
 
 Partnering with colleagues from OGI, Andy co-founded Galois, a
 consulting company specializing in high assurance software. Galois grew
@@ -246,10 +259,12 @@ of $7.5M in 2008.
 
 </div><div class="span2">
 
+### (2008-)
+### Assistant Professor
+### The University<BR>of Kansas 
+
+
 While at KU, Andy has been focusing on Domain Specific Languages
 and practical applications for the Worker/Wrapper transformation.
 
-
 </div></div>
-
-
