@@ -101,13 +101,17 @@ Recent Publications and Submissions
 Professional Activities
 -----------------------
 
--   Editor, SIGPLAN Notices & SIGPLAN Information Director
+-   Editor, 
+        SIGPLAN Notices & SIGPLAN Information Director
 -   PC Member, 
         International Symposium on High-level Parallel Programming and Applications,
         2013
 -   PC Member, 
         Trends in Functional Programming
         (TFL'13)
+-   Co-Chair, 
+        Midwest Verification Day, Lawrence, KS, 45 attendees,
+        2012
 -   PC Member, 
         6th International Conference on Software Language Engineering,
         2013
