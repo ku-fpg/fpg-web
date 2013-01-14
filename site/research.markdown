@@ -68,35 +68,12 @@ Funding
 
 ### Improving the Applicability of Haskell-Hosted Semi-Formal Models to High Assurance Development (2011-2013)
 
-In engineering practice, models are an essential part of understanding
-how to build complex systems. In this project, high-level models and
-efficient implementations of computer systems will be developed
-side-by-side under a single framework that bridges the gap between them
-using a high degree of automation. This is possible due to the use of a
-modern functional language for both the model and implementation, and
-the deployment of a new and powerful general-purpose and semi-automatic
-refinement technology.
+<a class="teaser" href="/projects/hermit">Read more about HERMIT</a>
 
-The functional language Haskell has already enjoyed considerable success
-as a platform for high-level modeling of complex systems with its
-mathematical-style syntax, state-of-the-art type system, and powerful
-abstraction mechanisms. In this project, Haskell will be used to express
-a semi-formal model and an efficient implementation, taking the form of
-two distinct expressions of computation with the same mathematical
-foundation. The project develops tools and methodologies that use
-transformations like the worker/wrapper transformation to construct
-links between these models and implementations, lowering the cost of the
-development of high-assurance software and hardware components in
-application areas like security kernels and critical control systems.
-Lowering the cost of linking semi-formal specifications and models to
-real implementations will have considerable impact. For example,
-Evaluation Assurance Level (EAL) 5 and 6 of the Common Criteria call for
-semi-formal methods to construct such link, and this project addresses
-keys part of this requirement.
 
 ### Efficient Hardware Implementation of Iterative FEC Decoders (2009-2011)
 
-On this project, we are using Kansas Lava to generate efficient forward
+On this project, we are used [Kansas Lava](/projects/kansas-lava) to generate efficient forward
 error correcting codes. From a research point of view, we are trying to
 answer the following questions:
 
@@ -117,31 +94,13 @@ Other Sponsors
 
 #### Scottish Informatics and Computer Science Alliance (SICSA)
 
-#### 
-
-[![](http://www.ittc.ku.edu/csdl/fpg/sites/default/files/sicsa_logo.gif)](http://www.sicsa.ac.uk/)
+[![](/files/sicsa_logo.gif)](http://www.sicsa.ac.uk/)
 
 #### International Foundation for Telemetering (IFT)
 
-[![](http://www.ittc.ku.edu/csdl/fpg/sites/default/files/IFT_logo.gif)](http://www.telemetry.org/pages/ift/whoisift.php)
+[![](/files/IFT_logo.gif)](http://www.telemetry.org/)
 
 #### Xilinx
 
-#### 
-
-[![](http://www.ittc.ku.edu/csdl/fpg/sites/default/files/xilinx_logo.gif)](http://www.xilinx.com/)
-
-Research Before KU
-==================
-
-[History](/Users/AndyGill/History "History")
------------------------------------------------------
-
-Andy Gill has been an active researcher in functional programming for 20
-years. Before joining KU and forming the FPG, Andy worked on optimizing
-functional languages at Edinburgh then Glasgow, running Haskell on
-virtual machines at OGI, and high assurance software at Galois.
-
--   [Read
-    more](/Users/AndyGill/History "Read the rest of History.")
+[![](/files/xilinx_logo.gif)](http://www.xilinx.com/)
 
