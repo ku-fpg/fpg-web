@@ -7,4 +7,3 @@ libraries (software and hardware) that facilitate the use of FPGAs.
 
 </div>
 
-![](http://www.ittc.ku.edu/csdl/fpg/sites/default/files/Bridge.png)

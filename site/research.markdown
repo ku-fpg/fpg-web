@@ -1,3 +1,4 @@
+
 <div class="teaser">
         
 We use functional programming to solve problems in ways that are
@@ -18,7 +19,6 @@ perform effectively as a concise executable specification of a solution
 to a problem. However, the scope and influence of our ideas is intended
 to be broader than simply their use inside our functional language
 community.
-
 
 Overview of Research
 ====================
@@ -49,11 +49,9 @@ Kansas, we are addressing this gap using two separate techniques.
 -   First, we are looking at deep compiler optimizations which
     fundamentally revisit the optimizing possibilities of a Haskell
     program. At the heart of these principled optimizations is the
-    [Worker Wrapper
-    transformation](/Research/WorkerWrapper).
+    [Worker Wrapper transformation](/Research/WorkerWrapper).
 -   Second, we are looking at ways of expressing and implementing
-    [Domain Specific
-    Languages](/Research/DSLs) (DSLs)
+    *Domain Specific Languages* (DSLs)
     which are stylized libraries that give an engineered compromise
     between clarity, elegance and efficiency.
 
@@ -63,44 +61,42 @@ threads, and have the DSL technologies become the target of our
 aggressive optimizations, closing the loop and bridging the gap between
 specification and implementation.
 
+Summary of Active Projects
+==========================
+
+We have three projects that attempt to address our research objectives.
+
+ * The [HERMIT Project](/projects/hermit) is building infrastructure for
+   performing deep for 
+
+
+ * The [Kansas Lava Project](/projects/kansas-lava) is ...
+   It is intended as a target for refinements in the HERMIT project.
+
+ * [The Sunroof Project](/projects/sunroof) is looking DSLs for web technologies,
+   specifically deep embeddings for offshoring computation into
+   the browser.
+
 Funding
 =======
+### Improving the Applicability of Haskell-Hosted Semi-Formal Models to High Assurance Development
 
-### Improving the Applicability of Haskell-Hosted Semi-Formal Models to High Assurance Development (2011-2013)
+##### NSF (2011-2014)
 
-<a class="teaser" href="/projects/hermit">Read more about HERMIT</a>
+<a href="/projects/hermit" class="teaser">More about the HERMIT project</a>
 
+### Efficient Hardware Implementation of Iterative FEC Decoders
 
-### Efficient Hardware Implementation of Iterative FEC Decoders (2009-2011)
+##### CTEIP (2009-2011)
 
-On this project, we are used [Kansas Lava](/projects/kansas-lava) to generate efficient forward
-error correcting codes. From a research point of view, we are trying to
-answer the following questions:
+<a href="/projects/hfec" class="teaser">More about the HFEC project</a>
 
--   Can we use use functional programming to complement and support the
-    current development module of using MATLAB for a reference, and VHDL
-    for an implementation.
--   Can we build a functional program that mitigates against the need to
-    perform frequent refactorings when working in VHDL, as a suitable
-    architecture is discovered.
--   Can we gain a stronger assurance of the relationship between the
-    specification and implementation?
--   What are the weaknesses of using a system like Lava to implement a
-    FEC, and what are the remaining research problems with using EDSLs
-    as an architecture bridge.
+### Other Sponsors
 
-Other Sponsors
---------------
+We would like to thank our other sponsors for supporting our research.
 
-#### Scottish Informatics and Computer Science Alliance (SICSA)
-
-[![](/files/sicsa_logo.gif)](http://www.sicsa.ac.uk/)
-
-#### International Foundation for Telemetering (IFT)
-
-[![](/files/IFT_logo.gif)](http://www.telemetry.org/)
-
-#### Xilinx
-
-[![](/files/xilinx_logo.gif)](http://www.xilinx.com/)
+ * International Foundation for Telemetering (IFT) for 
+   funding for hardware, travel and student scholarships.
+ * Xilinx for software and hardware through the Xilinx University Program.
+ * Altera for software and hardware through the Altera University Program.
 
