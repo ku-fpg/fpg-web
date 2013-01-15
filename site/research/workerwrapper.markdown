@@ -8,7 +8,7 @@ structures used.
 Transformation Overview
 -----------------------
 
-[![](http://www.ittc.ku.edu/sites/default/files/WW.png)](http://www.ittc.ku.edu/csdl/fpg/sites/default/files/WW.png)
+[![](/files/WW.png)](WW.png)
 
 (click to enlarge)
 
