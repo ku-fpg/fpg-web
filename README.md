@@ -24,4 +24,17 @@ Directories in FPG
       of view. Approx. one for each hackage packages, sometimes shared (example - kansas-lava
       and kansas-lava cores are on the kansas-lava page)
     * site/users - our "home" pages. Not required, but quite useful.
-    
+ * template - our templates for the page border, including nav bars.
+
+Use of markdown
+---------------
+
+We use markdown inside the directory site for all our text.
+ * Local links start with /, so my homepage is /users/andygill 
+ * Local links are given without suffixes.
+
+
+
+
+
+
