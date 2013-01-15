@@ -123,7 +123,8 @@ IRC
 ---
 
 We have an IRC group, **#ku-csdl**, on irc.freenode.net.
-We also use a subreddit, <http://www.reddit.com/r/csdl/>.
+We also use a subreddit, <code>/r/csdl/</code>,
+and use github <https://github.com/ku-fpg/>.
 
 
 </div></div>
