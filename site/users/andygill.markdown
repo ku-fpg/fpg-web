@@ -161,7 +161,7 @@ Professional Activities
         [Practical Aspects of Declarative Languages](http://clip.dia.fi.upm.es/Conferences/PADL-2010/)
         (PADL'10)
 -   PC Member for the 
-        [Symposium on the Implementation and Application of Functional Languages](http://tltc.shu.edu/blogs/projects/IFL2009/)
+        Symposium on the Implementation and Application of Functional Languages
         (IFL'09)
 -  Chair,
         [ICFP Programming Contest](http://www.icfpcontest.org/),
@@ -170,7 +170,7 @@ Professional Activities
         Midwest Programming Languages Day, 
         2009
 -   PC Member for the 
-        [Symposium on the Implementation and Application of Functional Languages](http://events.sac-home.org/ifl2008/)
+        Symposium on the Implementation and Application of Functional Languages
         (IFL'08)
 -   PC Co-Chair for the
         [Practical Aspects of Declarative Languages](http://cs.utdallas.edu/padl09/)
