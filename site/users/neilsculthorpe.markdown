@@ -81,13 +81,3 @@ Lecture slides for the modules I taught at the University of Nottingham can be f
 <i>Last updated 19th September 2012.</i>
 </p>
 
-<p>
-    <a href="http://validator.w3.org/check?uri=referer"><img
-        src="http://www.w3.org/Icons/valid-xhtml10-blue"
-        alt="Valid XHTML 1.0 Strict" height="31" width="88" /></a>
-
-    <a href="http://www.haskellers.com/user/1060"><img
-        src="http://www.haskellers.com/static/badge.png"
-        alt="I'm a Haskeller" /></a>
-
-</p>
