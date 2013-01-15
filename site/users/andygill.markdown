@@ -33,7 +33,7 @@ Assistant Professor<br>
 </div><div class="span2">
 
 <div class="pull-right">
-<img src="http://www.ittc.ku.edu/csdl/fpg/sites/default/files/me.jpg" class="img-rounded"/>
+<img src="/files/me.jpg" class="img-rounded"/>
 </div>
 
 </div></div>
