@@ -137,7 +137,7 @@ Andy Gill gave a talk at ASEE, about post-processing video talks.
 
 ### Aug 28th
 
-[Paper](/node/63) about using ChalkBoard
+[Paper](/papers/Gill-10-ImprovingVideo) about using ChalkBoard
 for video processing accepted and sent for publication at ASEE.
 
 ### July 19th-23rd
