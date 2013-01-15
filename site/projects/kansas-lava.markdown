@@ -71,7 +71,7 @@ Architecture
 This figure gives a high level overview of the architecture of the major
 components of Kansas Lava.
 
-![](/sites/default/files/KansasLava.png)
+![](/files/KansasLava.png)
 
 The user manual give more details of how these components fit together.
 
