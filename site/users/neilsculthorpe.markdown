@@ -1,9 +1,11 @@
+<h2>Neil Sculthorpe</h2>
+
 <h3>Contact Details</h3>
 
 <div class="content">
 
 <div style="float: right">
-<img alt="Neil's Portrait" height="330px" src="http://www.ittc.ku.edu/~neil/NeilWeb.JPG"/>
+<img alt="Neil's Portrait" style="height:380px" src="http://www.ittc.ku.edu/~neil/NeilWeb.JPG"/>
 </div>
 
 <table cellpadding="2" style="width: auto;">
@@ -31,7 +33,7 @@
 
 <p>
 I am a Post-Doctoral Researcher in the <a href="http://www.ittc.ku.edu/csdl/fpg/">Functional Programming Group</a> in the <a href="http://www.ittc.ku.edu/">Information and Telecommunication Technology Center</a>, at the <a href="http://www.ku.edu/">University of Kansas</a>.
-I have recently moved here from the <a href="http://www.nottingham.ac.uk/cs">University of Nottingham School of Computer Science</a>, where I was a member of the <a href="http://sneezy.cs.nott.ac.uk/joomla/">Functional Programming Laboratory</a>.
+I moved here from the <a href="http://www.nottingham.ac.uk/cs">University of Nottingham School of Computer Science</a>, where I was a member of the <a href="http://sneezy.cs.nott.ac.uk/joomla/">Functional Programming Laboratory</a>.
 </p>
 
 
