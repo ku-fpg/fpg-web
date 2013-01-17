@@ -47,7 +47,7 @@ I'm interested in developing the underlying theory of the transformation, and fi
 </p>
 
 <p>
-I also maintain the <a href="http://www.ittc.ku.edu/csdl/fpg/Tools/KURE">Kansas University Rewite Engine (KURE)</a>, an implementation of strategic programming as a Haskell-embedded DSL.  The latest version is available on <a href="http://hackage.haskell.org/package/kure-2.4.0">Hackage</a>.
+I also maintain the <a href="http://www.ittc.ku.edu/csdl/fpg/Tools/KURE">Kansas University Rewite Engine (KURE)</a>, an implementation of strategic programming as a Haskell-embedded DSL.  The latest version is available on <a href="http://hackage.haskell.org/package/kure">Hackage</a>.
 </p>
 
 <p>
@@ -78,6 +78,6 @@ Lecture slides for the modules I taught at the University of Nottingham can be f
 
 
 <p>
-<i>Last updated 19th September 2012.</i>
+<i>Last updated 17th January 2012.</i>
 </p>
 
