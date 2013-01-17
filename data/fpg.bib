@@ -15,7 +15,7 @@
    author="Andy Gill and Tristan Bull and Andrew Farmer and Garrin Kimmell and Ed Komp",
    booktitle = "Proceedings of Trends in Functional Programming",
    note = "Submitted to the Journal of Higher-Order and Symbolic Computation",
-   year={2012},
+   year=2012,
    abstract={In this article
 we overview the design and implementation of the second generation
 of Kansas Lava.
@@ -41,16 +41,16 @@ illustrate its use in a small but complete example.}
 }
 
 
-
-@misc{Sculthorpe:12:HERMITinTree-Submitted,
-    author      = "Neil Sculthorpe and Andrew Farmer and Andy Gill",
-    title       = {The HERMIT in the Tree: Mechanizing Program Transformations in the GHC Core Language},
-    location    = "Oxford, England",
-    note     = {Submitted to the Post-conference Proceedings of the 24th Symposium on Implementation and Application of Functional Languages},
-    year = {2012},
-    abstract = {In this paper we describe our experiences of using the HERMIT toolkit
-to apply well-known transformations to the Glasgow Haskell Compiler's internal core language.
-HERMIT provides several mechanisms to support
+@inproceedings{ Sculthorpe:12:HERMITinTree-Submitted,
+    author       = "Neil Sculthorpe and Andrew Farmer and Andy Gill",
+    title        = "The {HERMIT} in the Tree: Mechanizing Program Transformations in the {GHC} Core Language",
+    booktitle    = "Draft Proceedings of the 24th Symposium on Implementation and Application of Functional Languages",
+    location     = "Oxford, England",
+    pages        = "239--254",
+    year         = 2012,
+    abstract     = "In this paper we describe our experiences of using the {HERMIT} toolkit
+to apply well-known transformations to the {G}lasgow {H}askell {C}ompiler's internal core language.
+{HERMIT} provides several mechanisms to support
 writing general-purpose transformations:
 a strategic programming domain-specific language
 specialized to the internal core language,
@@ -66,7 +66,7 @@ The mechanization process can often reveal pragmatic
 obstacles that are glossed over in pen-and-paper proofs;
 understanding and removing these obstacles is our concern.
 Using HERMIT, we implement eleven examples of three program transformations,
-report on our experiences, and describe improvements made in the process.}
+report on our experiences, and describe improvements made in the process."
 }
 
 // ------------------------------------------------------------------------------
@@ -78,21 +78,20 @@ report on our experiences, and describe improvements made in the process.}
 @inproceedings{Farmer:12:HERMITinMachine,
    author        = "Andrew Farmer and Andy Gill and Ed Komp and Neil Sculthorpe",
    title         = "The {HERMIT} in the Machine: A Plugin for the Interactive Transformation of {GHC} Core Language Programs",
-   booktitle     = "Proceedings of the 2012 Haskell Symposium",
- series = {Haskell '12},
- year = {2012},
- isbn = {978-1-4503-1574-6},
- location = {Copenhagen, Denmark},
- pages = {1--12},
- numpages = {12},
- url = {http://doi.acm.org/10.1145/2364506.2364508},
- xurl = {http://www.ittc.ku.edu/csdl/fpg/files/Farmer-12-HERMITinMachine.pdf},
- doi = {10.1145/2364506.2364508},
- acmid = {2364508},
- publisher = {ACM},
- address = {New York, NY, USA},
- keywords = {DSLs, equational reasoning, GHC, optimization, strategic programming},
-abstract = {The importance of reasoning about and refactoring programs
+   booktitle     = "Proceedings of the ACM SIGPLAN Haskell Symposium",
+   series        = "Haskell '12",
+   year          = 2012,
+   isbn          = "978-1-4503-1574-6",
+   location      = "Copenhagen, Denmark",
+   pages         = "1--12",
+   url           = "http://doi.acm.org/10.1145/2364506.2364508",
+   xurl          = "http://www.ittc.ku.edu/csdl/fpg/files/Farmer-12-HERMITinMachine.pdf",
+   doi           = "10.1145/2364506.2364508",
+   acmid         = 2364508,
+   publisher     = "ACM",
+   address       = "New York, NY, USA",
+   keywords      = "{DSL}s, equational reasoning, {GHC}, optimization, strategic programming",
+   abstract      = "The importance of reasoning about and refactoring programs
 is a central tenet of functional programming.
 Yet our compilers and development toolchains
 only provide rudimentary support for these tasks.
@@ -117,18 +116,17 @@ We describe a HERMIT application---a
 read-eval-print shell for performing transformations using HERMIT.
 We also demonstrate using this shell to prototype an optimization
 on a specific example, and report our initial experiences and
-remaining challenges.
-},
+remaining challenges.",
 }
 
 @inproceedings{Farmer:12:WebDSLs,
-        author={Andrew Farmer and Andy Gill},
-        title = {Haskell DSLs for Interactive Web Services},
-        booktitle="1st International Workshop on Cross-model Language Design and Implementation",
-        location = {Copenhagen, Denmark},
-        year = 2012,
-        month = {Sep},
-        abstract={Robust cross-platform GUI-based applications are challenging to write in Haskell,
+   author        = "Andrew Farmer and Andy Gill",
+   title         = "{Haskell} {DSL}s for Interactive Web Services",
+   booktitle     = "1st International Workshop on Cross-model Language Design and Implementation",
+   location      = "Copenhagen, Denmark",
+   year          = 2012,
+   month         = "Sep",
+   abstract      = {Robust cross-platform GUI-based applications are challenging to write in Haskell,
 not because providing hooks into existing GUI frameworks is hard,
 but because these hooks are both platform dependent and prone to rapid bit-rot.
 Browser-based user interfaces implemented using
@@ -146,7 +144,7 @@ Using our monad, the Haskell programmer can choose the
 granularity of interaction, with the option of
 having reactive interfaces that are completely
 handled by the client.},
-        note={(published on workshop website, http://workshops.inf.ed.ac.uk/xldi2012/)}
+   note          = "(published on workshop website, http://workshops.inf.ed.ac.uk/xldi2012/)"
 }
 
 @inproceedings{Frisby:12:AlmostHomomorphicFunctions,
@@ -180,7 +178,7 @@ with an exact range type that has no constructor for lambdas.}
    booktitle = {Practical Aspects of Declarative Languages},
    publisher = {Springer-Verlag},
    series= {LNCS},
-   volume = {7149},
+   volume = 7149,
    location = "Philadelphia, PA",
    year=2012,
    month="January"
@@ -189,7 +187,7 @@ with an exact range type that has no constructor for lambdas.}
 @inproceedings {Gill:11:Declarative,
 	       title = {Declarative {FPGA} Circuit Synthesis using {K}ansas {L}ava},
 	       booktitle = {The International Conference on Engineering of Reconfigurable Systems and Algorithms},
-	       year = {2011},
+	       year = 2011,
 	       month = {July},
 	       location = {Las Vegas, Nevada, USA},
 	       author = {Andy Gill}
@@ -200,14 +198,14 @@ with an exact range type that has no constructor for lambdas.}
  title = {Deriving an Efficient {FPGA} Implementation of a Low Density Parity Check Forward Error Corrector},
  booktitle = {Proceedings of the 16th ACM SIGPLAN international conference on Functional programming},
  series = {ICFP '11},
- year = {2011},
+ year = 2011,
  isbn = {978-1-4503-0865-6},
  location = {Tokyo, Japan},
  pages = {209--220},
- numpages = {12},
+ numpages = 12,
  url = {http://doi.acm.org/10.1145/2034773.2034804},
  doi = {10.1145/2034773.2034804},
- acmid = {2034804},
+ acmid = 2034804,
  publisher = {ACM},
  address = {New York, NY, USA},
  keywords = {dsl, error correction, lava, ldpc},
@@ -217,16 +215,16 @@ with an exact range type that has no constructor for lambdas.}
 
 @inproceedings{Gill:11:GeneratingLDPC,
  author = {Gill, Andy and Bull, Tristan and DePardo, Dan and Farmer, Andrew and Komp, Ed and Perrins, Erik},
- title = {Using Functional Programming to Generate an LDPC Forward Error Corrector},
- booktitle = {Proceedings of the 2011 IEEE 19th Annual International Symposium on Field-Programmable Custom Computing Machines},
+ title = {Using Functional Programming to Generate an {LDPC} Forward Error Corrector},
+ booktitle = {Proceedings of the IEEE 19th Annual International Symposium on Field-Programmable Custom Computing Machines},
  series = {FCCM '11},
- year = {2011},
+ year = 2011,
  isbn = {978-0-7695-4301-7},
  pages = {133--140},
- numpages = {8},
+ numpages = 8,
  url = {http://dx.doi.org/10.1109/FCCM.2011.31},
  doi = {10.1109/FCCM.2011.31},
- acmid = {1990171},
+ acmid = 1990171,
  publisher = {IEEE Computer Society},
  address = {Washington, DC, USA},
  month={May},
@@ -238,7 +236,7 @@ with an exact range type that has no constructor for lambdas.}
 @unpublished{Gill:11:CatchingSat,
 	title = {Capturing Functions and Catching Satellites},
 	note = {ITTC Technical Report ITTC-FY2011-TR-29952011-1},
-	year = {2011},
+	year = 2011,
 	month = Jan,
 	abstract = {The 2009 ICFP programming contest problem required contestants to control
 virtual satellites that obey basic physical laws.  The orbital physics
@@ -279,10 +277,10 @@ by fold operators, and illustrate our new technique with a number of examples.},
    author="Kevin Matlage and Andy Gill",
    booktitle = "Proceedings of Trends in Functional Programming",
    month="May",
-   year="2010",
+   year=2010,
    publisher = {Springer-Verlag},
    series= {LNCS},
-   volume = {6546}
+   volume = 6546
 }
 
 @inproceedings{Gill:10:TypesKansasLava,
@@ -290,10 +288,10 @@ by fold operators, and illustrate our new technique with a number of examples.},
    author="Andy Gill and Tristan Bull and Andrew Farmer and Garrin Kimmell and Ed Komp",
    booktitle = "Proceedings of Trends in Functional Programming",
    month="May",
-   year="2010",
+   year=2010,
    publisher = {Springer-Verlag},
    series= {LNCS},
-   volume = {6546},
+   volume = 6546,
 	abstract = {In this paper,
 
 we overview the design and implementation of our latest
@@ -319,7 +317,7 @@ we mitigate this complexity.}
    booktitle = "Proceedings of Trends in Functional Programming",
    month="May",
    publisher = {Springer-Verlag, LNCS 6546},
-   year="2010",
+   year=2010,
 	abstract = {Kansas Lava is a functional hardware description language implemented
 in Haskell. In the course of attempting to generate ever larger circuits,
 we have found the need to effectively test and debug the internals of
@@ -333,7 +331,7 @@ the results of these efforts.
 @inproceedings {Gill:10:ImprovingVideo,
 	title = {Improving the Presentation of Technical Material in Video Talks using Post Production},
 	booktitle = {2010 Midwest Section Conference of the American Society for Engineering Education},
-	year = {2010},
+	year = 2010,
 	month = {September},
 	address = {Lawrence, KS},
 	abstract = {In this paper, we present our experiences using our image processing toolkit
@@ -364,7 +362,7 @@ value and impact to the final video.
         booktitle = "Proceedings of the Symposium on Implementation and Application of Functional Languages",
         publisher = {Springer-Verlag},
         series= {LNCS},
-        volume = {6041},
+        volume = 6041,
         abstract={ChalkBoard is a domain specific language for describing images.
                 The ChalkBoard language is uncompromisingly functional
                 and encourages the use of modern functional idioms.
@@ -383,7 +381,7 @@ value and impact to the final video.
         booktitle = "Proceedings of the Symposium on Implementation and Application of Functional Languages",
         publisher = {Springer-Verlag},
         series= {LNCS},
-        volume = {6041},
+        volume = 6041,
         abstract={Kansas Lava is a domain specific language for hardware description.
                 Though there have been a number of previous implementations of Lava,
                 we have found the design space rich, with unexplored choices.
@@ -443,15 +441,15 @@ for reification which allows direct observation of sharing.},
  title = {A {H}askell Hosted {DSL} for Writing Transformation Systems},
  booktitle = {Proceedings of the IFIP TC 2 Working Conference on Domain-Specific Languages},
  series = {DSL '09},
- year = {2009},
+ year = 2009,
  month = {July},
  isbn = {978-3-642-03033-8},
  location = {Oxford, UK},
  pages = {285--309},
- numpages = {25},
+ numpages = 25,
  url = {http://dx.doi.org/10.1007/978-3-642-03034-5_14},
  doi = {10.1007/978-3-642-03034-5_14},
- acmid = {1575968},
+ acmid = 1575968,
  publisher = {Springer-Verlag},
  address = {Berlin, Heidelberg},
  abstract = { KURE is a Haskell hosted Domain Specific Language (DSL)
@@ -478,7 +476,7 @@ author	= "Garrin Kimmell and Kevin Matlage and
 	Wesley Peck and  Mark Snyder and Brett Werling",
 title	= "The 2009 {ICFP} Programming Contest Problem Specification",
 month	= "June",
-year	= "2009",
+year	= 2009,
 institution	= "Information Telecommunication and Technology Center, University of Kansas, Lawrence, KS"
 }
 
@@ -518,14 +516,14 @@ power of this recipe using a range of examples.
  title = {Unrestricted pure call-by-value recursion},
  booktitle = {Proceedings of the 2008 ACM SIGPLAN workshop on ML},
  series = {ML '08},
- year = {2008},
+ year = 2008,
  isbn = {978-1-60558-062-3},
  location = {Victoria, BC, Canada},
  pages = {23--34},
- numpages = {12},
+ numpages = 12,
  url = {http://doi.acm.org/10.1145/1411304.1411309},
  doi = {10.1145/1411304.1411309},
- acmid = {1411309},
+ acmid = 1411309,
  publisher = {ACM},
  address = {New York, NY, USA},
  abstract = {Call-by-value languages commonly restrict recursive
@@ -683,7 +681,7 @@ power of this recipe using a range of examples.
   title         = "Fast mergeable integer maps",
   pages         = {77--86},
   booktitle     = "ACM SIGPLAN Workshop on ML",
-  year          = "1998",
+  year          = 1998,
   month         = {September},
   abstract      = {Finite maps are ubiquitous in many applications, but
         perhaps nowhere more so than in compilers and other language
@@ -697,7 +695,7 @@ power of this recipe using a range of examples.
         that performs well in practice on all three operations. This
         data structure is not new-indeed, it is thirty years old this
         year-but it deserves to be more widely known.},
-  citations    = "23",
+  citations    = 23,
   contribution = "30%"
 }
 
@@ -747,7 +745,7 @@ power of this recipe using a range of examples.
 
 
 @inproceedings{Gill:94:CheapDeforestationPrac,
-  author        = {Andrew Gill and Simon Peyton~Jones},
+  author        = {Andrew Gill and Simon {Peyton Jones}},
   title         = {Cheap Deforestation in Practice: An Optimizer for {H}askell},
   booktitle     = {IFIP Congress (1)},
   year          = 1994,
@@ -764,7 +762,7 @@ power of this recipe using a range of examples.
 }
 
 @inproceedings{Gill:93:ShortCutFusion,
-  author       = {Andrew Gill and John Launchbury and Simon Peyton~Jones},
+  author       = {Andrew Gill and John Launchbury and Simon {Peyton Jones}},
   title        = {A short cut to deforestation},
   booktitle    = {FPCA '93: Proceedings of the conference on Functional Programming Languages and Computer Architecture},
   year         = 1993,
@@ -783,11 +781,11 @@ power of this recipe using a range of examples.
 }
 
 @inproceedings{Avoid92,
-  author       = {John Launchbury and Andrew Gill and John Hughes and Simon Marlow and Simon Peyton~Jones and Philip Wadler},
+  author       = {John Launchbury and Andrew Gill and John Hughes and Simon Marlow and Simon {Peyton Jones} and Philip Wadler},
   title        = {Avoiding Unnecessary Updates},
   booktitle    = {Glasgow Workshop on Functional Programming, Workshops in Computing},
   pages        = {144-153},
-  year         = {1992},
+  year         = 1992,
   location     = {Ayr, Scotland},
   publisher    = {Springer-Verlag},
   abstract     = {Graph reduction underlies most implementations of lazy functional
