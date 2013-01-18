@@ -132,8 +132,7 @@ Programming*, vol. 20, issue 3-4, 2010. [Abstract](/node/10)
     and Computer Architecture (FPCA '91)*, pp. 636–666, 1991.
 -   [Work It, Wrap It, Fix It, Fold
     It.](http://www.ittc.ku.edu/~neil/publications.html) Neil Sculthorpe
-    and Graham Hutton. Submitted to *Transactions on Programming
-    Languages and Systems (TOPLAS)*.
+    and Graham Hutton. Submitted to the *Journal of Functional Programming (JFP)*.
 
 Use Cases
 ---------

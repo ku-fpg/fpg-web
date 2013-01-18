@@ -76,10 +76,4 @@ Lecture slides for the modules I taught at the University of Nottingham can be f
 </li>
 
 </ul>
-<hr />
-
-
-<p>
-<i>Last updated 17th January 2012.</i>
-</p>
 
