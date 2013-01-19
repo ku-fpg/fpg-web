@@ -41,7 +41,9 @@ import Web.Chione
 import Web.Chione.BibTeX
 
 site_url     = "http://www.ittc.ku.edu/csdl/fpg"
---site_url     = "http://localhost/~andy/fpgweb"
+
+-- TODO: this needs generalized
+target_dir   = "andygill@drumchapel:/projects/csdl/htdocs/fpg-new"
 
 site_dir     = "site"
 
@@ -128,6 +130,11 @@ main2 ("build":extra) = do
 
         -- This will make all the target Files / URLs
         chioneRules myURLs
+
+
+        when ("publish" `elem` extra) $ action $ do
+                need [html_dir </> "status.html"]
+                system' "rsync" ["-avz",html_dir ++ "/",target_dir]
 
         -- This will make a status file, in the autogen dir
         makeStatus site_url "autogen"
@@ -293,9 +300,8 @@ main2 ["clean"] = clean
 
 main2 _ = putStrLn $ unlines
         [ "usage:"
-        , "./Main clean          clean up"
-        , "       build          build pages"
-        , "       build status   build pages; report status of pages"
+        , "./Main clean                    clean up"
+        , "       build [status] [publish] build pages; report status; publish"
         ]
 
 isXtra :: BibTeXCitation -> Bool
