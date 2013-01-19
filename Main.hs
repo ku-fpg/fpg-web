@@ -89,7 +89,7 @@ main2 ("build":extra) = do
 
     let prettyPage file dir = htmlPage file dir $ idR
                         >>> addDefaultWidth
-                        >>> wrapTemplateFile "template/page.html" depth
+                        >>> wrapTemplateFile ("template" </> templ) depth
                         >>> expandMacros
                         >>> insertTeasers
                         >>> fixURLs depth
@@ -98,6 +98,9 @@ main2 ("build":extra) = do
 
           where
                   depth = length $ filter (== '/') file
+                  templ = if file == "status.html"
+                          then "full.html"
+                          else "page.html"
 
     let myURLs = [ prettyPage (flip replaceExtension "html" $ dropDirectory1 $ file) "contents"
                  | file <- markups
