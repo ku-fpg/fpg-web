@@ -78,8 +78,10 @@ main2 ("build":extra) = do
     bib <- fmap (fmap (\ cite -> (tagToFileName $ getBibTexCitationTag cite,cite)))
          $ readBibTeX "data/fpg.bib"
 
+
     let autogen = [ "papers" </> replaceExtension nm ".html"
-                  | (nm,_) <- bib
+                  | (nm,cite) <- bib
+                  , not (isXtra cite)
                   ] ++
                   [ "publications.html"
                   ] ++
@@ -245,7 +247,7 @@ main2 ("build":extra) = do
 
         "_make/autogen/publications.html" *> \ out -> do
 
-                citations :: [(String,Int,HTML)] <- sequence
+                citations :: [(String,Int,HTML)] <- fmap concat $ sequence
                         [ do cite <- getBibTeXCitation nm
                              let year = case lookupBibTexCitation "year" cite of
                                           Just n | all isDigit n -> read n
@@ -256,7 +258,7 @@ main2 ("build":extra) = do
                                         "a" <- getTag
                                         getInner
                              html_txt1 <- applyFPGM tr html_txt0
-                             return (nm,year,html_txt1)
+                             return [(nm,year,html_txt1) | not (isXtra cite) ]
                         | (nm,_) <- bib
                         ]
 
@@ -293,6 +295,10 @@ main2 _ = putStrLn $ unlines
         , "       build status   build pages; report status of pages"
         ]
 
+isXtra :: BibTeXCitation -> Bool
+isXtra cite = case lookupBibTexCitation "xtra" cite of
+                Nothing -> False
+                _       -> True
 
 citation :: String -> Action HTML
 citation nm = do
@@ -318,14 +324,16 @@ expandMacros = extractR' $ tryR $ prunetdR $ promoteR $ anyElementHTML $ divSpan
                  () <- trace (show ("tm",tm,txt)) $ return ()
                  return (text txt)
          macro xs | "cite " `isPrefixOf` xs = do
-                let (_:wds) = words xs
-                liftActionFPGM $ liftIO $ print wds
-                xs <- mapM (liftActionFPGM . citation . tagToFileName) wds
+                let ["cite",wd] = words xs
+--                liftActionFPGM $ liftIO $ print wds
+                x <- liftActionFPGM $ citation $ tagToFileName $ wd
+                cite <- liftActionFPGM $ getBibTeXCitation $ tagToFileName wd
+                liftActionFPGM $ liftIO $ print cite
                 return $ element "div" [attr "style" "cite-link"]
-                       $ mconcat
-                        [ element "a" [attr "href" ("/papers/" ++ tagToFileName nm)] c
-                        | (c,nm) <- xs `zip` wds
-                        ]
+                       $ (if isXtra cite
+                          then id
+                          else element "a" [attr "href" ("/papers/" ++ tagToFileName wd)])
+                       $ x
          macro nm = fail $ "failed macro" ++ nm
 
 insertTeasers :: R HTML
