@@ -116,7 +116,7 @@ main2 ("build":extra) = do
 
     shake shakeOptions { shakeVerbosity = Normal
                        , shakeReport = return "report.html"
-                       , shakeThreads = 1
+                       , shakeThreads = 4
                        } $ do
 
 
