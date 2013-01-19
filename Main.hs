@@ -43,7 +43,7 @@ import Web.Chione.BibTeX
 site_url     = "http://www.ittc.ku.edu/csdl/fpg"
 
 -- TODO: this needs generalized
-target_dir   = "andygill@drumchapel:/projects/csdl/htdocs/fpg-new"
+target_dir   = "andygill@drumchapel:/projects/csdl/htdocs/fpg"
 
 site_dir     = "site"
 
@@ -74,7 +74,7 @@ main2 ("build":extra) = do
           , findBuildTargets "img"   "png"
           , findBuildTargets "js"    "js"
           , findBuildTargets "css"   "css"
-          , findBuildTargets "files" "*"
+          , return [".htaccess"]
           ]
 
     bib <- fmap (fmap (\ cite -> (tagToFileName $ getBibTexCitationTag cite,cite)))
@@ -133,7 +133,7 @@ main2 ("build":extra) = do
 
 
         when ("publish" `elem` extra) $ action $ do
-                need [html_dir </> "status.html"]
+                need [html_dir </> "status.html", html_dir </> ".htaccess"]
                 system' "rsync" ["-avz",html_dir ++ "/",target_dir]
 
         -- This will make a status file, in the autogen dir

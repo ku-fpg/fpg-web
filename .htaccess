@@ -1,0 +1,20 @@
+# first cut at redirects
+
+# Gill's old home dir
+RedirectMatch 301 ^/csdl/fpg/users/andygill/$  /csdl/fpg/users/andygill.html
+
+# Bib redirect
+RedirectMatch 301 /csdl/fpg/biblio$ /csdl/fpg/publications.html
+
+# tools are now called software
+RedirectMatch 301 /csdl/fpg/Tools(.*)$ /csdl/fpg/software$1.html
+
+# Using hackage normalize names
+RedirectMatch 301 (.*)/KansasLava.html $1/kansas-lava.html
+
+# short cut the directory
+Redirect 301 /csdl/fpg/sites/default/files http://www.ittc.ku.edu/csdl/fpg/files
+
+# Root level names
+RedirectMatch 301 /csdl/fpg/ChalkBoard$ /csdl/fpg/software/chalkboard.html
+
