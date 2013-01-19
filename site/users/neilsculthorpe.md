@@ -40,16 +40,16 @@ I moved here from the <a href="http://www.nottingham.ac.uk/cs">University of Not
 <h3>Research</h3>
 
 <p>
-I'm currently working on the <a href="http://www.ittc.ku.edu/csdl/fpg/Tools/HERMIT/">HERMIT project</a>, a scriptable toolkit for the interactive transformation of programs in the internals of the <a href="http://www.haskell.org/ghc/">Glasgow Haskell Compiler</a>.
+I'm currently working on the <a href="/projects/hermit">HERMIT project</a>, a scriptable toolkit for the interactive transformation of programs in the internals of the <a href="http://www.haskell.org/ghc/">Glasgow Haskell Compiler</a>.
 </p>
 
 <p>
-The <a href="http://www.ittc.ku.edu/csdl/fpg/Research/WorkerWrapper">Worker/Wrapper Transformation</a>, a verification technique for connecting clear specifications to efficient implementations, is being used extensively in HERMIT.
+The <a href="/tutorials/workerwrapper">Worker/Wrapper Transformation</a>, a verification technique for connecting clear specifications to efficient implementations, is being used extensively in HERMIT.
 I'm interested in developing the underlying theory of the transformation, and finding new applications.
 </p>
 
 <p>
-I also maintain the <a href="http://www.ittc.ku.edu/csdl/fpg/Tools/KURE">Kansas University Rewite Engine (KURE)</a>, an implementation of strategic programming as a Haskell-embedded DSL.  The latest version is available on <a href="http://hackage.haskell.org/package/kure">Hackage</a>.
+I also maintain the <a href="/software/kure">Kansas University Rewite Engine (KURE)</a>, an implementation of strategic programming as a Haskell-embedded DSL.  The latest version is available on <a href="http://hackage.haskell.org/package/kure">Hackage</a>.
 </p>
 
 <p>
