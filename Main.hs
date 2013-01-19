@@ -359,7 +359,8 @@ fixTables = extractR' $ tryR $ prunetdR $ promoteR $ do
 
 
 fixActiveLinks :: String -> R HTML
-fixActiveLinks file = tryR $ extractR' $ anytdR (promoteR is_nav_ul >>> anytdR (promoteR new_li >>> anytdR (promoteR active_link)))
+fixActiveLinks file = do
+        tryR $ extractR' $ anytdR (promoteR is_nav_ul >>> anytdR (promoteR new_li >>> anytdR (promoteR active_link)))
 
    where
         is_nav_ul :: R Element
@@ -377,7 +378,8 @@ fixActiveLinks file = tryR $ extractR' $ anytdR (promoteR is_nav_ul >>> anytdR (
         active_link = do
                 "a" <- getTag
                 url <- getAttr "href"
-                if url == file then idR else fail "not fount active URL"
+                if (takeDirectory file </> url) == file then idR else do
+                        fail "not fount active URL"
 
 -- find out if "row" has been used,
 addDefaultWidth :: R HTML
