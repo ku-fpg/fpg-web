@@ -21,3 +21,19 @@ to to answer the following questions:
 </div>
 
 The project had a period of performance of May 2009 to Aug 2011.
+
+There were a number of publications that came directly out of this project.
+
+ * <div class="cite Gill:11:DerivingLDPC"/>
+ * <div class="cite Gill:11:GeneratingLDPC"/>
+ * <div class="cite Werling:09:ITC"/>
+ * <div class="cite Bull:09:ITC"/> 
+ 
+There are also background papers about Kansas Lava from the same time period
+that we indirect influenced by the needs of the project.
+
+ * <div class="cite Gill:10:TypesKansasLava"/>
+ * <div class="cite Farmer:10:WhatsTheMatter"/>
+ * <div class="cite Gill:09:KansasLava"/>
+
+
