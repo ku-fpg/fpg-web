@@ -346,7 +346,8 @@ fixURLs :: Int -> R HTML
 fixURLs depth = extractR' $ tryR $ prunetdR $ promoteR $ mapURL $ (relativeURL depth . selfReference)
 
 selfReference :: String -> String
-selfReference nm | (site_url ++ "/") `isPrefixOf` nm = drop (length site_url) nm
+selfReference nm | (site_url ++ "/") ==  nm          = "/index"
+                 | (site_url ++ "/") `isPrefixOf` nm = drop (length site_url) nm
                  | otherwise                         = nm
 
 fixTables :: R HTML
