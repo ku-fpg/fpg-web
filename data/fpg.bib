@@ -815,18 +815,6 @@ power of this recipe using a range of examples.
       may be omitted.}
 }
 
-@inproceedings{ SPJ:91:Unboxed,
-    author       = "Simon {Peyton Jones} and John Launchbury",
-    title        = "Unboxed Values as First Class Citizens in a	Non-Strict Functional Language",
-    booktitle    = "Functional Programming Languages and Computer Architecture",
-    series       = "{FPCA} '91",
-    pages        = "636--666",
-    publisher    = "Springer",
-    year         = 1991,
-    url          = "http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.50.231",
-    abstract     = "The code compiled from a non-strict functional program usually manipulates heap-allocated boxed numbers. Compilers for such languages often go to considerable trouble to optimise operations on boxed numbers into simpler operations on their unboxed forms. These optimisations are usually handled in an ad hoc manner in the code generator, because earlier phases of the compiler have no way to talk about unboxed values. We present a new approach, which makes unboxed values into (nearly) first-class citizens. The language, including its type system, is extended to handle unboxed values. The optimisation of boxing and unboxing operations can now be reinterpreted as a set of correctness-preserving program transformations. Indeed the particular transformations required are ones which a compiler would want to implement anyway. The compiler becomes both simpler and more modular. Two other benefits accrue. Firstly, the results of strictness analysis can be exploited within the same uniform transformational framework. Secondly, new algebraic data types with unboxed components can be declared. Values of these types can be manipulated much more efficiently than the corresponding boxed versions. Both a static and a dynamic semantics are given for the augmented language. The denotational dynamic semantics is notable for its use of unpointed domains."
-}
-
 @inproceedings{NovelPeep91,
   author      = {Andrew Gill},
   title       = {A Novel Approach Towards Peephole Optimisations},
@@ -848,5 +836,20 @@ power of this recipe using a range of examples.
     third hybrid algorithm combines the strong points of both these
     solutions, and is presented as an alternative to conventional
     peepholing.}
+}
+
+// Extras
+
+@inproceedings{ SPJ:91:Unboxed,
+    author       = "Simon {Peyton Jones} and John Launchbury",
+    title        = "Unboxed Values as First Class Citizens in a	Non-Strict Functional Language",
+    booktitle    = "Functional Programming Languages and Computer Architecture",
+    series       = "{FPCA} '91",
+    pages        = "636--666",
+    publisher    = "Springer",
+    year         = 1991,
+    xtra         = {for citing regarding worker/wrapper},
+    url          = "http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.50.231",
+    abstract     = "The code compiled from a non-strict functional program usually manipulates heap-allocated boxed numbers. Compilers for such languages often go to considerable trouble to optimise operations on boxed numbers into simpler operations on their unboxed forms. These optimisations are usually handled in an ad hoc manner in the code generator, because earlier phases of the compiler have no way to talk about unboxed values. We present a new approach, which makes unboxed values into (nearly) first-class citizens. The language, including its type system, is extended to handle unboxed values. The optimisation of boxing and unboxing operations can now be reinterpreted as a set of correctness-preserving program transformations. Indeed the particular transformations required are ones which a compiler would want to implement anyway. The compiler becomes both simpler and more modular. Two other benefits accrue. Firstly, the results of strictness analysis can be exploited within the same uniform transformational framework. Secondly, new algebraic data types with unboxed components can be declared. Values of these types can be manipulated much more efficiently than the corresponding boxed versions. Both a static and a dynamic semantics are given for the augmented language. The denotational dynamic semantics is notable for its use of unpointed domains."
 }
 
