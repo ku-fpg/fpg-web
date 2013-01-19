@@ -11,7 +11,7 @@ structures used.
 Transformation Overview
 -----------------------
 
-[![](/files/WW.png)](WW.png)
+[![](/files/WW.png)](/files/WW.png)
 
 (click to enlarge)
 

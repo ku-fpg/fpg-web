@@ -49,7 +49,7 @@ Kansas, we are addressing this gap using two separate techniques.
 -   First, we are looking at deep compiler optimizations which
     fundamentally revisit the optimizing possibilities of a Haskell
     program. At the heart of these principled optimizations is the
-    [Worker Wrapper transformation](/research/workerwrapper).
+    [Worker Wrapper transformation](/tutorials/workerwrapper).
 -   Second, we are looking at ways of expressing and implementing
     *Domain Specific Languages* (DSLs)
     which are stylized libraries that give an engineered compromise
