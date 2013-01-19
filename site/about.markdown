@@ -1,4 +1,4 @@
-<div class="row"><div class="span6">
+<div class="row"><div class="span8 offset1">        
 
 The Functional Programming Group
 ================================
@@ -18,6 +18,13 @@ needs.
 
 </div>
 
+We operate inside the Computer Systems Design Laboratory (CSDL), at
+ITTC. CDSL also hosts the [System Level Design
+Group](https://wiki.ittc.ku.edu/sldg_wiki/index.php/Main_Page) (SLDG),
+lead by [Perry Alexander](http://www.ittc.ku.edu/~alex/), who also uses
+functional programming for system engineering, and with whom we
+collaborate closely.
+
 
 Joining the Lab
 ---------------
@@ -31,8 +38,6 @@ then please outline how you know Haskell, or another functional
 language. The lab does not offer scholarships to outside students,
 though we have people join from other graduate programs from
 time to time.
-
-</div><div class="span6">
 
 ## Current Members
 
@@ -53,11 +58,6 @@ Michael Tabone                                                  HERMIT/Android  
 Brad Torrence                                                   Artificial Life                 MS CS
 -----------                                                     -------------------             ------
 
-</div></div>
-
-----------------------------------------------
-
-<div class="row"><div class="span6">
 
 ## Group Alumni
 
@@ -73,7 +73,6 @@ Patrick Miller                                          Lambda Bridge, BS 2012  
 Brandon Smith                                           ChalkBoard, BS 2011
 -----------                                             ------                  --------
 
-</div><div class="span6">
 
 ## Visitors
 
@@ -90,37 +89,13 @@ Who                                                                             
 This semester (Spring 2012), Andrew Farmer is spending time at Portland State University,
 working with the FP group there.
 
-</div></div>
 
----------------------------------------
-
-<div class="row"><div class="span4">
-
-Computer Systems Design Laboratory
-----------------------------------
-
-We operate inside the Computer Systems Design Laboratory (CSDL), at
-ITTC. CDSL also hosts the [System Level Design
-Group](https://wiki.ittc.ku.edu/sldg_wiki/index.php/Main_Page) (SLDG),
-lead by [Perry Alexander](http://www.ittc.ku.edu/~alex/), who also uses
-functional programming for system engineering, and with whom we
-collaborate closely.
-
-
-</div><div class="span4">
-
-LAMBDA Reading Group
---------------------
+### Other
 
 SLDG and FPG jointly run the [LAMBDA reading
 group](https://wiki.ittc.ku.edu/lambda/Main_Page) for anyone that is
 interested, discussing topics related to programming and specification
 languages, semantic models, and programming paradigms.
-
-</div><div class="span4">
-
-IRC
----
 
 We have an IRC group, **#ku-csdl**, on irc.freenode.net.
 We also use a subreddit, <code>/r/csdl/</code>,

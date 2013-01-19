@@ -1,8 +1,19 @@
+<div class="row"><div class="span8 offset1">        
 
-<div class="row"><div class="span4 offset1">
+<div class="row"><div class="span4">        
+
+<div style="font-size: 12pt; line-height: 20pt; text-align: left">
+<strong>Andy Gill</strong><br>
+Assistant Professor<br>
+[Electrical Engineering and Computer Science](http://www.eecs.ku.edu/)<br>
+[School of Engineering](http://www.engr.ku.edu/)<br>
+[The University of Kansas](http://www.ku.edu/)</div>
+
+<BR/>
+<BR/>
 
 --------------- -----------------------------
-<b>Email:<b>    andygill at ku.edu
+<b>Email:</b>    andygill at ku.edu
 
 Phone:          +1 785-864-8817 (Eaton) / <BR>
                 +1 785-864-4712 (ITTC) <BR>
@@ -20,29 +31,13 @@ Office<BR>hours:   Wednesday 2:00-4:00 <BR>
                  (or by appointment)
 --------------- -----------------------------
 
-</div><div class="span5 offset0">
+</div><div class="span2 offset2">
 
-<div style="font-size: 12pt; line-height: 20pt; text-align: left">
-<strong>Andy Gill</strong><br>
-Assistant Professor<br>
-[Electrical Engineering and Computer Science](http://www.eecs.ku.edu/)<br>
-[School of Engineering](http://www.engr.ku.edu/)<br>
-[The University of Kansas](http://www.ku.edu/)</div>
-
-
-</div><div class="span2">
-
-<div class="pull-right">
-<img src="/files/me.jpg" class="img-rounded"/>
-</div>
+<img src="/files/andygill/me.jpg" class="img-rounded"/>
 
 </div></div>
-
-<div class="row"><div class="span5 offset1">
-
-<div style="padding-right: 10pt">
  
- Research
+Research
 --------
 
 I lead the [Functional Programming Group](/index) at the University of Kansas.
@@ -58,10 +53,6 @@ application areas, including telemetry, high performance computing and
 real-time systems.
 
 <a class="label" href="/Research">Read more about Functional Programming Research at KU</a>
-
-</div>
-
-</div><div class="span5">
 
 Teaching
 --------
@@ -81,11 +72,6 @@ EECS 876  Advanced Topics in Functional Languages
 I am teaching Programming I (EECS 168) in Spring 2013.
 
 <a class="label" href="/users/andygill/teaching">Read more about Andy Gill's classes at KU</a>
-
-</div></div>
-
-
-<div class="row"><div class="span10 offset1">
 
 
 Recent Publications and Submissions
@@ -208,67 +194,5 @@ research is to offer engineers and practitioners the opportunity to write
 clear and high-level executable specifications that can realistically be
 compiled into efficient implementations.
 
-</div></div>
-
-<div class="row"><div class="span10 offset1">
-<hr style="border: dotted 1pt;">
-</div></div>
-
-
-<div class="row fpg-small"><div class="span2 offset1">
-
-### (1991-96)
-### PhD Student / PostDoc
-### Glasgow 
-
-While studying for his PhD under the supervision of [Simon Peyton
-Jones](http://research.microsoft.com/en-us/people/simonpj/), Andy
-developed the popular foldr/build fusion optimization, still used to
-this day inside the [Glasgow Haskell
-compiler](http://www.haskell.org/ghc).
-Andy also did postdoctoral studies at Glasgow, under [John
-O'Donnell](http://www.dcs.gla.ac.uk/~jtod), working on interactive
-rewrite engines.
-
-</div><div class="span2">
-
-### (1996-99)
-### Engineer
-### Industry
-
-Andy spend three years as a professional compiler engineer, working
-first for HP on and optimizer for the itanium, worked at Metrowerks on a
-Java JIT for the PowerPC, and for a small startup call Semantic Designs,
-maintaining a parallel compiler for a scheme-like language.
-
-</div><div class="span2">
-
-### (1999-2000)
-### Project Scientist
-### Oregon Graduate<BR>Institute
-
-At OGI, Andy helped Microsoft with their .NET initiative, and developed
-debugging technologies for Haskell.
-
-</div><div class="span2">
-
-### (2000-08)
-### Co-founder & Engineer
-### Galois 
-
-Partnering with colleagues from OGI, Andy co-founded Galois, a
-consulting company specializing in high assurance software. Galois grew
-from a team of four in 2000 to a team of over 35 employees and revenue
-of $7.5M in 2008.
-
-</div><div class="span2">
-
-### (2008-)
-### Assistant Professor
-### The University<BR>of Kansas 
-
-
-While at KU, Andy has been focusing on Domain Specific Languages
-and practical applications for the Worker/Wrapper transformation.
 
 </div></div>

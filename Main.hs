@@ -219,7 +219,7 @@ main2 ("build":extra) = do
 
                 traced "paper-out" $ writeFile out $ show
                         $ element "div" [attr "class" "row"]
-                          $ element "div" [attr "class" "span8 offset2"]
+                          $ element "div" [attr "class" "span8 offset1"]
                             $ htmlC
                               [ element "div" [attr "class" "well"]
                                 $ html_cite0
@@ -270,7 +270,7 @@ main2 ("build":extra) = do
                               $ element "h3" [attr "style" "margin-top: -7px; border-top: 1px dotted;"]
                                 $ text (show year)
                             ) <>
-                            (element "div" [attr "class" "span8"]
+                            (element "div" [attr "class" "span6"]
                              $ element "ul" []
                                $ htmlC [ element "li" [attr "style" "margin-bottom: 2px;"]
                                          $ element "div" [ attr "class" "cite-link" ]
