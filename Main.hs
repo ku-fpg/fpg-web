@@ -3,7 +3,7 @@
 --
 --      site/ ... name.page
 --
---      _make/contents/name.markdown
+--      _make/contents/name.md
 -- @
 
 import Development.Shake hiding (getDirectoryContents)
@@ -64,7 +64,7 @@ main = do
 
 main2 ("build":extra) = do
 
-    markups <- findBuildTargets "site" "markdown"
+    markups <- findBuildTargets "site" "md"
 
     files_to_copy <- fmap concat $ sequence
           [ findBuildTargets "img"   "jpg"
@@ -135,7 +135,7 @@ main2 ("build":extra) = do
         -- make the content files, using pandoc.
         "_make/contents//*.html" *> \ out -> do
 --                liftIO $ prepareDirectory out
-                let srcName = dropDirectory1 $ dropDirectory1 $ replaceExtension out ".markdown"
+                let srcName = dropDirectory1 $ dropDirectory1 $ replaceExtension out "md"
                 let input = site_dir </> srcName
                 need [ input ]
                 system' "pandoc" ["-o",out,input]
