@@ -47,9 +47,7 @@
               margin-left: auto;
       }
 
-      .nav-list > li > a {
-              padding: 1px 15px;
-      }
+
       .hero-unit {
               padding: 20px;
               margin-bottom: 20px;
@@ -69,10 +67,10 @@
          color: #0022B4;
 --         font-size: 120%;
       }    
-      .fpg-menu {
-              border-left: 1px solid #0022B4;
-              padding-left: 10px;
-      }
+--      .fpg-menu {
+--              border-left: 1px solid #0022B4;
+--             padding-left: 10px;
+--      }
 
 .fpg-event-list h3 {
 	font-size: 100%;
@@ -123,7 +121,7 @@
 
 
 .fpg-landing {
-	background: #f0f0f0;
+	background: #f8f0f0;
 }
 
 .cite-link {
@@ -146,5 +144,21 @@
 	color: inherit;
 }
 
+.nav-header {
+  text-align: center;
+}
 
+Xa.nav-list2 {
+  padding-left: 10px;
+  padding-top: 10px;
+}
+
+.nav-list ul li a {
+     padding: 0px 15px;
+}
+
+.nav > li > a:hover {
+  background-color: #dedede;
+}
+--  border-color: red;
 

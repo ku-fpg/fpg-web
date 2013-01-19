@@ -375,12 +375,12 @@ addDefaultWidth = has_row <+ add_row
      has_row = extractR' $ anytdR $ promoteR $ do
         "div" <- getTag
         cls <- getAttr "class"
-        if "row" `elem` words cls then idR else fail "not class row"
+        if any ("span" `isPrefixOf`) $ words cls then idR else fail "not span div"
 
      add_row = promoteR $ do
              h <- idR
              return $ element "div" [attr "class" "row"]
-                    $ element "div" [attr "class" "span8 offset2"]
+                    $ element "div" [attr "class" "span8 offset1"]
                     $ h
 
 -------------------------------------------------------------------------------------------------
