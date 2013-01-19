@@ -67,7 +67,7 @@ this program. We have also generated some index files, that list all the
 modules in our executable. `hpc_index.html`{.haskell
 .geshifilter-haskell} looks like this.
 
-![](http://www.ittc.ku.edu/csdl/fpg/sites/default/files/HpcMarkup.png)
+![](/files/HpcMarkup.png)
 
 ### What files are you using to collect coverage?
 

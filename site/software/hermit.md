@@ -1,6 +1,12 @@
+## HERMIT
+
+<div class="teaser">
+
 The **Haskell Equational Reasoning Model-to-Implementation Tunnel**
 (HERMIT) is an NSF-funded project to improving the Applicability of
 Haskell-Hosted Semi-Formal Models to High Assurance Development.
+
+</div>
 
 Summary
 -------

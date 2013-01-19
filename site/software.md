@@ -15,6 +15,10 @@ which gives the research-centric view of the FPG lab.
 
 -----------------------------------------------------------
 
+## Rewriting and Refactoring Tools
+
+<a href="/software/hermit" class="teaser">More about HERMIT</a>
+
 ## Haskell Domain Specific Languages (DSLs)
 
 ### Kansas Lava and Hardware Specification and Generation

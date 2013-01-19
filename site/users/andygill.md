@@ -52,7 +52,7 @@ implementations. We then deploy our new technologies into diverse
 application areas, including telemetry, high performance computing and
 real-time systems.
 
-<a class="label" href="/Research">Read more about Functional Programming Research at KU</a>
+<a class="label" href="/research">Read more about Functional Programming Research at KU</a>
 
 Teaching
 --------

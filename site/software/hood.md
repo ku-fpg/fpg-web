@@ -8,6 +8,23 @@ imperative language debuggers.
 
 </div>
 
+Features
+--------
+
+-   Observation of base types (Int, Bool, Float, etc)
+-   Observation of both finite and infinite structures (Lists, trees,
+    arrays, etc).
+-   Observation of usage patterns for functions.
+-   Observation of monadic actions, including IO actions.
+-   Hooks to add observational capabilities for new base type and used
+    defined types.
+-   Programmable browsing capabilities - structure browsers can be coded
+    and plugged in.
+-   Includes a basic structure rendering package that uses a
+    Haskell-like syntax.
+-   Thread-safe observations are are supported.
+-   Supports observations on exceptions (on certain compilers).
+
 Examples
 --------
 
@@ -81,35 +98,11 @@ Hood was developed at OGI, in 1999, for GHC 4.X. We are looking into a
 debugging toolkit for Haskell and Lava, so we ported Hood to GHC 6.X,
 and re-released it on hackage. We hope you find it useful.
 
-On Hackage
-----------
+### Key Links
 
-[http://hackage.haskell.org/package/hood](http://hackage.haskell.org/package/hood)
+ *  <http://hackage.haskell.org/package/hood>
+ 
+### HOOD Papers
 
-Paper
------
+ * <div class="cite Gill:00:HOOD"/>
 
-### No items found
-
-Features
---------
-
--   Observation of base types (Int, Bool, Float, etc)
--   Observation of both finite and infinite structures (Lists, trees,
-    arrays, etc).
--   Observation of usage patterns for functions.
--   Observation of monadic actions, including IO actions.
--   Hooks to add observational capabilities for new base type and used
-    defined types.
--   Programmable browsing capabilities - structure browsers can be coded
-    and plugged in.
--   Includes a basic structure rendering package that uses a
-    Haskell-like syntax.
--   Thread-safe observations are are supported.
--   Supports observations on exceptions (on certain compilers).
-
-Tutorial
---------
-
-[Hood 0.2
-Tutorial](http://www.ittc.ku.edu/csdl/fpg/sites/default/files/hood-tutorial-0.2.1.pdf)
