@@ -1,3 +1,6 @@
+KURE
+----
+
 <div class="teaser">
 The **Kansas University Rewrite Engine** (KURE) is a Haskell-hosted
 Domain Specific Language (DSL) for writing transformation systems based
@@ -16,10 +19,11 @@ detection.
 KURE was used (along with Template Haskell) to provide the basic rewrite
 abilities inside HERA. It was rewritten once in late 2008, and again in
 2012. The 2012 version is being used as the underlying rewrite engine by
-HERMIT. Both the 2008 and 2012 versions are available on Hackage.
+HERMIT. Both the 2008 and 2012 versions are [available on Hackage](http://hackage.haskell.org/package/kure).
 
 ### Key Links
 
 ### Publications
 
-
+* <div class="cite Farmer:12:HERMITinMachine"/>
+* <div class="cite Gill:2009:KUREDSL"/>
