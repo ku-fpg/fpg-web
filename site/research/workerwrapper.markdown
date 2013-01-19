@@ -1,3 +1,6 @@
+Worker/Wrapper Transformation
+=============================
+
 The worker/wrapper transformation is a technique for transforming a
 computation of one type into a *worker* of a different type, together
 with a *wrapper* that acts as an impedance matcher between the original
@@ -74,19 +77,19 @@ There are several worker/wrapper assumptions that are sufficient to
 justify worker/wrapper factorization. The three given in the
 worker/wrapper paper are:
 
-  ---------------------------- ---------------- ----------------------------------
-  **abs ο rep**                **= id**         (**(A)** basic assumption)
-  **abs ο rep ο body**         **= body**       (**(B)** body assumption)
-  **fix (abs ο rep ο body)**   **= fix body**   (**(C)** fixed-point assumption)
-  ---------------------------- ---------------- ----------------------------------
+  ------- -------------------------------------- ----------------------------------
+  **(A)** **abs ο rep = id**                      (basic assumption)
+  **(B)** **abs ο rep ο body = body**             (body assumption)
+  **(C)** **fix (abs ο rep ο body) = fix body**   (fixed-point assumption)
+  ------- -------------------------------------- ----------------------------------
 
 There is also another possible assumption, which uses the **fixed point
 fusion** rule (hence the name fpf assumption) and only holds for a
 strict **abs**:
 
-  ----------------------------- ------------------ --------------------------
-  **wrap ο rep ο body ο abs**   **= body ο abs**   (**(D)** fpf assumption)
-  ----------------------------- ------------------ --------------------------
+  ------- ---------------------------------------- -----------------
+  **(D)** **wrap ο rep ο body ο abs = body ο abs** (fpf assumption)
+  ------- ---------------------------------------- -----------------
 
 ### Worker/Wrapper Fusion Rule
 
@@ -98,41 +101,11 @@ hold, then:
 Papers
 ------
 
-2009
+* <div class="cite Sculthorpe:13:WorkIt"/>
+* <div class="cite Gill:10:F5"/>
+* <div class="cite Gill:09:WW"/>
+* <div class="cite SPJ:91:Unboxed"/>
 
-[Gill, A.](/biblio/author/42), and [G.
-Hutton](/biblio/author/2), "[The worker/wrapper
-transformation](/biblio/view/19)", *Journal of Functional
-Programming*, vol. 19, no. 2: Cambridge University Press, pp. 227–251,
-03/2009. [Abstract](/node/19)
-
--   [Tagged](/biblio/export/tagged/19 "Click to download the EndNote Tagged formatted file")
--   [XML](/biblio/export/xml/19 "Click to download the XML formatted file")
--   [BibTex](/biblio/export/bibtex/19 "Click to download the BibTEX formatted file")
--   [Google
-    Scholar](http://scholar.google.com/scholar?btnG=Search%2BScholar&as_q=%22The%2Bworker%2Fwrapper%2Btransformation%22&as_sauthors=Gill&as_occt=any&as_epq=&as_oq=&as_eq=&as_publication=&as_ylo=&as_yhi=&as_sdtAAP=1&as_sdtp=1 "Click to search Google Scholar for this entry")
-
-2010
-
-[Hutton, G.](/biblio/author/2), [M.
-Jaskelioff](/biblio/author/6), and [A.
-Gill](/biblio/author/42), "[Factorising Folds for Faster
-Functions](/biblio/view/10)", *Journal of Functional
-Programming*, vol. 20, issue 3-4, 2010. [Abstract](/node/10)
-
--   [Tagged](/biblio/export/tagged/10 "Click to download the EndNote Tagged formatted file")
--   [XML](/biblio/export/xml/10 "Click to download the XML formatted file")
--   [BibTex](/biblio/export/bibtex/10 "Click to download the BibTEX formatted file")
--   [Google
-    Scholar](http://scholar.google.com/scholar?btnG=Search%2BScholar&as_q=%22Factorising%2BFolds%2Bfor%2BFaster%2BFunctions%22&as_sauthors=Hutton&as_occt=any&as_epq=&as_oq=&as_eq=&as_publication=&as_ylo=&as_yhi=&as_sdtAAP=1&as_sdtp=1 "Click to search Google Scholar for this entry")
-
--   [Unboxed values as first class citizens in a non-strict functional
-    language](http://citeseer.ist.psu.edu/jones91unboxed.html). Simon L
-    Peyton Jones and John Launchbury. *Functional Programming Languages
-    and Computer Architecture (FPCA '91)*, pp. 636–666, 1991.
--   [Work It, Wrap It, Fix It, Fold
-    It.](http://www.ittc.ku.edu/~neil/publications.html) Neil Sculthorpe
-    and Graham Hutton. Submitted to the *Journal of Functional Programming (JFP)*.
 
 Use Cases
 ---------

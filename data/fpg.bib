@@ -9,6 +9,23 @@
 // ------------------------------------------------------------------------------
 // Submitted
 
+@unpublished{ Sculthorpe:13:WorkIt,
+   author        = "Neil Sculthorpe and Graham Hutton",
+   title         = "Work It, Wrap It, Fix It, Fold It",
+   note          = "Submitted to the Journal of Functional Programming",
+   url           = "http://www.ittc.ku.edu/~neil/publications.html",
+   abstract      = "The worker/wrapper transformation is a general-purpose technique
+for refactoring recursive programs to improve their performance.
+The two previous approaches to formalising the technique were
+based upon different recursion operators and different correctness
+conditions.  In this article we show how these two approaches can
+be generalised in a uniform manner by combining their correctness
+conditions, how the theory can be extended with new conditions
+that are necessary (in addition to sufficient) to ensure the correctness
+of the worker/wrapper technique, and explore the benefits that result.
+All the proofs have been mechanically verified using the Agda system."
+}
+
 @misc{Gill:13:TypesKansasLava-Submitted,
    title={Types and Associated Type Families for Hardware Simulation and Synthesis:
           The Internals and Externals of {K}ansas {L}ava},
@@ -255,7 +272,7 @@ and because of this the rendered binary was found to be robust and reliable.},
 }
 
 
-@article{WWF52009,
+@article{Gill:10:F5,
 	author = "Graham Hutton and Mauro Jaskelioff and Andy Gill",
         title  = "Factorising Folds for Faster Functions",
         abstract ={The worker/wrapper transformation is a general technique for improving the performance of
@@ -488,7 +505,7 @@ institution	= "Information Telecommunication and Technology Center, University o
   year=2009,
   month={January}
 }
-@article{WorkerWrapper08,
+@article{ Gill:09:WW,
  author = {Andy Gill and Graham Hutton},
  title = {The worker/wrapper transformation},
  abstract = {The worker/wrapper transformation is a technique for changing the type
@@ -796,6 +813,18 @@ power of this recipe using a range of examples.
       this value, so the update is unnecessary. In this paper we take
       some steps towards an analysis for determining when these updates
       may be omitted.}
+}
+
+@inproceedings{ SPJ:91:Unboxed,
+    author       = "Simon {Peyton Jones} and John Launchbury",
+    title        = "Unboxed Values as First Class Citizens in a	Non-Strict Functional Language",
+    booktitle    = "Functional Programming Languages and Computer Architecture",
+    series       = "{FPCA} '91",
+    pages        = "636--666",
+    publisher    = "Springer",
+    year         = 1991,
+    url          = "http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.50.231",
+    abstract     = "The code compiled from a non-strict functional program usually manipulates heap-allocated boxed numbers. Compilers for such languages often go to considerable trouble to optimise operations on boxed numbers into simpler operations on their unboxed forms. These optimisations are usually handled in an ad hoc manner in the code generator, because earlier phases of the compiler have no way to talk about unboxed values. We present a new approach, which makes unboxed values into (nearly) first-class citizens. The language, including its type system, is extended to handle unboxed values. The optimisation of boxing and unboxing operations can now be reinterpreted as a set of correctness-preserving program transformations. Indeed the particular transformations required are ones which a compiler would want to implement anyway. The compiler becomes both simpler and more modular. Two other benefits accrue. Firstly, the results of strictness analysis can be exploited within the same uniform transformational framework. Secondly, new algebraic data types with unboxed components can be declared. Values of these types can be manipulated much more efficiently than the corresponding boxed versions. Both a static and a dynamic semantics are given for the augmented language. The denotational dynamic semantics is notable for its use of unpointed domains."
 }
 
 @inproceedings{NovelPeep91,

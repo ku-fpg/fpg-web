@@ -1,6 +1,6 @@
 
 <div class="teaser">
-        
+
 We use functional programming to solve problems in ways that are
 amicable to acceleration (GPUs, Multi-cores, FPGAs), and supports
 assurance arguments (using semi-formal methods like equational
@@ -49,7 +49,7 @@ Kansas, we are addressing this gap using two separate techniques.
 -   First, we are looking at deep compiler optimizations which
     fundamentally revisit the optimizing possibilities of a Haskell
     program. At the heart of these principled optimizations is the
-    [Worker Wrapper transformation](/Research/WorkerWrapper).
+    [Worker Wrapper transformation](/research/workerwrapper).
 -   Second, we are looking at ways of expressing and implementing
     *Domain Specific Languages* (DSLs)
     which are stylized libraries that give an engineered compromise
@@ -67,7 +67,7 @@ Summary of Active Projects
 We have three projects that attempt to address our research objectives.
 
  * The [HERMIT Project](/projects/hermit) is building infrastructure for
-   performing deep for 
+   performing deep for
 
 
  * The [Kansas Lava Project](/projects/kansas-lava) is ...
@@ -95,7 +95,7 @@ Funding
 
 We would like to thank our other sponsors for supporting our research.
 
- * International Foundation for Telemetering (IFT) for 
+ * International Foundation for Telemetering (IFT) for
    funding for hardware, travel and student scholarships.
  * Xilinx for software and hardware through the Xilinx University Program.
  * Altera for software and hardware through the Altera University Program.
