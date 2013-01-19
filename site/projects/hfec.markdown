@@ -3,7 +3,7 @@
 <div class="teaser">
 
 On this project, we used [Kansas Lava](/projects/kansas-lava) to generate efficient forward
-error correcting codes. From a research point of view, we were attempting
+error correcting codes. From a FPG research point of view, we were attempting
 to to answer the following questions:
 
 -   Can we use use functional programming to complement and support the
@@ -20,3 +20,4 @@ to to answer the following questions:
 
 </div>
 
+The project had a period of performance of May 2009 to Aug 2011.
