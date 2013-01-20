@@ -9,7 +9,7 @@ KURE is a strongly typed strategy control language in the tradition of Stratego 
 Its aim is to provide a simple interface for writing reasonably efficient rewrite systems while supporting complex traversal strategies.
 </div>
 
-KURE was used (along with Template Haskell) to provide the basic rewrite abilities inside HERA (the precursor to [HERMIT](software/hermit.html)).
+KURE was used (along with Template Haskell) to provide the basic rewrite abilities inside HERA (the precursor to [HERMIT](/software/hermit.html)).
 It was rewritten once in late 2008, again in 2012, and the interface was revised in 2013.
 The 2013 version is being used as the underlying rewrite engine by HERMIT.
 The 2008, 2012 and 2013 versions are all [available on Hackage](http://hackage.haskell.org/package/kure).
