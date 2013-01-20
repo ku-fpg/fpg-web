@@ -1,8 +1,8 @@
 # first cut at redirects
 
-# Automatically add .html to non-suffix'd names or directories
-RedirectMatch 302 (.*)/([^\.\/]*)/$  $1/$2.html
-RedirectMatch 302 (.*)/([^\.\/]*)$  $1/$2.html
+# Automatically add .html to non-suffix'd names or directories,
+# but not for the root /csd/fpg directory
+RedirectMatch 302 (/csdl/fpg.*)/([^\.\/]+)/?$  $1/$2.html
 #RedirectMatch 301 ^/csdl/fpg/users/([^\.]*)$  /csdl/fpg/users/$1.html	
 
 # Bib redirect
