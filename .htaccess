@@ -1,0 +1,26 @@
+# first cut at redirects
+
+# Automatically add .html to non-suffix'd names or directories,
+# but not for the root /csd/fpg directory
+RedirectMatch 302 (/csdl/fpg.*)/([^\.\/]+)/?$  $1/$2.html
+#RedirectMatch 301 ^/csdl/fpg/users/([^\.]*)$  /csdl/fpg/users/$1.html	
+
+# Bib redirect
+RedirectMatch 301 ^/csdl/fpg/biblio /csdl/fpg/publications.html
+
+# tools are now called software
+RedirectMatch 301 ^/csdl/fpg/Tools/(.*)$ /csdl/fpg/software/$1
+
+# Using hackage normalize names
+RedirectMatch 301 (.*)/KansasLava.html$ $1/kansas-lava.html
+
+# short cut the directory
+Redirect 301 /csdl/fpg/sites/default/files http://www.ittc.ku.edu/csdl/fpg/files
+
+# Root level names
+Redirect 301 /csdl/fpg/Tools.html http://www.ittc.ku.edu/csdl/fpg/software.html
+
+Redirect 301 /csdl/fpg/ChalkBoard.html http://www.ittc.ku.edu/csdl/fpg/software/chalkboard.html
+Redirect 301 /csdl/fpg/KansasLava.html http://www.ittc.ku.edu/csdl/fpg/software/kansas-lava.html
+Redirect 301 /csdl/fpg/Hood.html http://www.ittc.ku.edu/csdl/fpg/software/hood.html
+Redirect 301 /csdl/fpg/Home.html http://www.ittc.ku.edu/csdl/fpg/index.html
