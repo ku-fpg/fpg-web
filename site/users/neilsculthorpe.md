@@ -44,7 +44,7 @@ I'm currently working on the <a href="/projects/hermit">HERMIT project</a>, a sc
 </p>
 
 <p>
-The <a href="/tutorials/workerwrapper">Worker/Wrapper Transformation</a>, a verification technique for connecting clear specifications to efficient implementations, is being used extensively in HERMIT.
+The <a href="/theory/workerwrapper">Worker/Wrapper Transformation</a>, a verification technique for connecting clear specifications to efficient implementations, is being used extensively in HERMIT.
 I'm interested in developing the underlying theory of the transformation, and finding new applications.
 </p>
 
