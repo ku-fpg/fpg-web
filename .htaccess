@@ -23,3 +23,4 @@ Redirect 301 /csdl/fpg/Tools.html http://www.ittc.ku.edu/csdl/fpg/software.html
 Redirect 301 /csdl/fpg/ChalkBoard.html http://www.ittc.ku.edu/csdl/fpg/software/chalkboard.html
 Redirect 301 /csdl/fpg/KansasLava.html http://www.ittc.ku.edu/csdl/fpg/software/kansas-lava.html
 Redirect 301 /csdl/fpg/Hood.html http://www.ittc.ku.edu/csdl/fpg/software/hood.html
+Redirect 301 /csdl/fpg/Home.html http://www.ittc.ku.edu/csdl/fpg/index.html
