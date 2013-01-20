@@ -74,6 +74,7 @@ main2 ("build":extra) = do
           , findBuildTargets "img"   "png"
           , findBuildTargets "js"    "js"
           , findBuildTargets "css"   "css"
+          , findBuildTargets "files" "*"
           , return [".htaccess"]
           ]
 
