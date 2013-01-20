@@ -1,4 +1,5 @@
-## HERMIT
+HERMIT
+======
 
 <div class="teaser">
 
@@ -38,3 +39,9 @@ semi-formal methods to construct such link, and this project addresses
 keys part of this requirement.
 
 ![](/files/HERMIT-tunnel.png)
+
+Publications
+------------
+
+* <div class="cite Sculthorpe:12:HERMITinTree-Submitted"/>
+* <div class="cite Farmer:12:HERMITinMachine"/>
