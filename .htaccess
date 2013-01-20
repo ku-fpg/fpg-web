@@ -4,10 +4,10 @@
 RedirectMatch 301 ^/csdl/fpg/users/andygill/$  /csdl/fpg/users/andygill.html
 
 # Bib redirect
-RedirectMatch 301 /csdl/fpg/biblio$ /csdl/fpg/publications.html
+RedirectMatch 301 ^/csdl/fpg/biblio /csdl/fpg/publications.html
 
 # tools are now called software
-RedirectMatch 301 /csdl/fpg/Tools(.*)$ /csdl/fpg/software$1.html
+RedirectMatch 301 ^/csdl/fpg/Tools(.*)$ /csdl/fpg/software$1.html
 
 # Using hackage normalize names
 RedirectMatch 301 (.*)/KansasLava.html $1/kansas-lava.html
@@ -16,5 +16,6 @@ RedirectMatch 301 (.*)/KansasLava.html $1/kansas-lava.html
 Redirect 301 /csdl/fpg/sites/default/files http://www.ittc.ku.edu/csdl/fpg/files
 
 # Root level names
-RedirectMatch 301 /csdl/fpg/ChalkBoard$ /csdl/fpg/software/chalkboard.html
-
+RedirectMatch 301 ^/csdl/fpg/ChalkBoard$ /csdl/fpg/software/chalkboard.html
+RedirectMatch 301 ^/csdl/fpg/KansasLava$ /csdl/fpg/software/kansas-lava.html
+RedirectMatch 301 ^/csdl/fpg/Hood$ /csdl/fpg/software/hood.html
