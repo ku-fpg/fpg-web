@@ -29,3 +29,5 @@ semi-formal methods to construct such link, and this project addresses
 keys part of this requirement.
 
 </div>
+
+![](/files/HERMIT-tunnel.png)
