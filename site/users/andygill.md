@@ -89,6 +89,9 @@ Professional Activities
 
 -   Editor, 
         SIGPLAN Notices & SIGPLAN Information Director
+-   PC Member,
+        23nd International Conference on Field Programmable Logic and Applications,
+        2013
 -   PC Member, 
         International Symposium on High-level Parallel Programming and Applications,
         2013
