@@ -1,4 +1,4 @@
-<div class="row"><div class="span8 offset1">        
+<div class="row"><div class="span8 offset1">
 
 The Functional Programming Group
 ================================
@@ -61,7 +61,7 @@ Brad Torrence                                                   Artificial Life 
 
 ## Group Alumni
 
-These are people who has worked for or with FPG in some capacity.
+These are people who have worked for or with FPG in some capacity.
 
 Who                                                     What                    Where after FPG
 -----------                                             -----                   ---------
@@ -86,7 +86,7 @@ Who                                                                             
 
 ## Visits
 
-This semester (Spring 2012), Andrew Farmer is spending time at Portland State University,
+[Andrew Farmer](/users/andrewfarmer) is spending Spring 2013 at Portland State University,
 working with the FP group there.
 
 
