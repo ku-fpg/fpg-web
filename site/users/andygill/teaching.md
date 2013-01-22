@@ -25,6 +25,19 @@ will be teaching EECS 776 in Fall 2013.
 Classes at KU
 -------------
 
+EECS 168 **Programming I** introduces problem solving using a high
+level programming language and object oriented software design.
+Fundamental stages of software development are discussed: problem
+specification, program design, implementation, testing, and
+documentation. Introduction to programming using object oriented
+language: using classes, defining classes, and extending classes.
+Introduction to algorithms and data structures useful for problem
+solving: arrays, lists, files, searching, and sorting. Student will
+be responsible for designing, implementing, testing and documenting
+independent programming projects. Professional ethics are defined and
+discussed in particular with respect to computer rights and
+responsibilities.
+
 EECS 368 **Programming Language Paradigms** is an introduction to
 programming language fundamentals. The objective of the course is to
 provide an introduction to alternative programming models that
