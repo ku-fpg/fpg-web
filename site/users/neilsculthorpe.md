@@ -77,3 +77,10 @@ Lecture slides for the modules I taught at the University of Nottingham can be f
 
 </ul>
 
+<h3>Professional Activities</h3>
+
+<p>
+I am a member of the program committee for the 2013 <a href="http://www.haskell.org/haskell-symposium/">ACM SIGPLAN Haskell Symposium.</a>
+</p>
+
+
