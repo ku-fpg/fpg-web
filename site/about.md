@@ -44,7 +44,7 @@ time to time.
 Who                                                             Project(s)                      Status
 -----------                                                     --------------------            -----
 Robert F Blair                                                  HERMIT/Android                  BS CS
-Jan Bracker                                                     HERMIT/Sunroof                  MS exchange student
+[Jan Bracker](/users/janbracker)                                HERMIT/Sunroof                  MS exchange student
 [Andrew Farmer](/users/andrewfarmer)                            HERMIT                          PhD, expected 2014
 Patrick G Flor                                                  HERMIT/Android                  BS CS
 [Andy Gill](/users/andygill)                                    HERMIT &amp; KansasLava         PI / Faculty
