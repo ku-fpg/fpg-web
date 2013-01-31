@@ -1,7 +1,6 @@
 <div class="row"><div class="span8 offset1">
 
-The Functional Programming Group
-================================
+# The Functional Programming Group
 
 <div class="teaser">
 
