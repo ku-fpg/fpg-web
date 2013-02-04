@@ -43,5 +43,5 @@ keys part of this requirement.
 Publications
 ------------
 
-* <div class="cite Sculthorpe:12:HERMITinTree-Submitted"/>
+* <div class="cite Sculthorpe:12:HERMITinTree"/>
 * <div class="cite Farmer:12:HERMITinMachine"/>
