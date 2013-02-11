@@ -1,6 +1,6 @@
-<div class="row"><div class="span8 offset1">        
+<div class="row"><div class="span8 offset1">
 
-<div class="row"><div class="span4">        
+<div class="row"><div class="span4">
 
 <div style="font-size: 12pt; line-height: 20pt; text-align: left">
 <strong>Andy Gill</strong><br>
@@ -36,12 +36,12 @@ Office<BR>hours:   Wednesday 2:00-4:00 <BR>
 <img src="/files/andygill/me.jpg" class="img-rounded"/>
 
 </div></div>
- 
+
 Research
 --------
 
 I lead the [Functional Programming Group](/index) at the University of Kansas.
-Funded by the National Science Foundation, 
+Funded by the National Science Foundation,
 the International Foundation for Telemetering, and others,
 we use functional programming to solve problems in ways that are
 amicable to acceleration, and supports
@@ -57,17 +57,17 @@ real-time systems.
 Teaching
 --------
 
-I teach programming in Java (EECS 168 &amp; 368), 
-Scheme (EECS 368), and Haskell (EECS 368, 776, 876). 
+I teach programming in Java (EECS 168 &amp; 368),
+Scheme (EECS 368), and Haskell (EECS 368, 776, 876).
 In all these class, we go on to use programming
 to solve interesting real-world problems.
 
---------  --------------                                          
-EECS 168  Programming I                                          
-EECS 368  Programming Language Paradigms                         
-EECS 776  Functional Programming and Domain Specific Languages   
-EECS 876  Advanced Topics in Functional Languages                
---------  --------------                                          
+--------  --------------
+EECS 168  Programming I
+EECS 368  Programming Language Paradigms
+EECS 776  Functional Programming and Domain Specific Languages
+EECS 876  Advanced Topics in Functional Languages
+--------  --------------
 
 I am teaching Programming I (EECS 168) in Spring 2013.
 
@@ -78,7 +78,7 @@ Recent Publications and Submissions
 -----------------------------------
 
  * <div class="cite Gill:13:TypesKansasLava-Submitted"/>
- * <div class="cite Sculthorpe:12:HERMITinTree-Submitted"/>
+ * <div class="cite Sculthorpe:12:HERMITinTree"/>
  * <div class="cite Farmer:12:HERMITinMachine"/>
  * <div class="cite Farmer-12-WebDSLs"/>
  * <div class="cite Frisby:12:AlmostHomomorphicFunctions"/>
@@ -87,7 +87,7 @@ Recent Publications and Submissions
 Professional Activities
 -----------------------
 
--   Editor, 
+-   Editor,
         SIGPLAN Notices & SIGPLAN Information Director
 -   PC Member,
         Workshop on Haskell And Rewriting Techniques (HART), 
@@ -95,85 +95,85 @@ Professional Activities
 -   PC Member,
         23nd International Conference on Field Programmable Logic and Applications,
         2013
--   PC Member, 
+-   PC Member,
         International Symposium on High-level Parallel Programming and Applications,
         2013
--   PC Member, 
+-   PC Member,
         Trends in Functional Programming
         (TFL'13)
--   PC Member, 
+-   PC Member,
         6th International Conference on Software Language Engineering,
         2013
--   Co-Chair, 
+-   Co-Chair,
         Midwest Verification Day, Lawrence, KS, 45 attendees,
         2012
--   PC Member, 
+-   PC Member,
         22nd International Conference on Field Programmable Logic and Applications,
-        2012	
--   PC Member, 
+        2012
+-   PC Member,
         8th ACM SIGPLAN Workshop on Generic Programming,
         2012
--   PC Member, 
+-   PC Member,
         Reconfigurable Architectures Workshop,
         2012
--   PC Member, 
+-   PC Member,
         High-level programming for heterogeneous and hierarchical parallel systems,
         2012
--   PC Member, 
+-   PC Member,
         ACM SIGPLAN Workshop on Partial Evaluation and Program Manipulation
         (PEPM'12)
--   Chair & Editor, 
+-   Chair & Editor,
         International Symposium on the Implementation and Application of Functional Languages
         (IFL'11)
 -   Member,
-        ACM SIGPLAN Haskell Symposium Steering Committee, 
+        ACM SIGPLAN Haskell Symposium Steering Committee,
         2008-2011 (Chair in 2011)
--   PC Member, 
+-   PC Member,
         [ACM SIGPLAN Haskell Symposium](http://www.haskell.org/haskell-symposium/2011/)
         (HASKELL'11)
--   Chair, 
+-   Chair,
         ICFP Program Committee Workshop, Cambridge, England,
         2010
 -   PC Member,
         ACM SIGPLAN International Conference on Functional Programming
         (ICFP'10)
--   PC Member, 
-        ACM SIGPLAN Symposium on Practical Aspects of Declarative Languages	
+-   PC Member,
+        ACM SIGPLAN Symposium on Practical Aspects of Declarative Languages
         (PADL'10)
--   PC Member for the 
+-   PC Member for the
         [Workshop on Mathematically Structured Functional Programming](http://cs.ioc.ee/msfp/msfp2010/)
         (MSFP'10)
--   PC Member for the 
-        [Symposium on the Implementation and Application of Functional Languages](http://www.cs.uu.nl/wiki/bin/view/IFL2010/WebHome) 
+-   PC Member for the
+        [Symposium on the Implementation and Application of Functional Languages](http://www.cs.uu.nl/wiki/bin/view/IFL2010/WebHome)
         (IFL'10)
--   PC Member for the 
-        [ACM SIGPLAN International Conference on Functional Programming](http://www.icfpconference.org/) 
+-   PC Member for the
+        [ACM SIGPLAN International Conference on Functional Programming](http://www.icfpconference.org/)
         (ICFP'10)
--   PC Member for 
+-   PC Member for
         [Practical Aspects of Declarative Languages](http://clip.dia.fi.upm.es/Conferences/PADL-2010/)
         (PADL'10)
--   PC Member for the 
+-   PC Member for the
         Symposium on the Implementation and Application of Functional Languages
         (IFL'09)
 -  Chair,
         [ICFP Programming Contest](http://www.icfpcontest.org/),
         2009
--   Chair, 
-        Midwest Programming Languages Day, 
+-   Chair,
+        Midwest Programming Languages Day,
         2009
--   PC Member for the 
+-   PC Member for the
         Symposium on the Implementation and Application of Functional Languages
         (IFL'08)
 -   PC Co-Chair for the
         [Practical Aspects of Declarative Languages](http://cs.utdallas.edu/padl09/)
         (PADL'09)
--   PC Chair for the 
+-   PC Chair for the
         [ACM SIGPLAN Haskell Symposium](http://www.haskell.org/haskell-symposium/2008/)
         (HASKELL'08)
--   PC Member for 
+-   PC Member for
         [Mathematically Structured Functional Programming](http://msfp.org.uk/)
         (MSFP'08)
--   PC Member for the 
+-   PC Member for the
         [ACM SIGPLAN Haskell  Workshop](http://www.haskell.org/haskell-workshop/2007/)
         (HASKELL'07)
 
