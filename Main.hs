@@ -67,6 +67,7 @@ main = do
 main2 ("build":extra) = do
 
     markups <- findBuildTargets "site" "md"
+    raw_html <- findBuildTargets "site" "html"
 
     files_to_copy <- fmap concat $ sequence
           [ findBuildTargets "img"   "jpg"
@@ -101,7 +102,7 @@ main2 ("build":extra) = do
 
           where
                   depth = length $ filter (== '/') file
-                  templ = if file == "status.html"
+                  templ = if file `elem` ["status.html","sigplan/status.html"]
                           then "full.html"
                           else "page.html"
 
@@ -110,6 +111,9 @@ main2 ("build":extra) = do
                  ] ++
                  [ prettyPage file "autogen"
                  | file <- autogen
+                 ] ++
+                 [ prettyPage (dropDirectory1 file) "raw"
+                 | file <- raw_html
                  ] ++
                  [ copyPage file
                  | file <- files_to_copy
@@ -139,6 +143,13 @@ main2 ("build":extra) = do
 
         -- This will make a status file, in the autogen dir
         makeStatus site_url "autogen"
+
+
+        -- make the content files, using pandoc.
+        "_make/raw//*.html" *> \ out -> do
+                let srcName = dropDirectory1 $ dropDirectory1 out
+                let input = site_dir </> srcName
+                copyFile' input out
 
         -- make the content files, using pandoc.
         "_make/contents//*.html" *> \ out -> do

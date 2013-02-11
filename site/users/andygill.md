@@ -90,6 +90,9 @@ Professional Activities
 -   Editor,
         SIGPLAN Notices & SIGPLAN Information Director
 -   PC Member,
+        Workshop on Haskell And Rewriting Techniques (HART), 
+        2013
+-   PC Member,
         23nd International Conference on Field Programmable Logic and Applications,
         2013
 -   PC Member,

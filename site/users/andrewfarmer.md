@@ -35,7 +35,8 @@ the Kansas Lava project. He is currently working on the HERMIT project.
 
 ### Presentations
 
-- Introducing HERMIT: A Plugin for Transforming GHC Core Language Programs. Portland State PL Club. Portland, Oregon. January 2013. [Slides](http://www.ittc.ku.edu/~afarmer/psu-pl-club.html)
+- Towards a HERMIT-based DSL for Specifying Optimizations in GHC. Portland State PL Club. Portland, Oregon. February 2013. [Slides](http://www.ittc.ku.edu/~afarmer/pdx-pl-club2.html)
+- Introducing HERMIT: A Plugin for Transforming GHC Core Language Programs. Portland State PL Club. Portland, Oregon. January 2013. [Slides](http://www.ittc.ku.edu/~afarmer/pdx-pl-club.html)
 - Haskell DSLs for Interactive Web Services. First International Workshop on Cross-model Language Design and Implementation (XLDI '12), Copenhagen, Denmark. September 2012. [Slides](http://www.ittc.ku.edu/~afarmer/sunroof-xldi12.html) [Video](http://www.youtube.com/watch?v=ivMHHreMTvM)
 - HERMIT: A Plugin for Transforming GHC Core Language Programs. 2012 Oregon Programming Languages Summer School, student talk session, Eugene, Oregon. July 2012. [Slides](http://www.ittc.ku.edu/~afarmer/oplss-hermit.html)
 - The HERMIT Equational Reasoning Framework. ITTC Industry Advisory Board Poster Session, Lawrence, Kansas. June 2012. Winner of Student Poster Competition. <!-- <a href="">Poster</a> -->
