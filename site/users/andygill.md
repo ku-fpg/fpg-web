@@ -78,7 +78,7 @@ Recent Publications and Submissions
 -----------------------------------
 
  * <div class="cite Gill:13:TypesKansasLava-Submitted"/>
- * <div class="cite Sculthorpe:12:HERMITinTree"/>
+ * <div class="cite Sculthorpe:13:HERMITinTree"/>
  * <div class="cite Farmer:12:HERMITinMachine"/>
  * <div class="cite Farmer-12-WebDSLs"/>
  * <div class="cite Frisby:12:AlmostHomomorphicFunctions"/>

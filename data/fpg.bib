@@ -59,32 +59,32 @@ illustrate its use in a small but complete example.}
 }
 
 
-@inproceedings{ Sculthorpe:12:HERMITinTree,
+@inproceedings{ Sculthorpe:13:HERMITinTree,
     author       = "Neil Sculthorpe and Andrew Farmer and Andy Gill",
     title        = "The {HERMIT} in the Tree: Mechanizing Program Transformations in the {GHC} Core Language",
     booktitle    = "Proceedings of the 24th Symposium on Implementation and Application of Functional Languages",
     location     = "Oxford, England",
-    year         = 2012,
-    url          = "http://www.ittc.ku.edu/~neil/publications.html",
-    abstract     = "In this paper we describe our experiences of using the {HERMIT} toolkit
-to apply well-known transformations to the {G}lasgow {H}askell {C}ompiler's internal core language.
-{HERMIT} provides several mechanisms to support
-writing general-purpose transformations:
-a strategic programming domain-specific language
-specialized to the internal core language,
-a library of primitive rewrites,
-and a shell-style--based scripting language for
-interactive and batch usage.
+    year         = 2013,
+    url          = "http://www.ittc.ku.edu/csdl/fpg/files/Sculthorpe-13-HERMITinTree.pdf",
+    xurl         = "http://www.ittc.ku.edu/csdl/fpg/files/Sculthorpe-13-HERMITinTree-extended.pdf",
+    abstract     = "This paper describes our experience using the HERMIT toolkit to apply
+well-known transformations to the internal core language of the
+Glasgow Haskell Compiler.  HERMIT provides several mechanisms to
+support writing general-purpose transformations: a domain-specific
+language for strategic programming specialized to GHC's core
+language, a library of primitive rewrites, and a shell-style--based
+scripting language for interactive and batch usage.
 
-There are many program transformation techniques that have been described
-in theory but have not been mechanized and made available inside GHC
---- either because they are too specialized to include in a general-purpose compiler,
-or because the developers' interest is in theory rather than implementation.
-The mechanization process can often reveal pragmatic
-obstacles that are glossed over in pen-and-paper proofs;
-understanding and removing these obstacles is our concern.
-Using HERMIT, we implement eleven examples of three program transformations,
-report on our experiences, and describe improvements made in the process."
+There are many program transformation techniques that have been
+described in the literature but have not been mechanized and made
+available inside GHC --- either because they are too specialized to
+include in a general-purpose compiler, or because the developers'
+interest is in theory rather than implementation. The mechanization
+process can often reveal pragmatic obstacles that are glossed over in
+pen-and-paper proofs; understanding and removing these obstacles is our
+concern. Using HERMIT, we implement eleven examples of three program
+transformations, report on our experience, and describe improvements
+made in the process."
 }
 
 // ------------------------------------------------------------------------------
