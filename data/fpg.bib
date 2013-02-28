@@ -207,7 +207,31 @@ with an exact range type that has no constructor for lambdas.}
 	       year = 2011,
 	       month = {July},
 	       location = {Las Vegas, Nevada, USA},
-	       author = {Andy Gill}
+	       author = {Andy Gill},
+    url      = "http://www.ittc.ku.edu/csdl/fpg/files/Gill-11-Declarative.pdf",
+    abstract={Designing and debugging hardware components is
+                  challenging, especially when performance
+                  requirements demands a complex orchestra of
+                  cooperating and highly synchronized computation
+                  engines. New language-based solutions to this prob-
+                  lem have the potential to revolutionize how we think
+                  about and build circuits. In this paper, we describe
+                  our language- based approach to semi-formal
+                  co-design. Using examples, we will show how
+                  generative techniques, high-level interfaces, and
+                  refinement techniques like the worker/wrapper
+                  transformation can be used to take descriptions of
+                  specialized computation, and generate efficient
+                  circuits. Kansas Lava, our high-level hardware
+                  description language built on top of the functional
+                  language Haskell, acts as a bridge between these
+                  computational descriptions and synthesizable
+                  VHDL. Central to the whole approach is the use of
+                  Haskell types to express communication and timing
+                  choices between computational components. Design
+                  choices and engineering compromises during co-design
+                  become type-centric refinements, encouraging
+                  architectural exploration. }
 }
 
 @inproceedings{Gill:11:DerivingLDPC,
@@ -481,6 +505,16 @@ value and impact to the final video.
     booktitle   = {Proceedings of the Second {ACM} {SIGPLAN} {H}askell Symposium},
     year        = 2009,
     month       = {Sep},
+    series = {Haskell '09},
+    isbn = {978-1-60558-508-6},
+    location = {Edinburgh, Scotland},
+    pages = {117--128},
+    url = {http://doi.acm.org/10.1145/1596638.1596653},
+    doi = {10.1145/1596638.1596653},
+    acmid = {1596653},
+    publisher = {ACM},
+    address = {New York, NY, USA},
+    keywords = {DSL compilation, observable sharing},
     abstract    = {Haskell is a great language for writing and supporting
 embedded Domain Specific Languages (DSLs).
 Some form of observable sharing
