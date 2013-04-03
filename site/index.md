@@ -10,3 +10,6 @@
 
 <a class="teaser" href="/software">Read more about our Tools and Libraries</a>
 
+## Theory
+
+<a class="teaser" href="/theory">Read more about our Theoretical Research</a>

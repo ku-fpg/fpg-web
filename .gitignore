@@ -6,3 +6,4 @@ tmp/*
 *.hi
 *.o
 *~
+report.html
