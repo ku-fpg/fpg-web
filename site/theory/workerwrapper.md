@@ -1,12 +1,16 @@
 Worker/Wrapper Transformation
 =============================
 
+<div class="teaser">
+
 The worker/wrapper transformation is a technique for transforming a
 computation of one type into a *worker* of a different type, together
 with a *wrapper* that acts as an impedance matcher between the original
 and new computations. The technique can be used to improve the
 performance of functional programs by improving the choice of data
 structures used.
+
+</div>
 
 Transformation Overview
 -----------------------

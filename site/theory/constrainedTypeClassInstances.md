@@ -1,6 +1,8 @@
 Constrained Type-Class Instances
 ================================
 
+<div class="teaser">
+
 In Haskell, there are many data types that could be made instances of standard type classes such as **Functor** and **Monad**, were it not for the presence of type-class constraints on the operations on that data type.
 This is a frustrating problem in practice, because there is a considerable amount of support and infrastructure for standard type classes that these data types cannot use.
 We call this the *Constrained-Type-Class Problem*.
@@ -9,6 +11,7 @@ To give a concrete example, the abstract type **Set** provided by the [Data.Set]
 One significant occurrence of the constrained-type-class problem is when embedding a Domain-Specific Language (DSL) in Haskell, where it is necessary to restrict the types that can appear in an embedded computation so that the computation can be compiled to some other language.
 This restriction can prevent type classes with polymorphic methods being used to structure such computations.
 
+</div>
 
 Existing Solutions
 ------------------

@@ -2,9 +2,9 @@
 
 We build tools and libraries, typically written in Haskell, to explore and validate our
 ideas. The main research challenge we are addressing is improving the
-high assurance narrative for functional languages. We release our tools
-open source, under a BSD license, use git for version control, and
-github for external contributions.
+high-assurance narrative for functional languages. We release our tools
+open source, under a BSD license, use GIT for version control, and
+GitHub for external contributions.
 
 </div>
 
