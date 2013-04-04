@@ -24,6 +24,7 @@ the Kansas Lava project. He is currently working on the HERMIT project.
 
 ### Publications
 
+- <div class="cite Adams:13:OSIE"/>
 - <div class="cite Gill:13:TypesKansasLava-Submitted"/>
 - <div class="cite Sculthorpe:13:HERMITinTree"/>
 - <div class="cite Farmer:12:HERMITinMachine"/>
