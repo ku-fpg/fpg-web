@@ -9,6 +9,33 @@
 // ------------------------------------------------------------------------------
 // Submitted
 
+@unpublished{Adams:13:OSIE,
+    author = "Michael Adams and Andrew Farmer and José Pedro Magalhães",
+    title  = "Optimizing SYB Is Easy!",
+    note   = "Submitted to the International Conference on Functional Programming",
+    url    = "http://www.ittc.ku.edu/csdl/fpg/files/Adams-13-OSIE.pdf",
+    year   = 2013,
+    abstract = "The most widely used generic-programming system in the Haskell
+                community, Scrap Your Boilerplate (SYB), also happens to be one
+                of the slowest. Generic traversals in SYB are about an order of
+                magnitude slower than equivalent handwritten, non-generic traversals.
+                Thus while SYB allows the concise expression of many traversals,
+                its use incurs a significant runtime cost. Existing techniques for
+                optimizing other generic-programming systems are not able to
+                eliminate this overhead.
+                This paper presents an optimization that completely eliminates
+                this cost. The optimization takes advantage of domain-specific
+                knowledge about the structure of SYB and in so doing can
+                optimize SYB-style traversals to be as fast as handwritten,
+                non-generic code.
+                This paper presents both the formal structure of the optimization
+                and the results of benchmarking the optimized SYB code against
+                both unoptimized SYB code and handwritten, non-generic code.
+                In these benchmarks, the optimized SYB code matches the
+                performance of handwritten code even when the unoptimized SYB code
+                is an order of magnitude or more slower."
+}
+
 @unpublished{ Sculthorpe:13:ConstrainedMonad,
     author = "Neil Sculthorpe and Jan Bracker and George Giorgidze and Andy Gill",
     title  = "The Constrained-Monad Problem",
@@ -90,7 +117,7 @@
 @unpublished{ Sculthorpe:13:WorkIt,
    author        = "Neil Sculthorpe and Graham Hutton",
    title         = "Work It, Wrap It, Fix It, Fold It",
-   note          = "Submitted to the Journal of Functional Programming",
+   note          = "Undergoing revision",
    url           = "http://www.ittc.ku.edu/~neil/publications.html",
    year          = 2013,
    abstract      = "The worker/wrapper transformation is a general-purpose technique
