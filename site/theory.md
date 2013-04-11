@@ -1,6 +1,6 @@
 <div class="teaser">
 
-We develop progamming-language theory to support our software.
+We develop programming-language theory to support our software.
 Our main theoretical interest is program transformation, including compilation between languages, improving the efficiency of a program within a language, or transforming data types to allow compatibility with common interfaces (such as type classes).
 
 </div>
