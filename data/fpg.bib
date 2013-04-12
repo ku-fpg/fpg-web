@@ -9,6 +9,34 @@
 // ------------------------------------------------------------------------------
 // Submitted
 
+@unpublished{Bracker:13:Draft-Sunroof,
+  author={Jan Bracker and Andy Gill},
+  title={Sunroof: A JavaScript Monad Compiler},
+  note   = {To be submitted to the Pre-Proceedings of Trends in Functional Programming},
+  year   = 2013,
+  abstract={Sunroof is a Haskell-hosted Domain Specific Language (DSL) for generating JavaScript.
+            Sunroof is build on top of the JS-monad, which, like the Haskell IO-monad, allows 
+            access to external resources, but specifically JavaScript
+            resources. As such, Sunroof is primarily a feature-rich foreign
+            function API to the browser's JavaScript engine, and all the browser-specific
+            functionality, including HTML-based rendering, event handling, and 
+            drawing to the HTML5 canvas. 
+
+            In this paper, we give the design and implementation of Sunroof.
+            Using monadic reification, we reify a deep embedding of the \JS-monad,
+            and from this embedding we generate JavaScript.
+            The Sunroof DSL has the feel of native Haskell, with a simple
+            Haskell-based type schema to guide the Sunroof programmer.
+            Furthermore, because we are generating code,
+            we can offer Haskell-style concurrency patterns, like MVars and Channels.
+            In combination with a web services package like Scotty,
+            the Sunroof compiler offers a robust platform to build interactive web applications,
+            giving the ability to interleave Haskell and JavaScript computations
+            with each other as needed.}
+}
+
+
+
 @unpublished{Adams:13:OSIE,
     author = "Michael Adams and Andrew Farmer and José Pedro Magalhães",
     title  = "Optimizing SYB Is Easy!",
