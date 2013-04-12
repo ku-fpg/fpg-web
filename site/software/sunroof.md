@@ -81,6 +81,7 @@ language extension `ScopedTypeVariables`. [Look here for further examples][examp
  
 ### Publications
 
+ * <div class="cite Bracker:13:Draft-Sunroof"/>
  * <div class="cite Farmer:12:WebDSLs"/>
  * <div class="cite Sculthorpe:13:ConstrainedMonad"/>
 
