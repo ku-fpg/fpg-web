@@ -140,7 +140,7 @@ main2 ("build":extra) = do
         when ("publish" `elem` extra) $ action $ do
 --                need [html_dir </> "status.html"]
 		need [html_dir </> ".htaccess"]
-                system' "rsync" ["-avz",html_dir ++ "/",target_dir]
+                system' "rsync" ["-vz",html_dir ++ "/",target_dir]
 
         -- This will make a status file, in the autogen dir
         makeStatus site_url "autogen"

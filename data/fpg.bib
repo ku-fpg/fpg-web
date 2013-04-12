@@ -9,11 +9,39 @@
 // ------------------------------------------------------------------------------
 // Submitted
 
+@unpublished{Adams:13:OSIE,
+    author = "Michael Adams and Andrew Farmer and José Pedro Magalhães",
+    title  = "Optimizing SYB Is Easy!",
+    note   = "Submitted to the International Conference on Functional Programming",
+    url    = "http://www.ittc.ku.edu/csdl/fpg/files/Adams-13-OSIE.pdf",
+    year   = 2013,
+    abstract = "The most widely used generic-programming system in the Haskell
+                community, Scrap Your Boilerplate (SYB), also happens to be one
+                of the slowest. Generic traversals in SYB are about an order of
+                magnitude slower than equivalent handwritten, non-generic traversals.
+                Thus while SYB allows the concise expression of many traversals,
+                its use incurs a significant runtime cost. Existing techniques for
+                optimizing other generic-programming systems are not able to
+                eliminate this overhead.
+                This paper presents an optimization that completely eliminates
+                this cost. The optimization takes advantage of domain-specific
+                knowledge about the structure of SYB and in so doing can
+                optimize SYB-style traversals to be as fast as handwritten,
+                non-generic code.
+                This paper presents both the formal structure of the optimization
+                and the results of benchmarking the optimized SYB code against
+                both unoptimized SYB code and handwritten, non-generic code.
+                In these benchmarks, the optimized SYB code matches the
+                performance of handwritten code even when the unoptimized SYB code
+                is an order of magnitude or more slower."
+}
+
 @unpublished{ Sculthorpe:13:ConstrainedMonad,
     author = "Neil Sculthorpe and Jan Bracker and George Giorgidze and Andy Gill",
     title  = "The Constrained-Monad Problem",
     note   = "Submitted to the International Conference on Functional Programming",
     url    = "http://www.ittc.ku.edu/csdl/fpg/files/Sculthorpe-13-ConstrainedMonad.pdf",
+    xurl   = "http://www.ittc.ku.edu/csdl/fpg/theory/constrainedTypeClassInstances.html",
     year   = 2013,
     abstract = "In Haskell, there are many data types that would form
                   monads were it not for the presence of type-class
@@ -34,10 +62,62 @@
                   that can appear in that computation."
 }
 
+@inproceedings{ Persson:11:GenericMonadicConstructs,
+  author       = "Anders Persson and Emil Axelsson and Josef Svenningsson",
+  title        = "Generic Monadic Constructs for Embedded Languages",
+  booktitle    = "Implementation and Application of Functional Languages 2011",
+  location     = "Lawrence, Kansas",
+  pages        = "85--99",
+  publisher    = "Springer",
+  year         = 2012,
+  xtra         = {for citing regarding constrained-monad problem},
+  url          = "http://link.springer.com/chapter/10.1007%2F978-3-642-34407-7_6?LI=true"
+}
+
+@inproceedings{ Orchard:10:ConstraintsUnleashed,
+  author     = "Dominic Orchard and Tom Schrijvers",
+  title      = "Haskell Type Constraints Unleashed",
+  booktitle  = "International Conference on Functional and Logic Programming",
+  location   = "Sendai, Japan",
+  pages      = "56--71",
+  publisher  = "Springer",
+  year       = 2010,
+  xtra       = {for citing regarding constrained-monad problem},
+  url        = "http://link.springer.com/chapter/10.1007%2F978-3-642-12251-4_6"
+}
+
+@inproceedings{ Hughes:99:RestrictedDataTypes,
+  author       = "John Hughes",
+  title        = "Restricted Data Types in {Haskell}",
+  booktitle    = "Haskell Workshop",
+  location     = "Paris, France",
+  year         = 1999,
+  xtra         = {for citing regarding constrained-monad problem},
+  url          = "http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.39.2816"
+}
+
+@misc{ Hackage:08:RMonad,
+  author       = "Ganesh Sittampalam and Peter Gavin",
+  title        = "R{M}onad",
+  url          = "http://hackage.haskell.org/package/rmonad",
+  xtra         = {for citing regarding constrained-monad problem},
+  year         = 2008
+}
+
+@misc{ Hackage:13:ConstrainedNormal,
+  author       = "Neil Sculthorpe",
+  title        = "The Constrained-Normal Package",
+  url          = "http://hackage.haskell.org/package/constrained-normal",
+  xtra         = {for citing regarding constrained-monad problem},
+  year         = 2013
+}
+
+
+
 @unpublished{ Sculthorpe:13:WorkIt,
    author        = "Neil Sculthorpe and Graham Hutton",
    title         = "Work It, Wrap It, Fix It, Fold It",
-   note          = "Submitted to the Journal of Functional Programming",
+   note          = "Undergoing revision",
    url           = "http://www.ittc.ku.edu/~neil/publications.html",
    year          = 2013,
    abstract      = "The worker/wrapper transformation is a general-purpose technique
