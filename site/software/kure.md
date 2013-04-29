@@ -20,5 +20,6 @@ The 2008, 2012 and 2013 versions are all [available on Hackage](http://hackage.h
 
 ### Publications
 
+* <div class="cite Sculthorpe:13:KURE"/>
 * <div class="cite Farmer:12:HERMITinMachine"/>
 * <div class="cite Gill:2009:KUREDSL"/>

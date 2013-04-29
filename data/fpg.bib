@@ -15,12 +15,12 @@
   note   = {To be submitted to the Pre-Proceedings of Trends in Functional Programming},
   year   = 2013,
   abstract={Sunroof is a Haskell-hosted Domain Specific Language (DSL) for generating JavaScript.
-            Sunroof is build on top of the JS-monad, which, like the Haskell IO-monad, allows 
+            Sunroof is build on top of the JS-monad, which, like the Haskell IO-monad, allows
             access to external resources, but specifically JavaScript
             resources. As such, Sunroof is primarily a feature-rich foreign
             function API to the browser's JavaScript engine, and all the browser-specific
-            functionality, including HTML-based rendering, event handling, and 
-            drawing to the HTML5 canvas. 
+            functionality, including HTML-based rendering, event handling, and
+            drawing to the HTML5 canvas.
 
             In this paper, we give the design and implementation of Sunroof.
             Using monadic reification, we reify a deep embedding of the \JS-monad,
@@ -35,6 +35,35 @@
             with each other as needed.}
 }
 
+@unpublished{ Sculthorpe:13:KURE,
+    author       = "Neil Sculthorpe and Nicolas Frisby and Andy Gill",
+    title        = "{KURE}: A {Haskell}-Embedded Strategic Programming Language with Custom Closed Universes",
+    note         = "Submitted to the Journal of Functional Programming",
+    url          = "http://www.ittc.ku.edu/csdl/fpg/files/Sculthorpe-13-KURE.pdf",
+    xurl         = "http://www.ittc.ku.edu/csdl/fpg/software/kure.html",
+    year         = 2013,
+    abstract     = "When writing transformation systems, a significant amount of engineering effort
+                    goes into setting up the infrastructure needed to direct individual transformations
+                    to specific targets in the data being transformed.  Strategic programming languages
+                    provide much of this infrastructure, with the aim of minimizing the amount of such
+                    boilerplate code the author of the transformation system has to write.
+
+                    KURE is a typed strategic programming language in the tradition of Stratego,
+                    implemented as a domain-specific Haskell embedding.  Or, viewed from another
+                    perspective, KURE is a Haskell library for generic programming.  KURE is designed
+                    to support typed transformations over typed data, and the main challenge is how to
+                    make such transformations compatible with generic strategies/traversals that should
+                    operate over any type.  Compared to other generic programming libraries that
+                    provide such type support, the distinguishing feature of KURE's solution is that
+                    the user can configure the behavior of traversals based on the location of each
+                    datum in the tree, as well as their behavior being determined by the type of each
+                    datum.
+
+                    This article describes the implementation of KURE, and compares its design choices,
+                    and their consequences, with other approaches to strategic and generic programming.
+                    We also demonstrate KURE usage with examples taken from the HERMIT project, which
+                    uses KURE as its underlying rewrite engine."
+}
 
 
 @unpublished{Adams:13:OSIE,
