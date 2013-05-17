@@ -36,6 +36,7 @@ the Kansas Lava project. He is currently working on the HERMIT project.
 
 ### Presentations
 
+- A Language for Domain-Specific Optimizations in Haskell. Symposium on Trends in Functional Programming (TFP '13). Provo, Utah. May 2013. [Slides](http://www.ittc.ku.edu/~afarmer/tfp-13.html)
 - Introducing HERMIT: A Plugin for Transforming GHC Core Language Programs. Galois Tech Talk. Portland, Oregon. April 2013. [Slides](http://www.ittc.ku.edu/~afarmer/galois-apr-13.html)
 - Towards a HERMIT-based DSL for Specifying Optimizations in GHC. Portland State PL Club. Portland, Oregon. February 2013. [Slides](http://www.ittc.ku.edu/~afarmer/pdx-pl-club2.html)
 - Introducing HERMIT: A Plugin for Transforming GHC Core Language Programs. Portland State PL Club. Portland, Oregon. January 2013. [Slides](http://www.ittc.ku.edu/~afarmer/pdx-pl-club.html)
