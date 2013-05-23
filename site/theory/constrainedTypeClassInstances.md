@@ -19,7 +19,7 @@ Existing Solutions
 There have been numerous solutions suggested to address the constrained-type-class problem.
 John Hughes proposed a language extension for [Restricted Data Types](http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.39.2816): data types with attached class constraints on their parameters.
 In the same paper he also proposed *Restricted Type Classes*: type classes that take a class constraint as an additional parameter.
-Several simulations of restricted type classes were implemented, such as in the [RMonad library](http://hackage.haskell.org/package/rmonad), before the arrival of the [Constraint-Kinds](http://link.springer.com/chapter/10.1007%2F978-3-642-12251-4_6) GHC extension, which enabled them to be encoded directly.
+Several simulations of restricted type classes were implemented, such as in the [RMonad library](http://hackage.haskell.org/package/rmonad), before the arrival of the [Constraint-Kinds](http://blog.omega-prime.co.uk/?p=127) GHC extension, which enabled them to be encoded directly.
 
 However, these solutions all require modifying existing type classes (or adding new ones), so do not allow for interoperability with infrastructure and libraries that use the existing classes in their current form.
 An alternative approach is to modify the data type such that the desired class instance *can* be declared, in such a way that class operations applied to this new data type can be interpreted in the same way as the desired class operations on the original data type.
