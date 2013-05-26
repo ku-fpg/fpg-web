@@ -40,7 +40,7 @@ I moved here from the <a href="http://www.nottingham.ac.uk/cs">University of Not
 <h3>Research</h3>
 
 <p>
-I'm currently working on the <a href="/projects/hermit">HERMIT project</a>, a scriptable toolkit for the interactive transformation of programs in the internals of the <a href="http://www.haskell.org/ghc/">Glasgow Haskell Compiler</a>.
+My current main research activity is the <a href="/projects/hermit">HERMIT project</a>, a scriptable toolkit for the interactive transformation of programs in the internals of the <a href="http://www.haskell.org/ghc/">Glasgow Haskell Compiler</a>.
 </p>
 
 <p>
@@ -49,7 +49,11 @@ I'm interested in developing the underlying theory of the transformation, and fi
 </p>
 
 <p>
-I also maintain the <a href="/software/kure">Kansas University Rewite Engine (KURE)</a>, an implementation of strategic programming as a Haskell-embedded DSL.  The latest version is available on <a href="http://hackage.haskell.org/package/kure">Hackage</a>.
+I maintain the <a href="/software/kure">Kansas University Rewite Engine (KURE)</a>, an implementation of strategic programming as a Haskell-embedded DSL.  The latest version is available on <a href="http://hackage.haskell.org/package/kure">Hackage</a>.  KURE is the underlying rewrite engine used by HERMIT to manipulate GHC's internal intermediate language.
+</p>
+
+<p>
+As a side project, I'm also investigating solutions to the <a href="/theory/constrainedTypeClassInstances">Constrained-Type-Class Problem</a>.
 </p>
 
 <p>
