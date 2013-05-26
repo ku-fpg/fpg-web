@@ -43,7 +43,6 @@ time to time.
 Who                                                             Project(s)                      Status
 -----------                                                     --------------------            -----
 Robert F Blair                                                  HERMIT/Android                  BS CS
-[Jan Bracker](/users/janbracker)                                HERMIT/Sunroof                  MS exchange student
 [Andrew Farmer](/users/andrewfarmer)                            HERMIT                          PhD, expected 2014
 Patrick G Flor                                                  HERMIT/Android                  BS CS
 [Andy Gill](/users/andygill)                                    HERMIT &amp; KansasLava         PI / Faculty
@@ -64,12 +63,13 @@ These are people who have worked for or with FPG in some capacity.
 
 Who                                                     What                    Where after FPG
 -----------                                             -----                   ---------
+Jan Bracker						Sunroof                 Christian-Albrechts-University
 Tristan Bull                                            HFEC, MS 2011           Industry
-Nicolas Frisby                                          HERMIT, after PhD        MSR Cambridge
+Nicolas Frisby                                          HERMIT, after PhD       MSR Cambridge
 [Garrin Kimmell](http://www.ittc.ku.edu/~kimmell/)      HFEC, PostDoc           PostDoc, University of Iowa
 Kevin Matlage                                           ChalkBoard, MS 2011     Industry
 Patrick Miller                                          Lambda Bridge, BS 2012  PhD student, Notre Dame
-Brandon Smith                                           ChalkBoard, BS 2011
+Brandon Smith                                           ChalkBoard, BS 2011     Industry
 -----------                                             ------                  --------
 
 
