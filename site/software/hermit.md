@@ -38,7 +38,7 @@ Evaluation Assurance Level (EAL) 5 and 6 of the Common Criteria call for
 semi-formal methods to construct such link, and this project addresses
 keys part of this requirement.
 
-![](/files/hermit-arch.png)
+![](/files/hermit-arch2.png)
 
 Publications
 ------------
