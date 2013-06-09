@@ -63,7 +63,7 @@ These are people who have worked for or with FPG in some capacity.
 
 Who                                                     What                    Where after FPG
 -----------                                             -----                   ---------
-Jan Bracker						Sunroof                 Christian-Albrechts-University
+Jan Bracker                                             Sunroof, MS Exchange    Christian-Albrechts-University
 Tristan Bull                                            HFEC, MS 2011           Industry
 Nicolas Frisby                                          HERMIT, after PhD       MSR Cambridge
 [Garrin Kimmell](http://www.ittc.ku.edu/~kimmell/)      HFEC, PostDoc           PostDoc, University of Iowa
