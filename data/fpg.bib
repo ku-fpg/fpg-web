@@ -11,8 +11,8 @@
 
 @unpublished{Bracker:13:Draft-Sunroof,
   author={Jan Bracker and Andy Gill},
-  title={Sunroof: A JavaScript Monad Compiler},
-  note   = {To be submitted to the Pre-Proceedings of Trends in Functional Programming},
+  title={Sunroof: A {J}ava{S}cript Monad Compiler},
+  note   = {Submitted to the Post-Proceedings of Trends in Functional Programming},
   year   = 2013,
   abstract={Sunroof is a Haskell-hosted Domain Specific Language (DSL) for generating JavaScript.
             Sunroof is build on top of the JS-monad, which, like the Haskell IO-monad, allows
@@ -191,13 +191,13 @@ of the worker/wrapper technique, and explore the benefits that result.
 All the proofs have been mechanically verified using the Agda system."
 }
 
-@misc{Gill:13:TypesKansasLava-Submitted,
+@article{Gill:13:TypesKansasLava,
    title={Types and Associated Type Families for Hardware Simulation and Synthesis:
           The Internals and Externals of {K}ansas {L}ava},
    author="Andy Gill and Tristan Bull and Andrew Farmer and Garrin Kimmell and Ed Komp",
-   booktitle = "Proceedings of Trends in Functional Programming",
-   note = "Submitted to the Journal of Higher-Order and Symbolic Computation",
-   year=2012,
+   booktitle = "Post-Proceedings of Trends in Functional Programming",
+   note = "Accepted for publication in the Journal of Higher-Order and Symbolic Computation",
+   year = 2013,
    abstract={In this article
 we overview the design and implementation of the second generation
 of Kansas Lava.
@@ -218,7 +218,7 @@ we mitigate this complexity.
 Finally, when connecting Kansas Lava to the real world,
 the standardized idiom of using named input and output ports
 is provided by Kansas Lava using a new monad, called \verb|Fabric|.
-We present the design of this \verb|Fabric| monad, and
+We present the design of this Fabric monad, and
 illustrate its use in a small but complete example.}
 }
 
@@ -249,6 +249,15 @@ pen-and-paper proofs; understanding and removing these obstacles is our
 concern. Using HERMIT, we implement eleven examples of three program
 transformations, report on our experience, and describe improvements
 made in the process."
+}
+
+
+@proceedings{IFL11,
+  title={Implementation and Application of Functional Languages},
+  editor={Andy Gill and Jurriaan Hage},
+  publisher={Springer, LNCS 7257},
+  year=2011,
+  month={October}
 }
 
 // ------------------------------------------------------------------------------
@@ -324,8 +333,7 @@ to our web-based applications.
 Using our monad, the Haskell programmer can choose the
 granularity of interaction, with the option of
 having reactive interfaces that are completely
-handled by the client.},
-   note          = "(published on workshop website, http://workshops.inf.ed.ac.uk/xldi2012/)"
+handled by the client.}
 }
 
 @inproceedings{Frisby:12:AlmostHomomorphicFunctions,
@@ -362,7 +370,24 @@ with an exact range type that has no constructor for lambdas.}
    volume = 7149,
    location = "Philadelphia, PA",
    year=2012,
-   month="January"
+   month="January",
+   url      = "http://www.ittc.ku.edu/csdl/fpg/files/Gill-11-PatchLogic.pdf",
+   abstract = { Designing hardware is like writing music for an
+                  orchestra - lots of pieces have to come together at
+                  the correct time for everything to work. In systems
+                  design, there is a confusing array of standards for
+                  allowing cooperating components, and little
+                  type-level support in traditional design
+                  methodologies for helping connect components with
+                  pre-arranged protocols. In this paper, we explore
+                  bringing protocol-level types to communicating
+                  processes. Inside our hardware description language
+                  Kansas Lava we introduce the notation of a patch,
+                  which is a communicating component with
+                  well-understood protocols. We build a theory round
+                  the notion of patches, which we call patch logic,
+                  and then use the patch abstraction to build a small
+                  driver for an FPGA board. }
 }
 
 @inproceedings {Gill:11:Declarative,
@@ -377,8 +402,8 @@ with an exact range type that has no constructor for lambdas.}
                   challenging, especially when performance
                   requirements demands a complex orchestra of
                   cooperating and highly synchronized computation
-                  engines. New language-based solutions to this prob-
-                  lem have the potential to revolutionize how we think
+                  engines. New language-based solutions to this problem
+                  have the potential to revolutionize how we think
                   about and build circuits. In this paper, we describe
                   our language- based approach to semi-formal
                   co-design. Using examples, we will show how
@@ -463,11 +488,11 @@ with an exact range type that has no constructor for lambdas.}
                   hardware design.}
 }
 
-@unpublished{Gill:11:CatchingSat,
+@techreport{Gill:11:CatchingSat,
 	title = {Capturing Functions and Catching Satellites},
 	note = {ITTC Technical Report ITTC-FY2011-TR-29952011-1},
 	year = 2011,
-	month = Jan,
+	month = {January},
 	abstract = {The 2009 ICFP programming contest problem required contestants to control
 virtual satellites that obey basic physical laws.  The orbital physics
 behavior of the system was simulated via a binary provided to contestants
@@ -505,7 +530,7 @@ by fold operators, and illustrate our new technique with a number of examples.},
 @inproceedings{Matlage:10:BeginningMiddleEnd,
    title="Every Animation Should Have a Beginning, a Middle, and an End",
    author="Kevin Matlage and Andy Gill",
-   booktitle = "Proceedings of Trends in Functional Programming",
+   booktitle = "Post-Proceedings of Trends in Functional Programming",
    month="May",
    year=2010,
    xurl      = "http://www.ittc.ku.edu/csdl/fpg/files/Matlage-10-BeginningMiddleEnd.pdf",
@@ -529,7 +554,7 @@ by fold operators, and illustrate our new technique with a number of examples.},
 @inproceedings{Gill:10:TypesKansasLava,
    title="Types and Type Families for Hardware Simulation and Synthesis: The Internals and Externals of {K}ansas {L}ava",
    author="Andy Gill and Tristan Bull and Andrew Farmer and Garrin Kimmell and Ed Komp",
-   booktitle = "Proceedings of Trends in Functional Programming",
+   booktitle = "Post-Proceedings of Trends in Functional Programming",
    month="May",
    year=2010,
    publisher = {Springer-Verlag},
@@ -557,7 +582,7 @@ we mitigate this complexity.}
 @inproceedings{Farmer:10:WhatsTheMatter,
    title="What's the matter with {K}ansas {L}ava?",
    author="Andrew Farmer and Garrin Kimmell and Andy Gill",
-   booktitle = "Proceedings of Trends in Functional Programming",
+   booktitle = "Post-Proceedings of Trends in Functional Programming",
    month="May",
    publisher = {Springer-Verlag, LNCS 6546},
    year=2010,
@@ -739,6 +764,7 @@ institution	= "Information Telecommunication and Technology Center, University o
   year=2009,
   month={January}
 }
+
 @article{ Gill:09:WW,
  author = {Andy Gill and Graham Hutton},
  title = {The worker/wrapper transformation},

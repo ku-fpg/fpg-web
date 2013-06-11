@@ -78,7 +78,7 @@ Recent Publications and Submissions
 -----------------------------------
 
  * <div class="cite Sculthorpe:13:ConstrainedMonad"/>
- * <div class="cite Gill:13:TypesKansasLava-Submitted"/>
+ * <div class="cite Gill:13:TypesKansasLava"/>
  * <div class="cite Sculthorpe:13:HERMITinTree"/>
  * <div class="cite Farmer:12:HERMITinMachine"/>
  * <div class="cite Farmer-12-WebDSLs"/>
