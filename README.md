@@ -36,7 +36,7 @@ We use markdown inside the directory site for all our text.
 Testing
 -------
 
-Here, we [link](README).
+Here, we [link](README.md), and [link2](data/fpg.bib).
 
 
 
