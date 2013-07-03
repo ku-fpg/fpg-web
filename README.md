@@ -33,6 +33,10 @@ We use markdown inside the directory site for all our text.
  * Local links start with /, so my homepage is /users/andygill 
  * Local links are given without suffixes.
 
+Testing
+-------
+
+Here, we [link](README.md), and [link2](data/fpg.bib).
 
 
 
