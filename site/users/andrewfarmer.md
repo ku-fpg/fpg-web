@@ -7,14 +7,20 @@ language design in general and specifically the compilation and optimization
 of functional languages. 
 I am currently working on [HERMIT](http://www.ittc.ku.edu/csdl/fpg/software/hermit.html),
 a GHC plugin for transforming Core Language programs.
+I am interested in making HERMIT useful for prototyping and debugging GHC optimizations.
 In the past I worked on testing and debugging tools for
 the [Kansas Lava](http://www.ittc.ku.edu/csdl/fpg/software/kansas-lava.html) project. 
+
+I also created [Scotty](http://hackage.haskell.org/package/scotty), a small framework
+for specifying RESTful web services.
 
 <dl class="dl-horizontal">
     <dt>Email:</dt>
     <dd>afarmer at ittc dot ku.edu</dd>
     <dt>Personal webpage:</dt>
     <dd><http://andrewfarmer.name></dd>
+    <dt>Github:</dt>
+    <dd><https://github.com/xich></dd>
     <dt>Twitter:</dt>
     <dd><http://twitter.com/xich></dd>
     <dt>Google+:</dt>
@@ -24,7 +30,8 @@ the [Kansas Lava](http://www.ittc.ku.edu/csdl/fpg/software/kansas-lava.html) pro
 
 ### Publications
 
-- <div class="cite Adams:13:OSIE"/>
+- <div class="cite Farmer:14:HERMITinStream"/>
+- <div class="cite Adams:14:OSIE"/>
 - <div class="cite Gill:13:TypesKansasLava"/>
 - <div class="cite Sculthorpe:13:HERMITinTree"/>
 - <div class="cite Farmer:12:HERMITinMachine"/>
@@ -36,7 +43,8 @@ the [Kansas Lava](http://www.ittc.ku.edu/csdl/fpg/software/kansas-lava.html) pro
 
 ### Presentations
 
-- Prototyping GHC Optimizations with HERMIT. [2013 Haskell Implementors Workshop](http://www.haskell.org/haskellwiki/HaskellImplementorsWorkshop/2013). Boston. Massachusetts. September 2013. [Slides](http://www.ittc.ku.edu/~afarmer/hiw-13.html)
+- RESTful Web Services with Haskell. [Lambda Lounge KC](http://www.meetup.com/lamba-lounge-kc/events/149077972/). Fairway, Kansas. November 2013. 
+- Prototyping GHC Optimizations with HERMIT. [2013 Haskell Implementors Workshop](http://www.haskell.org/haskellwiki/HaskellImplementorsWorkshop/2013). Boston, Massachusetts. September 2013. [Slides](http://www.ittc.ku.edu/~afarmer/hiw-13.html)
 - A Language for Domain-Specific Optimizations in Haskell. Symposium on Trends in Functional Programming (TFP '13). Provo, Utah. May 2013. [Slides](http://www.ittc.ku.edu/~afarmer/tfp-13.html)
 - Haskell DSLs for Interactive Web Services. Janrain. Portland, Oregon. April 2013. [Slides](http://www.ittc.ku.edu/~afarmer/janrain-apr-13.html)
 - Introducing HERMIT: A Plugin for Transforming GHC Core Language Programs. Galois Tech Talk. Portland, Oregon. April 2013. [Slides](http://www.ittc.ku.edu/~afarmer/galois-apr-13.html)
