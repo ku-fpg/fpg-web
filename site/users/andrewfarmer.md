@@ -2,17 +2,17 @@
 <td style="border:none; padding:1em 0 0;" width="214"><img src="/files/andrewfarmer/me.jpg"/></td>
 <td style="border:none;"><h2>Andrew Farmer</h2>
 
-Andrew Farmer (afarmer at ittc dot ku.edu) is a Ph.D. student with Dr. Gill.
-He received his B.S. in Computer Science from the University of Kansas in
-2005 and went off to industry to write domain specific languages for web
-application development.
-
-Returning to KU in the fall of 2009, Andrew's interests include programming
+I am a Ph.D. student with Dr. Gill. My interests include programming
 language design in general and specifically the compilation and optimization
-of functional languages. He has done work on testing and debugging tools for
-the Kansas Lava project. He is currently working on the HERMIT project.
+of functional languages. 
+I am currently working on [HERMIT](http://www.ittc.ku.edu/csdl/fpg/software/hermit.html),
+a GHC plugin for transforming Core Language programs.
+In the past I worked on testing and debugging tools for
+the [Kansas Lava](http://www.ittc.ku.edu/csdl/fpg/software/kansas-lava.html) project. 
 
 <dl class="dl-horizontal">
+    <dt>Email:</dt>
+    <dd>afarmer at ittc dot ku.edu</dd>
     <dt>Personal webpage:</dt>
     <dd><http://andrewfarmer.name></dd>
     <dt>Twitter:</dt>
@@ -36,7 +36,9 @@ the Kansas Lava project. He is currently working on the HERMIT project.
 
 ### Presentations
 
+- Prototyping GHC Optimizations with HERMIT. [2013 Haskell Implementors Workshop](http://www.haskell.org/haskellwiki/HaskellImplementorsWorkshop/2013). Boston. Massachusetts. September 2013. [Slides](http://www.ittc.ku.edu/~afarmer/hiw-13.html)
 - A Language for Domain-Specific Optimizations in Haskell. Symposium on Trends in Functional Programming (TFP '13). Provo, Utah. May 2013. [Slides](http://www.ittc.ku.edu/~afarmer/tfp-13.html)
+- Haskell DSLs for Interactive Web Services. Janrain. Portland, Oregon. April 2013. [Slides](http://www.ittc.ku.edu/~afarmer/janrain-apr-13.html)
 - Introducing HERMIT: A Plugin for Transforming GHC Core Language Programs. Galois Tech Talk. Portland, Oregon. April 2013. [Slides](http://www.ittc.ku.edu/~afarmer/galois-apr-13.html)
 - Towards a HERMIT-based DSL for Specifying Optimizations in GHC. Portland State PL Club. Portland, Oregon. February 2013. [Slides](http://www.ittc.ku.edu/~afarmer/pdx-pl-club2.html)
 - Introducing HERMIT: A Plugin for Transforming GHC Core Language Programs. Portland State PL Club. Portland, Oregon. January 2013. [Slides](http://www.ittc.ku.edu/~afarmer/pdx-pl-club.html)
