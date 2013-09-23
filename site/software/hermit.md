@@ -40,6 +40,13 @@ keys part of this requirement.
 
 ![](/files/hermit-arch2.png)
 
+The HERMIT Package
+------------------
+
+* On Hackage: <http://hackage.haskell.org/package/hermit>
+
+* On Github: <https://github.com/ku-fpg/hermit>
+
 Publications
 ------------
 
