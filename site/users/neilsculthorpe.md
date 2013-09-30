@@ -5,7 +5,7 @@
 <div class="content">
 
 <div style="float: right">
-<img alt="Neil's Portrait" style="width:315px" src="http://www.ittc.ku.edu/~neil/NeilWeb.JPG"/>
+<img alt="Neil's Portrait" style="width:310px" src="http://www.ittc.ku.edu/~neil/NeilWeb.JPG"/>
 </div>
 
 <table cellpadding="2" style="width: auto;">
