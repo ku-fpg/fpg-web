@@ -66,30 +66,30 @@
 }
 
 
-@unpublished{Adams:13:OSIE,
-    author = "Michael Adams and Andrew Farmer and José Pedro Magalhães",
-    title  = "Optimizing SYB Is Easy!",
-    note   = "Draft",
-    url    = "http://www.ittc.ku.edu/csdl/fpg/files/Adams-13-OSIE.pdf",
-    abstract = "The most widely used generic-programming system in the Haskell
-                community, Scrap Your Boilerplate (SYB), also happens to be one
-                of the slowest. Generic traversals in SYB are about an order of
-                magnitude slower than equivalent handwritten, non-generic traversals.
-                Thus while SYB allows the concise expression of many traversals,
-                its use incurs a significant runtime cost. Existing techniques for
-                optimizing other generic-programming systems are not able to
-                eliminate this overhead.
-                This paper presents an optimization that completely eliminates
-                this cost. The optimization takes advantage of domain-specific
-                knowledge about the structure of SYB and in so doing can
-                optimize SYB-style traversals to be as fast as handwritten,
-                non-generic code.
-                This paper presents both the formal structure of the optimization
-                and the results of benchmarking the optimized SYB code against
-                both unoptimized SYB code and handwritten, non-generic code.
-                In these benchmarks, the optimized SYB code matches the
-                performance of handwritten code even when the unoptimized SYB code
-                is an order of magnitude or more slower."
+@inproceedings{Farmer:14:HERMITinStream,
+    author = "Andrew Farmer and Christian {H\"{o}ner zu Siederdissen} and Andy Gill",
+    title  = "The {HERMIT} in the {Stream}",
+    booktitle = "Proceedings of the 2014 ACM SIGPLAN Workshop on Partial Evaluation and Program Manipulation",
+    series = "PEPM '14",
+    publisher = "ACM",
+    location = "San Diego, California, USA",
+    year   = 2014,
+    abstract = "Stream Fusion, a popular deforestation technique in the Haskell community, cannot fuse the concatMap combinator. This is a serious limitation, as concatMap represents computations on nested streams. The original implementation of Stream Fusion used the Glasgow Haskell Compiler’s user-directed rewriting system. A transformation which allows the compiler to fuse many uses of concatMap has previously been proposed, but never implemented, because the host rewrite system was not expressive enough to implement the proposed transformation. In this paper, we develop a custom optimization plugin which implements the proposed concatMap transformation, and study the effectiveness of the transformation in practice. We also provide a new translation scheme for list comprehensions which enables them to be optimized. Within this framework, we extend the transformation to monadic streams. Code featuring uses of concatMap experiences significant speedup when compiled with this optimization. This allows Stream Fusion to outperform its rival, foldr/build, on many list computations, and enables performance-sensitive code to be expressed at a higher level of abstraction."
+}
+
+@inproceedings{Adams:14:OSIE,
+    author = "Michael Adams and Andrew Farmer and Jos\'{e} Pedro {Magalh\~{a}es}",
+    title  = "Optimizing {SYB} {Is} {Easy}!",
+    booktitle = "Proceedings of the 2014 ACM SIGPLAN Workshop on Partial Evaluation and Program Manipulation",
+    series = "PEPM '14",
+    publisher = "ACM",
+    location = "San Diego, California, USA",
+    year   = 2014,
+    abstract = "The most widely used generic-programming system in the Haskell community, Scrap Your Boilerplate (SYB), also happens to be one of the slowest. Generic traversals in SYB are about an order of magnitude slower than equivalent handwritten, non-generic traversals. Thus while SYB allows the concise expression of many traversals, its use incurs a significant runtime cost. Existing techniques for optimizing other generic-programming systems are not able to eliminate this overhead. 
+
+This paper presents an optimization that completely eliminates this cost. The optimization takes advantage of domain-specific knowledge about the structure of SYB and in so doing can optimize SYB-style traversals to be as fast as handwritten, non-generic code. 
+
+This paper presents both the formal structure of the optimization and the results of benchmarking the optimized SYB code against both unoptimized SYB code and handwritten, non-generic code. In these benchmarks, the optimized SYB code matches the performance of handwritten code even when the unoptimized SYB code is an order of magnitude or more slower."
 }
 
 @inproceedings{ Sculthorpe:13:ConstrainedMonad,
