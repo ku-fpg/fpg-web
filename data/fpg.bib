@@ -37,32 +37,27 @@
 
 @unpublished{ Sculthorpe:13:KURE,
     author       = "Neil Sculthorpe and Nicolas Frisby and Andy Gill",
-    title        = "K{URE}: A {H}askell-Embedded Strategic Programming Language with Custom Closed Universes",
+    title        = "The {K}ansas {U}niversity {R}ewrite {E}ngine: A {H}askell-Embedded Strategic Programming Language with Custom Closed Universes",
     note         = "Submitted to the Journal of Functional Programming",
     url          = "http://www.ittc.ku.edu/csdl/fpg/files/Sculthorpe-13-KURE.pdf",
     xurl         = "http://www.ittc.ku.edu/csdl/fpg/software/kure.html",
     year         = 2013,
-    abstract     = "When writing transformation systems, a significant amount of engineering effort
-                    goes into setting up the infrastructure needed to direct individual transformations
-                    to specific targets in the data being transformed.  Strategic programming languages
-                    provide much of this infrastructure, with the aim of minimizing the amount of such
-                    boilerplate code the author of the transformation system has to write.
+    abstract     = "When writing transformation systems, a significant amount of engineering effort goes into setting up the infrastructure
+                   needed to direct individual transformations to specific targets in the data being transformed.  Strategic and generic
+                   programming languages provide general-purpose infrastructure for this task, which the author of a transformation system
+                   can use for any algebraic data structure.
 
-                    KURE is a typed strategic programming language in the tradition of Stratego,
-                    implemented as a domain-specific Haskell embedding.  Or, viewed from another
-                    perspective, KURE is a Haskell library for generic programming.  KURE is designed
-                    to support typed transformations over typed data, and the main challenge is how to
-                    make such transformations compatible with generic strategies/traversals that should
-                    operate over any type.  Compared to other generic programming libraries that
-                    provide such type support, the distinguishing feature of KURE's solution is that
-                    the user can configure the behavior of traversals based on the location of each
-                    datum in the tree, as well as their behavior being determined by the type of each
-                    datum.
+                   The Kansas University Rewrite Engine (KURE) is a typed strategic programming language, implemented as a Haskell-embedded
+                   domain-specific language.  Or, viewed from another perspective, KURE is a Haskell library for generic programming.  KURE
+                   is designed to support typed transformations over typed data, and the main challenge is how to make such transformations
+                   compatible with generic traversal strategies that should operate over any type.  Compared to other Haskell libraries for
+                   generic programming that provide such type support, the distinguishing feature of KURE's solution is that the user can
+                   configure the behavior of traversals based on the location of each datum in the tree, beyond their behavior being
+                   determined by the type of each datum.
 
-                    This article describes the implementation of KURE, and compares its design choices,
-                    and their consequences, with other approaches to strategic and generic programming.
-                    We also demonstrate KURE usage with examples taken from the HERMIT project, which
-                    uses KURE as its underlying rewrite engine."
+                   This article describes KURE's approach to assigning types to generic traversals, and the implementation of that
+                   approach.  We also compare KURE, its design choices, and their consequences, with other approaches to strategic and
+                   generic programming."
 }
 
 
@@ -229,9 +224,10 @@ illustrate its use in a small but complete example.}
     booktitle    = "Proceedings of the 24th Symposium on Implementation and Application of Functional Languages",
     location     = "Oxford, England",
     series       = "Lecture Notes in Computer Science",
+    pages        = "86--103",
     volume       = "8241",
     year         = 2013,
-    url          = "http://www.ittc.ku.edu/csdl/fpg/files/Sculthorpe-13-HERMITinTree.pdf",
+    url          = "http://dx.doi.org/10.1007/978-3-642-41582-1_6",
     xurl         = "http://www.ittc.ku.edu/csdl/fpg/files/Sculthorpe-13-HERMITinTree-extended.pdf",
     abstract     = "This paper describes our experience using the HERMIT toolkit to apply
 well-known transformations to the internal core language of the
