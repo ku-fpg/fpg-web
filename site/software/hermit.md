@@ -50,6 +50,8 @@ The HERMIT Package
 Publications
 ------------
 
+* <div class="cite Farmer:14:HERMITinStream"/>
+* <div class="cite Adams:14:OSIE"/>
 * <div class="cite Sculthorpe:13:KURE"/>
 * <div class="cite Sculthorpe:13:HERMITinTree"/>
 * <div class="cite Farmer:12:HERMITinMachine"/>
