@@ -43,7 +43,8 @@ for specifying RESTful web services.
 
 ### Presentations
 
-- RESTful Web Services with Haskell. [Lambda Lounge KC](http://www.meetup.com/lamba-lounge-kc/events/149077972/). Fairway, Kansas. November 2013. 
+- The HERMIT in the Stream. [PEPM 2014](http://www.program-transformation.org/PEPM14). San Diego, California. January 2014. [Slides](http://www.ittc.ku.edu/~afarmer/talks/concatmap-pepm14.html)
+- RESTful Web Services with Haskell. [Lambda Lounge KC](http://www.meetup.com/lamba-lounge-kc/events/149077972/). Fairway, Kansas. November 2013. [Slides](http://www.ittc.ku.edu/~afarmer/talks/lambdaloungekc.html) [Video](https://db.tt/WGVW6UZV)
 - Prototyping GHC Optimizations with HERMIT. [2013 Haskell Implementors Workshop](http://www.haskell.org/haskellwiki/HaskellImplementorsWorkshop/2013). Boston, Massachusetts. September 2013. [Slides](http://www.ittc.ku.edu/~afarmer/hiw-13.html)
 - A Language for Domain-Specific Optimizations in Haskell. Symposium on Trends in Functional Programming (TFP '13). Provo, Utah. May 2013. [Slides](http://www.ittc.ku.edu/~afarmer/tfp-13.html)
 - Haskell DSLs for Interactive Web Services. Janrain. Portland, Oregon. April 2013. [Slides](http://www.ittc.ku.edu/~afarmer/janrain-apr-13.html)
