@@ -9,32 +9,6 @@
 // ------------------------------------------------------------------------------
 // Submitted
 
-@unpublished{Bracker:13:Draft-Sunroof,
-  author={Jan Bracker and Andy Gill},
-  title={Sunroof: A {J}ava{S}cript Monad Compiler},
-  note   = {Submitted to the Post-Proceedings of Trends in Functional Programming},
-  year   = 2013,
-  abstract={Sunroof is a Haskell-hosted Domain Specific Language (DSL) for generating JavaScript.
-            Sunroof is build on top of the JS-monad, which, like the Haskell IO-monad, allows
-            access to external resources, but specifically JavaScript
-            resources. As such, Sunroof is primarily a feature-rich foreign
-            function API to the browser's JavaScript engine, and all the browser-specific
-            functionality, including HTML-based rendering, event handling, and
-            drawing to the HTML5 canvas.
-
-            In this paper, we give the design and implementation of Sunroof.
-            Using monadic reification, we reify a deep embedding of the \JS-monad,
-            and from this embedding we generate JavaScript.
-            The Sunroof DSL has the feel of native Haskell, with a simple
-            Haskell-based type schema to guide the Sunroof programmer.
-            Furthermore, because we are generating code,
-            we can offer Haskell-style concurrency patterns, like MVars and Channels.
-            In combination with a web services package like Scotty,
-            the Sunroof compiler offers a robust platform to build interactive web applications,
-            giving the ability to interleave Haskell and JavaScript computations
-            with each other as needed.}
-}
-
 @unpublished{ Sculthorpe:13:KURE,
     author       = "Neil Sculthorpe and Nicolas Frisby and Andy Gill",
     title        = "The {K}ansas {U}niversity {R}ewrite {E}ngine: A {H}askell-Embedded Strategic Programming Language with Custom Closed Universes",
@@ -60,6 +34,48 @@
                    generic programming."
 }
 
+// ------------------------------------------------------------------------------
+// Published
+
+
+@incollection{Bracker:14:Sunroof,
+  year={2014},
+  isbn={978-3-319-04131-5},
+  booktitle={Practical Aspects of Declarative Languages},
+  volume={8324},
+  series={Lecture Notes in Computer Science},
+  editor={Flatt, Matthew and Guo, Hai-Feng},
+  doi={10.1007/978-3-319-04132-2_5},
+  title={Sunroof: A Monadic {DSL} for Generating {J}ava{S}cript},
+  url={http://dx.doi.org/10.1007/978-3-319-04132-2_5},
+  publisher={Springer International Publishing},
+  keywords={DSLs; JavaScript; Web Technologies; Cloud Computing},
+  author={Bracker, Jan and Gill, Andy},
+  pages={65-80},
+abstract={Sunroof is a Haskell-hosted Domain Specific Language (DSL)
+                  for generating JavaScript. The central feature of
+                  Sunroof is a JavaScript monad, which, like the
+                  Haskell IO-monad, allows access to external
+                  resources, but specifically JavaScript resources. As
+                  such, Sunroof is primarily a feature-rich
+                  foreign-function API to the browser’s JavaScript
+                  engine, and all the browser-specific functionality,
+                  including HTML-based rendering, event handling, and
+                  drawing to the HTML5 canvas element.  
+
+                  In this paper,
+                  we give the design and implementation of
+                  Sunroof. Using monadic reification, we generate
+                  JavaScript from a deep embedding of the JavaScript
+                  monad. The Sunroof DSL has the feel of native
+                  Haskell, with a simple Haskell-based type schema to
+                  guide the Sunroof programmer. Furthermore, because
+                  we are generating code, we can offer Haskell-style
+                  concurrency patterns, such as MVars and Channels. In
+                  combination with a web-services package, the Sunroof
+                  DSL offers a robust platform to build interactive
+                  web applications.}
+}
 
 @inproceedings{Farmer:14:HERMITinStream,
     author = "Andrew Farmer and Christian {H\"{o}ner zu Siederdissen} and Andy Gill",
@@ -250,20 +266,6 @@ made in the process."
 }
 
 
-@proceedings{IFL11,
-  title={Implementation and Application of Functional Languages},
-  editor={Andy Gill and Jurriaan Hage},
-  publisher={Springer, LNCS 7257},
-  year=2011,
-  month={October}
-}
-
-// ------------------------------------------------------------------------------
-// In press
-
-// ------------------------------------------------------------------------------
-// Published
-
 @inproceedings{Farmer:12:HERMITinMachine,
    author        = "Andrew Farmer and Andy Gill and Ed Komp and Neil Sculthorpe",
    title         = "The {HERMIT} in the Machine: A Plugin for the Interactive Transformation of {GHC} Core Language Programs",
@@ -386,6 +388,14 @@ with an exact range type that has no constructor for lambdas.}
                   the notion of patches, which we call patch logic,
                   and then use the patch abstraction to build a small
                   driver for an FPGA board. }
+}
+
+@proceedings{IFL11,
+  title={Implementation and Application of Functional Languages},
+  editor={Andy Gill and Jurriaan Hage},
+  publisher={Springer, LNCS 7257},
+  year=2011,
+  month={October}
 }
 
 @inproceedings {Gill:11:Declarative,
