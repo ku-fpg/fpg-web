@@ -61,7 +61,7 @@ abstract={Sunroof is a Haskell-hosted Domain Specific Language (DSL)
                   foreign-function API to the browser’s JavaScript
                   engine, and all the browser-specific functionality,
                   including HTML-based rendering, event handling, and
-                  drawing to the HTML5 canvas element.  
+                  drawing to the HTML5 canvas element.
 
                   In this paper,
                   we give the design and implementation of
@@ -96,9 +96,9 @@ abstract={Sunroof is a Haskell-hosted Domain Specific Language (DSL)
     publisher = "ACM",
     location = "San Diego, California, USA",
     year   = 2014,
-    abstract = "The most widely used generic-programming system in the Haskell community, Scrap Your Boilerplate (SYB), also happens to be one of the slowest. Generic traversals in SYB are about an order of magnitude slower than equivalent handwritten, non-generic traversals. Thus while SYB allows the concise expression of many traversals, its use incurs a significant runtime cost. Existing techniques for optimizing other generic-programming systems are not able to eliminate this overhead. 
+    abstract = "The most widely used generic-programming system in the Haskell community, Scrap Your Boilerplate (SYB), also happens to be one of the slowest. Generic traversals in SYB are about an order of magnitude slower than equivalent handwritten, non-generic traversals. Thus while SYB allows the concise expression of many traversals, its use incurs a significant runtime cost. Existing techniques for optimizing other generic-programming systems are not able to eliminate this overhead.
 
-This paper presents an optimization that completely eliminates this cost. The optimization takes advantage of domain-specific knowledge about the structure of SYB and in so doing can optimize SYB-style traversals to be as fast as handwritten, non-generic code. 
+This paper presents an optimization that completely eliminates this cost. The optimization takes advantage of domain-specific knowledge about the structure of SYB and in so doing can optimize SYB-style traversals to be as fast as handwritten, non-generic code.
 
 This paper presents both the formal structure of the optimization and the results of benchmarking the optimized SYB code against both unoptimized SYB code and handwritten, non-generic code. In these benchmarks, the optimized SYB code matches the performance of handwritten code even when the unoptimized SYB code is an order of magnitude or more slower."
 }
@@ -184,21 +184,21 @@ This paper presents both the formal structure of the optimization and the result
 
 
 
-@unpublished{ Sculthorpe:13:WorkIt,
+@article{ Sculthorpe:13:WorkIt,
    author        = "Neil Sculthorpe and Graham Hutton",
    title         = "Work It, Wrap It, Fix It, Fold It",
-   note          = "Submitted to the Journal of Functional Programming",
+   journal       = "Journal of Functional Programming",
    url           = "http://www.ittc.ku.edu/~neil/publications.html",
-   year          = 2013,
+   year          = 2014,
    abstract      = "The worker/wrapper transformation is a general-purpose technique
                     for refactoring recursive programs to improve their performance.
                     The two previous approaches to formalising the technique were
                     based upon different recursion operators and different correctness
                     conditions.  In this article we show how these two approaches can
                     be generalised in a uniform manner by combining their correctness
-                    conditions, how the theory can be extended with new conditions
-                    that are necessary (in addition to sufficient) to ensure the correctness
-                    of the worker/wrapper technique, and explore the benefits that result.
+                    conditions, extend the theory with new conditions that are
+                    both necessary and sufficient to ensure the correctness of the
+                    worker/wrapper technique, and explore the benefits that result.
                     All the proofs have been mechanically verified using the Agda system."
 }
 
