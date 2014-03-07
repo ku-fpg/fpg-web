@@ -4,20 +4,20 @@ Sunroof
 <div class="teaser">
 
 Sunroof is a Domain Specific Language (DSL) for dynamically generating JavaScript.
-Sunroof is build on top of the JS-monad, which, like the IO-monad, allows 
+Sunroof is build on top of the JS-monad, which, like the IO-monad, allows
 read and write access to external resources, but specifically JavaScript
 resources. As such, Sunroof is primarily a feature-rich foreign
 function API to the browser's JavaScript engine, and all the browser-specific
 functionality, like HTML-based rendering, event handling, and even
-drawing to the HTML5 canvas. 
+drawing to the HTML5 canvas.
 
 </div>
 
 Sunroof is a Haskell-hosted DSL. This
 makes it easy to use Haskell abstractions for larger Javascript
 applications without obscuring the produced Javascript on the Haskell
-level. 
-Furthermore, Sunroof offers two threading models for 
+level.
+Furthermore, Sunroof offers two threading models for
 building on top Javascript, atomic and blocking threads.
 This allows full access to Javascript APIs, but
 using Haskell concurrency patterns, like MVars and Channels.
@@ -35,7 +35,7 @@ value into a JavaScript program. An example invocation is
 GHCi> import Language.Sunroof
 GHCi> import Language.Sunroof.JS.Browser
 GHCi> import Data.Default
-GHCi> txt <- sunroofCompileJS def "main" $ do 
+GHCi> txt <- sunroofCompileJS def "main" $ do
                 alert (js "Hello");
 GHCi> putStrLn txt
 var main = (function() {
@@ -61,8 +61,8 @@ var square = (function() {
 })();
 ~~~
 
-Now `square` in JavaScript is bound to the square function. Note that for 
-having type annotations on function parameters you need to activate the 
+Now `square` in JavaScript is bound to the square function. Note that for
+having type annotations on function parameters you need to activate the
 language extension `ScopedTypeVariables`. [Look here for further examples][examples].
 
 ### Key Links
@@ -78,10 +78,10 @@ language extension `ScopedTypeVariables`. [Look here for further examples][examp
      + [sunroof-compiler](https://github.com/ku-fpg/sunroof-compiler)
      + [sunroof-server](https://github.com/ku-fpg/sunroof-server)
      + [sunroof-examples](https://github.com/ku-fpg/sunroof-examples)
- 
+
 ### Publications
 
- * <div class="cite Bracker:13:Draft-Sunroof"/>
+ * <div class="cite Bracker:14:Sunroof"/>
  * <div class="cite Farmer:12:WebDSLs"/>
  * <div class="cite Sculthorpe:13:ConstrainedMonad"/>
 

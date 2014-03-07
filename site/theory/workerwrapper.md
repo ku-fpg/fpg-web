@@ -105,11 +105,13 @@ hold, then:
 Papers
 ------
 
-* <div class="cite Sculthorpe:13:WorkIt"/>
+
+* <div class="cite Hackett:14:WWFaster"/>
+* <div class="cite Hackett:13:WWUnfold"/>
+* <div class="cite Sculthorpe:14:WorkIt"/>
 * <div class="cite Gill:10:F5"/>
 * <div class="cite Gill:09:WW"/>
 * <div class="cite SPJ:91:Unboxed"/>
-
 
 Use Cases
 ---------
