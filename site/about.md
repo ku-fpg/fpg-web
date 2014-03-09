@@ -49,10 +49,8 @@ Adam Howell                                                     HERMIT/Android  
 [Ed Komp](http://www.ittc.ku.edu/view_contact.phtml?id=28)      HERMIT                          Staff
 [Bowe Neuenschwander](/users/boweneuenschwander)                KansasLava / &lambda;-Bridge    MS, expected 2013
 Ryan Scott                                                      HERMIT/Android                  BS CS
-[Neil Sculthorpe](/users/neilsculthorpe)                        HERMIT                          PostDoc
 Mike Stees                                                      High Performance Haskell        PhD, expected 2017
 Rama Subramanian                                                TBD                             MS CS
-Michael Tabone                                                  HERMIT/Android                  BS CS
 Brad Torrence                                                   Artificial Life                 MS CS
 -----------                                                     -------------------             ------
 
@@ -70,6 +68,7 @@ Patrick G Flor                                        HERMIT/Android          Gr
 [Garrin Kimmell](http://www.ittc.ku.edu/~kimmell/)    HFEC, PostDoc           PostDoc, University of Iowa
 Kevin Matlage                                         ChalkBoard, MS 2011     Industry
 Patrick Miller                                        Lambda Bridge, BS 2012  PhD student, Notre Dame
+[Neil Sculthorpe](http://www.cs.swan.ac.uk/~csnas/)   HERMIT/KURE, PostDoc    PostDoc, Swansea University
 Brandon Smith                                         ChalkBoard, BS 2011     Industry
 -----------                                           ------                  --------
 
@@ -80,7 +79,9 @@ These are people who have visited the lab recently for more than a day or so.
 
 Who                                                                             When                    From
 ------------------------------------------------------------                    --------                -----------
+[Lawerence Day](http://www.cs.nott.ac.uk/~led/)                                 Oct 2013                University of Nottingham
 [Anders Persson](http://www.chalmers.se/cse/EN/people/persson-anders)           Oct 2011                Chalmers
+[Simon Thompson](http://www.cs.kent.ac.uk/people/staff/sjt/)                    June 2011               University of Kent
 [Jun Inoue](http://www.owlnet.rice.edu/~ji2)                                    Oct/Nov 2010            Rice University
 ------------------------------------------------------------                    ----------              ------------
 
