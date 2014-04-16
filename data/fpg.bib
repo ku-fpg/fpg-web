@@ -98,13 +98,22 @@ abstract={Sunroof is a Haskell-hosted Domain Specific Language (DSL)
 }
 
 @inproceedings{Adams:14:OSIE,
-    author = "Michael D. Adams and Andrew Farmer and Jos\'{e} Pedro {Magalh\~{a}es}",
-    title  = "Optimizing {SYB} {Is} {Easy}!",
-    booktitle = "Proceedings of the 2014 ACM SIGPLAN Workshop on Partial Evaluation and Program Manipulation",
-    series = "PEPM '14",
-    publisher = "ACM",
-    location = "San Diego, California, USA",
-    year   = 2014,
+    author = {Adams, Michael D. and Farmer, Andrew and Magalh\~{a}es, Jos{\'e} Pedro},
+    title = {Optimizing SYB is Easy!},
+    booktitle = {Proceedings of the ACM SIGPLAN 2014 Workshop on Partial Evaluation and Program Manipulation},
+    series = {PEPM '14},
+    year = {2014},
+    isbn = {978-1-4503-2619-3},
+    location = {San Diego, California, USA},
+    pages = {71--82},
+    numpages = {12},
+    url = {http://doi.acm.org/10.1145/2543728.2543730},
+    xurl= "http://www.ittc.ku.edu/csdl/fpg/files/Adams-14-OSIE.pdf",
+    doi = {10.1145/2543728.2543730},
+    acmid = {2543730},
+    publisher = {ACM},
+    address = {New York, NY, USA},
+    keywords = {datatype-generic programming, haskell, keywords: optimization, partial evaluation, performance, scrap your boilerplate (syb)},
     abstract = "The most widely used generic-programming system in the Haskell community, Scrap Your Boilerplate (SYB), also happens to be one of the slowest. Generic traversals in SYB are about an order of magnitude slower than equivalent handwritten, non-generic traversals. Thus while SYB allows the concise expression of many traversals, its use incurs a significant runtime cost. Existing techniques for optimizing other generic-programming systems are not able to eliminate this overhead.
 
 This paper presents an optimization that completely eliminates this cost. The optimization takes advantage of domain-specific knowledge about the structure of SYB and in so doing can optimize SYB-style traversals to be as fast as handwritten, non-generic code.
