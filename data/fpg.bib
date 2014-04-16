@@ -79,12 +79,21 @@ abstract={Sunroof is a Haskell-hosted Domain Specific Language (DSL)
 
 @inproceedings{Farmer:14:HERMITinStream,
     author = "Andrew Farmer and Christian {H\"{o}ner zu Siederdissen} and Andy Gill",
-    title  = "The {HERMIT} in the {Stream}",
-    booktitle = "Proceedings of the 2014 ACM SIGPLAN Workshop on Partial Evaluation and Program Manipulation",
-    series = "PEPM '14",
-    publisher = "ACM",
-    location = "San Diego, California, USA",
-    year   = 2014,
+    title = {The HERMIT in the Stream: Fusing Stream Fusion's concatMap},
+    booktitle = {Proceedings of the ACM SIGPLAN 2014 Workshop on Partial Evaluation and Program Manipulation},
+    series = {PEPM '14},
+    year = {2014},
+    isbn = {978-1-4503-2619-3},
+    location = {San Diego, California, USA},
+    pages = {97--108},
+    numpages = {12},
+    url = {http://doi.acm.org/10.1145/2543728.2543736},
+    xurl= "http://www.ittc.ku.edu/csdl/fpg/files/Farmer-14-HERMITinStream.pdf",
+    doi = {10.1145/2543728.2543736},
+    acmid = {2543736},
+    publisher = {ACM},
+    address = {New York, NY, USA},
+    keywords = {deforestation, functional programming, ghc, haskell, optimization, program fusion, program transformation, stream fusion},
     abstract = "Stream Fusion, a popular deforestation technique in the Haskell community, cannot fuse the concatMap combinator. This is a serious limitation, as concatMap represents computations on nested streams. The original implementation of Stream Fusion used the Glasgow Haskell Compiler’s user-directed rewriting system. A transformation which allows the compiler to fuse many uses of concatMap has previously been proposed, but never implemented, because the host rewrite system was not expressive enough to implement the proposed transformation. In this paper, we develop a custom optimization plugin which implements the proposed concatMap transformation, and study the effectiveness of the transformation in practice. We also provide a new translation scheme for list comprehensions which enables them to be optimized. Within this framework, we extend the transformation to monadic streams. Code featuring uses of concatMap experiences significant speedup when compiled with this optimization. This allows Stream Fusion to outperform its rival, foldr/build, on many list computations, and enables performance-sensitive code to be expressed at a higher level of abstraction."
 }
 
