@@ -79,7 +79,7 @@ These are people who have visited the lab recently for more than a day or so.
 
 Who                                                                             When                    From
 ------------------------------------------------------------                    --------                -----------
-[Lawerence Day](http://www.cs.nott.ac.uk/~led/)                                 Oct 2013                University of Nottingham
+[Laurence E. Day](http://www.cs.nott.ac.uk/~led/)                                 Oct 2013                University of Nottingham
 [Anders Persson](http://www.chalmers.se/cse/EN/people/persson-anders)           Oct 2011                Chalmers
 [Simon Thompson](http://www.cs.kent.ac.uk/people/staff/sjt/)                    June 2011               University of Kent
 [Jun Inoue](http://www.owlnet.rice.edu/~ji2)                                    Oct/Nov 2010            Rice University
