@@ -16,22 +16,24 @@
     url          = "http://www.ittc.ku.edu/csdl/fpg/files/Sculthorpe-13-KURE.pdf",
     xurl         = "http://www.ittc.ku.edu/csdl/fpg/software/kure.html",
     year         = 2013,
-    abstract     = "When writing transformation systems, a significant amount of engineering effort goes into setting up the infrastructure
-                   needed to direct individual transformations to specific targets in the data being transformed.  Strategic and generic
-                   programming languages provide general-purpose infrastructure for this task, which the author of a transformation system
-                   can use for any algebraic data structure.
+    abstract     = "When writing transformation systems, a significant amount of engineering effort goes into setting
+                   up the infrastructure needed to direct individual transformations to specific targets in the data
+                   being transformed.  Strategic programming languages provide general-purpose infrastructure for
+                   this task, which the author of a transformation system can use for any algebraic data structure.
 
-                   The Kansas University Rewrite Engine (KURE) is a typed strategic programming language, implemented as a Haskell-embedded
-                   domain-specific language.  Or, viewed from another perspective, KURE is a Haskell library for generic programming.  KURE
-                   is designed to support typed transformations over typed data, and the main challenge is how to make such transformations
-                   compatible with generic traversal strategies that should operate over any type.  Compared to other Haskell libraries for
-                   generic programming that provide such type support, the distinguishing feature of KURE's solution is that the user can
-                   configure the behavior of traversals based on the location of each datum in the tree, beyond their behavior being
-                   determined by the type of each datum.
+                   The Kansas University Rewrite Engine (KURE) is a typed strategic programming language, implemented
+                   as a Haskell-embedded domain-specific language. KURE is designed to support typed transformations
+                   over typed data, and the main challenge is how to make such transformations compatible with
+                   generic traversal strategies that should operate over any type.
 
-                   This article describes KURE's approach to assigning types to generic traversals, and the implementation of that
-                   approach.  We also compare KURE, its design choices, and their consequences, with other approaches to strategic and
-                   generic programming."
+                   Strategic programming in a typed setting has much in common with datatype-generic programming.
+                   Compared to other approaches to datatype-generic programming, the distinguishing feature of KURE's
+                   solution is that the user can configure the behaviour of traversals based on the location of each
+                   datum in the tree, beyond their behaviour being determined by the type of each datum.
+
+                   This article describes KURE's approach to assigning types to generic traversals, and the
+                   implementation of that approach.  We also compare KURE, its design choices, and their
+                   consequences, with other approaches to strategic and datatype-generic programming."
 }
 
 // ------------------------------------------------------------------------------
@@ -1153,4 +1155,3 @@ power of this recipe using a range of examples.
     url          = "http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.50.231",
     abstract     = "The code compiled from a non-strict functional program usually manipulates heap-allocated boxed numbers. Compilers for such languages often go to considerable trouble to optimise operations on boxed numbers into simpler operations on their unboxed forms. These optimisations are usually handled in an ad hoc manner in the code generator, because earlier phases of the compiler have no way to talk about unboxed values. We present a new approach, which makes unboxed values into (nearly) first-class citizens. The language, including its type system, is extended to handle unboxed values. The optimisation of boxing and unboxing operations can now be reinterpreted as a set of correctness-preserving program transformations. Indeed the particular transformations required are ones which a compiler would want to implement anyway. The compiler becomes both simpler and more modular. Two other benefits accrue. Firstly, the results of strictness analysis can be exploited within the same uniform transformational framework. Secondly, new algebraic data types with unboxed components can be declared. Values of these types can be manipulated much more efficiently than the corresponding boxed versions. Both a static and a dynamic semantics are given for the augmented language. The denotational dynamic semantics is notable for its use of unpointed domains."
 }
-
