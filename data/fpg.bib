@@ -9,29 +9,32 @@
 // ------------------------------------------------------------------------------
 // Submitted
 
-@unpublished{ Sculthorpe:13:KURE,
+@article{ Sculthorpe:13:KURE,
     author       = "Neil Sculthorpe and Nicolas Frisby and Andy Gill",
     title        = "The {K}ansas {U}niversity {R}ewrite {E}ngine: A {H}askell-Embedded Strategic Programming Language with Custom Closed Universes",
-    note         = "Submitted to the Journal of Functional Programming",
-    url          = "http://www.ittc.ku.edu/csdl/fpg/files/Sculthorpe-13-KURE.pdf",
+    url          = "http://www.ittc.ku.edu/csdl/fpg/files/Sculthorpe-14-KURE.pdf",
     xurl         = "http://www.ittc.ku.edu/csdl/fpg/software/kure.html",
-    year         = 2013,
-    abstract     = "When writing transformation systems, a significant amount of engineering effort goes into setting up the infrastructure
-                   needed to direct individual transformations to specific targets in the data being transformed.  Strategic and generic
-                   programming languages provide general-purpose infrastructure for this task, which the author of a transformation system
-                   can use for any algebraic data structure.
+    journal      = "Journal of Functional Programming",
+    publisher    = "Cambridge University Press",
+    year         = 2014,
+    abstract     = "When writing transformation systems, a significant amount of engineering effort goes into setting
+                   up the infrastructure needed to direct individual transformations to specific targets in the data
+                   being transformed.  Strategic programming languages provide general-purpose infrastructure for
+                   this task, which the author of a transformation system can use for any algebraic data structure.
 
-                   The Kansas University Rewrite Engine (KURE) is a typed strategic programming language, implemented as a Haskell-embedded
-                   domain-specific language.  Or, viewed from another perspective, KURE is a Haskell library for generic programming.  KURE
-                   is designed to support typed transformations over typed data, and the main challenge is how to make such transformations
-                   compatible with generic traversal strategies that should operate over any type.  Compared to other Haskell libraries for
-                   generic programming that provide such type support, the distinguishing feature of KURE's solution is that the user can
-                   configure the behavior of traversals based on the location of each datum in the tree, beyond their behavior being
-                   determined by the type of each datum.
+                   The Kansas University Rewrite Engine (KURE) is a typed strategic programming language, implemented
+                   as a Haskell-embedded domain-specific language. KURE is designed to support typed transformations
+                   over typed data, and the main challenge is how to make such transformations compatible with
+                   generic traversal strategies that should operate over any type.
 
-                   This article describes KURE's approach to assigning types to generic traversals, and the implementation of that
-                   approach.  We also compare KURE, its design choices, and their consequences, with other approaches to strategic and
-                   generic programming."
+                   Strategic programming in a typed setting has much in common with datatype-generic programming.
+                   Compared to other approaches to datatype-generic programming, the distinguishing feature of KURE's
+                   solution is that the user can configure the behaviour of traversals based on the location of each
+                   datum in the tree, beyond their behaviour being determined by the type of each datum.
+
+                   This article describes KURE's approach to assigning types to generic traversals, and the
+                   implementation of that approach.  We also compare KURE, its design choices, and their
+                   consequences, with other approaches to strategic and datatype-generic programming."
 }
 
 // ------------------------------------------------------------------------------
@@ -79,23 +82,41 @@ abstract={Sunroof is a Haskell-hosted Domain Specific Language (DSL)
 
 @inproceedings{Farmer:14:HERMITinStream,
     author = "Andrew Farmer and Christian {H\"{o}ner zu Siederdissen} and Andy Gill",
-    title  = "The {HERMIT} in the {Stream}",
-    booktitle = "Proceedings of the 2014 ACM SIGPLAN Workshop on Partial Evaluation and Program Manipulation",
-    series = "PEPM '14",
-    publisher = "ACM",
-    location = "San Diego, California, USA",
-    year   = 2014,
+    title = {The HERMIT in the Stream: Fusing Stream Fusion's concatMap},
+    booktitle = {Proceedings of the ACM SIGPLAN 2014 Workshop on Partial Evaluation and Program Manipulation},
+    series = {PEPM '14},
+    year = {2014},
+    isbn = {978-1-4503-2619-3},
+    location = {San Diego, California, USA},
+    pages = {97--108},
+    numpages = {12},
+    url = {http://doi.acm.org/10.1145/2543728.2543736},
+    xurl= "http://www.ittc.ku.edu/csdl/fpg/files/Farmer-14-HERMITinStream.pdf",
+    doi = {10.1145/2543728.2543736},
+    acmid = {2543736},
+    publisher = {ACM},
+    address = {New York, NY, USA},
+    keywords = {deforestation, functional programming, ghc, haskell, optimization, program fusion, program transformation, stream fusion},
     abstract = "Stream Fusion, a popular deforestation technique in the Haskell community, cannot fuse the concatMap combinator. This is a serious limitation, as concatMap represents computations on nested streams. The original implementation of Stream Fusion used the Glasgow Haskell Compiler’s user-directed rewriting system. A transformation which allows the compiler to fuse many uses of concatMap has previously been proposed, but never implemented, because the host rewrite system was not expressive enough to implement the proposed transformation. In this paper, we develop a custom optimization plugin which implements the proposed concatMap transformation, and study the effectiveness of the transformation in practice. We also provide a new translation scheme for list comprehensions which enables them to be optimized. Within this framework, we extend the transformation to monadic streams. Code featuring uses of concatMap experiences significant speedup when compiled with this optimization. This allows Stream Fusion to outperform its rival, foldr/build, on many list computations, and enables performance-sensitive code to be expressed at a higher level of abstraction."
 }
 
 @inproceedings{Adams:14:OSIE,
-    author = "Michael D. Adams and Andrew Farmer and Jos\'{e} Pedro {Magalh\~{a}es}",
-    title  = "Optimizing {SYB} {Is} {Easy}!",
-    booktitle = "Proceedings of the 2014 ACM SIGPLAN Workshop on Partial Evaluation and Program Manipulation",
-    series = "PEPM '14",
-    publisher = "ACM",
-    location = "San Diego, California, USA",
-    year   = 2014,
+    author = {Adams, Michael D. and Farmer, Andrew and Magalh\~{a}es, Jos{\'e} Pedro},
+    title = {Optimizing SYB is Easy!},
+    booktitle = {Proceedings of the ACM SIGPLAN 2014 Workshop on Partial Evaluation and Program Manipulation},
+    series = {PEPM '14},
+    year = {2014},
+    isbn = {978-1-4503-2619-3},
+    location = {San Diego, California, USA},
+    pages = {71--82},
+    numpages = {12},
+    url = {http://doi.acm.org/10.1145/2543728.2543730},
+    xurl= "http://www.ittc.ku.edu/csdl/fpg/files/Adams-14-OSIE.pdf",
+    doi = {10.1145/2543728.2543730},
+    acmid = {2543730},
+    publisher = {ACM},
+    address = {New York, NY, USA},
+    keywords = {datatype-generic programming, haskell, keywords: optimization, partial evaluation, performance, scrap your boilerplate (syb)},
     abstract = "The most widely used generic-programming system in the Haskell community, Scrap Your Boilerplate (SYB), also happens to be one of the slowest. Generic traversals in SYB are about an order of magnitude slower than equivalent handwritten, non-generic traversals. Thus while SYB allows the concise expression of many traversals, its use incurs a significant runtime cost. Existing techniques for optimizing other generic-programming systems are not able to eliminate this overhead.
 
 This paper presents an optimization that completely eliminates this cost. The optimization takes advantage of domain-specific knowledge about the structure of SYB and in so doing can optimize SYB-style traversals to be as fast as handwritten, non-generic code.
@@ -203,7 +224,10 @@ This paper presents both the formal structure of the optimization and the result
    author        = "Neil Sculthorpe and Graham Hutton",
    title         = "Work It, Wrap It, Fix It, Fold It",
    journal       = "Journal of Functional Programming",
-   url           = "http://www.cs.swan.ac.uk/~csnas/publications.html",
+   pages         = "113--127",
+   volume        = 24,
+   number        = 1,
+   url           = "http://dx.doi.org/10.1017/S0956796814000045",
    year          = 2014,
    abstract      = "The worker/wrapper transformation is a general-purpose technique
                     for refactoring recursive programs to improve their performance.
@@ -1132,4 +1156,3 @@ power of this recipe using a range of examples.
     url          = "http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.50.231",
     abstract     = "The code compiled from a non-strict functional program usually manipulates heap-allocated boxed numbers. Compilers for such languages often go to considerable trouble to optimise operations on boxed numbers into simpler operations on their unboxed forms. These optimisations are usually handled in an ad hoc manner in the code generator, because earlier phases of the compiler have no way to talk about unboxed values. We present a new approach, which makes unboxed values into (nearly) first-class citizens. The language, including its type system, is extended to handle unboxed values. The optimisation of boxing and unboxing operations can now be reinterpreted as a set of correctness-preserving program transformations. Indeed the particular transformations required are ones which a compiler would want to implement anyway. The compiler becomes both simpler and more modular. Two other benefits accrue. Firstly, the results of strictness analysis can be exploited within the same uniform transformational framework. Secondly, new algebraic data types with unboxed components can be declared. Values of these types can be manipulated much more efficiently than the corresponding boxed versions. Both a static and a dynamic semantics are given for the augmented language. The denotational dynamic semantics is notable for its use of unpointed domains."
 }
-
